@@ -1,0 +1,669 @@
+table_name	field_name	var_name	field_type	field_display	var_desc	blank_pct
+rmp_accident	accident_id	Accident ID	int(11)	id	The unique ID for each RMP accident record.	0
+rmp_accident	rmp_id	RMP ID	bigint(20)	id	The unique ID for each RMP submission.	0
+rmp_accident	accident_date	Accident Date	varchar(25)		Date on which the RMP accident occured.	0
+rmp_accident	accident_time	Accident Time	char(4)		Time at which the RMP accident began.	0.089774665589371
+rmp_accident	naics	NAICS of Process Involved	char(6)	code:s:long:alldb.all_naics_cd:naics:naics_tr	The NAICS industry or product type code for the process involved in the accident.	0.053864799353622
+rmp_accident	release_duration	Release Duration (HHHMM)	char(5)		Approximate duration of accidental release in hours and minutes (HHHMM)	0.23341413053236
+rmp_accident	re_gas	Release Event - Gas Release	char(1)	yn	Indicates whether the accident was a gas release.	0
+rmp_accident	re_spill	Release Event - Spill	char(1)	yn	Indicates whether the accident was a liquid spill or evaporation.	0
+rmp_accident	re_fire	Release Event - Fire	char(1)	yn	Indicates whether the accident was a fire.	0
+rmp_accident	re_explosion	Release Event - Explosion	char(1)	yn	Indicates whether the accident was an explosion.	0
+rmp_accident	re_reactiveincid	Release Event - Reaction	char(1)	yn	Indicates whether the accident was an uncontrolled or runaway reaction.	0
+rmp_accident	rs_storagevessel	Release Source - Storage Vessel	char(1)	yn	Indicates that the release source in the accident was a storage vessel.	0
+rmp_accident	rs_piping	Release Source - Piping	char(1)	yn	Indicates that the release source in the accident was piping.	0
+rmp_accident	rs_processvessel	Release Source - Process Vessel	char(1)	yn	Indicates that the release source in the accident was a process vessel.	0
+rmp_accident	rs_transferhose	Release Source - Transfer Hose	char(1)	yn	Indicates that the release source in the accident was a transfer hose.	0
+rmp_accident	rs_valve	Release Source - Valve	char(1)	yn	Indicates that the release source in the accident was a valve.	0
+rmp_accident	rs_pump	Release Source - Pump	char(1)	yn	Indicates that the release source in the accident was a pump.	0
+rmp_accident	rs_joint	Release Source - Joint	char(1)	yn	Indicates that the release source in the accident was a joint.	0
+rmp_accident	rs_other	Release Source - Other	varchar(200)		Description of another release source in the accident	73.848639913816
+rmp_accident	wind_speed	Wind Speed	float		Wind speed at the time of the accident.	47.760122093545
+rmp_accident	wind_speed_unit	Wind Speed Units	char(1)	code:n:short:rmp_wind	The units in which the wind speed is expressed.	9.7495286830057
+rmp_accident	wind_direction	Wind Direction	char(3)		The wind direction at the time of the accident.	46.79055570518
+rmp_accident	temperature	Temperature	float		The ambient temperature at the scene of the accident, in degrees F.	44.770625729419
+rmp_accident	stability_class	Atmospheric Stability Class	char(1)		The atmospheric stability class at the time of the accident.	58.964000359099
+rmp_accident	precipitation_yn	Precipitation	char(1)	yn	Indicates whether there was precipitation at the time of the accident.	0
+rmp_accident	unknown_weather	Unknown Weather	char(1)	yn	Indicates whether weather conditions at the time of the accident are unknown.	0
+rmp_accident	deaths_workers	Workers Killed	int(11)		The number of on-site deaths of workers (employees and contract employees) due to the accident.	98.590537750247
+rmp_accident	deaths_responders	Responders Killed	int(11)		The number of on-site deaths of responders (e.g. fire department personnel) due to the accident.	99.802495735703
+rmp_accident	deaths_public	Public Killed (on-site)	int(11)		The number of on-site deaths of the general public (e.g. visitors) due to the accident.	99.91920280097
+rmp_accident	injuries_workers	Workers Injured	int(11)		The number of workers (employees and contract employees) injured on-site due to the accident.	52.500224436664
+rmp_accident	injuries_respond	Responders Injured	int(11)		The number of responders (e.g. fire department personnel) injured due to the accident.	99.129185743783
+rmp_accident	injuries_public	Public Injured (on-site)	int(11)		The number of the general public (e.g. visitors) injured on-site due to the accident.	99.003501211958
+rmp_accident	onsite_damage	Property Damage (on-site)	bigint(20)	dollars	The amount of property damage on-site, in dollars, due to the accident.	77.206212406859
+rmp_accident	offsite_deaths	Off-site Deaths	int(11)		The number of people killed off-site due to the accident.	99.910225334411
+rmp_accident	offsite_hosp	Hospitalizations	int(11)		The number of off-site people who needed to be hospitalized because of the accident.	97.001526169315
+rmp_accident	offsite_medical	Number Requiring Medical Treatment	int(11)		The number of off-site people who required medical treatment other than hospitalization due to the accident.	93.41053954574
+rmp_accident	offsite_evacuated	Number Evacuated	int(11)		The number of off-site people who needed to be evacuated due to the accident.	90.905826375797
+rmp_accident	offsite_shelter	Number Sheltered In Place	int(11)		The number of off-site people who needed to shelter in place due to the accident.	93.554179010683
+rmp_accident	offsite_damage	Property damage (off-site)	int(11)	dollars	The amount of property damage off-site, in dollars, due to the accident.	96.821976838136
+rmp_accident	ed_kills	Environmental Damage - Fish/Animal Kills	char(1)	yn	Indicates whether fish or animal kills occured as a result of the accident.	0
+rmp_accident	ed_defoliation	Environmental Damage - Defoliation	char(1)	yn	Indicates whether defoliation occured as a result of the accident.	0
+rmp_accident	ed_watercontam	Environmental Damage - Water Contamination	char(1)	yn	Indicates whether water contamination occured as a result of the accident.	0
+rmp_accident	ed_soilcontam	Environmental Damage - Soil Contamination	char(1)	yn	Indicates whether soil contamination occured as a result of the accident.	0
+rmp_accident	ed_other	Environmental Damage - Other	varchar(200)		Describes other environmental damage that occured as a result of the accident.	92.431995690816
+rmp_accident	initiating_event	Initiating Event	char(1)	code:n:long:rmp_events_cd:events:events_tr	The type of event that initiated the accident.	0.035909866235748
+rmp_accident	cf_equipmentfail	Contributing Factor - Equipment Failure	char(1)	yn	Indicates whether equipment failure was a contributing factor in the accident.	0
+rmp_accident	cf_humanerror	Contributing Factor - Human Error	char(1)	yn	Indicates whether human error was a contributing factor in the accident.	0
+rmp_accident	cf_impprocedure	Contributing Factor - Improper Procedure	char(1)	yn	Indicates whether improper procedure was a contributing factor in the accident.	0
+rmp_accident	cf_overpressure	Contributing Factor - Overpressurization	char(1)	yn	Indicates whether overpressurization was a contributing factor in the accident.	0
+rmp_accident	cf_upsetcondition	Contributing Factor - Upset Condition	char(1)	yn	Indicates whether an upset condition was a contributing factor in the accident.	0
+rmp_accident	cf_bypasscond	Contributing Factor - By-pass Condition	char(1)	yn	Indicates whether a by-pass condition was a contributing factor in the accident.	0
+rmp_accident	cf_maintenance	Contributing Factor - Maintenance	char(1)	yn	Indicates whether maintenance activity or inactivity was a contributing factor in the accident.	0
+rmp_accident	cf_processdesign	Contributing Factor - Process Design	char(1)	yn	Indicates whether process design was a contributing factor in the accident.	0
+rmp_accident	cf_unsuitequip	Contributing Factor - Unsuitable Equipment	char(1)	yn	Indicates whether unsuitable equipment was a contributing factor in the accident.	0
+rmp_accident	cf_unusualweather	Contributing Factor - Unusual Weather	char(1)	yn	Indicates whether unusual weather was a contributing factor in the accident.	0
+rmp_accident	cf_management	Contributing Factor - Management Error	char(1)	yn	Indicates whether management error was a contributing factor in the accident.	0
+rmp_accident	cf_other	Contributing Factor - Other	varchar(200)		Describes another contributing factor in the accident.	85.465481641081
+rmp_accident	offsite_notify	Off-site Responders Notified	varchar(25)		Indicates whether response agencies were notified.	0.2423915970913
+rmp_accident	ci_improveequip	Changes Introduced - Improved Equipment	char(1)	yn	Indicates whether improved or upgraded equipment changes were introduced to prevent recurrance of the accident.	0
+rmp_accident	ci_revisedmaint	Changes Introduced - Revised Maintenance	char(1)	yn	Indicates whether maintenance procedure changes were introduced to prevent recurrance of the accident.	0
+rmp_accident	ci_revisedtrain	Changes Introduced - Revised Training	char(1)	yn	Indicates whether revised training changes were introduced to prevent recurrance of the accident.	0
+rmp_accident	ci_opprocedures	Changes Introduced - Operating Procedures	char(1)	yn	Indicates whether operating procedure changes were introduced to prevent recurrance of the accident.	0
+rmp_accident	ci_processcontrol	Changes Introduced - Process Control	char(1)	yn	Indicates whether new process control changes were introduced to prevent recurrance of the accident.	0
+rmp_accident	ci_mitigationsys	Changes Introduced - Mitigation Systems	char(1)	yn	Indicates whether new mitigation system changes were introduced to prevent recurrance of the accident.	0
+rmp_accident	ci_responseplan	Changes Introduced - Response Plan	char(1)	yn	Indicates whether response plan changes were introduced to prevent recurrance of the accident.	0
+rmp_accident	ci_changedprocess	Changes Introduced - Changed Process	char(1)	yn	Indicates whether process changes were introduced to prevent recurrance of the accident.	0
+rmp_accident	ci_reducedinv	Changes Introduced - Reduced Inventory	char(1)	yn	Indicates whether inventory was reduced to prevent recurrance of the accident.	0
+rmp_accident	ci_none	Changes Introduced - None	char(1)	yn	Indicates whether no changes were introduced to prevent recurrance of the accident.	0
+rmp_accident	ci_other	Changes Introduced - Other	varchar(200)		Describes another change introduced to prevent recurrance of the accident.	78.974773318969
+rmp_accident	cbi_flag	Confidential Business Information	char(1)	yn	Indicates whether this record contained Confidential Business Information (CBI) which has been erased by EPA from the public version of the data.	0
+rmp_accident	num_acc_chem	Number of Chemicals	int(11)		The number of chemicals listed for this accident record.	0.080797199030434
+rmp_accident	flam_tot	Flammable Amount Total (lbs)	double		The total amount of flammable chemicals listed as released in this accident.	81.856540084388
+rmp_accident	toxic_tot	Toxic Amount Total (lbs)	double		The total amount of toxic chemicals listed as released in this accident.	15.997845408026
+rmp_accident	quantity_tot	Released Amount Total (lbs)	double		The total amount of both toxic and flammable chemicals listed as released in this accident.	0.51171559385941
+rmp_accident	num_deaths	Number of Deaths	int(11)		The total number of people killed as a result of this accident.	98.231439087889
+rmp_accident	num_injuries	Number of Injuries	int(11)		The total number of people injured or hospitalized as a result of this accident.	47.831941826017
+rmp_accident	num_evacuated	Number Evacuated / Sheltered	int(11)		The total number of people evacuated or sheltered in place as a result of this accident.	85.923332435587
+rmp_accident	property_damage	Total Property Damage	bigint(20)	dollars	The total on-site and off-site property damage due to the accident, in dollars.	76.155848819463
+rmp_accident	env_damage	Environmental Damage	char(1)	yn	Indicates whether any one of a number of forms of environmental damage were caused by the accident.	0
+rmp_acc_chem	accchem_id	Accident Chemical Record ID	int(11)	id	A unique ID for each accident chemical record.	0
+rmp_acc_chem	accident_id	Accident ID	int(11)	id	The unique ID for each accident record.	0
+rmp_acc_chem	chemical_id	Chemical ID	int(11)	code:n:long:rmp_chem_cd:chemical_id:chemical_name	The identifying ID for a particular chemical released in an accident.	0
+rmp_acc_chem	quantity_lbs	Amount Released (lbs)	double		The amount of the substance released in the accident, in pounds, to two significant digits.	0.38904450669157
+rmp_acc_chem	percent_weight	Percent Weight (Within Mixture)	float		The percent weight of a chemical within a mixture released in an accident.	36.437908496732
+rmp_acc_chem	num_acc_flam	Number of Flammable Components	int(11)		The number of listed flammable component chemicals for this chemical record.	94.57671957672
+rmp_acc_chem	cas	CAS number	char(9)		The identifying CAS number for a chemical.	0
+rmp_acc_chem	chemical_type	Chemical Type	char(1)	code:n:short:rmp_chemtype	The type of chemical (T=toxic, F=flammable).	0
+rmp_acc_flam	flammixchem_id	Flammable Chemical ID	int(11)	id	A unique ID for each flammable chemical record.	0
+rmp_acc_flam	accchem_id	Accident Chemical Record ID	int(11)	id	A unique ID for each accident chemical record.	0
+rmp_acc_flam	chemical_id	Chemical ID	int(11)	code:n:long:rmp_chem_cd:chemical_id:chemical_name	The identifying ID for a particular flammable chemical released in an accident.	0
+rmp_alt_flam	flammable_id	Flammable Scenario ID	int(11)	id	A unique ID for each alternate case flammable scenario record.	0
+rmp_alt_flam	procchem_id	Process Chemical Record ID	int(11)	id	A unique identifier for each process chemical record.	0
+rmp_alt_flam	analytical_basis	Model Used	varchar(255)		The model used, or analytical basis, for the release scenario.	0
+rmp_alt_flam	scenario	Release Scenario	varchar(200)		Indicates gas release or liquid spill. (data not released to public by EPA)	100
+rmp_alt_flam	quantity_lbs	Amount Released (lbs)	double		The amount released in the scenario, in lbs. (data not released to public by EPA)	100
+rmp_alt_flam	endpoint_used	Endpoint Used	varchar(30)		The endpoint used for vapor cloud explosions or fires. (data not released to public by EPA)	100
+rmp_alt_flam	lfl_value	LFL Value	float		The lower flammability limit (LFL) value used.  (data not released to public by EPA)	100
+rmp_alt_flam	endpoint_distance	Endpoint Distance (miles)	float		The furthest distance that the release would reach from the facility, in miles. (data not released to public by EPA)	100
+rmp_alt_flam	population	Population	varchar(9)		The population living within the endpoint distance used as a radius. (data not released to public by EPA)	100
+rmp_alt_flam	pr_schools	Public Receptors - Schools	char(1)	yn	Indicates whether schools are present within the modelled endpoint distance radius. (data not released to public by EPA)	0
+rmp_alt_flam	pr_residences	Public Receptors - Residences	char(1)	yn	Indicates whether residences are present within the modelled endpoint distance radius. (data not released to public by EPA)	0
+rmp_alt_flam	pr_hospitals	Public Receptors - Hospitals	char(1)	yn	Indicates whether hospitals are present within the modelled endpoint distance radius. (data not released to public by EPA)	0
+rmp_alt_flam	pr_prisons	Public Receptors - Prisons	char(1)	yn	Indicates whether prisons are present within the modelled endpoint distance radius. (data not released to public by EPA)	0
+rmp_alt_flam	pr_public_rec	Public Receptors - Recreation Areas	char(1)	yn	Indicates whether recreation areas are present within the modelled endpoint distance radius. (data not released to public by EPA)	0
+rmp_alt_flam	pr_comm_ind	Public Receptors - Commercial	char(1)	yn	Indicates whether commercial, office, or industrial areas are present within the modelled endpoint distance radius. (data not released to public by EPA)	0
+rmp_alt_flam	pr_othertype	Public Receptors - Other	varchar(200)		Description of other public receptors present within the modelled endpoint distance radius. (data not released to public by EPA)	100
+rmp_alt_flam	er_natlstateparks	Environmental Receptors - Parks	char(1)	yn	Indicates whether national or state parks are present within the modelled endpoint distance radius. (data not released to public by EPA)	0
+rmp_alt_flam	er_wildlifesanct	Environmental Receptors - Wildlife	char(1)	yn	Indicates whether wildlife sanctuaries or preserves are present within the modelled endpoint distance radius. (data not released to public by EPA)	0
+rmp_alt_flam	er_fedwilderness	Environmental Receptors - Wilderness	char(1)	yn	Indicates whether Federally designated wilderness areas are present within the modelled endpoint distance radius. (data not released to public by EPA)	0
+rmp_alt_flam	er_othertype	Environmental Receptors - Other	varchar(200)		Description of other environmental receptors present within the modelled endpoint distance radius. (data not released to public by EPA)	100
+rmp_alt_flam	pm_dikes	Passive Mitigation - Dikes	char(1)	yn	Indicates whether dikes as a passive mitigation measure were considered in estimating the release quantity or rate for the scenario.	0
+rmp_alt_flam	pm_firewalls	Passive Mitigation - Fire Walls	char(1)	yn	Indicates whether fire walls as a passive mitigation measure were considered in estimating the release quantity or rate for the scenario.	0
+rmp_alt_flam	pm_blastwalls	Passive Mitigation - Blast Walls	char(1)	yn	Indicates whether blast walls as a passive mitigation measure were considered in estimating the release quantity or rate for the scenario.	0
+rmp_alt_flam	pm_enclosures	Passive Mitigation - Enclosures	char(1)	yn	Indicates whether enclosures as a passive mitigation measure were considered in estimating the release quantity or rate for the scenario.	0
+rmp_alt_flam	pm_othertype	Passive Mitigation - Other	varchar(200)		Description of another passive mitigation measure considered in estimating the release quantity or rate for the scenario.	93.195463642428
+rmp_alt_flam	am_sprinklers	Active Mitigation - Sprinklers	char(1)	yn	Indicates whether sprinklers were considered as active mitigation methods that affected the release quantity or rate in the scenario.	0
+rmp_alt_flam	am_delugesystems	Active Mitigation - Deluge Systems	char(1)	yn	Indicates whether deluge systems were considered as active mitigation methods that affected the release quantity or rate in the scenario.	0
+rmp_alt_flam	am_watercurtain	Active Mitigation - Water Curtain	char(1)	yn	Indicates whether a water curtain was considered as an active mitigation method that affected the release quantity or rate in the scenario.	0
+rmp_alt_flam	am_excessflowvalve	Active Mitigation - Excess Flow Valves	char(1)	yn	Indicates whether excess flow valves were considered as active mitigation methods that affected the release quantity or rate in the scenario.	0
+rmp_alt_flam	am_othertype	Active Mitigation - Other	varchar(200)		Description of another method considered as an active mitigation method that affected the release quantity or rate in the scenario.	73.21177081017
+rmp_alt_flam	ptrgraphic	Graphics File	varchar(12)		Graphics file name included with submission. (data not released to public by EPA)	100
+rmp_alt_flam	cbi_flag	Confidential Business Information	char(1)	yn	Indicates whether this record contained Confidential Business Information (CBI) which has been erased by EPA from the public version of the data.	0
+rmp_alt_tox	toxic_id	Toxic Scenario ID	int(11)	id	A unique ID for each alternate case toxics release scenario record.	0
+rmp_alt_tox	procchem_id	Process Chemical Record ID	int(11)	id	A unique identifier for each process chemical record.	0
+rmp_alt_tox	percent_weight	Percent Weight (Within Mixture)	float		If the scenario involves the release of a mixture containing a regulated substance, the percentage weight of the regulated substance in the mixture.	64.008586420735
+rmp_alt_tox	physical_state	Physical State	char(1)	code:n:long:rmp_phys_cd:phys:phys_tr	The physical state (gas, liquid, etc.) of the chemical in the modelled vessel.	0.017036549076619
+rmp_alt_tox	analytical_basis	Model Used	varchar(255)		The model used, or analytical basis, for the release scenario.	0.0079503895690889
+rmp_alt_tox	scenario	Release Scenario	varchar(200)		Indicates gas release or liquid spill. (data not released to public by EPA)	100
+rmp_alt_tox	quantity_lbs	Amount Released (lbs)	double		The amount released in the scenario, in lbs. (data not released to public by EPA)	100
+rmp_alt_tox	release_duration	Release Duration (HHHMM)	float		Approximate duration of accidental release in hours and minutes (HHHMM) (data not released to public by EPA)	100
+rmp_alt_tox	release_rate	Release Rate (lbs/minute)	float		The rate in lbs/minute at which the modelled release takes place. (data not released to public by EPA)	100
+rmp_alt_tox	wind_speed	Wind Speed	float		Wind speed at the time of the accident.	0.014765009199737
+rmp_alt_tox	stability_class	Atmospheric Stability Class	char(1)		The atmospheric stability class at the time of the accident.	0.014765009199737
+rmp_alt_tox	topography	Topography	char(1)	code:n:short:rmp_topo	Indicates whether the topography surrounding the facility is urban or rural.	0.0056788496922063
+rmp_alt_tox	endpoint_distance	Endpoint Distance (miles)	float		The furthest distance that the release would reach from the facility, in miles. (data not released to public by EPA)	100
+rmp_alt_tox	population	Population	varchar(9)		The population living within the endpoint distance used as a radius. (data not released to public by EPA)	100
+rmp_alt_tox	pr_schools	Public Receptors - Schools	char(1)	yn	Indicates whether schools are present within the modelled endpoint distance radius. (data not released to public by EPA)	0
+rmp_alt_tox	pr_residences	Public Receptors - Residences	char(1)	yn	Indicates whether residences are present within the modelled endpoint distance radius. (data not released to public by EPA)	0
+rmp_alt_tox	pr_hospitals	Public Receptors - Hospitals	char(1)	yn	Indicates whether hospitals are present within the modelled endpoint distance radius. (data not released to public by EPA)	0
+rmp_alt_tox	pr_prisons	Public Receptors - Prisons	char(1)	yn	Indicates whether prisons are present within the modelled endpoint distance radius. (data not released to public by EPA)	0
+rmp_alt_tox	pr_public_rec	Public Receptors - Recreation Areas	char(1)	yn	Indicates whether recreation areas are present within the modelled endpoint distance radius. (data not released to public by EPA)	0
+rmp_alt_tox	pr_comm_ind	Public Receptors - Commercial	char(1)	yn	Indicates whether commercial, office, or industrial areas are present within the modelled endpoint distance radius. (data not released to public by EPA)	0
+rmp_alt_tox	pr_othertype	Public Receptors - Other	varchar(200)		Description of other public receptors present within the modelled endpoint distance radius. (data not released to public by EPA)	100
+rmp_alt_tox	er_natlstateparks	Environmental Receptors - Parks	char(1)	yn	Indicates whether national or state parks are present within the modelled endpoint distance radius. (data not released to public by EPA)	0
+rmp_alt_tox	er_wildlifesanct	Environmental Receptors - Wildlife	char(1)	yn	Indicates whether wildlife sanctuaries or preserves are present within the modelled endpoint distance radius. (data not released to public by EPA)	0
+rmp_alt_tox	er_fedwilderness	Environmental Receptors - Wilderness	char(1)	yn	Indicates whether Federally designated wilderness areas are present within the modelled endpoint distance radius. (data not released to public by EPA)	0
+rmp_alt_tox	er_othertype	Environmental Receptors - Other	varchar(200)		Description of other environmental receptors present within the modelled endpoint distance radius. (data not released to public by EPA)	100
+rmp_alt_tox	pm_dikes	Passive Mitigation - Dikes	char(1)	yn	Indicates whether dikes as a passive mitigation measure were considered in estimating the release quantity or rate for the scenario.	0
+rmp_alt_tox	pm_enclosures	Passive Mitigation - Enclosures	char(1)	yn	Indicates whether enclosures as a passive mitigation measure were considered in estimating the release quantity or rate for the scenario.	0
+rmp_alt_tox	pm_berms	Passive Mitigation - Berms	char(1)	yn	Indicates whether berms as a passive mitigation measure were considered in estimating the release quantity or rate for the scenario.	0
+rmp_alt_tox	pm_drains	Passive Mitigation - Drains	char(1)	yn	Indicates whether drains as a passive mitigation measure were considered in estimating the release quantity or rate for the scenario.	0
+rmp_alt_tox	pm_sumps	Passive Mitigation - Sumps	char(1)	yn	Indicates whether sumps as a passive mitigation measure were considered in estimating the release quantity or rate for the scenario.	0
+rmp_alt_tox	pm_othertype	Passive Mitigation - Other	varchar(200)		Description of another passive mitigation measure considered in estimating the release quantity or rate for the scenario.	94.132612498012
+rmp_alt_tox	am_sprinklers	Active Mitigation - Sprinklers	char(1)	yn	Indicates whether sprinklers were considered as active mitigation methods that affected the release quantity or rate in the scenario.	0
+rmp_alt_tox	am_delugesystems	Active Mitigation - Deluge Systems	char(1)	yn	Indicates whether deluge systems were considered as active mitigation methods that affected the release quantity or rate in the scenario.	0
+rmp_alt_tox	am_watercurtain	Active Mitigation - Water Curtain	char(1)	yn	Indicates whether a water curtain was considered as an active mitigation method that affected the release quantity or rate in the scenario.	0
+rmp_alt_tox	am_neutralization	Active Mitigation - Neutralization	char(1)	yn	Indicates whether neutralization was considered as an active mitigation method that affected the release quantity or rate in the scenario.	0
+rmp_alt_tox	am_excessflowvalve	Active Mitigation - Excess Flow Valves	char(1)	yn	Indicates whether excess flow valves were considered as active mitigation methods that affected the release quantity or rate in the scenario.	0
+rmp_alt_tox	am_flares	Active Mitigation - Flares	char(1)	yn	Indicates whether flares were considered as active mitigation methods that affected the release quantity or rate in the scenario.	0
+rmp_alt_tox	am_scrubbers	Active Mitigation - Scrubbers	char(1)	yn	Indicates whether scrubbers were considered as active mitigation methods that affected the release quantity or rate in the scenario.	0
+rmp_alt_tox	am_emerg_shutdown	Active Mitigation - Emergency Shutdown	char(1)	yn	Indicates whether an emergency shutdown was considered as an active mitigation method that affected the release quantity or rate in the scenario.	0
+rmp_alt_tox	am_othertype	Active Mitigation - Other	varchar(200)		Description of another method considered as an active mitigation method that affected the release quantity or rate in the scenario.	78.725893283057
+rmp_alt_tox	ptrgraphic	Graphics File	varchar(12)		Graphics file name included with submission. (data not released to public by EPA)	100
+rmp_alt_tox	cbi_flag	Confidential Business Information	char(1)	yn	Indicates whether this record contained Confidential Business Information (CBI) which has been erased by EPA from the public version of the data.	0
+rmp_execsum	rmp_id	RMP ID	int(11)	id	The unique ID for each RMP submission.	0
+rmp_execsum	execsum	Executive Summary	mediumtext	nl2br	The executive summary of an RMP submission.	92.072882460422
+rmp_facility	facility_id	Facility ID	char(12)		A unique ID for each facility.	0
+rmp_facility	facility_name	Facility Name	varchar(250)		The name of the facility.	0
+rmp_facility	marplot_id	MARPLOT ID	varchar(16)		The ID for the facility within the MARPLOT software package.	100
+rmp_facility	cameo_id	CAMEO ID	varchar(10)		The ID for the facility within the CAMEO software package.	100
+rmp_facility	rmp_id	RMP ID	bigint(20)	id	The unique ID for each RMP submission.	0
+rmp_facility	street_1	Street Address Line 1	varchar(50)		The first line of the street address of the physical location of the facility.	0
+rmp_facility	street_2	Street Address Line 2	varchar(35)		The second line of the street address of the physical location of the facility.	91.011954543218
+rmp_facility	city	City	varchar(19)		The city in which the facility is physically located.	0
+rmp_facility	state	State	char(2)	code:S:long:alldb.all_state_cd:state:state_tr	The postal abbreviation for the U.S. state in which the facility is physically located.	0
+rmp_facility	zip	Zip Code	varchar(5)		The Zip code within the address for the physical location of the facility.	0
+rmp_facility	zip_ext	Zip Code Extension	varchar(4)		The extension (to 9 digits) of the Zip code within the address of the physical location of the facility.	82.319082993063
+rmp_facility	county_fips	County FIPS Code	varchar(5)		The FIPS code for the county in which the facility is located.	0
+rmp_facility	num_registrations	EPA Number of Registrations	int(11)		The number of registrations for this facility, as counted by EPA.	0
+rmp_facility	latitude_dec	Latitude	char(10)		The latitude of the facility in decimal degrees.	0
+rmp_facility	longitude_dec	Longitude	char(11)		The longitude of the facility in decimal degrees.	0
+rmp_facility	num_registration	Number of RMP Submissions	int(11)		The number of registrations (RMP submissions) for this facility.	0
+rmp_facility	sub_type	Submission Type	char(1)	code:n:short:rmp_subtype	The type of the most recent RMP submission for this facility.	0
+rmp_facility	sub_date	Submission Date	date		The date of the most recent RMP submission for this facility.	0
+rmp_facility	exec_type	Executive Summary Type	char(1)	code:n:short:rmp_execsum	The type of executive summary (e.g. whether it is good or not) in the most recent RMP submission for this facility.	0
+rmp_facility	execsum_rmp_id	Exec Summary RMP ID	int(11)		The RMP ID of the most recent submission for this facility that has a useable executive summary.	0
+rmp_facility	exec_sub_type	Exec Summary Submission Type	char(1)		The type of submission for the most recent submission for this facility that has a useable executive summary.	0
+rmp_facility	exec_sub_date	Exec Summary Submission Date	date		The submission date of the most recent submission for this facility that has a useable executive summary.	0
+rmp_facility	deregistration_date	Deregistration Date	date		The date on which this facility was deregistered from the RMP database (i.e., no longer has processes with potential off-site consequences).	60.613961725783
+rmp_facility	dereg_effect_date	Deregistration Effective Date	date		The date on which the change in processes leading to deregistration actually occured.	60.613961725783
+rmp_facility	parent	Parent Company	varchar(50)		The parent company that owns at least 50% of the voting stock of the company that owns the facility.	27.077286367885
+rmp_facility	parent_2	Second Parent Company	varchar(50)		If the facility is owned by a 50/50 joint venture, the name of the second parent company.	88.778471983077
+rmp_facility	operator_name	Owner or Operator Name	varchar(35)		The name of the owner or operator of the facility.	0
+rmp_facility	operator_city	Owner or Operator City	varchar(20)		The city in the mailing address of the owner or operator.	0
+rmp_facility	operator_state	Owner or Operator State	char(2)	code:S:long:alldb.all_state_cd:state:state_tr	The postal abbreviation for the state in the mailing address of the owner or operator.	0.40832390416687
+rmp_facility	operator_zip	Owner or Operator Zip	char(5)		The 5-digit Zip code in the mailing address of the owner or operator.	0.40832390416687
+rmp_facility	province	Owner or Operator Province	varchar(35)		The foreign province in the mailing address of the owner or operator.	99.591676095833
+rmp_facility	county	County	varchar(60)		A translation of the county FIPS code for the county that the facility is located in.	0.0098391302208885
+rmp_facility	country	Country	varchar(50)		A translation of the foreign country code.	99.586756530723
+rmp_facility	sub_reason	Reason For Submission	char(3)	code:n:long:rmp_submit_cd:submit:submit_tr	A code indicating the reason for submission.	24.351847296699
+rmp_facility	dereg_reason	Deregistration Reason	char(2)	code:n:long:rmp_dereg_cd:dereg:dereg_tr	A code indicating the reason for deregistration of the facility.	67.840802873026
+rmp_facility	dereg_other	Deregistration Reason (Other)	varchar(80)		Text describing a non-standard reason for deregistration of the facility.	95.095193584887
+rmp_facility	toxic_tot	Process Toxic Amount Total (lbs)	double		The total amount of toxic chemicals held in the facility's processes.	15.550745314114
+rmp_facility	flam_tot	Process Flammable Amount Total (lbs)	double		The total amount of flammable chemicals held in the facility's processes.	80.769419983273
+rmp_facility	quantity_tot	Process Amount Total (lbs)	double		The total amount of RMP regulated chemicals held in the facility's processes.	0.073793476656664
+rmp_facility	num_proc_23	Number of Potential Offsite Consequence Processes	int(11)		The number of processes at the facility in Program 2 or 3 (i.e. with potential off-site consequences).	5.9625129138584
+rmp_facility	toxic_tot_23	Potential Offsite Consequence Toxic Amount Total (lbs)	double		The total amount of toxic chemical held in Program 2 or 3 processes (i.e. with potential off-site consequences).	17.16928223545
+rmp_facility	flam_tot_23	Potential Offsite Consequence Flammable Amount Total (lbs)	double		The total amount of flammable chemical held in Program 2 or 3 processes (i.e. with potential off-site consequences).	85.38397205687
+rmp_facility	quantity_tot_23	Potential Offsite Consequence Amount Total (lbs)	double		The total amount of RMP chemicals held in Program 2 or 3 processes (i.e. with potential off-site consequences).	6.0117085649629
+rmp_facility	all_naics	All Process NAICS	varchar(100)		All NAICS codes for all of the facility's processes, separated by spaces.	0.0049195651104442
+rmp_facility	sortid_1	Sortid 1	int(11)	id	A unique ID for facilities sorted by name.	0
+rmp_facility	sortid_2	Sortid 2	int(11)	id	A unique ID for facilities sorted by state and name.	0
+rmp_facility	sortid_3	Sortid 3	int(11)	id	A unique ID for facilities sorted by descending amount.	0
+rmp_facility	deregistration_yn	Deregistered (Yes/No)	char(1)	yn	Indicates whether the facility has deregistered from RMP.  Field added by RTK NET.	0
+rmp_facility	num_fte	Number of Full Time Employees	int(11)		The number of full-time equivalent employees working at the site (part-time employees add fractions).	8.5108476410685
+rmp_facility	num_accident	Number of RMP Accidents	int(11)		The number of accident records (i.e. accidents reported within the RMP database) for this submission.	93.781669700398
+rmp_facility	acc_flam_tot	RMP Accident Flammable Total (lbs)	double		The total amount of flammable chemicals released in accidents listed in the submission.	98.883258719929
+rmp_facility	acc_toxic_tot	RMP Accident Toxic Total (lbs)	double		The total amount of toxic chemicals released in accidents listed in the submission.	94.672110985389
+rmp_facility	acc_quantity_tot	RMP Accident Amount Total (lbs)	double		The total amount of both toxic and flammable chemicals released in accidents listed in the submission.	93.79642839573
+rmp_facility	num_deaths	Total RMP Accident Deaths	int(11)		The total number of people killed due to accidents listed in the submission.	99.857332611797
+rmp_facility	num_injuries	Total RMP Accident Injuries	int(11)		The total number of people injured or hospitalized due to accidents listed in the submission.	96.876076154868
+rmp_facility	num_evacuated	Total RMP Accident Evacuated/Sheltering In Place	int(11)		The total number of people evacuated or sheltering in place due to accidents listed in the submission.	98.799626113052
+rmp_facility	property_damage	Total RMP Accident Property Damage	bigint(20)	dollars	The total property damage, in dollars, due to accidents listed in the submission.	98.273232646234
+rmp_prev2text	prevent_2_id	Prevention Program ID	int(11)	id	A unique ID for each prevention program (for Program 2 processes) record.	0
+rmp_prev2text	desctext	Prevention Program Description	mediumtext	nl2br	A text description for the prevention program.	99.402969162291
+rmp_prev3text	prevent_3_id	Prevention Program ID	int(11)	id	A unique ID for each prevention program (for Program 3 processes) record.	0
+rmp_prev3text	desctext	Prevention Program Description	mediumtext	nl2br	A text description for the prevention program.	97.562834281198
+rmp_prevent_2	prevent_2_id	Prevention Program ID	int(11)	id	A unique ID for each prevention program (for Program 2 processes) record.	0
+rmp_prevent_2	procnaics_id	Process NAICS ID	int(11)	id	A unique ID for each process NAICS record.	0
+rmp_prevent_2	safety_info_date	Safety Info Review Date	char(11)		Date on which the safety information was last reviewed or revised.	0
+rmp_prevent_2	fr_nfpa58	Safety Regs - NFPA 58	char(1)	yn	Indicates that NFPA 58 propane handling code was used as a standard to demonstrate compliance with the safety information requirement.	0
+rmp_prevent_2	fr_osha	Safety Regs - OSHA (Ammonia)	char(1)	yn	Indicates that OSHA (29 CFR 1910.111) standard for anhydrous ammonia was used as a standard to demonstrate compliance with the safety information requirement.	0
+rmp_prevent_2	fr_astm	Safety Regs - ASTM Standards	char(1)	yn	Indicates that ASTM Standards were used as a standard to demonstrate compliance with the safety information requirement.	0
+rmp_prevent_2	fr_ansi	Safety Regs - ANSI Standards	char(1)	yn	Indicates that ANSI Standards were used as a standard to demonstrate compliance with the safety information requirement.	0
+rmp_prevent_2	fr_asme	Safety Regs - ASME Standards	char(1)	yn	Indicates that ASME Standards were used as a standard to demonstrate compliance with the safety information requirement.	0
+rmp_prevent_2	fr_none	Safety Regs - None	char(1)	yn	Indicates that no national standards were used as a standard to demonstrate compliance with the safety information requirement.	0
+rmp_prevent_2	fr_other	Safety Regs - Other	varchar(200)		Describes another standard that was used as a standard to demonstrate compliance with the safety information requirement.	38.455182707428
+rmp_prevent_2	fr_comments	Safety Regs - Commnents	varchar(100)		Comments on standards used to demonstrate compliance with the safety information requirement.	84.671766305072
+rmp_prevent_2	haz_review_date	PHA Review Date	char(11)		The date of completion of the most recent hazard review or update.	0
+rmp_prevent_2	change_comp_date	PHA Change Completion Date	char(11)		Expected or actual date of completion of all changes resulting from last PHA or PHA update.	0
+rmp_prevent_2	mh_toxicrelease	Hazard Identified - Toxic Release	char(1)	yn	Indicates whether toxic release was identified as a major hazard for the process as a result of the PHA.	0
+rmp_prevent_2	mh_fire	Hazard Identified - Fire	char(1)	yn	Indicates whether fire was identified as a major hazard for the process as a result of the PHA.	0
+rmp_prevent_2	mh_explosion	Hazard Identified - Explosion	char(1)	yn	Indicates whether explosion was identified as a major hazard for the process as a result of the PHA.	0
+rmp_prevent_2	mh_runawayreact	Hazard Identified - Runaway Reaction	char(1)	yn	Indicates whether runaway reaction was identified as a major hazard for the process as a result of the PHA.	0
+rmp_prevent_2	mh_polymerization	Hazard Identified - Polymerization	char(1)	yn	Indicates whether polymerization was identified as a major hazard for the process as a result of the PHA.	0
+rmp_prevent_2	mh_overpressure	Hazard Identified - Overpressure	char(1)	yn	Indicates whether overpressure was identified as a major hazard for the process as a result of the PHA.	0
+rmp_prevent_2	mh_corrosion	Hazard Identified - Corrosion	char(1)	yn	Indicates whether corrosion was identified as a major hazard for the process as a result of the PHA.	0
+rmp_prevent_2	mh_overfilling	Hazard Identified - Overfilling	char(1)	yn	Indicates whether overfilling was identified as a major hazard for the process as a result of the PHA.	0
+rmp_prevent_2	mh_contamination	Hazard Identified - Contamination	char(1)	yn	Indicates whether contamination was identified as a major hazard for the process as a result of the PHA.	0
+rmp_prevent_2	mh_equipfailure	Hazard Identified - Equipment Failure	char(1)	yn	Indicates whether equipment failure was identified as a major hazard for the process as a result of the PHA.	0
+rmp_prevent_2	mh_cooling_loss	Hazard Identified - Cooling Loss	char(1)	yn	Indicates whether cooling (or heating or instrument air) loss was identified as a major hazard for the process as a result of the PHA.	0
+rmp_prevent_2	mh_earthquake	Hazard Identified - Earthquake	char(1)	yn	Indicates whether earthquake was identified as a major hazard for the process as a result of the PHA.	0
+rmp_prevent_2	mh_floods	Hazard Identified - Flood	char(1)	yn	Indicates whether flood was identified as a major hazard for the process as a result of the PHA.	0
+rmp_prevent_2	mh_tornado	Hazard Identified - Tornado	char(1)	yn	Indicates whether tornado was identified as a major hazard for the process as a result of the PHA.	0
+rmp_prevent_2	mh_hurricanes	Hazard Identified - Hurricane	char(1)	yn	Indicates whether hurricane was identified as a major hazard for the process as a result of the PHA.	0
+rmp_prevent_2	mh_othertype	Hazard Identified - Other	varchar(200)		Describes another event identified as a major hazard for the process as a result of the PHA.	74.277032969962
+rmp_prevent_2	pc_vents	Process Controls - Vents	char(1)	yn	Indicates whether vents are used as process controls.	0
+rmp_prevent_2	pc_reliefvalves	Process Controls - Relief Valves	char(1)	yn	Indicates whether relief valves are used as process controls.	0
+rmp_prevent_2	pc_checkvalves	Process Controls - Check Valves	char(1)	yn	Indicates whether check valves are used as process controls.	0
+rmp_prevent_2	pc_scrubbers	Process Controls - Scrubbers	char(1)	yn	Indicates whether scrubbers are used as process controls.	0
+rmp_prevent_2	pc_flares	Process Controls - Flares	char(1)	yn	Indicates whether flares are used as process controls.	0
+rmp_prevent_2	pc_manualshutoffs	Process Controls - Manual Shutoffs	char(1)	yn	Indicates whether manual shutoffs are used as process controls.	0
+rmp_prevent_2	pc_autoshutoffs	Process Controls - Auto Shutoffs	char(1)	yn	Indicates whether automatic shutoffs are used as process controls.	0
+rmp_prevent_2	pc_interlocks	Process Controls - Interlocks	char(1)	yn	Indicates whether interlocks are used as process controls.	0
+rmp_prevent_2	pc_alarms	Process Controls - Alarms	char(1)	yn	Indicates whether alarms are used as process controls.	0
+rmp_prevent_2	pc_keyedbypass	Process Controls - Keyed Bypass	char(1)	yn	Indicates whether keyed bypass is used as a process control.	0
+rmp_prevent_2	pc_emergencyair	Process Controls - Emergency Air	char(1)	yn	Indicates whether an emergency air supply is used as a process control.	0
+rmp_prevent_2	pc_emergencypower	Process Controls - Emergency Power	char(1)	yn	Indicates whether backup power systems are used as process controls.	0
+rmp_prevent_2	pc_backuppump	Process Controls - Backup Pump	char(1)	yn	Indicates whether a backup pump is used as a process control.	0
+rmp_prevent_2	pc_groundingequip	Process Controls - Grounding	char(1)	yn	Indicates whether grounding equipment is used as a process control.	0
+rmp_prevent_2	pc_inhibitoradd	Process Controls - Inhibitor Addition	char(1)	yn	Indicates whether inhibitor addition is used as a process control.	0
+rmp_prevent_2	pc_rupturedisks	Process Controls - Rupture Disks	char(1)	yn	Indicates whether rupture disks are used as process controls.	0
+rmp_prevent_2	pc_excessflowdev	Process Controls - Excess Flow Devices	char(1)	yn	Indicates whether excess flow devices are used as process controls.	0
+rmp_prevent_2	pc_quenchsystem	Process Controls - Quench System	char(1)	yn	Indicates whether a quench system is used as a process control.	0
+rmp_prevent_2	pc_purgesystem	Process Controls - Purge System	char(1)	yn	Indicates whether a purge system is used as a process control.	0
+rmp_prevent_2	pc_none	Process Controls - None	char(1)	yn	Indicates whether no process controls are used.	0
+rmp_prevent_2	pc_other	Process Controls - Other	varchar(200)		Describes another type of equipment used as a process control.	76.204056611317
+rmp_prevent_2	ms_sprinklersys	Mitigation Systems - Sprinklers	char(1)	yn	Indicates that sprinkler systems are used as mitigation systems for the process.	0
+rmp_prevent_2	ms_dikes	Mitigation Systems - Dikes	char(1)	yn	Indicates that dikes are used as mitigation systems for the process.	0
+rmp_prevent_2	ms_firewalls	Mitigation Systems - Fire Walls	char(1)	yn	Indicates that fire walls are used as mitigation systems for the process.	0
+rmp_prevent_2	ms_blastwalls	Mitigation Systems - Blast Walls	char(1)	yn	Indicates that blast walls are used as mitigation systems for the process.	0
+rmp_prevent_2	ms_delugesystem	Mitigation Systems - Deluge Systems	char(1)	yn	Indicates that deluge systems are used as mitigation systems for the process.	0
+rmp_prevent_2	ms_watercurtain	Mitigation Systems - Water Curtains	char(1)	yn	Indicates that water curtains are used as mitigation systems for the process.	0
+rmp_prevent_2	ms_enclosure	Mitigation Systems - Enclosure	char(1)	yn	Indicates that enclosure is used as a mitigation system for the process.	0
+rmp_prevent_2	ms_neutralization	Mitigation Systems - Neutralization	char(1)	yn	Indicates that neutralization is used as a mitigation system for the process.	0
+rmp_prevent_2	ms_none	Mitigation Systems - None	char(1)	yn	Indicates that no systems are used as mitigation systems for the process.	0
+rmp_prevent_2	ms_other	Mitigation Systems - Other	varchar(200)		Describes another system used as a mitigation system for the process.	84.972947040166
+rmp_prevent_2	md_processarea	Monitoring Systems - Process Area	char(1)	yn	Indicates whether process area detectors are used as monitoring/detection systems.	0
+rmp_prevent_2	md_perimetermon	Monitoring Systems - Perimeter	char(1)	yn	Indicates whether perimeter monitors are used as monitoring/detection systems.	0
+rmp_prevent_2	md_none	Monitoring Systems - None	char(1)	yn	Indicates whether no monitoring/detection systems are used.	0
+rmp_prevent_2	md_other	Monitoring Systems - Other	varchar(200)		Describes another monitoring/detection system used.	73.813267944242
+rmp_prevent_2	ch_reduceinv	Changes Since PHA - Reduced Inventory	char(1)	yn	Indicates whether inventory reduced since last PHA or PHA update.	0
+rmp_prevent_2	ch_increaseinv	Changes Since PHA - Increased Inventory	char(1)	yn	Indicates whether inventory increased since last PHA or PHA update.	0
+rmp_prevent_2	ch_changeparam	Changes Since PHA - Process Parameters	char(1)	yn	Indicates whether process parameters changed since last PHA or PHA update.	0
+rmp_prevent_2	ch_proccontrol	Changes Since PHA - Process Controls	char(1)	yn	Indicates whether process control change occured since last PHA or PHA update.	0
+rmp_prevent_2	ch_procdetect	Changes Since PHA - Process Detection	char(1)	yn	Indicates whether process detection changes occured since last PHA or PHA update.	0
+rmp_prevent_2	ch_perimetermon	Changes Since PHA - Perimeter Monitoring	char(1)	yn	Indicates whether perimeter monitoring changes occured since last PHA or PHA update.	0
+rmp_prevent_2	ch_mitigationsys	Changes Since PHA - Mitigation Systems	char(1)	yn	Indicates whether mitigation systems changes occured since last PHA or PHA update.	0
+rmp_prevent_2	ch_nonerequired	Changes Since PHA - None Recommended	char(1)	yn	Indicates whether no changes where required or recommended since last PHA or PHA update.	0
+rmp_prevent_2	ch_none	Changes Since PHA - None	char(1)	yn	Indicates whether no changes occured since last PHA or PHA update.	0
+rmp_prevent_2	ch_other	Changes Since PHA - Other	varchar(200)		Describes another change that occured since last PHA or PHA update.	81.246834936965
+rmp_prevent_2	proc_review_date	Procedure Review Date	char(11)		Date of most recent review or revision of operating procedures.	0
+rmp_prevent_2	train_review_date	Training Review Date	char(11)		Date of most recent review or revision of training programs.	0
+rmp_prevent_2	tr_classroom	Type of Training - Classroom	char(1)	yn	Indicates whether classroom traing was provided.	0
+rmp_prevent_2	tr_onthejob	Type of Training - On the Job	char(1)	yn	Indicates whether on the job training was provided.	0
+rmp_prevent_2	tr_other	Type of Training - Other	varchar(200)		Describes another type of training provided.	87.824835416722
+rmp_prevent_2	ct_writtentest	Competency Testing - Written Tests	char(1)	yn	Indicates whether competency was tested through written tests.	0
+rmp_prevent_2	ct_oraltest	Competency Testing - Oral Tests	char(1)	yn	Indicates whether competency was tested through oral tests.	0
+rmp_prevent_2	ct_demonstration	Competency Testing - Demonstration	char(1)	yn	Indicates whether competency was tested through demonstration.	0
+rmp_prevent_2	ct_observation	Competency Testing - Observation	char(1)	yn	Indicates whether competency was tested through observation.	0
+rmp_prevent_2	ct_other	Competency Testing - Other	varchar(200)		Describes another method of competency testing.	95.786135024921
+rmp_prevent_2	maint_review_date	Maintenance Review Date	char(11)		The date on which maintenance procedures were most recently reviewed or revised.	0
+rmp_prevent_2	maint_inspect_date	Maintenance Inspection Date	char(11)		The date of the most recent equipment inspection or test.	0
+rmp_prevent_2	equip_tested	Equipment Tested	varchar(200)		The equipment that was inspected or tested in the most recent maintenance inspection.	0.20256403422266
+rmp_prevent_2	comp_audit_date	Compliance Audit Date	char(11)		Date of most recent compliance audit.	0
+rmp_prevent_2	audit_comp_date	Compliance Audit Change Completion Date	char(11)		Expected or actual date of completion of all changes resulting from the most recent compliance audit.	0
+rmp_prevent_2	inc_invest_date	Incident Investigation Date	char(11)		Date of the most recent incident investigation.	0
+rmp_prevent_2	inc_change_date	Incident Invest. Change Completion Date	char(11)		The expected or actual date of completion of all changes resulting from the incident investigation.	0
+rmp_prevent_2	most_recent_date	Most Recent Change Date	char(11)		Date of most recent change that triggered review or revision.	0
+rmp_prevent_2	cbi_flag	Confidential Business Information	char(1)	yn	Indicates whether this record contained Confidential Business Information (CBI) which has been erased by EPA from the public version of the data.	0
+rmp_prevent_2	num_prevent_2_chem	Number of Chemicals	int(11)		The number of chemicals associated with this prevention program record.	0.10661264959087
+rmp_prevent_2	num_prev2text	Number of Description Records	int(11)		Should always be equal to 1.	0
+rmp_prevent_2	num_prev2_text	Number of Description Lines	int(11)		The number of description lines for this prevention program record.	0
+rmp_prevent_2_chem	primary_key	Prevention Program Chemical ID	int(11)	id	A unique ID for each prevention program chemical record.	0
+rmp_prevent_2_chem	prevent_2_id	Prevention Program ID	int(11)	id	A unique ID for each prevention program (for Program 2 processes) record.	0
+rmp_prevent_2_chem	procchem_id	Process Chemical Record ID	int(11)	id	A unique identifier for each process chemical record.	0
+rmp_prevent_3	prevent_3_id	Prevention Program ID	int(11)	id	A unique ID for each prevention program (for Program 3 processes) record.	0
+rmp_prevent_3	procnaics_id	Process NAICS ID	int(11)	id	A unique ID for each process NAICS record.	0
+rmp_prevent_3	safety_info_date	Safety Info Review Date	char(11)		Date on which the safety information was last reviewed or revised.	0
+rmp_prevent_3	last_pha_date	PHA Update Date	char(11)		Date on which the most recent Process Hazard Analysis (PHA) was completed or updated.	0
+rmp_prevent_3	pha_whatif	PHA Technique - What If	char(1)	yn	Indicates whether What If was used as a PHA (Process Hazard Analysis) technique.	0
+rmp_prevent_3	pha_checklist	PHA Technique - Checklist	char(1)	yn	Indicates whether Checklist was used as a PHA (Process Hazard Analysis) technique.	0
+rmp_prevent_3	pha_whatifcheck	PHA Technique - What If/Checklist	char(1)	yn	Indicates whether What If/Checklist (combined) was used as a PHA (Process Hazard Analysis) technique.	0
+rmp_prevent_3	pha_hazop	PHA Technique - HAZOP	char(1)	yn	Indicates whether HAZOP was used as a PHA (Process Hazard Analysis) technique.	0
+rmp_prevent_3	pha_fmea	PHA Technique - FMEA	char(1)	yn	Indicates whether Failure Mode & Effects Analysis was used as a PHA (Process Hazard Analysis) technique.	0
+rmp_prevent_3	pha_fta	PHA Technique - FTA	char(1)	yn	Indicates whether Fault Tree Analysis was used as a PHA (Process Hazard Analysis) technique.	0
+rmp_prevent_3	pha_other	PHA Technique - Other	varchar(200)		Describes another method used as a PHA (Process Hazard Analysis) technique.	91.014803629641
+rmp_prevent_3	change_comp_date	PHA Change Completion Date	char(11)		Expected or actual date of completion of all changes resulting from last PHA or PHA update.	0
+rmp_prevent_3	mh_toxicrelease	Hazard Identified - Toxic Release	char(1)	yn	Indicates whether toxic release was identified as a major hazard for the process as a result of the PHA.	0
+rmp_prevent_3	mh_fire	Hazard Identified - Fire	char(1)	yn	Indicates whether fire was identified as a major hazard for the process as a result of the PHA.	0
+rmp_prevent_3	mh_explosion	Hazard Identified - Explosion	char(1)	yn	Indicates whether explosion was identified as a major hazard for the process as a result of the PHA.	0
+rmp_prevent_3	mh_runawayreact	Hazard Identified - Runaway Reaction	char(1)	yn	Indicates whether runaway reaction was identified as a major hazard for the process as a result of the PHA.	0
+rmp_prevent_3	mh_polymerization	Hazard Identified - Polymerization	char(1)	yn	Indicates whether polymerization was identified as a major hazard for the process as a result of the PHA.	0
+rmp_prevent_3	mh_overpressure	Hazard Identified - Overpressure	char(1)	yn	Indicates whether overpressure was identified as a major hazard for the process as a result of the PHA.	0
+rmp_prevent_3	mh_corrosion	Hazard Identified - Corrosion	char(1)	yn	Indicates whether corrosion was identified as a major hazard for the process as a result of the PHA.	0
+rmp_prevent_3	mh_overfilling	Hazard Identified - Overfilling	char(1)	yn	Indicates whether overfilling was identified as a major hazard for the process as a result of the PHA.	0
+rmp_prevent_3	mh_contamination	Hazard Identified - Contamination	char(1)	yn	Indicates whether contamination was identified as a major hazard for the process as a result of the PHA.	0
+rmp_prevent_3	mh_equipfailure	Hazard Identified - Equipment Failure	char(1)	yn	Indicates whether equipment failure was identified as a major hazard for the process as a result of the PHA.	0
+rmp_prevent_3	mh_cooling_loss	Hazard Identified - Cooling Loss	char(1)	yn	Indicates whether cooling (or heating or instrument air) loss was identified as a major hazard for the process as a result of the PHA.	0
+rmp_prevent_3	mh_earthquake	Hazard Identified - Earthquake	char(1)	yn	Indicates whether earthquake was identified as a major hazard for the process as a result of the PHA.	0
+rmp_prevent_3	mh_floods	Hazard Identified - Flood	char(1)	yn	Indicates whether flood was identified as a major hazard for the process as a result of the PHA.	0
+rmp_prevent_3	mh_tornado	Hazard Identified - Tornado	char(1)	yn	Indicates whether tornado was identified as a major hazard for the process as a result of the PHA.	0
+rmp_prevent_3	mh_hurricanes	Hazard Identified - Hurricane	char(1)	yn	Indicates whether hurricane was identified as a major hazard for the process as a result of the PHA.	0
+rmp_prevent_3	mh_othertype	Hazard Identified - Other	varchar(200)		Describes another event identified as a major hazard for the process as a result of the PHA.	89.415898731319
+rmp_prevent_3	pc_vents	Process Controls - Vents	char(1)	yn	Indicates whether vents are used as process controls.	0
+rmp_prevent_3	pc_reliefvalves	Process Controls - Relief Valves	char(1)	yn	Indicates whether relief valves are used as process controls.	0
+rmp_prevent_3	pc_checkvalves	Process Controls - Check Valves	char(1)	yn	Indicates whether check valves are used as process controls.	0
+rmp_prevent_3	pc_scrubbers	Process Controls - Scrubbers	char(1)	yn	Indicates whether scrubbers are used as process controls.	0
+rmp_prevent_3	pc_flares	Process Controls - Flares	char(1)	yn	Indicates whether flares are used as process controls.	0
+rmp_prevent_3	pc_manualshutoffs	Process Controls - Manual Shutoffs	char(1)	yn	Indicates whether manual shutoffs are used as process controls.	0
+rmp_prevent_3	pc_autoshutoffs	Process Controls - Auto Shutoffs	char(1)	yn	Indicates whether automatic shutoffs are used as process controls.	0
+rmp_prevent_3	pc_interlocks	Process Controls - Interlocks	char(1)	yn	Indicates whether interlocks are used as process controls.	0
+rmp_prevent_3	pc_alarms	Process Controls - Alarms	char(1)	yn	Indicates whether alarms are used as process controls.	0
+rmp_prevent_3	pc_keyedbypass	Process Controls - Keyed Bypass	char(1)	yn	Indicates whether keyed bypass is used as a process control.	0
+rmp_prevent_3	pc_emergencyair	Process Controls - Emergency Air	char(1)	yn	Indicates whether an emergency air supply is used as a process control.	0
+rmp_prevent_3	pc_emergencypower	Process Controls - Emergency Power	char(1)	yn	Indicates whether backup power systems are used as process controls.	0
+rmp_prevent_3	pc_backuppump	Process Controls - Backup Pump	char(1)	yn	Indicates whether a backup pump is used as a process control.	0
+rmp_prevent_3	pc_groundingequip	Process Controls - Grounding	char(1)	yn	Indicates whether grounding equipment is used as a process control.	0
+rmp_prevent_3	pc_inhibitoradd	Process Controls - Inhibitor Addition	char(1)	yn	Indicates whether inhibitor addition is used as a process control.	0
+rmp_prevent_3	pc_rupturedisks	Process Controls - Rupture Disks	char(1)	yn	Indicates whether rupture disks are used as process controls.	0
+rmp_prevent_3	pc_excessflowdev	Process Controls - Excess Flow Devices	char(1)	yn	Indicates whether excess flow devices are used as process controls.	0
+rmp_prevent_3	pc_quenchsystem	Process Controls - Quench System	char(1)	yn	Indicates whether a quench system is used as a process control.	0
+rmp_prevent_3	pc_purgesystem	Process Controls - Purge System	char(1)	yn	Indicates whether a purge system is used as a process control.	0
+rmp_prevent_3	pc_none	Process Controls - None	char(1)	yn	Indicates whether no process controls are used.	0
+rmp_prevent_3	pc_other	Process Controls - Other	varchar(200)		Describes another type of equipment used as a process control.	84.926828579896
+rmp_prevent_3	ms_sprinklersys	Mitigation Systems - Sprinklers	char(1)	yn	Indicates that sprinkler systems are used as mitigation systems for the process.	0
+rmp_prevent_3	ms_dikes	Mitigation Systems - Dikes	char(1)	yn	Indicates that dikes are used as mitigation systems for the process.	0
+rmp_prevent_3	ms_firewalls	Mitigation Systems - Fire Walls	char(1)	yn	Indicates that fire walls are used as mitigation systems for the process.	0
+rmp_prevent_3	ms_blastwalls	Mitigation Systems - Blast Walls	char(1)	yn	Indicates that blast walls are used as mitigation systems for the process.	0
+rmp_prevent_3	ms_delugesystem	Mitigation Systems - Deluge Systems	char(1)	yn	Indicates that deluge systems are used as mitigation systems for the process.	0
+rmp_prevent_3	ms_watercurtain	Mitigation Systems - Water Curtains	char(1)	yn	Indicates that water curtains are used as mitigation systems for the process.	0
+rmp_prevent_3	ms_enclosure	Mitigation Systems - Enclosure	char(1)	yn	Indicates that enclosure is used as a mitigation system for the process.	0
+rmp_prevent_3	ms_neutralization	Mitigation Systems - Neutralization	char(1)	yn	Indicates that neutralization is used as a mitigation system for the process.	0
+rmp_prevent_3	ms_none	Mitigation Systems - None	char(1)	yn	Indicates that no systems are used as mitigation systems for the process.	0
+rmp_prevent_3	ms_other	Mitigation Systems - Other	varchar(200)		Describes another system used as a mitigation system for the process.	71.525945160243
+rmp_prevent_3	md_processarea	Monitoring Systems - Process Area	char(1)	yn	Indicates whether process area detectors are used as monitoring/detection systems.	0
+rmp_prevent_3	md_perimetermon	Monitoring Systems - Perimeter	char(1)	yn	Indicates whether perimeter monitors are used as monitoring/detection systems.	0
+rmp_prevent_3	md_none	Monitoring Systems - None	char(1)	yn	Indicates whether no monitoring/detection systems are used.	0
+rmp_prevent_3	md_other	Monitoring Systems - Other	varchar(200)		Describes another monitoring/detection system used.	74.624970011713
+rmp_prevent_3	ch_reduceinv	Changes Since PHA - Reduced Inventory	char(1)	yn	Indicates whether inventory reduced since last PHA or PHA update.	0
+rmp_prevent_3	ch_increaseinv	Changes Since PHA - Increased Inventory	char(1)	yn	Indicates whether inventory increased since last PHA or PHA update.	0
+rmp_prevent_3	ch_changeparam	Changes Since PHA - Process Parameters	char(1)	yn	Indicates whether process parameters changed since last PHA or PHA update.	0
+rmp_prevent_3	ch_proccontrol	Changes Since PHA - Process Controls	char(1)	yn	Indicates whether process control change occured since last PHA or PHA update.	0
+rmp_prevent_3	ch_procdetect	Changes Since PHA - Process Detection	char(1)	yn	Indicates whether process detection changes occured since last PHA or PHA update.	0
+rmp_prevent_3	ch_perimetermon	Changes Since PHA - Perimeter Monitoring	char(1)	yn	Indicates whether perimeter monitoring changes occured since last PHA or PHA update.	0
+rmp_prevent_3	ch_mitigationsys	Changes Since PHA - Mitigation Systems	char(1)	yn	Indicates whether mitigation systems changes occured since last PHA or PHA update.	0
+rmp_prevent_3	ch_nonerequired	Changes Since PHA - None Recommended	char(1)	yn	Indicates whether no changes where required or recommended since last PHA or PHA update.	0
+rmp_prevent_3	ch_none	Changes Since PHA - None	char(1)	yn	Indicates whether no changes occured since last PHA or PHA update.	0
+rmp_prevent_3	ch_other	Changes Since PHA - Other	varchar(200)		Describes another change that occured since last PHA or PHA update.	81.455243363769
+rmp_prevent_3	proc_review_date	Procedure Review Date	char(11)		Date of most recent review or revision of operating procedures.	0
+rmp_prevent_3	train_review_date	Training Review Date	char(11)		Date of most recent review or revision of training programs.	0
+rmp_prevent_3	tr_classroom	Type of Training - Classroom	char(1)	yn	Indicates whether classroom traing was provided.	0
+rmp_prevent_3	tr_onthejob	Type of Training - On the Job	char(1)	yn	Indicates whether on the job training was provided.	0
+rmp_prevent_3	tr_other	Type of Training - Other	varchar(200)		Describes another type of training provided.	70.916300927167
+rmp_prevent_3	ct_writtentest	Competency Testing - Written Tests	char(1)	yn	Indicates whether competency was tested through written tests.	0
+rmp_prevent_3	ct_oraltest	Competency Testing - Oral Tests	char(1)	yn	Indicates whether competency was tested through oral tests.	0
+rmp_prevent_3	ct_demonstration	Competency Testing - Demonstration	char(1)	yn	Indicates whether competency was tested through demonstration.	0
+rmp_prevent_3	ct_observation	Competency Testing - Observation	char(1)	yn	Indicates whether competency was tested through observation.	0
+rmp_prevent_3	ct_other	Competency Testing - Other	varchar(200)		Describes another method of competency testing.	87.757722865892
+rmp_prevent_3	maint_review_date	Maintenance Review Date	char(11)		The date on which maintenance procedures were most recently reviewed or revised.	0
+rmp_prevent_3	maint_inspect_date	Maintenance Inspection Date	char(11)		The date of the most recent equipment inspection or test.	0
+rmp_prevent_3	equip_tested	Equipment Tested	varchar(200)		The equipment that was inspected or tested in the most recent maintenance inspection.	0.10160737217934
+rmp_prevent_3	change_manage_date	Management of Change Most Recent Date	char(11)		The date of the most recent change (if any) that triggered a management of change procedure.	0
+rmp_prevent_3	change_review_date	Management of Change Review Date	char(11)		The date that the management of change procedures were most recently reviewed or revised.	0
+rmp_prevent_3	prestart_rev_date	Pre-startup Review Date	char(11)		Date of most recent pre-startup review.	0
+rmp_prevent_3	comp_audit_date	Compliance Audit Date	char(11)		Date of most recent compliance audit.	0
+rmp_prevent_3	audit_comp_date	Compliance Audit Change Completion Date	char(11)		Expected or actual date of completion of all changes resulting from the most recent compliance audit.	0
+rmp_prevent_3	inc_invest_date	Incident Investigation Date	char(11)		Date of the most recent incident investigation.	0
+rmp_prevent_3	inc_change_date	Incident Invest. Change Completion Date	char(11)		The expected or actual date of completion of all changes resulting from the incident investigation.	0
+rmp_prevent_3	part_review_date	Participation Plan Review Date	char(11)		Date of most recent review or revision of employee participation plans.	0
+rmp_prevent_3	hotwork_rev_date	Hot Work Review Date	char(11)		Date of most recent review or revision of hot work permit procedures.	0
+rmp_prevent_3	con_safety_date	Contractor Safety Review Date	char(11)		Date of most recent review or revision of contractor safety procedures.	0
+rmp_prevent_3	con_eval_date	Contractor Safety Eval. Date	char(11)		Date of most recent evaluation of contractor safety performance.	0
+rmp_prevent_3	cbi_flag	Confidential Business Information	char(1)	yn	Indicates whether this record contained Confidential Business Information (CBI) which has been erased by EPA from the public version of the data.	0
+rmp_prevent_3	num_prevent_3_chem	Number of Chemicals	int(11)		The number of chemicals associated with this prevention program record.	0.45864438830951
+rmp_prevent_3	num_prev3text	Number of Text Records	int(11)		Should always be equal to 1.	0
+rmp_prevent_3	num_prev3_text	Number of Description Lines	int(11)		The number of description lines for each prevention program record.	0
+rmp_prevent_3_chem	primary_key	Prevention Program Chemical ID	int(11)	id	A unique ID for each prevention program chemical record.	0
+rmp_prevent_3_chem	prevent_3_id	Prevention Program ID	int(11)	id	A unique ID for each prevention program (for Program 3 processes) record.	0
+rmp_prevent_3_chem	procchem_id	Process Chemical Record ID	int(11)	id	A unique identifier for each process chemical record.	0
+rmp_process	process_id	Process ID	int(11)	id	A unique ID for each process.	0
+rmp_process	process_desc	Process Description	varchar(25)		A short descriptive label for each process. (optional)	9.7330677986828
+rmp_process	rmp_id	RMP ID	bigint(20)	id	The unique ID for each RMP submission.	0
+rmp_process	program_level	Program Level	smallint(6)		A program level from 1-3 that reflects the process potential for public impacts and the level of effort needed to prevent accidents.  Processes with program level 1 have no public receptors in the worst-case circle.	0
+rmp_process	cbi_flag	Confidential Business Information	char(1)	yn	Indicates whether this record contained Confidential Business Information (CBI) which has been erased by EPA from the public version of the data.	0
+rmp_process	num_proc_chem	Number of Process Chemical Records	int(11)		The number of chemical records associated with this process.	0
+rmp_process	num_proc_naics	Number of NAICS Codes	int(11)		The number of NAICS code records associated with this process.	0.00087346924514788
+rmp_process	num_chem_real	Number of Process Chemicals	smallint(6)		The number of chemical records associated with this process that have actual chemical identities.	36.186083887986
+rmp_process	num_chem_fake	Number of Fake Chemical Records	smallint(6)		The number of chemical records associated with this process that have no chemical identity.  These are used by EPA to avoid releasing to the public the chemicals involved in worst and alternate case scenarios.	0
+rmp_process	num_worst_tox	Number of Toxic Worst-Case Scenarios	smallint(6)		The number of toxic worst-case scenario records for this process.	36.520622608878
+rmp_process	num_alt_tox	Number of Toxic Alternate Scenarios	smallint(6)		The number of toxic alternate scenario records for this process.	31.358419370054
+rmp_process	num_worst_flam	Number of Flammable Worst-Case Scenarios	smallint(6)		The number of flammable worst-case scenario records for this process.	84.663626993694
+rmp_process	num_alt_flam	Number of Flammable Alternate Scenarios	smallint(6)		The number of flammable alternate scenario records for this process.	89.18994462205
+rmp_process	num_prev_2	Number of Prevention Program 2 Records	smallint(6)		The number of prevention program 2 records for this process.	67.562846112188
+rmp_process	num_prev_3	Number of Prevention Program 3 Records	smallint(6)		The number of prevention program 3 records for this process.	40.251209754905
+rmp_process	toxic_tot	Toxic Amount Total (lbs)	double		The total amount of all toxic chemicals held in this process.	24.107751166081
+rmp_process	flam_tot	Flammable Amount Total (lbs)	double		The total amount of all flammable chemicals held in this process.	72.017539262443
+rmp_process	quantity_tot	Process Amount Total (lbs)	double		The total amount of both toxic and flammable chemicals held in this process.	0.13626120224307
+rmp_proc_chem	procchem_id	Process Chemical Record ID	int(11)	id	A unique identifier for each process chemical record.	0
+rmp_proc_chem	process_id	Process ID	int(11)	id	A unique ID for each process.	0
+rmp_proc_chem	chemical_id	Process Chemical ID	int(11)	code:n:long:rmp_chem_cd:chemical_id:chemical_name	The identifying ID for a particular regulated chemical held above its threshold within a process.	50
+rmp_proc_chem	quantity_lbs	Process Chemical Amount (lbs)	double		An estimation of the maximum quantity (in pounds, to two significant digits) of the regulated chemical held in the covered process at any one time during the calendar year.	50.071527054056
+rmp_proc_chem	cbi_flag	Confidential Business Information	char(1)	yn	Indicates whether this record contained Confidential Business Information (CBI) which has been erased by EPA from the public version of the data.	0
+rmp_proc_chem	num_alt_flam	Number of Flammable Alternate Scenarios	int(11)		The number of flammable alternate scenario records associated with this process chemical.	95.733945251057
+rmp_proc_chem	num_alt_tox	Number of Toxic Alternate Scenarios	int(11)		The number of toxic alternate scenario records associated with this process chemical.	72.24264824872
+rmp_proc_chem	num_prevent_2_chem	Number of Prevention 2 Records	int(11)		The number of prevention program 2 records associated with this process chemical.	87.352010201506
+rmp_proc_chem	num_prevent_3_chem	Number of Prevention 3 Records	int(11)		The number of prevention program 3 records associated with this process chemical.	67.519597118204
+rmp_proc_chem	num_proc_flam	Number of Flammable Mixture Components	int(11)		The number of flammable mixture component records associated with this process chemical record.	92.792273783555
+rmp_proc_chem	num_worst_flam	Number of Flammable Worst-case Scenarios	int(11)		The number of flammable worst-case scenario records associated with this process chemical.	94.006291791542
+rmp_proc_chem	num_worst_tox	Number of Toxic Worst-case Scenarios	int(11)		The number of toxic worst-case scenario records associated with this process chemical record.	75.98859450957
+rmp_proc_chem	cas	CAS number	char(9)		The identifying CAS number for a chemical.	0
+rmp_proc_chem	chemical_type	Chemical Type	char(1)	code:n:short:rmp_chemtype	The type of chemical (T=toxic, F=flammable).	50
+rmp_proc_flam	flammixchem_id	Flammable Chemical ID	int(11)	id	A unique ID for each flammable chemical record.	0
+rmp_proc_flam	procchem_id	Process Chemical Record ID	int(11)	id	A unique identifier for each process chemical record.	0
+rmp_proc_flam	chemical_id	Chemical ID	int(11)	code:n:long:rmp_chem_cd:chemical_id:chemical_name	The identifying ID for a particular flammable chemical held in the process.	0
+rmp_proc_naics	procnaics_id	Process NAICS ID	int(11)	id	A unique ID for each process NAICS record.	0
+rmp_proc_naics	process_id	Process ID	int(11)	id	A unique ID for each process.	0
+rmp_proc_naics	naics	NAICS Code	char(6)	code:s:long:alldb.all_naics_cd:naics:naics_tr	A code that describes the kind of industrial activity or products made by the process.  Applies to a single process, not the facility as a whole.	0
+rmp_proc_naics	num_prevent_2	Number of Prevention Program 2 Records	int(11)		The number of prevention program 2 records associated with this process NAICS.	68.390149258812
+rmp_proc_naics	num_prevent_3	Number of Prevention Program 3 Records	int(11)		The number of prevention program 3 records associated with this process NAICS.	41.712476811274
+rmp_registration	rmp_id	RMP ID	bigint(20)	id	The unique ID for each RMP submission.	0
+rmp_registration	facility_name	Facility Name	varchar(250)		The name of the facility.	0
+rmp_registration	street_1	Street Address Line 1	varchar(35)		The first line of the street address of the physical location of the facility.	0
+rmp_registration	street_2	Street Address Line 2	varchar(35)		The second line of the street address of the physical location of the facility.	90.015930669725
+rmp_registration	city	City	varchar(19)		The city in which the facility is physically located.	0
+rmp_registration	state	State	char(2)	code:S:long:alldb.all_state_cd:state:state_tr	The postal abbreviation for the U.S. state in which the facility is physically located.	0
+rmp_registration	zip	Zip Code	char(5)		The Zip code within the address for the physical location of the facility.	0
+rmp_registration	zip_ext	Zip Code Extension	char(4)		The extension (to 9 digits) of the Zip code within the address of the physical location of the facility.	80.64614796406
+rmp_registration	county_fips	County FIPS Code	char(5)		The FIPS code for the county in which the facility is located.	0
+rmp_registration	lepc	LEPC Name	varchar(30)		Name of the Local Emergency Planning Committee within whose district the facility is located. (optional)	8.3081628751673
+rmp_registration	latitude_dec	Latitude	char(10)		The latitude of the facility in decimal degrees.	0
+rmp_registration	longitude_dec	Longitude	char(11)		The longitude of the facility in decimal degrees.	0
+rmp_registration	valid_latlong	Valid Lat/Long	char(1)	yn	Whether lat/long appears to be valid.	0
+rmp_registration	latlong_meth	Lat/Long Method	char(2)	code:n:long:rmp_llmeth_cd:llmeth:llmeth_tr	Method used to determine lat/long coordinates.	0.070094946791563
+rmp_registration	latlong_desc	Lat/Long Location Type	char(2)	code:n:long:rmp_lldesc_cd:lldesc:lldesc_tr	The location which the lat/long coordinates represent: i.e., center of facility, plant entrance, etc.	0.084113936149876
+rmp_registration	facility_url	Facility URL	varchar(100)		The URL for the home page of the facility or parent company. (optional)	64.065506913911
+rmp_registration	facility_phone	Facility Phone	varchar(10)		The phone number of a public contact for the facility. (optional)	61.042503026827
+rmp_registration	facility_email	Facility Email	varchar(100)		The Email address of a public contact for the facility or parent company. (optional)	74.542789778882
+rmp_registration	facility_duns	Facility Dun and Bradstreet Number	char(9)		The DUNS number that identifies the facility.	0
+rmp_registration	parent	Parent Company	varchar(250)		The parent company that owns at least 50% of the voting stock of the company that owns the facility.	27.003122411266
+rmp_registration	parent_2	Second Parent Company	varchar(50)		If the facility is owned by a 50/50 joint venture, the name of the second parent company.	87.786911361754
+rmp_registration	parent_duns	Parent Dun and Bradstreet Number	char(9)		The DUNS number of the parent company.	0
+rmp_registration	parent2_duns	Second Parent Dun and Bradstreet Number	char(9)		If the facility is owned by a 50/50 joint venture, the DUNS number of the second parent.	0
+rmp_registration	operator_name	Owner or Operator Name	varchar(250)		The name of the owner or operator of the facility.	0.0012744535780284
+rmp_registration	operator_phone	Owner or Operator Phone	varchar(10)		The phone number of the owner or operator of the facility.	0.028037978716625
+rmp_registration	op_street_1	Owner or Operator Address Line 1	varchar(35)		The first line of the mailing address of the owner or operator.	0.0025489071560568
+rmp_registration	op_street_2	Owner or Operator Address Line 2	varchar(35)		The second line of the mailing address of the owner or operator.	79.850888931371
+rmp_registration	operator_city	Owner or Operator City	varchar(19)		The city in the mailing address of the owner or operator.	0.0012744535780284
+rmp_registration	operator_state	Owner or Operator State	char(2)	code:S:long:alldb.all_state_cd:state:state_tr	The postal abbreviation for the state in the mailing address of the owner or operator.	0.46899891671446
+rmp_registration	operator_zip	Owner or Operator Zip	char(5)		The 5-digit Zip code in the mailing address of the owner or operator.	0.47409673102657
+rmp_registration	operator_zip_ext	Owner or Operator Zip Extension	char(4)		The 4-digit Zip code extension in the mailing address of the owner or operator.	69.377429427133
+rmp_registration	rmp_contact	RMP Contact	varchar(35)		The name of the person responsible for RMP (part 68) implementation.	2.2838208118269
+rmp_registration	rmp_contact_title	RMP Contact Title	varchar(250)		The title of the person responsible for RMP (part 68) implementation.	0.0063722678901421
+rmp_registration	em_contact_name	Emergency Contact Name	varchar(250)		The name of the emergency contact person for the facility.	0.0089211750461989
+rmp_registration	em_contact_title	Emergency Contact Title	varchar(35)		The title of the emergency contact person for the facility.	0.021665710826483
+rmp_registration	em_contact_phone	Emergency Contact Phone	varchar(10)		The phone number of the emergency contact person for the facility.	0.012744535780284
+rmp_registration	phone_24hour	Emergency Contact 24-hour Phone	varchar(10)		The 24-hour phone number of the emergency contact for the facility.	0.038233607340853
+rmp_registration	phone_24hour_ext	Emergency Contact 24-hour Phone Extension	varchar(10)		The extension to the 24-hour emergency contact phone number.	91.076276046645
+rmp_registration	num_fte	Number of Full Time Employees	int(11)		The number of full-time equivalent employees working at the site (part-time employees add fractions).	5.8586630981966
+rmp_registration	other_facility_id	Other Facility ID	char(15)		Contains, in order of preference, either the TRI Facility ID, the RCRIS Handler ID, or the CERCLIS Site ID.	67.800930351112
+rmp_registration	facility_id	Facility ID	char(12)		A unique ID for each facility.	0
+rmp_registration	osha_psm_yn	Covered by OSHA PSM Standard	char(1)	yn	Indicates whether any process at the facility is covered by OSHA's Process Safety Management (PSM) of Highly Hazardous Chemicals Standard (29 CFR 1910.110).	0
+rmp_registration	epcra_302_yn	Covered by EPCRA Section 302	char(1)	yn	Indicates whether facility has on-site more than a threshold planning quantity of a substance that is an extremely hazardous substance (EHS) defined in 40 CFR 355.	0
+rmp_registration	caa_title_v_yn	Covered by CAA Title V	char(1)	yn	Indicates whether the facility is covered by Title V of the Clean Air Act.	0
+rmp_registration	caa_permit_id	CAA Title V Air Operating Permit ID	varchar(15)		ID for the facility under Title V of the Clean Air Act.	82.831835850379
+rmp_registration	safety_inspect_dt	Last Safety Inspection Date	varchar(25)		Date of facility's last safety inspection by an external agency.	0
+rmp_registration	safety_inspect_by	Last Safety Inspection By	varchar(50)		Agency that performed the last safety inspection of the facility.	0.09685847193016
+rmp_registration	osha_ranking	OSHA Star or Merit Ranking	char(1)	yn	Indicates whether the facility has received a Star or Merit Ranking under OSHA's Voluntary Protection Program. (optional)	0
+rmp_registration	predictive_file_yn	Predictive Filing	char(1)	yn	Indicates whether RMP submission includes regulated substances which may not actually be present at the facility at the time the RMP is submitted.	0
+rmp_registration	submission_type	Submission Type	char(1)	code:n:short:rmp_subtype	Indicates the type of RMP submission.	0
+rmp_registration	rmp_desc	RMP Description	varchar(50)		A short label for the RMP submission.	80.256165169184
+rmp_registration	no_accidents_yn	No RMP Accidents Last 5 Years	char(1)	yn	Indicates whether there have been no accidents with off-site consequences in the last five years.	0
+rmp_registration	foreign_province	Owner or Operator Province	varchar(35)		The foreign province in the mailing address of the owner or operator.	99.533549990442
+rmp_registration	foreign_zip	Owner or Operator Foreign Zip Code	varchar(14)		The foreign Zip code in the mailing address of the owner or operator.	99.552666794112
+rmp_registration	foreign_country	Owner or Operator Foreign Country	char(2)		The country in themailing address of the owner or operator.	99.472376218696
+rmp_registration	num_fte_cbi_flag	Number of FTE CBI Flag	char(1)	yn	Indicates whether the number of full-time employees has been claimed as CBI (confidential business information) and not released by EPA.	0
+rmp_registration	complete_check_dt	Complete Check Date	varchar(25)		Date on which the RMP submission was checked by EPA.	0
+rmp_registration	error_report_dt	Error Report Date	varchar(25)		Date on which EPA reported apparent errors in the RMP submission to the reporting facility.	0
+rmp_registration	receipt_date	Receipt Date	varchar(25)		Date on which EPA received the RMP submission from the reporting facility.	0
+rmp_registration	graphics_ind	Graphics Indicator	char(1)	yn	Indicates whether a graphics file was attached to the RMP submission.	0
+rmp_registration	attachment_ind	Attachment Indicator	char(1)	yn	Indicates whether an executive summary file was attached to the RMP submission.	0
+rmp_registration	cert_rec_flag	Certification Received Flag	char(1)	yn	Indicates whether certification statement that information in the RMP submission is correct was received.	0
+rmp_registration	submit_method	Submission Method	varchar(50)		The method or program through which the RMP submission was submitted.	0.019116803670426
+rmp_registration	cbi_substant_flag	CBI Substantiation Flag	char(1)	yn	Indicates whether CBI (confidential business information) claims have been substantiated.	0
+rmp_registration	elect_waiver_flag	Electronic Waiver Flag	char(1)	yn	Indicates whether EPA waived the requirement for electronic submission and let the facility submit on paper.	0
+rmp_registration	postmark_date	Postmark Date	varchar(25)		The date on which the RMP submission was postmarked.	0
+rmp_registration	rmp_complete_flag	RMP Complete Flag	char(1)	yn	Indicates whether the RMP submission appears to be complete.	0
+rmp_registration	deregistration_dt	Deregistration Date	varchar(25)		The date on which this facility was deregistered from the RMP database (i.e., no longer has processes with potential off-site consequences).	0
+rmp_registration	dereg_effect_dt	Deregistration Effective Date	varchar(25)		The date on which the change in processes leading to deregistration actually occured.	0
+rmp_registration	anniversary_date	Anniversary Date	varchar(25)		The 5-year anniversary date after the facility's last full submission (i.e. when a new full submission is due.)	0
+rmp_registration	cbi_flag	Confidential Business Information	char(1)	yn	Indicates whether this record contained Confidential Business Information (CBI) which has been erased by EPA from the public version of the data.	0
+rmp_registration	unsanitized_vers	Unsanitized Version Provided	char(1)	yn	Indicates, for a submission that contains CBI (confidential business information), whether an unsanitized version was submitted to EPA on paper.	0
+rmp_registration	version_number	Software Version Number	varchar(15)		The version number of the RMP Process software used by EPA to process the submission.	3.2587777990187
+rmp_registration	frs_lat_dec	FRS Latitude	float		The latitude of the facility in decimal degrees, as taken from the Facility Registry System (FRS).	12.473077168164
+rmp_registration	frs_long_dec	FRS Longitude	float		The longitude of the facility in decimal degrees, as taken from the Facility Registry System (FRS).	12.473077168164
+rmp_registration	frs_ll_desc	FRS Lat/Long Description	varchar(40)		A description of the place within the facility that the lat/long point applies to, taken from the Facility Registry System (FRS).	13.426368444529
+rmp_registration	frs_ll_method	FRS Lat/Long Method	varchar(60)		The method of determining the lat/long coordinates, taken from the Facility Registry System (FRS).	13.43911298031
+rmp_registration	hor_measure	Lat/Long Horizontal Accuracy	varchar(6)		The accuracy (in meters) of the lat/long coordinates.	31.532530427579
+rmp_registration	hor_ref	Lat/Long Horizontal Reference	varchar(3)		Indicates the reference datum used in determining latitude and longitude coordinates.	31.470082202256
+rmp_registration	source_scale	Lat/Long Source Map Scale	varchar(10)		The number that represents the proportional distance on the ground for one unit of measure on a map or photo.	77.621869623399
+rmp_registration	em_email	Emergency Contact Email	varchar(100)		The email address of the emergency contact.	30.077104441471
+rmp_registration	prep_name	RMP Preparer Name	varchar(70)		Name of a contractor or consultant who prepared the RMP submission.	59.278659274836
+rmp_registration	prep_street_1	RMP Preparer Address Line 1	varchar(35)		The first line of the mailing address of the preparer of the RMP submission.	59.290129357038
+rmp_registration	prep_street_2	RMP Preparer Address Line 2	varchar(35)		The second line of the mailing address of the preparer of the RMP submisson.	89.899955394125
+rmp_registration	prep_city	RMP Preparer City	varchar(30)		The city in the mailing address of the preparer of the RMP submission.	59.28885490346
+rmp_registration	prep_state	RMP Preparer State	char(2)		The postal abbreviation for the state in the mailing address of the preparer of the RMP submission.	59.296501624928
+rmp_registration	prep_zip	RMP Preparer Zip	varchar(5)		The Zip code in the mailing address of the preparer of the RMP submission.	59.299050532084
+rmp_registration	prep_zip_ext	RMP Preparer Zip Extension	varchar(4)		The 4-digit Zip code extension in the mailing address of the preparer of the RMP submission.	91.401261709042
+rmp_registration	prep_phone	RMP Preparer Phone	varchar(10)		The phone number of the contactor or consultant who prepared the RMP submission.	59.290129357038
+rmp_registration	prep_foreign_state	RMP Preparer Foreign State	varchar(35)		The foreign state in the mailing address of the preparer of the RMP submission.	99.991078824954
+rmp_registration	prep_country	RMP Preparer Country	char(2)	code:n:long:alldb.all_country_cd:country:country_tr	The country in the mailing address of the preparer of the RMP submission.	99.861084559995
+rmp_registration	prep_foreign_zip	RMP Preparer Foreign Zip	varchar(14)		The foreign Zip code in the mailing address of the preparer of the RMP submission.	99.992353278532
+rmp_registration	sub_reason	Reason For Submission	char(3)	code:n:long:rmp_submit_cd:submit:submit_tr	A code indicating the reason for submission.	36.660931625566
+rmp_registration	rmp_email	RMP Contact Email	varchar(100)		The Email address of the RMP contact person.	48.263556999936
+rmp_registration	dereg_reason	Deregistration Reason	char(2)	code:n:long:rmp_dereg_cd:dereg:dereg_tr	A code indicating the reason for deregistration of the facility.	75.115019435417
+rmp_registration	dereg_other	Deregistration Reason (Other)	varchar(80)		Text describing a non-standard reason for deregistration of the facility.	96.49015484611
+rmp_registration	num_accident	Number of RMP Accidents	int(11)		The number of accident records (i.e. accidents reported within the RMP database) for this submission.	91.668896960428
+rmp_registration	num_facility	Number of Facilities	int(11)		The number of facility record for this submission (will be zero if this is not the most recent submission for the facility, one otherwise).	74.094182119416
+rmp_registration	num_process	Number of Processes	int(11)		The number of process records for this submission.	0
+rmp_registration	num_response	Number of Response Plan Records	int(11)		The number of emergency response plan records for this submission.	0.028037978716625
+rmp_registration	num_chem_real	Number of Process Chemicals	smallint(6)		The number of process chemical records with nonzero chemical IDs for this submission.	36.369081756197
+rmp_registration	num_worst_tox	Number of Toxic Worst-case Scenarios	smallint(6)		The number of toxic worst-case scenario records for the submission.	12.052507487415
+rmp_registration	num_alt_tox	Number of Toxic Alternate Case Scenarios	smallint(6)		The number of toxic alternate case scenario records for the submission.	13.506659019945
+rmp_registration	num_worst_flam	Number of Flammable Worst-case Scenarios	smallint(6)		The number of flammable worst-case scenario records for the submission.	81.89383801695
+rmp_registration	num_alt_flam	Number of Flammable Alternate Case Scenarios	smallint(6)		The number of flammable alternate case scenarios for the submission.	84.946154336328
+rmp_registration	num_prev_2	Number of Prevention Program 2 Records	smallint(6)		The number of prevention program 2 records for the submission.	54.824444019627
+rmp_registration	num_prev_3	Number of Prevention Program 3 Records	smallint(6)		The number of prevention program 3 records for the submission.	48.510800994074
+rmp_registration	toxic_tot	Process Toxic Amount Total (lbs)	double		The total amount of toxic chemicals held within processes for the submission.	12.108583444848
+rmp_registration	flam_tot	Process Flammable Amount Total (lbs)	double		The total amount of flammable chemicals held within processes for the submission.	81.933346077869
+rmp_registration	quantity_tot	Process Amount Total (lbs)	double		The total amount of both toxic and flammable chemicals held within processes for the submission.	0.13764098642707
+rmp_registration	acc_flam_tot	RMP Accident Flammable Total (lbs)	double		The total amount of flammable chemicals released in accidents listed in the submission.	98.418403109667
+rmp_registration	acc_toxic_tot	RMP Accident Toxic Total (lbs)	double		The total amount of toxic chemicals released in accidents listed in the submission.	92.784043841203
+rmp_registration	acc_quantity_tot	RMP Accident Amount Total (lbs)	double		The total amount of both toxic and flammable chemicals released in accidents listed in the submission.	91.700758299879
+rmp_registration	num_deaths	Total RMP Accident Deaths	int(11)		The total number of people killed due to accidents listed in the submission.	99.760402727331
+rmp_registration	num_injuries	Total RMP Accident Injuries	int(11)		The total number of people injured or hospitalized due to accidents listed in the submission.	95.273051679093
+rmp_registration	num_evacuated	Total RMP Accident Evacuated/Sheltering In Place	int(11)		The total number of people evacuated or sheltering in place due to accidents listed in the submission.	98.238705155165
+rmp_registration	property_damage	Total RMP Accident Property Damage	bigint(20)	dollars	The total property damage, in dollars, due to accidents listed in the submission.	97.4013891544
+rmp_registration	county	County	varchar(60)		A translation of the county FIPS code for the county that the facility is located in.	0.029312432294654
+rmp_registration	foreign_country_tr	Country	varchar(50)		A translation of the foreign country code.	99.472376218696
+rmp_registration	num_proc_23	Number of Potential Offsite Consequence Processes	smallint(6)		The number of program 2 or 3 processes (i.e. those with potential off-site consequences) for this submission.	4.1483463964825
+rmp_registration	toxic_tot_23	Potential Offsite Consequence Toxic Amount Total (lbs)	double		The total amount of toxic chemical held in Program 2 or 3 processes (i.e. with potential off-site consequences).	13.537245905818
+rmp_registration	flam_tot_23	Potential Offsite Consequence Flammable Amount Total (lbs)	double		The total amount of flammable chemical held in Program 2 or 3 processes (i.e. with potential off-site consequences).	84.995858025871
+rmp_registration	quantity_tot_23	Potential Offsite Consequence Amount Total (lbs)	double		The total amount of RMP chemicals held in Program 2 or 3 processes (i.e. with potential off-site consequences).	4.257949404193
+rmp_registration	num_execsum_mod	Number of Edited Exec Summary Lines	smallint(6)		The number of executive summary line records after editing.	0.25743962276174
+rmp_registration	execsum_type	Exec Summary Type	char(1)	code:n:short:rmp_execsum	The type of executive summary for this submission (i.e. whether it is good or bad).	0
+rmp_registration	num_execsum	Number of Exec Summary Records	int(11)		Should always be either zero or one.	0.25743962276174
+rmp_registration	num_exec_sum	Number of Exec Summary Lines	int(11)		The number of executive summary line records for this submission.	0.25743962276174
+rmp_response	rmp_id	RMP ID	bigint(20)	id	The unique ID for each RMP submission.	0
+rmp_response	community_erp_yn	Facility In Community Plan	char(1)	yn	Indicates whether the facility is included in the community emergency response plan.	0
+rmp_response	facility_erp_yn	Facility Own Response Plan	char(1)	yn	Indicates whether the facility has its own written response plan.	0
+rmp_response	erp_specific_yn	Specific Facility Response Plan	char(1)	yn	Indicates whether facility's ER plan includes specific actions to be taken in response to accidental releases of regulated substance(s).	0
+rmp_response	erp_inform_yn	Inform. Procedures in Response Plan	char(1)	yn	Indicates whether facility's ER plan includes procedures for informing the public and local agencies responding to accidental releases.	0
+rmp_response	erp_inform_hth_yn	Emergency Care in Response Plan	char(1)	yn	Indicates whether facility's ER plan includes information on emergency health care.	0
+rmp_response	erp_review_date	Plan Review Date	varchar(25)		Date of most recent review or update of the facility's emergency response plan.	0
+rmp_response	erp_training_date	Response Training Date	varchar(25)		Date of the most recent emergency response training for the facility's employees.	0
+rmp_response	coord_agency	Local Response Agency	varchar(250)		Local agency with which the facility's ER plan or response actions are coordinated.	0.070114605509733
+rmp_response	coord_phone	Local Response Agency Phone	varchar(10)		Phone number of the local agency with which the facility's ER plan or response actions are coordinated.	0.18612240735311
+rmp_response	subto_osha191038	Subject To - OSHA EAP	char(1)	yn	Indicates whether facility is subject to OSHA Regulations at 29 CFR 1910.38 (Emergency Action Plan) emergency planning requirements.	0
+rmp_response	subto_osha191020	Subject To - OSHA HAZWOPER	char(1)	yn	Indicates whether facility is subject to OSHA Regulations at 29 CFR 1910.120 (Hazardous Waste Operations, HAZWOPER) emergency planning requirements.	0
+rmp_response	subto_cwa112	Subject To - CWA	char(1)	yn	Indicates whether facility is subject to Clean Water Act Regulations at 40 CFR 112 emergency planning requirements.	0
+rmp_response	subto_rcra264	Subject To - RCRA	char(1)	yn	Indicates whether facility is subject to RCRA Regulations at 40 CFR 264, 265, and 279.52 emergency planning requirements.	0
+rmp_response	subto_opa90	Subject To - OPA	char(1)	yn	Indicates whether facility is subject to OPA 90 Regulations at 40 CFR 112, 33 CFR 154, 49 CFR 194, or 30 CFR 254 (Oil Pollution Act) emergency planning requirements.	0
+rmp_response	subto_state_epcra	Subject To - State EPCRA	char(1)	yn	Indicates whether facility is subject to State EPCRA Rules or Laws emergency planning requirements.	0
+rmp_response	subto_other	Subject To - Other	varchar(200)		Describes other emergency planning requirements that the facility is subject to.	75.300536695435
+rmp_worst_flam	flammable_id	Flammable Scenario ID	int(11)	id	A unique ID for each flammable worst-case scenario record.	0
+rmp_worst_flam	procchem_id	Process Chemical Record ID	int(11)	id	A unique identifier for each process chemical record.	0
+rmp_worst_flam	analytical_basis	Model Used	varchar(255)		The model used, or analytical basis, for the release scenario.	0.010621348911312
+rmp_worst_flam	quantity_lbs	Amount Released (lbs)	double		The amount released in the scenario, in lbs. (data not released to public by EPA)	100
+rmp_worst_flam	endpoint_distance	Endpoint Distance (miles)	float		The furthest distance that the release would reach from the facility, in miles. (data not released to public by EPA)	100
+rmp_worst_flam	population	Population	varchar(9)		The population living within the endpoint distance used as a radius. (data not released to public by EPA)	100
+rmp_worst_flam	pr_schools	Public Receptors - Schools	char(1)	yn	Indicates whether schools are present within the modelled endpoint distance radius. (data not released to public by EPA)	0
+rmp_worst_flam	pr_residences	Public Receptors - Residences	char(1)	yn	Indicates whether residences are present within the modelled endpoint distance radius. (data not released to public by EPA)	0
+rmp_worst_flam	pr_hospitals	Public Receptors - Hospitals	char(1)	yn	Indicates whether hospitals are present within the modelled endpoint distance radius. (data not released to public by EPA)	0
+rmp_worst_flam	pr_prisons	Public Receptors - Prisons	char(1)	yn	Indicates whether prisons are present within the modelled endpoint distance radius. (data not released to public by EPA)	0
+rmp_worst_flam	pr_public_rec	Public Receptors - Recreation Areas	char(1)	yn	Indicates whether recreation areas are present within the modelled endpoint distance radius. (data not released to public by EPA)	0
+rmp_worst_flam	pr_comm_ind	Public Receptors - Commercial	char(1)	yn	Indicates whether commercial, office, or industrial areas are present within the modelled endpoint distance radius. (data not released to public by EPA)	0
+rmp_worst_flam	pr_othertype	Public Receptors - Other	varchar(200)		Description of other public receptors present within the modelled endpoint distance radius. (data not released to public by EPA)	100
+rmp_worst_flam	er_natlstateparks	Environmental Receptors - Parks	char(1)	yn	Indicates whether national or state parks are present within the modelled endpoint distance radius. (data not released to public by EPA)	0
+rmp_worst_flam	er_wildlife_sanct	Environmental Receptors - Wildlife	char(1)	yn	Indicates whether wildlife sanctuaries or preserves are present within the modelled endpoint distance radius.  (data not released to public by EPA)	0
+rmp_worst_flam	er_fedwilderness	Environmental Receptors - Wilderness	char(1)	yn	Indicates whether Federally designated wilderness areas are present within the modelled endpoint distance radius. (data not released to public by EPA)	0
+rmp_worst_flam	er_othertype	Environmental Receptors - Other	varchar(200)		Description of other environmental receptors present within the modelled endpoint distance radius. (data not released to public by EPA)	100
+rmp_worst_flam	pm_blastwalls	Passive Mitigation - Blast Walls	char(1)	yn	Indicates whether blast walls as a passive mitigation measure were considered in estimating the release quantity or rate for the scenario.	0
+rmp_worst_flam	pm_othertype	Passive Mitigation - Other	varchar(200)		Description of another passive mitigation measure considered in estimating the release quantity or rate for the scenario.	87.81200212427
+rmp_worst_flam	ptrgraphic	Graphics File	varchar(12)		Graphics file name included with submission. (data not released to public by EPA)	100
+rmp_worst_flam	cbi_flag	Confidential Business Information	char(1)	yn	Indicates whether this record contained Confidential Business Information (CBI) which has been erased by EPA from the public version of the data.	0
+rmp_worst_tox	toxic_id	Toxic Scenario ID	int(11)	id	A unique ID for each toxics worst case scenario record.	0
+rmp_worst_tox	procchem_id	Process Chemical Record ID	int(11)	id	A unique identifier for each process chemical record.	0
+rmp_worst_tox	percent_weight	Percent Weight (Within Mixture)	float		If the scenario involves the release of a mixture containing a regulated substance, the percentage weight of the regulated substance in the mixture.	66.506851144528
+rmp_worst_tox	physical_state	Physical State	char(1)	code:n:long:rmp_phys_cd:phys:phys_tr	The physical state (gas, liquid, etc.) of the chemical in the modelled vessel.	0.022703597852507
+rmp_worst_tox	analytical_basis	Model Used	varchar(255)		The model used, or analytical basis, for the release scenario.	0.010684046048238
+rmp_worst_tox	scenario	Release Scenario	char(1)		Indicates gas release or liquid spill. (data not released to public by EPA)	100
+rmp_worst_tox	quantity_lbs	Amount Released (lbs)	double		The amount released in the scenario, in lbs. (data not released to public by EPA)	100
+rmp_worst_tox	release_duration	Release Duration (minutes)	float		The number of minutes over which the modelled release takes place.	0.073452816581639
+rmp_worst_tox	release_rate	Release Rate (lbs/minute)	float		The rate in lbs/minute at which the modelled release takes place. (data not released to public by EPA)	100
+rmp_worst_tox	wind_speed	Wind Speed (meters/sec)	float		The wind speed in meters/second during the modelled release.	0
+rmp_worst_tox	stability_class	Atmospheric Stability Class	char(1)		The atmospheric stability class during the modelled release.	0
+rmp_worst_tox	topography	Topography	char(1)	code:n:short:rmp_topo	Indicates whether the topography surrounding the facility is urban or rural.	0.010684046048238
+rmp_worst_tox	endpoint_distance	Endpoint Distance (miles)	float		The furthest distance that the release would reach from the facility, in miles. (data not released to public by EPA)	100
+rmp_worst_tox	population	Population	varchar(9)		The population living within the endpoint distance used as a radius. (data not released to public by EPA)	100
+rmp_worst_tox	pr_schools	Public Receptors - Schools	char(1)	yn	Indicates whether schools are present within the modelled endpoint distance radius. (data not released to public by EPA)	0
+rmp_worst_tox	pr_residences	Public Receptors - Residences	char(1)	yn	Indicates whether residences are present within the modelled endpoint distance radius. (data not released to public by EPA)	0
+rmp_worst_tox	pr_hospitals	Public Receptors - Hospitals	char(1)	yn	Indicates whether hospitals are present within the modelled endpoint distance radius. (data not released to public by EPA)	0
+rmp_worst_tox	pr_prisons	Public Receptors - Prisons	char(1)	yn	Indicates whether prisons are present within the modelled endpoint distance radius. (data not released to public by EPA)	0
+rmp_worst_tox	pr_public_rec	Public Receptors - Recreation Areas	char(1)	yn	Indicates whether recreation areas are present within the modelled endpoint distance radius. (data not released to public by EPA)	0
+rmp_worst_tox	pr_comm_ind	Public Receptors - Commercial	char(1)	yn	Indicates whether commercial, office, or industrial areas are present within the modelled endpoint distance radius. (data not released to public by EPA)	0
+rmp_worst_tox	pr_othertype	Public Receptors - Other	varchar(200)		Description of other public receptors present within the modelled endpoint distance radius. (data not released to public by EPA)	100
+rmp_worst_tox	er_natlstateparks	Environmental Receptors - Parks	char(1)	yn	Indicates whether national or state parks are present within the modelled endpoint distance radius. (data not released to public by EPA)	0
+rmp_worst_tox	er_wildlifesanct	Environmental Receptors - Wildlife	char(1)	yn	Indicates whether wildlife sanctuaries or preserves are present within the modelled endpoint distance radius. (data not released to public by EPA)	0
+rmp_worst_tox	er_fedwilderness	Environmental Receptors - Wilderness	char(1)	yn	Indicates whether Federally designated wilderness areas are present within the modelled endpoint distance radius. (data not released to public by EPA)	0
+rmp_worst_tox	er_othertype	Environmental Receptors - Other	varchar(200)		Description of other environmental receptors present within the modelled endpoint distance radius. (data not released to public by EPA)	100
+rmp_worst_tox	pm_dikes	Passive Mitigation - Dikes	char(1)	yn	Indicates whether dikes as a passive mitigation measure were considered in estimating the release quantity or rate for the scenario.	0
+rmp_worst_tox	pm_enclosures	Passive Mitigation - Enclosures	char(1)	yn	Indicates whether enclosures as a passive mitigation measure were considered in estimating the release quantity or rate for the scenario.	0
+rmp_worst_tox	pm_berms	Passive Mitigation - Berms	char(1)	yn	Indicates whether berms as a passive mitigation measure were considered in estimating the release quantity or rate for the scenario.	0
+rmp_worst_tox	pm_drains	Passive Mitigation - Drains	char(1)	yn	Indicates whether drains as a passive mitigation measure were considered in estimating the release quantity or rate for the scenario.	0
+rmp_worst_tox	pm_sumps	Passive Mitigation - Sumps	char(1)	yn	Indicates whether sumps as a passive mitigation measure were considered in estimating the release quantity or rate for the scenario.	0
+rmp_worst_tox	pm_othertype	Passive Mitigation - Other	varchar(200)		Description of another passive mitigation measure considered in estimating the release quantity or rate for the scenario.	93.163546034883
+rmp_worst_tox	ptrgraphic	Graphics File	varchar(12)		Graphics file name included with submission. (data not released to public by EPA)	100
+rmp_worst_tox	cbi_flag	Confidential Business Information	char(1)	yn	Indicates whether this record contained Confidential Business Information (CBI) which has been erased by EPA from the public version of the data.	0
