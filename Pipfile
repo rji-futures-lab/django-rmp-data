@@ -7,6 +7,8 @@ name = "pypi"
 django = "*"
 django-environ = "*"
 "psycopg2" = "*"
+csvkit = "*"
+mdbtools = "*"
 
 [dev-packages]
 ipython = "*"
