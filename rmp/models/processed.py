@@ -29,12 +29,12 @@ class AccFlam(models.Model):
 
 class ChemCd(models.Model):
     chemical_id = models.DecimalField(max_digits=65535, decimal_places=65535)
-    chemical_name = models.CharField(max_length=-1)
-    cas2 = models.CharField(max_length=-1, blank=True, null=True)
+    chemical_name = models.CharField(max_length=92)
+    cas2 = models.CharField(max_length=10, blank=True, null=True)
     threshold = models.DecimalField(max_digits=65535, decimal_places=65535)
     chemical_type = models.BooleanField(blank=True, null=True)
     cbi_flag = models.BooleanField()
-    chemical_owner = models.CharField(max_length=-1, blank=True, null=True)
+    chemical_owner = models.CharField(max_length=3, blank=True, null=True)
 
     class Meta:
         db_table = 'rmp_chem_cd'
@@ -42,31 +42,31 @@ class ChemCd(models.Model):
 
 class DeregCd(models.Model):
     dereg = models.DecimalField(max_digits=65535, decimal_places=65535)
-    dereg_tr = models.CharField(max_length=-1)
+    dereg_tr = models.CharField(max_length=62)
 
     class Meta:
         db_table = 'rmp_dereg_cd'
 
 
 class DochanCd(models.Model):
-    dochan = models.CharField(max_length=-1)
-    dochan_tr = models.CharField(max_length=-1)
+    dochan = models.CharField(max_length=1)
+    dochan_tr = models.CharField(max_length=1)
 
     class Meta:
         db_table = 'rmp_dochan_cd'
 
 
 class DoctypCd(models.Model):
-    doctyp = models.CharField(max_length=-1)
-    doctyp_tr = models.CharField(max_length=-1)
+    doctyp = models.CharField(max_length=1)
+    doctyp_tr = models.CharField(max_length=30)
 
     class Meta:
         db_table = 'rmp_doctyp_cd'
 
 
 class EventsCd(models.Model):
-    events = models.CharField(max_length=-1)
-    events_tr = models.CharField(max_length=-1)
+    events = models.CharField(max_length=1)
+    events_tr = models.CharField(max_length=40)
 
     class Meta:
         db_table = 'rmp_events_cd'
@@ -84,8 +84,8 @@ class ExecSumLen(models.Model):
 
 
 class LldescCd(models.Model):
-    lldesc = models.CharField(max_length=-1)
-    lldesc_tr = models.CharField(max_length=-1)
+    lldesc = models.CharField(max_length=2)
+    lldesc_tr = models.CharField(max_length=36)
 
     class Meta:
         db_table = 'rmp_lldesc_cd'
@@ -93,16 +93,16 @@ class LldescCd(models.Model):
 
 class LlmethCd(models.Model):
     primary_key = models.DecimalField(max_digits=65535, decimal_places=65535)
-    llmeth = models.CharField(max_length=-1)
-    llmeth_tr = models.CharField(max_length=-1)
+    llmeth = models.CharField(max_length=2)
+    llmeth_tr = models.CharField(max_length=83)
 
     class Meta:
         db_table = 'rmp_llmeth_cd'
 
 
 class PhysCd(models.Model):
-    phys = models.CharField(max_length=-1)
-    phys_tr = models.CharField(max_length=-1)
+    phys = models.CharField(max_length=1)
+    phys_tr = models.CharField(max_length=30)
 
     class Meta:
         db_table = 'rmp_phys_cd'
@@ -167,40 +167,40 @@ class ProcNaics(models.Model):
 
 
 class RejectCd(models.Model):
-    reject = models.CharField(max_length=-1)
-    reject_tr = models.CharField(max_length=-1)
+    reject = models.CharField(max_length=1)
+    reject_tr = models.CharField(max_length=59)
 
     class Meta:
         db_table = 'rmp_reject_cd'
 
 
 class ScenCd(models.Model):
-    scen = models.CharField(max_length=-1)
-    scen_tr = models.CharField(max_length=-1)
+    scen = models.CharField(max_length=1)
+    scen_tr = models.CharField(max_length=27)
 
     class Meta:
         db_table = 'rmp_scen_cd'
 
 
 class SubmitCd(models.Model):
-    submit = models.CharField(max_length=-1)
-    submit_tr = models.CharField(max_length=-1)
+    submit = models.CharField(max_length=3)
+    submit_tr = models.CharField(max_length=101)
 
     class Meta:
         db_table = 'rmp_submit_cd'
 
 
 class TopoCd(models.Model):
-    topo = models.CharField(max_length=-1)
-    topo_tr = models.CharField(max_length=-1)
+    topo = models.CharField(max_length=1)
+    topo_tr = models.CharField(max_length=5)
 
     class Meta:
         db_table = 'rmp_topo_cd'
 
 
 class WindCd(models.Model):
-    wind = models.CharField(max_length=-1)
-    wind_tr = models.CharField(max_length=-1)
+    wind = models.CharField(max_length=1)
+    wind_tr = models.CharField(max_length=13)
 
     class Meta:
         db_table = 'rmp_wind_cd'
