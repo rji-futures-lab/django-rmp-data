@@ -15,7 +15,6 @@ class RmpAccChem(models.Model):
     chemical_type = models.BooleanField()
 
     class Meta:
-        managed = False
         db_table = 'rmp_acc_chem'
 
 
@@ -25,7 +24,6 @@ class RmpAccFlam(models.Model):
     chemical_id = models.DecimalField(max_digits=65535, decimal_places=65535)
 
     class Meta:
-        managed = False
         db_table = 'rmp_acc_flam'
 
 
@@ -39,7 +37,6 @@ class RmpChemCd(models.Model):
     chemical_owner = models.CharField(max_length=-1, blank=True, null=True)
 
     class Meta:
-        managed = False
         db_table = 'rmp_chem_cd'
 
 
@@ -48,7 +45,6 @@ class RmpDeregCd(models.Model):
     dereg_tr = models.CharField(max_length=-1)
 
     class Meta:
-        managed = False
         db_table = 'rmp_dereg_cd'
 
 
@@ -57,7 +53,6 @@ class RmpDochanCd(models.Model):
     dochan_tr = models.CharField(max_length=-1)
 
     class Meta:
-        managed = False
         db_table = 'rmp_dochan_cd'
 
 
@@ -66,7 +61,6 @@ class RmpDoctypCd(models.Model):
     doctyp_tr = models.CharField(max_length=-1)
 
     class Meta:
-        managed = False
         db_table = 'rmp_doctyp_cd'
 
 
@@ -75,7 +69,6 @@ class RmpEventsCd(models.Model):
     events_tr = models.CharField(max_length=-1)
 
     class Meta:
-        managed = False
         db_table = 'rmp_events_cd'
 
 
@@ -87,7 +80,6 @@ class RmpExecSumLen(models.Model):
     edited_yn = models.BooleanField()
 
     class Meta:
-        managed = False
         db_table = 'rmp_exec_sum_len'
 
 
@@ -96,7 +88,6 @@ class RmpLldescCd(models.Model):
     lldesc_tr = models.CharField(max_length=-1)
 
     class Meta:
-        managed = False
         db_table = 'rmp_lldesc_cd'
 
 
@@ -106,7 +97,6 @@ class RmpLlmethCd(models.Model):
     llmeth_tr = models.CharField(max_length=-1)
 
     class Meta:
-        managed = False
         db_table = 'rmp_llmeth_cd'
 
 
@@ -115,7 +105,6 @@ class RmpPhysCd(models.Model):
     phys_tr = models.CharField(max_length=-1)
 
     class Meta:
-        managed = False
         db_table = 'rmp_phys_cd'
 
 
@@ -125,7 +114,6 @@ class RmpPrevent2Chem(models.Model):
     procchem_id = models.DecimalField(max_digits=65535, decimal_places=65535)
 
     class Meta:
-        managed = False
         db_table = 'rmp_prevent_2_chem'
 
 
@@ -135,7 +123,6 @@ class RmpPrevent3Chem(models.Model):
     procchem_id = models.DecimalField(max_digits=65535, decimal_places=65535)
 
     class Meta:
-        managed = False
         db_table = 'rmp_prevent_3_chem'
 
 
@@ -156,7 +143,6 @@ class RmpProcChem(models.Model):
     chemical_type = models.BooleanField(blank=True, null=True)
 
     class Meta:
-        managed = False
         db_table = 'rmp_proc_chem'
 
 
@@ -166,7 +152,6 @@ class RmpProcFlam(models.Model):
     chemical_id = models.DecimalField(max_digits=65535, decimal_places=65535)
 
     class Meta:
-        managed = False
         db_table = 'rmp_proc_flam'
 
 
@@ -178,7 +163,6 @@ class RmpProcNaics(models.Model):
     num_prevent_3 = models.DecimalField(max_digits=65535, decimal_places=65535)
 
     class Meta:
-        managed = False
         db_table = 'rmp_proc_naics'
 
 
@@ -187,7 +171,6 @@ class RmpRejectCd(models.Model):
     reject_tr = models.CharField(max_length=-1)
 
     class Meta:
-        managed = False
         db_table = 'rmp_reject_cd'
 
 
@@ -196,7 +179,6 @@ class RmpScenCd(models.Model):
     scen_tr = models.CharField(max_length=-1)
 
     class Meta:
-        managed = False
         db_table = 'rmp_scen_cd'
 
 
@@ -205,7 +187,6 @@ class RmpSubmitCd(models.Model):
     submit_tr = models.CharField(max_length=-1)
 
     class Meta:
-        managed = False
         db_table = 'rmp_submit_cd'
 
 
@@ -214,7 +195,6 @@ class RmpTopoCd(models.Model):
     topo_tr = models.CharField(max_length=-1)
 
     class Meta:
-        managed = False
         db_table = 'rmp_topo_cd'
 
 
@@ -223,5 +203,4 @@ class RmpWindCd(models.Model):
     wind_tr = models.CharField(max_length=-1)
 
     class Meta:
-        managed = False
         db_table = 'rmp_wind_cd'
