@@ -5,44 +5,117 @@ from django.db import models
 
 
 class AccChem(models.Model):
-    accchem_id = models.DecimalField(max_digits=65535, decimal_places=65535)
-    accident_id = models.DecimalField(max_digits=65535, decimal_places=65535)
-    chemical_id = models.DecimalField(max_digits=65535, decimal_places=65535)
-    quantity_lbs = models.DecimalField(max_digits=65535, decimal_places=65535)
-    percent_weight = models.DecimalField(max_digits=65535, decimal_places=65535, blank=True, null=True)
-    num_acc_flam = models.DecimalField(max_digits=65535, decimal_places=65535)
-    cas = models.DecimalField(max_digits=65535, decimal_places=65535)
-    chemical_type = models.BooleanField()
+    accchem_id = models.IntegerField(
+        primary_key=True,
+        verbose_name='Accident Chemical Record ID',
+        help_text='A unique ID for each accident chemical record.',
+    )
+    # TODO: ForeignKeyField candidate
+    accident_id = models.IntegerField(
+        help_text='The unique ID for each accident record',
+    )
+    # TODO: ForeignKeyField candidate
+    chemical_id = models.IntegerField(
+        help_text='The identifying ID for a particular chemical released in an '
+                  'accident.',
+    )
+    quantity_lbs = models.IntegerField(
+        verbose_name='Amount Released (lbs)',
+        help_text='The amount of the substance released in the accident, in '
+                  'pounds, to two significant digits.',
+    )
+    # TODO: db_fields.tsv says this should be a float field, will decimal work?
+    percent_weight = models.DecimalField(
+        decimal_places=2,
+        null=True,
+        verbose_name='Percent Weight (Within Mixture)',
+        help_text='The percent weight of a chemical within a mixture released '
+                  'in an accident.',
+    )
+    num_acc_flam = models.IntegerField(
+        help_text='',
+        null=True,
+        verbose_name='Number of Flammable Components',
+        help_text='The number of listed flammable component chemicals for this'
+                  ' chemical record.',
+    )
+    cas = models.CharField(
+        max_length=9,
+        verbose_name='CAS number',
+        help_text='The identifying CAS number for a chemical.',
+    )
+    CHEMICAL_TYPE_CHOICES = (
+        ('T', 'toxic'),
+        ('F', 'flammable'),
+    )
+    chemical_type = models.CharField(
+        max_length=1,
+        choices=CHEMICAL_TYPE_CHOICES,
+        help_text='"The type of chemical.',
+    )
 
     class Meta:
         db_table = 'rmp_acc_chem'
 
 
+# TODO: does this table have a primary key, or is it a linking table?
+# if the latter, how might we make the model more in line with Django's
+# conventions?
 class AccFlam(models.Model):
-    flammixchem_id = models.DecimalField(max_digits=65535, decimal_places=65535)
-    accchem_id = models.DecimalField(max_digits=65535, decimal_places=65535)
-    chemical_id = models.DecimalField(max_digits=65535, decimal_places=65535)
+    # TODO: ForeignKeyField candidate
+    flammixchem_id = models.IntegerField(
+        verbose_name='Flammable Chemical ID',
+        help_text='A unique ID for each flammable chemical record'.
+    )
+    # TODO: ForeignKeyField candidate
+    accchem_id = models.IntegerField(
+        verbose_name='Accident Chemical Record ID',
+        help_text='A unique ID for each accident chemical record.'
+    )
+    # TODO: ForeignKeyField candidate
+    chemical_id = models.IntegerField(
+        verbose_name='Chemical ID',
+        help_text='The identifying ID for a particular flammable chemical released in an accident.',
+    )
 
     class Meta:
         db_table = 'rmp_acc_flam'
 
 
+# TODO: this table is not defined in db_field.tsv
 class ChemCd(models.Model):
-    chemical_id = models.DecimalField(max_digits=65535, decimal_places=65535)
-    chemical_name = models.CharField(max_length=92)
-    cas2 = models.CharField(max_length=10, blank=True, null=True)
-    threshold = models.DecimalField(max_digits=65535, decimal_places=65535)
-    chemical_type = models.BooleanField(blank=True, null=True)
+    chemical_id = models.IntegerField(
+        primary_key=True,
+    )
+    chemical_name = models.CharField(
+        max_length=92,
+    )
+    cas2 = models.CharField(
+        max_length=10,
+        blank=True,
+    )
+    threshold = models.IntegerField()
+    chemical_type = models.CharField(
+        max_length=1,
+        blank=True,
+    )
     cbi_flag = models.BooleanField()
-    chemical_owner = models.CharField(max_length=3, blank=True, null=True)
+    chemical_owner = models.CharField(
+        max_length=3,
+        blank=True,
+    )
 
     class Meta:
         db_table = 'rmp_chem_cd'
 
 
 class DeregCd(models.Model):
-    dereg = models.DecimalField(max_digits=65535, decimal_places=65535)
-    dereg_tr = models.CharField(max_length=62)
+    dereg = models.IntegerField(
+        primary_key=True,
+    )
+    dereg_tr = models.CharField(
+        max_length=62,
+    )
 
     class Meta:
         db_table = 'rmp_dereg_cd'
@@ -54,6 +127,9 @@ class DochanCd(models.Model):
 
     class Meta:
         db_table = 'rmp_dochan_cd'
+
+# JG: Models below here need a look
+# ==================================
 
 
 class DoctypCd(models.Model):
