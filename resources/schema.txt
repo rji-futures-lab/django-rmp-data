@@ -1,0 +1,66 @@
+
+
+rmp_acc_chem = tblS6AccidentChemicals join tlkpChemicals
+
+rmp_acc_flam = tblS6FlammableMixtureChemicals
+
+rmp_accident = tblS6AccidentHistory + columns are all put together
+  flam_tot comes from rmp_acc_chem join on accident_id
+  toxic_tot
+  quantity_tot
+
+rmp_alt_flam = tblS5FlammablesAltReleases
+
+rmp_alt_tox = tblS3ToxicAltReleases
+
+rmp_chem_cd = tlkpChemicals
+
+rmp_dereg_cd = tlkpDeregistrationReason
+
+rmp_dochan = tlkpDocHandle
+
+rmp_doctyp = tlkpDocType
+
+rmp_events_cd = tlkpS6InitiatingEvents
+
+rmp_execsum = tblExecutiveSummaries
+
+rmp_facility = tblFacility - RMPFac.mdb
+
+rmp_lldesc_cd = tlkpLatLongDescriptions
+
+tmp_llmeth_cd = tlkpLatLongMethods
+
+rmp_phys_cd = tlkpPhysicalStateCodes
+
+rmp_prevent_2_chem = tblS8_Prevention_Program_Chemicals
+
+rmp_prevent_2 = tblS8PreventionProgram2
+
+rmp_prevent_3_chem = tblS7_Prevention_Program_Chemicals + some sort of join at the end
+
+rmp_prevent_3 = tblS7PreventionProgram3 + some sort of join at the end
+
+rmp_proc_chem = ? See db_joins.tsv
+
+rmp_proc_naics = ? see db_joins.tsv
+
+rmp_proc_flam = tblS1FlammableMixtureChemicals
+
+rmp_registration = tblRMPError join FacilityID
+
+rmp_reject_cd = tlkpRejectReason
+
+rmp_response = tblS9EmergencyResponses
+
+rmp_scen_cd = tlkpS2ScenarioCodes
+
+rmp_submit_cd = tlkpSubmissionReasonCodes
+
+rmp_topo_cd = tlkpTopographyCode
+
+rmp_wind_cd = tlkpWindSpeedUnitCodes
+
+rmp_worst_flam = tblS4FlammablesWorstCase
+
+rmp_worst_tox = tblS2ToxicsWorstCase

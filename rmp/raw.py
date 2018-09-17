@@ -7,7 +7,6 @@
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
 
-
 class Tblexecutivesummaries(models.Model):
     esseqnum = models.DecimalField(db_column='ESSeqNum', max_digits=65535, decimal_places=65535)  # Field name made lowercase.
     facilityid = models.DecimalField(db_column='FacilityID', max_digits=65535, decimal_places=65535)  # Field name made lowercase.
