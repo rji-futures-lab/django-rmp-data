@@ -28,6 +28,7 @@ class AccChem(models.Model):
     percent_weight = models.DecimalField(
         decimal_places=2,
         null=True,
+        # max_digits=5,
         verbose_name='Percent Weight (Within Mixture)',
         help_text='The percent weight of a chemical within a mixture released '
                   'in an accident.',
@@ -149,11 +150,19 @@ class EventsCd(models.Model):
 
 
 class ExecSumLen(models.Model):
-    rmp_id = models.DecimalField(max_digits=65535, decimal_places=65535)
-    byte_count = models.DecimalField(max_digits=65535, decimal_places=65535)
-    suspect_count = models.DecimalField(max_digits=65535, decimal_places=65535)
-    line_count = models.DecimalField(max_digits=65535, decimal_places=65535)
-    edited_yn = models.BooleanField()
+    rmp_id = models.IntegerField(
+        primary_key=True,
+    )
+    byte_count = models.IntegerField(
+
+    )
+    suspect_count = models.IntegerField(
+
+    )
+    line_count = models.IntegerField(
+
+    )
+    edited_yn = models.CharField(max_length=1)
 
     class Meta:
         db_table = 'rmp_exec_sum_len'
@@ -168,7 +177,7 @@ class LldescCd(models.Model):
 
 
 class LlmethCd(models.Model):
-    primary_key = models.DecimalField(max_digits=65535, decimal_places=65535)
+    primary_key = models.IntegerField(primary_key=True)
     llmeth = models.CharField(max_length=2)
     llmeth_tr = models.CharField(max_length=83)
 
@@ -185,58 +194,72 @@ class PhysCd(models.Model):
 
 
 class Prevent2Chem(models.Model):
-    primary_key = models.DecimalField(max_digits=65535, decimal_places=65535)
-    prevent_2_id = models.DecimalField(max_digits=65535, decimal_places=65535)
-    procchem_id = models.DecimalField(max_digits=65535, decimal_places=65535)
+    primary_key = models.IntegerField(primary_key=True)
+
+    # TODO foreign key ?
+    prevent_2_id = models.IntegerField()
+
+    # TODO foreign key ?
+    procchem_id = models.IntegerField()
 
     class Meta:
         db_table = 'rmp_prevent_2_chem'
 
 
 class Prevent3Chem(models.Model):
-    primary_key = models.DecimalField(max_digits=65535, decimal_places=65535)
-    prevent_3_id = models.DecimalField(max_digits=65535, decimal_places=65535)
-    procchem_id = models.DecimalField(max_digits=65535, decimal_places=65535)
+    primary_key = models.IntegerField(primary_key=True)
+
+    #TODO Foreign key ?
+    prevent_3_id = models.IntegerField()
+
+    # TODO Foreign key ?
+    procchem_id = modelsIntegerField()
 
     class Meta:
         db_table = 'rmp_prevent_3_chem'
 
-
 class ProcChem(models.Model):
-    procchem_id = models.DecimalField(max_digits=65535, decimal_places=65535)
-    process_id = models.DecimalField(max_digits=65535, decimal_places=65535)
-    chemical_id = models.DecimalField(max_digits=65535, decimal_places=65535)
-    quantity_lbs = models.DecimalField(max_digits=65535, decimal_places=65535)
+    procchem_id = models.IntegerField(primary_key=True)
+
+    #TODO Foreign Key?
+    process_id = models.IntegerField()
+    chemical_id = models.IntegerField()
+    quantity_lbs = models.IntegerField()
+
     cbi_flag = models.BooleanField()
-    num_alt_flam = models.DecimalField(max_digits=65535, decimal_places=65535)
-    num_alt_tox = models.DecimalField(max_digits=65535, decimal_places=65535)
-    num_prevent_2_chem = models.DecimalField(max_digits=65535, decimal_places=65535)
-    num_prevent_3_chem = models.DecimalField(max_digits=65535, decimal_places=65535)
-    num_proc_flam = models.DecimalField(max_digits=65535, decimal_places=65535)
-    num_worst_flam = models.DecimalField(max_digits=65535, decimal_places=65535)
-    num_worst_tox = models.DecimalField(max_digits=65535, decimal_places=65535)
-    cas = models.DecimalField(max_digits=65535, decimal_places=65535)
-    chemical_type = models.BooleanField(blank=True, null=True)
+    num_alt_flam = models.IntegerField()
+    num_alt_tox = models.IntegerField()
+    num_prevent_2_chem = models.IntegerField()
+    num_prevent_3_chem = models.IntegerField()
+    num_proc_flam = models.IntegerField()
+    num_worst_flam = models.IntegerField()
+    num_worst_tox =models.IntegerField()
+    cas = models.IntegerField()
+    chemical_type = models.CharField(max_length=1)
 
     class Meta:
         db_table = 'rmp_proc_chem'
 
 
 class ProcFlam(models.Model):
-    flammixchem_id = models.DecimalField(max_digits=65535, decimal_places=65535)
-    procchem_id = models.DecimalField(max_digits=65535, decimal_places=65535)
-    chemical_id = models.DecimalField(max_digits=65535, decimal_places=65535)
+    flammixchem_id = models.IntegerField(primary_key=True)
+
+    #TODO Foreign key?
+    procchem_id = models.IntegerField()
+    chemical_id = models.IntegerField()
 
     class Meta:
         db_table = 'rmp_proc_flam'
 
 
 class ProcNaics(models.Model):
-    procnaics_id = models.DecimalField(max_digits=65535, decimal_places=65535)
-    process_id = models.DecimalField(max_digits=65535, decimal_places=65535)
-    naics = models.DecimalField(max_digits=65535, decimal_places=65535)
-    num_prevent_2 = models.DecimalField(max_digits=65535, decimal_places=65535)
-    num_prevent_3 = models.DecimalField(max_digits=65535, decimal_places=65535)
+    procnaics_id = models.IntegerField(primary_key=True)
+
+    #TODO Foreign key?
+    process_id = models.IntegerField()
+    naics = models.IntegerField()
+    num_prevent_2 = models.IntegerField()
+    num_prevent_3 = models.IntegerField()
 
     class Meta:
         db_table = 'rmp_proc_naics'

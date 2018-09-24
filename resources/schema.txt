@@ -1,6 +1,5 @@
-
-
-rmp_acc_chem = tblS6AccidentChemicals join tlkpChemicals
+rmp_acc_chem = tblS6AccidentChemicals join tlkpChemicals and num_acc_flam
+  num_acc_flam = number of times accidentChemID is in table
 
 rmp_acc_flam = tblS6FlammableMixtureChemicals
 
