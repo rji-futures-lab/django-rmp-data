@@ -2,6 +2,7 @@
 Code-related RMP data models.
 """
 from django.db import models
+from postgres_copy import CopyManager
 from .choices import (
     CHEMICAL_TYPE_CHOICES,
 )
@@ -41,6 +42,8 @@ class ChemCd(models.Model):
         blank=True,
     )
 
+    objects = CopyManager()
+
     class Meta:
         db_table = 'rmp_chem_cd'
 
@@ -57,6 +60,8 @@ class DeregCd(models.Model):
         max_length=62,
         help_text='Full description of the de-regulation reason.'
     )
+    
+    objects = CopyManager()
 
     class Meta:
         db_table = 'rmp_dereg_cd'
@@ -70,6 +75,8 @@ class DochanCd(models.Model):
     dochan_tr = models.CharField(
         max_length=1,
     )
+    
+    objects = CopyManager()
 
     class Meta:
         db_table = 'rmp_dochan_cd'
@@ -88,6 +95,8 @@ class DoctypCd(models.Model):
         max_length=30,
         help_text='Full description of the document type.'
     )
+    
+    objects = CopyManager()
 
     class Meta:
         db_table = 'rmp_doctyp_cd'
@@ -106,6 +115,8 @@ class EventsCd(models.Model):
         max_length=40,
         help_text='Full description of the event type.'
     )
+    
+    objects = CopyManager()
 
     class Meta:
         db_table = 'rmp_events_cd'
@@ -119,6 +130,8 @@ class LldescCd(models.Model):
     lldesc_tr = models.CharField(
         max_length=36,
     )
+    
+    objects = CopyManager()
 
     class Meta:
         db_table = 'rmp_lldesc_cd'
@@ -134,6 +147,8 @@ class LlmethCd(models.Model):
     llmeth_tr = models.CharField(
         max_length=83
     )
+    
+    objects = CopyManager()
 
     class Meta:
         db_table = 'rmp_llmeth_cd'
@@ -152,6 +167,8 @@ class PhysCd(models.Model):
         max_length=30,
         help_text='Full description of the physical state.'
     )
+    
+    objects = CopyManager()
 
     class Meta:
         db_table = 'rmp_phys_cd'
@@ -170,6 +187,8 @@ class RejectCd(models.Model):
         max_length=59,
         help_text='Full description of the rejection reason.'
     )
+    
+    objects = CopyManager()
 
     class Meta:
         db_table = 'rmp_reject_cd'
@@ -188,6 +207,8 @@ class ScenCd(models.Model):
         max_length=27,
         help_text='Full description of the scenario.'
     )
+    
+    objects = CopyManager()
 
     class Meta:
         db_table = 'rmp_scen_cd'
@@ -206,6 +227,8 @@ class SubmitCd(models.Model):
         max_length=101,
         help_text='Full description of the submission reason.'
     )
+    
+    objects = CopyManager()
 
     class Meta:
         db_table = 'rmp_submit_cd'
@@ -224,6 +247,8 @@ class TopoCd(models.Model):
         max_length=5,
         help_text='Full description of the topography type.'
     )
+    
+    objects = CopyManager()
 
     class Meta:
         db_table = 'rmp_topo_cd'
@@ -242,6 +267,8 @@ class WindCd(models.Model):
         max_length=13,
         help_text='Full description of the wind speed measurement unit.'
     )
+    
+    objects = CopyManager()
 
     class Meta:
         db_table = 'rmp_wind_cd'

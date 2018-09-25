@@ -9,6 +9,7 @@ django-environ = "*"
 "psycopg2" = "*"
 csvkit = "*"
 mdbtools = "*"
+django-postgres-copy = "*"
 
 [dev-packages]
 ipython = "*"
