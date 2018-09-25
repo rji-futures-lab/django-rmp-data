@@ -1,6 +1,7 @@
 """
 Django project settings for developer's local environment.
 """
+import os
 from .base import * # noqa
 
 
@@ -19,3 +20,5 @@ DATABASES = {
 
 DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+
+RMP_DATA_DIR = os.path.join(ROOT_DIR, 'data', 'rmp')
