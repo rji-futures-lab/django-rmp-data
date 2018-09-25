@@ -66,7 +66,7 @@ class AccFlam(models.Model):
     # TODO: ForeignKeyField candidate
     flammixchem_id = models.IntegerField(
         verbose_name='Flammable Chemical ID',
-        help_text='A unique ID for each flammable chemical record'.
+        help_text='A unique ID for each flammable chemical record.',
     )
     # TODO: ForeignKeyField candidate
     accchem_id = models.IntegerField(
