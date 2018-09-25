@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "ddfd06b8d505d5691bffbac5b3235399e0a0301692ef722b3b4c32c53e5d38b6"
+            "sha256": "1abd9be0f78822e0a55a20a9aeeb05ba86d95bbfc165bfdb3ccbb03df5097eb1"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -53,7 +53,6 @@
             "hashes": [
                 "sha256:a6c859c1321d4697dc41252877249091681297f093e08d9c1e1828a6d52c260c"
             ],
-            "index": "pypi",
             "version": "==1.0.3"
         },
         "dbfread": {
@@ -68,7 +67,6 @@
                 "sha256:04f2e423f2e60943c02bd2959174b844f7d1bcd19eabb7f8e4282999958021fd",
                 "sha256:e1cc1cd6b658aa4e052f5f2b148bfda08091d7c3558529708342e37e4e33f72c"
             ],
-            "index": "pypi",
             "version": "==2.1.1"
         },
         "django-environ": {
@@ -76,7 +74,6 @@
                 "sha256:6c9d87660142608f63ec7d5ce5564c49b603ea8ff25da595fd6098f6dc82afde",
                 "sha256:c57b3c11ec1f319d9474e3e5a79134f40174b17c7cc024bbb2fad84646b120c4"
             ],
-            "index": "pypi",
             "version": "==0.4.5"
         },
         "django-postgres-copy": {
@@ -84,8 +81,11 @@
                 "sha256:64b52397cff220196d1767c80bc2bdf6076ed968870ddbc5db56bb9c4ca388c2",
                 "sha256:eec7acc0dea34be2cc495db7f6a6f446a399d89c15c5f137cffaa4c9da077860"
             ],
-            "index": "pypi",
             "version": "==2.3.7"
+        },
+        "django-rmp-data": {
+            "editable": true,
+            "path": "."
         },
         "et-xmlfile": {
             "hashes": [
@@ -124,14 +124,13 @@
             "hashes": [
                 "sha256:a6691aeae18413e698ccfb1cc04c1733ceb8be59d81539d08821624f1e6df39a"
             ],
-            "index": "pypi",
             "version": "==0.3.14"
         },
         "openpyxl": {
             "hashes": [
-                "sha256:d3da4d6a78077d6f9fb1a1ec12d4aa500f7caa4661b8528538503b24ed72d632"
+                "sha256:22904d7bdfaaab33d65d50a0915a65eeb2f29c85d9ec53081563850678a29927"
             ],
-            "version": "==2.5.7"
+            "version": "==2.5.8"
         },
         "parsedatetime": {
             "hashes": [
@@ -173,7 +172,6 @@
                 "sha256:f4b0460a21f784abe17b496f66e74157a6c36116fa86da8bf6aa028b9e8ad5fe",
                 "sha256:f93d508ca64d924d478fb11e272e09524698f0c581d9032e68958cfbdd41faef"
             ],
-            "index": "pypi",
             "version": "==2.7.5"
         },
         "pymongo": {
@@ -429,10 +427,10 @@
         },
         "pickleshare": {
             "hashes": [
-                "sha256:84a9257227dfdd6fe1b4be1319096c20eb85ff1e82c7932f36efccfe1b09737b",
-                "sha256:c9a2541f25aeabc070f12f452e1f2a8eae2abd51e1cd19e8430402bdf4c1d8b5"
+                "sha256:87683d47965c1da65cdacaf31c8441d12b8044cdec9aca500cd78fc2c683afca",
+                "sha256:9649af414d74d4df115d5d718f82acb59c9d418196b7b4290ed47a12ce62df56"
             ],
-            "version": "==0.7.4"
+            "version": "==0.7.5"
         },
         "placebo": {
             "hashes": [
