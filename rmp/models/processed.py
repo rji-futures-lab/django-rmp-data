@@ -28,13 +28,12 @@ class AccChem(models.Model):
     percent_weight = models.DecimalField(
         decimal_places=2,
         null=True,
-        # max_digits=5,
+        max_digits=5,
         verbose_name='Percent Weight (Within Mixture)',
         help_text='The percent weight of a chemical within a mixture released '
                   'in an accident.',
     )
     num_acc_flam = models.IntegerField(
-        help_text='',
         null=True,
         verbose_name='Number of Flammable Components',
         help_text='The number of listed flammable component chemicals for this'
@@ -213,7 +212,7 @@ class Prevent3Chem(models.Model):
     prevent_3_id = models.IntegerField()
 
     # TODO Foreign key ?
-    procchem_id = modelsIntegerField()
+    procchem_id = models.IntegerField()
 
     class Meta:
         db_table = 'rmp_prevent_3_chem'
