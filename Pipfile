@@ -9,6 +9,9 @@ django-rmp-data = {editable = true, path = "."}
 [dev-packages]
 ipython = "*"
 zappa = "*"
+"flake8" = "*"
+"flake8-docstrings" = "*"
+python-coveralls = "*"
 
 [requires]
 python_version = "3.6"
