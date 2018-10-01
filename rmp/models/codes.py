@@ -60,7 +60,7 @@ class DeregCd(models.Model):
         max_length=62,
         help_text='Full description of the de-regulation reason.'
     )
-    
+
     objects = CopyManager()
 
     class Meta:
@@ -75,7 +75,7 @@ class DochanCd(models.Model):
     dochan_tr = models.CharField(
         max_length=1,
     )
-    
+
     objects = CopyManager()
 
     class Meta:
@@ -95,7 +95,7 @@ class DoctypCd(models.Model):
         max_length=30,
         help_text='Full description of the document type.'
     )
-    
+
     objects = CopyManager()
 
     class Meta:
@@ -115,7 +115,7 @@ class EventsCd(models.Model):
         max_length=40,
         help_text='Full description of the event type.'
     )
-    
+
     objects = CopyManager()
 
     class Meta:
@@ -130,7 +130,7 @@ class LldescCd(models.Model):
     lldesc_tr = models.CharField(
         max_length=36,
     )
-    
+
     objects = CopyManager()
 
     class Meta:
@@ -147,7 +147,7 @@ class LlmethCd(models.Model):
     llmeth_tr = models.CharField(
         max_length=83
     )
-    
+
     objects = CopyManager()
 
     class Meta:
@@ -167,7 +167,7 @@ class PhysCd(models.Model):
         max_length=30,
         help_text='Full description of the physical state.'
     )
-    
+
     objects = CopyManager()
 
     class Meta:
@@ -187,7 +187,7 @@ class RejectCd(models.Model):
         max_length=59,
         help_text='Full description of the rejection reason.'
     )
-    
+
     objects = CopyManager()
 
     class Meta:
@@ -207,7 +207,7 @@ class ScenCd(models.Model):
         max_length=27,
         help_text='Full description of the scenario.'
     )
-    
+
     objects = CopyManager()
 
     class Meta:
@@ -227,7 +227,7 @@ class SubmitCd(models.Model):
         max_length=101,
         help_text='Full description of the submission reason.'
     )
-    
+
     objects = CopyManager()
 
     class Meta:
@@ -247,12 +247,21 @@ class TopoCd(models.Model):
         max_length=5,
         help_text='Full description of the topography type.'
     )
-    
+
     objects = CopyManager()
 
     class Meta:
         db_table = 'rmp_topo_cd'
 
+class rmp_cities(models.Model):
+    city = models.CharField(max_length=30, blank=True, null=True)
+    state = models.CharField(max_length=2, blank=True, null=True)
+    num_fac = models.IntegerField()
+
+    objects = CopyManager()
+
+    class Meta:
+         db_table = 'rmp_topo_cd'
 
 class WindCd(models.Model):
     """
@@ -267,7 +276,7 @@ class WindCd(models.Model):
         max_length=13,
         help_text='Full description of the wind speed measurement unit.'
     )
-    
+
     objects = CopyManager()
 
     class Meta:

@@ -46,7 +46,7 @@ rmp_proc_naics = ? see db_joins.tsv
 
 rmp_proc_flam = tblS1FlammableMixtureChemicals
 
-rmp_registration = tblRMPError join FacilityID
+rmp_registration = tblS1Facilities
 
 rmp_reject_cd = tlkpRejectReason
 
@@ -63,3 +63,9 @@ rmp_wind_cd = tlkpWindSpeedUnitCodes
 rmp_worst_flam = tblS4FlammablesWorstCase
 
 rmp_worst_tox = tblS2ToxicsWorstCase
+
+rmp_prev2text = tblS8PreventionProgram2 - ONLY ID AND DESCRIPTION
+
+rmp_prev3Text = tblS7PreventionProgram3 - ONLY ID AND DESCRIPTION
+
+rmp_registration
