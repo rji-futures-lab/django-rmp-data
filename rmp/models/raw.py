@@ -179,21 +179,21 @@ from postgres_copy import CopyManager
 
 
 class Tbls6Accidentchemicals(models.Model):
-    accchem_id = models.IntegerField(
+    accidentchemicalid = models.IntegerField(
         primary_key=True,
         verbose_name='Accident Chemical Record ID',
         help_text='A unique ID for each accident chemical record.',
     )
     # TODO: ForeignKeyField candidate
-    accident_id = models.IntegerField(
+    accidenthistoryid = models.IntegerField(
         help_text='The unique ID for each accident record',
     )
     # TODO: ForeignKeyField candidate
-    chemical_id = models.IntegerField(
+    chemicalid = models.IntegerField(
         help_text='The identifying ID for a particular chemical released in an '
                   'accident.',
     )
-    quantity_lbs = models.DecimalField(
+    quantityreleased = models.DecimalField(
         decimal_places=1,
         max_digits=8,
         null=True,
@@ -202,7 +202,7 @@ class Tbls6Accidentchemicals(models.Model):
                   'pounds, to two significant digits.',
     )
     # TODO: db_fields.tsv says this should be a float field, will decimal work?
-    percent_weight = models.DecimalField(
+    percentweight = models.DecimalField(
         decimal_places=2,
         null=True,
         max_digits=5,
