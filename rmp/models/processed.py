@@ -24,6 +24,7 @@ class AccChem(models.Model):
                   'accident.',
     )
     quantity_lbs = models.IntegerField(
+        null=True,
         verbose_name='Amount Released (lbs)',
         help_text='The amount of the substance released in the accident, in '
                   'pounds, to two significant digits.',
@@ -57,6 +58,8 @@ class AccChem(models.Model):
         help_text='"The type of chemical.',
     )
 
+    objects = CopyManager()
+
     class Meta:
         db_table = 'rmp_acc_chem'
 
@@ -69,6 +72,7 @@ class AccFlam(models.Model):
         primary_key=True,
         verbose_name='Flammable Chemical ID',
         help_text='A unique ID for each flammable chemical record.',
+        primary_key=True,
     )
     # TODO: ForeignKeyField candidate
     accchem_id = models.ForeignKey(
@@ -84,6 +88,8 @@ class AccFlam(models.Model):
         verbose_name='Chemical ID',
         help_text='The identifying ID for a particular flammable chemical released in an accident.',
     )
+
+    objects = CopyManager()
 
     class Meta:
         db_table = 'rmp_acc_flam'

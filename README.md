@@ -104,10 +104,10 @@ TODO: This changes the command line prompt? Should we instead to `source .bash_p
 
 ### 5. Install recommended Python dependencies
 
-Now we install six additional dependencies for Python, [recommended](https://github.com/pyenv/pyenv/wiki#suggested-build-environment) by pyenv.
+Now we install six additional dependencies for Python, [recommended](https://github.com/pyenv/pyenv/wiki#suggested-build-environment) by pyenv, plus `mdbtools`, another tool we need for extracting the rmp data.
 
 ```bash
-brew install openssl readline sqlite3 xz zlib
+brew install openssl readline sqlite3 xz zlib mdbtools
 ```
 
 TODO: Should this step come before `brew install pyenv`?
