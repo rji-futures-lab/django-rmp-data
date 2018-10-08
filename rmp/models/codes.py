@@ -3,46 +3,63 @@ Code-related RMP data models.
 """
 from django.db import models
 from postgres_copy import CopyManager
+from .base import (
+    BaseRMPModel,
+    CopyFromBooleanField,
+    CopyFromCharField,
+    CopyFromDecimalField,
+    CopyFromIntegerField,
+)
 from .choices import (
     CHEMICAL_TYPE_CHOICES,
 )
 
 
-class ChemCd(models.Model):
-    chemical_id = models.IntegerField(
+class ChemCd(BaseRMPModel):
+    chemical_id = CopyFromIntegerField(
+        source_column='ChemicalID',
         primary_key=True,
         help_text="RMP's unique identifier of a chemical substance.",
     )
-    chemical_name = models.CharField(
+    chemical_name = CopyFromCharField(
+        source_column='ChemicalName',
         max_length=92,
         help_text="Chemical substance name.",
     )
-    cas2 = models.CharField(
+    cas2 = CopyFromCharField(
+        source_column='CASNumber',
         max_length=10,
         blank=True,
         help_text="Chemical Abstracts Service (CAS) registry number "
                   "(is 2 meaningful?)",
     )
-    threshold = models.IntegerField(
+    threshold = CopyFromDecimalField(
+        source_column='Threshold',
+        null=True,
+        decimal_places=1,
+        max_digits=8,
         help_text='Threshold above which the chemical is regulated???'
     )
-    chemical_type = models.CharField(
+    chemical_type = CopyFromCharField(
+        source_column='ChemType',
         max_length=1,
         choices=CHEMICAL_TYPE_CHOICES,
         blank=True,
         help_text='"The type of chemical (T=toxic, F=Flammable).',
     )
-    cbi_flag = models.BooleanField(
+    cbi_flag = CopyFromBooleanField(
+        source_column='flgCBI',
         help_text='Indicates whether this record contained Confidential '
                   'Business Information (CBI) which has been erased by EPA '
                   'from the public version of the data.'
     )
-    chemical_owner = models.CharField(
+    chemical_owner = CopyFromCharField(
+        source_column='ChemOwner',
         max_length=3,
         blank=True,
     )
 
-    objects = CopyManager()
+    source_file = 'tlkpChemicals'
 
     class Meta:
         db_table = 'rmp_chem_cd'
@@ -60,8 +77,6 @@ class DeregCd(models.Model):
         max_length=62,
         help_text='Full description of the de-regulation reason.'
     )
-
-    objects = CopyManager()
 
     class Meta:
         db_table = 'rmp_dereg_cd'
