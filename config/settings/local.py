@@ -22,3 +22,5 @@ DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
 RMP_DATA_DIR = os.path.join(ROOT_DIR, 'data', 'rmp')
+RMP_RAW_DATA_DIR = os.path.join(RMP_DATA_DIR, 'raw')
+RMP_PROCESSED_DATA_DIR = os.path.join(RMP_DATA_DIR, 'processed')
