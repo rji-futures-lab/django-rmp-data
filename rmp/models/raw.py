@@ -6,7 +6,15 @@
 #   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
-from postgres_copy import CopyManager
+from .base import BaseRMPModel
+from rmp.fields import (
+    CopyFromBooleanField,
+    CopyFromCharField,
+    CopyFromDecimalField,
+    CopyFromDateTimeField,
+    CopyFromIntegerField,
+    CopyFromForeignKey,
+)
 
 # class Tblexecutivesummaries(models.Model):
 #     esseqnum = models.DecimalField(db_column='ESSeqNum', max_digits=65535, decimal_places=65535)  # Field name made lowercase.
@@ -178,22 +186,30 @@ from postgres_copy import CopyManager
 #         db_table = 'tblS5FlammablesAltReleases'
 
 
-class Tbls6Accidentchemicals(models.Model):
-    accidentchemicalid = models.IntegerField(
+class Tbls6AccidentChemicals(BaseRMPModel):
+    accidentchemicalid = CopyFromIntegerField(
+        source_column='AccidentChemicalID',
         primary_key=True,
         verbose_name='Accident Chemical Record ID',
         help_text='A unique ID for each accident chemical record.',
     )
-    # TODO: ForeignKeyField candidate
-    accidenthistoryid = models.IntegerField(
+    # accidenthistoryid = CopyFromForeignKey(
+    #     'Tbls6Accidenthistory',
+    #     on_delete=models.PROTECT,
+    accidenthistoryid = CopyFromIntegerField(
+        source_column='AccidentHistoryID',
         help_text='The unique ID for each accident record',
     )
     # TODO: ForeignKeyField candidate
-    chemicalid = models.IntegerField(
+    chemicalid = CopyFromForeignKey(
+        'ChemCd',
+        on_delete=models.PROTECT,
+        source_column='ChemicalID',
         help_text='The identifying ID for a particular chemical released in an '
                   'accident.',
     )
-    quantityreleased = models.DecimalField(
+    quantityreleased = CopyFromDecimalField(
+        source_column='QuantityReleased',
         decimal_places=1,
         max_digits=8,
         null=True,
@@ -201,8 +217,8 @@ class Tbls6Accidentchemicals(models.Model):
         help_text='The amount of the substance released in the accident, in '
                   'pounds, to two significant digits.',
     )
-    # TODO: db_fields.tsv says this should be a float field, will decimal work?
-    percentweight = models.DecimalField(
+    percentweight = CopyFromDecimalField(
+        source_column='PercentWeight',
         decimal_places=2,
         null=True,
         max_digits=5,
@@ -211,86 +227,235 @@ class Tbls6Accidentchemicals(models.Model):
                   'in an accident.',
     )
 
-    objects = CopyManager()
-
     class Meta:
         db_table = 'tblS6AccidentChemicals'
 
 
-# class Tbls6Accidenthistory(models.Model):
-#     accidenthistoryid = models.DecimalField(db_column='AccidentHistoryID', max_digits=65535, decimal_places=65535)  # Field name made lowercase.
-#     facilityid = models.DecimalField(db_column='FacilityID', max_digits=65535, decimal_places=65535)  # Field name made lowercase.
-#     accidentdate = models.DateTimeField(db_column='AccidentDate', blank=True, null=True)  # Field name made lowercase.
-#     accidenttime = models.DecimalField(db_column='AccidentTime', max_digits=65535, decimal_places=65535, blank=True, null=True)  # Field name made lowercase.
-#     naicscode = models.DecimalField(db_column='NAICSCode', max_digits=65535, decimal_places=65535, blank=True, null=True)  # Field name made lowercase.
-#     accidentreleaseduration = models.DecimalField(db_column='AccidentReleaseDuration', max_digits=65535, decimal_places=65535, blank=True, null=True)  # Field name made lowercase.
-#     re_gas = models.BooleanField(db_column='RE_Gas')  # Field name made lowercase.
-#     re_spill = models.BooleanField(db_column='RE_Spill')  # Field name made lowercase.
-#     re_fire = models.BooleanField(db_column='RE_Fire')  # Field name made lowercase.
-#     re_explosion = models.BooleanField(db_column='RE_Explosion')  # Field name made lowercase.
-#     re_reactiveincident = models.BooleanField(db_column='RE_ReactiveIncident')  # Field name made lowercase.
-#     rs_storagevessel = models.BooleanField(db_column='RS_StorageVessel')  # Field name made lowercase.
-#     rs_piping = models.BooleanField(db_column='RS_Piping')  # Field name made lowercase.
-#     rs_processvessel = models.BooleanField(db_column='RS_ProcessVessel')  # Field name made lowercase.
-#     rs_transferhose = models.BooleanField(db_column='RS_TransferHose')  # Field name made lowercase.
-#     rs_valve = models.BooleanField(db_column='RS_Valve')  # Field name made lowercase.
-#     rs_pump = models.BooleanField(db_column='RS_Pump')  # Field name made lowercase.
-#     rs_joint = models.BooleanField(db_column='RS_Joint')  # Field name made lowercase.
-#     otherreleasesource = models.CharField(db_column='OtherReleaseSource', max_length=-1, blank=True, null=True)  # Field name made lowercase.
-#     windspeed = models.DecimalField(db_column='WindSpeed', max_digits=65535, decimal_places=65535, blank=True, null=True)  # Field name made lowercase.
-#     windspeedunitcode = models.CharField(db_column='WindSpeedUnitCode', max_length=-1, blank=True, null=True)  # Field name made lowercase.
-#     winddirection = models.CharField(db_column='WindDirection', max_length=-1, blank=True, null=True)  # Field name made lowercase.
-#     temperature = models.DecimalField(db_column='Temperature', max_digits=65535, decimal_places=65535, blank=True, null=True)  # Field name made lowercase.
-#     stabilityclass = models.CharField(db_column='StabilityClass', max_length=-1, blank=True, null=True)  # Field name made lowercase.
-#     precipitation = models.BooleanField(db_column='Precipitation')  # Field name made lowercase.
-#     weatherunknown = models.BooleanField(db_column='WeatherUnknown')  # Field name made lowercase.
-#     deathsworkers = models.DecimalField(db_column='DeathsWorkers', max_digits=65535, decimal_places=65535, blank=True, null=True)  # Field name made lowercase.
-#     deathspublicresponders = models.DecimalField(db_column='DeathsPublicResponders', max_digits=65535, decimal_places=65535, blank=True, null=True)  # Field name made lowercase.
-#     deathspublic = models.DecimalField(db_column='DeathsPublic', max_digits=65535, decimal_places=65535, blank=True, null=True)  # Field name made lowercase.
-#     injuriesworkers = models.DecimalField(db_column='InjuriesWorkers', max_digits=65535, decimal_places=65535, blank=True, null=True)  # Field name made lowercase.
-#     injuriespublicresponders = models.DecimalField(db_column='InjuriesPublicResponders', max_digits=65535, decimal_places=65535, blank=True, null=True)  # Field name made lowercase.
-#     injuriespublic = models.DecimalField(db_column='InjuriesPublic', max_digits=65535, decimal_places=65535, blank=True, null=True)  # Field name made lowercase.
-#     onsitepropertydamage = models.DecimalField(db_column='OnsitePropertyDamage', max_digits=65535, decimal_places=65535, blank=True, null=True)  # Field name made lowercase.
-#     offsitedeaths = models.BooleanField(db_column='OffsiteDeaths', blank=True, null=True)  # Field name made lowercase.
-#     hospitalization = models.DecimalField(db_column='Hospitalization', max_digits=65535, decimal_places=65535, blank=True, null=True)  # Field name made lowercase.
-#     medicaltreatment = models.DecimalField(db_column='MedicalTreatment', max_digits=65535, decimal_places=65535, blank=True, null=True)  # Field name made lowercase.
-#     evacuated = models.DecimalField(db_column='Evacuated', max_digits=65535, decimal_places=65535, blank=True, null=True)  # Field name made lowercase.
-#     shelteredinplace = models.DecimalField(db_column='ShelteredInPlace', max_digits=65535, decimal_places=65535, blank=True, null=True)  # Field name made lowercase.
-#     offsitepropertydamage = models.DecimalField(db_column='OffsitePropertyDamage', max_digits=65535, decimal_places=65535, blank=True, null=True)  # Field name made lowercase.
-#     ed_kills = models.BooleanField(db_column='ED_Kills')  # Field name made lowercase.
-#     ed_minordefoliation = models.BooleanField(db_column='ED_MinorDefoliation')  # Field name made lowercase.
-#     ed_watercontamination = models.BooleanField(db_column='ED_WaterContamination')  # Field name made lowercase.
-#     ed_soilcontamination = models.BooleanField(db_column='ED_SoilContamination')  # Field name made lowercase.
-#     ed_other = models.CharField(db_column='ED_Other', max_length=-1, blank=True, null=True)  # Field name made lowercase.
-#     initiatingevent = models.CharField(db_column='InitiatingEvent', max_length=-1, blank=True, null=True)  # Field name made lowercase.
-#     cf_equipmentfailure = models.BooleanField(db_column='CF_EquipmentFailure')  # Field name made lowercase.
-#     cf_humanerror = models.BooleanField(db_column='CF_HumanError')  # Field name made lowercase.
-#     cf_improperprocedure = models.BooleanField(db_column='CF_ImproperProcedure')  # Field name made lowercase.
-#     cf_overpressurization = models.BooleanField(db_column='CF_Overpressurization')  # Field name made lowercase.
-#     cf_upsetcondition = models.BooleanField(db_column='CF_UpsetCondition')  # Field name made lowercase.
-#     cf_bypasscondition = models.BooleanField(db_column='CF_BypassCondition')  # Field name made lowercase.
-#     cf_maintenance = models.BooleanField(db_column='CF_Maintenance')  # Field name made lowercase.
-#     cf_processdesignfailure = models.BooleanField(db_column='CF_ProcessDesignFailure')  # Field name made lowercase.
-#     cf_unsuitableequipment = models.BooleanField(db_column='CF_UnsuitableEquipment')  # Field name made lowercase.
-#     cf_unusualweather = models.BooleanField(db_column='CF_UnusualWeather')  # Field name made lowercase.
-#     cf_managementerror = models.BooleanField(db_column='CF_ManagementError')  # Field name made lowercase.
-#     cf_other = models.CharField(db_column='CF_Other', max_length=-1, blank=True, null=True)  # Field name made lowercase.
-#     offsiterespondersnotify = models.CharField(db_column='OffsiteRespondersNotify', max_length=-1, blank=True, null=True)  # Field name made lowercase.
-#     ci_improvedequipment = models.BooleanField(db_column='CI_ImprovedEquipment')  # Field name made lowercase.
-#     ci_revisedmaintenance = models.BooleanField(db_column='CI_RevisedMaintenance')  # Field name made lowercase.
-#     ci_revisedtraining = models.BooleanField(db_column='CI_RevisedTraining')  # Field name made lowercase.
-#     ci_revisedopprocedures = models.BooleanField(db_column='CI_RevisedOpProcedures')  # Field name made lowercase.
-#     ci_newprocesscontrols = models.BooleanField(db_column='CI_NewProcessControls')  # Field name made lowercase.
-#     ci_newmitigationsystems = models.BooleanField(db_column='CI_NewMitigationSystems')  # Field name made lowercase.
-#     ci_revisederplan = models.BooleanField(db_column='CI_RevisedERPlan')  # Field name made lowercase.
-#     ci_changedprocess = models.BooleanField(db_column='CI_ChangedProcess')  # Field name made lowercase.
-#     ci_reducedinventory = models.BooleanField(db_column='CI_ReducedInventory')  # Field name made lowercase.
-#     ci_none = models.BooleanField(db_column='CI_None')  # Field name made lowercase.
-#     ci_othertype = models.CharField(db_column='CI_OtherType', max_length=-1, blank=True, null=True)  # Field name made lowercase.
-#     cbi_flag = models.BooleanField(db_column='CBI_Flag')  # Field name made lowercase.
+# class Tbls6AccidentHistory(BaseRMPModel):
+#     accident_id = CopyFromIntegerField(
+#         primary_key=True,
+#         source_column='AccidentHistoryID'
+#     )
+#     # ForeignKey candidate
+#     rmp_id = CopyFromIntegerField(
+#         source_column='FacilityID',
+#     )
+#     accidentdate = CopyFromDateTimeField(
+#         source_column='AccidentDate',
+#         blank=True,
+#         null=True
+#     )
+#     accidenttime = CopyFromCharField(
+#         source_column='AccidentTime',
+#         max_length=4
+#     )
+#     naicscode = CopyFromCharField(
+#         source_column='NAICSCode',
+#         max_length=6
+#     )
+#     accidentreleaseduration = CopyFromCharField(
+#         source_column='AccidentReleaseDuration',
+#         max_length=5)
+#     re_gas = CopyFromBooleanField(
+#         source_column='RE_Gas',
+#     )
+#     re_spill = CopyFromBooleanField(
+#         source_column='RE_Spill',
+#     )
+#     re_fire = CopyFromBooleanField(
+#         source_column='RE_Fire',
+#     )
+#     re_explosion = CopyFromBooleanField(
+#         source_column='RE_Explosion',
+#     )
+#     re_reactiveincident = CopyFromBooleanField(
+#         source_column='RE_ReactiveIncident',
+#     )
+#     rs_storagevessel = CopyFromBooleanField(
+#         source_column='RS_StorageVessel',
+#     )
+#     rs_piping = CopyFromBooleanField(
+#         source_column='RS_Piping',
+#     )
+#     rs_processvessel = CopyFromBooleanField(
+#         source_column='RS_ProcessVessel',
+#     )
+#     rs_transferhose = CopyFromBooleanField(
+#         source_column='RS_TransferHose',
+#     )
+#     rs_valve = CopyFromBooleanField(
+#         source_column='RS_Valve',
+#     )
+#     rs_pump = CopyFromBooleanField(
+#         source_column='RS_Pump',
+#     )
+#     rs_joint = CopyFromBooleanField(
+#         source_column='RS_Joint',
+#     )
+#     otherreleasesource = CopyFromCharField(
+#         source_column='OtherReleaseSource',
+#         max_length=200,
+#         blank=True
+#     )
+#     windspeed = CopyFromDecimalField(
+#         source_column='WindSpeed',
+#         max_digits=6, decimal_places=2, blank=True, null=True
+#     )
+#     windspeedunitcode = CopyFromCharField(
+#         source_column='WindSpeedUnitCode',
+#         max_length=1, blank=True)
+#     winddirection = CopyFromCharField(
+#         source_column='WindDirection',
+#         max_length=3, blank=True)
+#     temperature = CopyFromDecimalField(
+#         source_column='Temperature',
+#         max_digits=6, decimal_places=2)
+#     stabilityclass = CopyFromCharField(
+#         source_column='StabilityClass',
+#         max_length=1, blank=True)
+#     precipitation = CopyFromBooleanField(
+#         source_column='Precipitation',
+#     )
+#     weatherunknown = CopyFromBooleanField(
+#         source_column='WeatherUnknown',
+#     )
+#     deathsworkers = CopyFromIntegerField(
+#         source_column='DeathsWorkers',
+#     )
+#     deathspublicresponders = CopyFromIntegerField(
+#         source_column='DeathsPublicResponders',
+#     )
+#     deathspublic = CopyFromIntegerField(
+#         source_column='DeathsPublic',
+#     )
+#     injuriesworkers = CopyFromIntegerField(
+#         source_column='InjuriesWorkers',
+#     )
+#     injuriespublicresponders = CopyFromIntegerField(
+#         source_column='InjuriesPublicResponders',
+#     )
+#     injuriespublic = CopyFromIntegerField(
+#         source_column='InjuriesPublic',
+#     )
+#     onsitepropertydamage = CopyFromIntegerField(
+#         source_column='OnsitePropertyDamage',
+#     )
+#     offsitedeaths = CopyFromBooleanField(
+#         source_column='OffsiteDeaths',
+#         blank=True, null=True)
+#     hospitalization = CopyFromIntegerField(
+#         source_column='Hospitalization',
+#     )
+#     medicaltreatment = CopyFromIntegerField(
+#         source_column='MedicalTreatment',
+#     )
+#     evacuated = CopyFromIntegerField(
+#         source_column='Evacuated',
+#     )
+#     shelteredinplace = CopyFromIntegerField(
+#         source_column='ShelteredInPlace',
+#     )
+#     offsitepropertydamage = CopyFromIntegerField(
+#         source_column='OffsitePropertyDamage',
+#     )
+#     ed_kills = CopyFromBooleanField(
+#         source_column='ED_Kills',
+#     )
+#     ed_minordefoliation = CopyFromBooleanField(
+#         source_column='ED_MinorDefoliation',
+#     )
+#     ed_watercontamination = CopyFromBooleanField(
+#         source_column='ED_WaterContamination',
+#     )
+#     ed_soilcontamination = CopyFromBooleanField(
+#         source_column='ED_SoilContamination',
+#     )
+#     ed_other = CopyFromCharField(
+#         source_column='ED_Other',
+#         max_length=200, blank=True)
+#     initiatingevent = CopyFromCharField(
+#         source_column='InitiatingEvent',
+#         max_length=1, blank=True)
+#     cf_equipmentfailure = CopyFromBooleanField(
+#         source_column='CF_EquipmentFailure',
+#     )
+#     cf_humanerror = CopyFromBooleanField(
+#         source_column='CF_HumanError',
+#     )
+#     cf_improperprocedure = CopyFromBooleanField(
+#         source_column='CF_ImproperProcedure',
+#     )
+#     cf_overpressurization = CopyFromBooleanField(
+#         source_column='CF_Overpressurization',
+#     )
+#     cf_upsetcondition = CopyFromBooleanField(
+#         source_column='CF_UpsetCondition',
+#     )
+#     cf_bypasscondition = CopyFromBooleanField(
+#         source_column='CF_BypassCondition',
+#     )
+#     cf_maintenance = CopyFromBooleanField(
+#         source_column='CF_Maintenance',
+#     )
+#     cf_processdesignfailure = CopyFromBooleanField(
+#         source_column='CF_ProcessDesignFailure',
+#     )
+#     cf_unsuitableequipment = CopyFromBooleanField(
+#         source_column='CF_UnsuitableEquipment',
+#     )
+#     cf_unusualweather = CopyFromBooleanField(
+#         source_column='CF_UnusualWeather',
+#     )
+#     cf_managementerror = CopyFromBooleanField(
+#         source_column='CF_ManagementError',
+#     )
+#     cf_other = CopyFromCharField(
+#         source_column='CF_Other',
+#         max_length=200, blank=True
+#     )
+#     offsiterespondersnotify = CopyFromCharField(
+#         source_column='OffsiteRespondersNotify',
+#         max_length=25, blank=True
+#     )
+#     ci_improvedequipment = CopyFromBooleanField(
+#         source_column='CI_ImprovedEquipment',
+#     )
+#     ci_revisedmaintenance = CopyFromBooleanField(
+#         source_column='CI_RevisedMaintenance',
+#     )
+#     ci_revisedtraining = CopyFromBooleanField(
+#         source_column='CI_RevisedTraining',
+#     )
+#     ci_revisedopprocedures = CopyFromBooleanField(
+#         source_column='CI_RevisedOpProcedures',
+#     )
+#     ci_newprocesscontrols = CopyFromBooleanField(
+#         source_column='CI_NewProcessControls',
+#     )
+#     ci_newmitigationsystems = CopyFromBooleanField(
+#         source_column='CI_NewMitigationSystems',
+#     )
+#     ci_revisederplan = CopyFromBooleanField(
+#         source_column='CI_RevisedERPlan',
+#     )
+#     ci_changedprocess = CopyFromBooleanField(
+#         source_column='CI_ChangedProcess',
+#     )
+#     ci_reducedinventory = CopyFromBooleanField(
+#         source_column='CI_ReducedInventory',
+#     )
+#     ci_none = CopyFromBooleanField(
+#         source_column='CI_None',
+#     )
+#     ci_othertype = CopyFromCharField(
+#         source_column='CI_OtherType',
+#         max_length=200, blank=True
+#     )
+#     cbi_flag = CopyFromBooleanField(
+#         # source_column='CBI_Flag',
+#     )
 
-#     class Meta:
-#         db_table = 'tblS6AccidentHistory'
+#     source_file = 'tblS6AccidentHistory'
 
 
 # class Tbls8Preventionprogram2(models.Model):
@@ -425,17 +590,40 @@ class Tbls6Accidentchemicals(models.Model):
 #         db_table = 'tblS9EmergencyResponses'
 
 
-# class Tlkpchemicals(models.Model):
-#     chemicalid = models.DecimalField(db_column='ChemicalID', max_digits=65535, decimal_places=65535)  # Field name made lowercase.
-#     chemicalname = models.CharField(db_column='ChemicalName', max_length=-1)  # Field name made lowercase.
-#     casnumber = models.CharField(db_column='CASNumber', max_length=-1, blank=True, null=True)  # Field name made lowercase.
-#     threshold = models.DecimalField(db_column='Threshold', max_digits=65535, decimal_places=65535, blank=True, null=True)  # Field name made lowercase.
-#     chemtype = models.BooleanField(db_column='ChemType', blank=True, null=True)  # Field name made lowercase.
-#     flgcbi = models.BooleanField(db_column='flgCBI')  # Field name made lowercase.
-#     chemowner = models.CharField(db_column='ChemOwner', max_length=-1, blank=True, null=True)  # Field name made lowercase.
+# class Tlkpchemicals(BaseRMPModel):
+#     chemicalid = models.IntegerField(
+#         db_column='ChemicalID',
+#     )  # Field name made lowercase.
+#     chemicalname = models.CharField(
+#         db_column='ChemicalName',
+#         max_length=
+#     )  # Field name made lowercase.
+#     casnumber = models.CharField(
+#         db_column='CASNumber',
+#         max_length=,
+#         blank=True,
+#     )  # Field name made lowercase.
+#     threshold = models.DecimalField(
+#         db_column='Threshold',
+#         max_digits=65535,
+#         decimal_places=65535,
+#         blank=True,
+#     )  # Field name made lowercase.
+#     chemtype = models.BooleanField(
+#         db_column='ChemType',
+#         blank=True,
+#     )  # Field name made lowercase.
+#     flgcbi = models.BooleanField(
+#         db_column='flgCBI'
+#     )  # Field name made lowercase.
+#     chemowner = models.CharField(
+#         db_column='ChemOwner',
+#         max_length=-1,
+#         blank=True,
+#     )  # Field name made lowercase.
 
-#     class Meta:
-#         db_table = 'tlkpChemicals'
+#   class Meta:
+#       db_table = 'tlkpChemicals'
 
 
 # class Tlkpderegistrationreason(models.Model):

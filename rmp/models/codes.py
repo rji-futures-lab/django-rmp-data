@@ -2,14 +2,13 @@
 Code-related RMP data models.
 """
 from django.db import models
-from postgres_copy import CopyManager
-from .base import (
-    BaseRMPModel,
+from rmp.fields import (
     CopyFromBooleanField,
     CopyFromCharField,
     CopyFromDecimalField,
     CopyFromIntegerField,
 )
+from .base import BaseRMPModel
 from .choices import (
     CHEMICAL_TYPE_CHOICES,
 )
@@ -61,9 +60,6 @@ class ChemCd(BaseRMPModel):
 
     source_file = 'tlkpChemicals'
 
-    class Meta:
-        db_table = 'rmp_chem_cd'
-
 
 class DeregCd(models.Model):
     """
@@ -78,8 +74,7 @@ class DeregCd(models.Model):
         help_text='Full description of the de-regulation reason.'
     )
 
-    class Meta:
-        db_table = 'rmp_dereg_cd'
+    source_file = 'rmp_dereg_cd'
 
 
 class DochanCd(models.Model):
@@ -91,10 +86,7 @@ class DochanCd(models.Model):
         max_length=1,
     )
 
-    objects = CopyManager()
-
-    class Meta:
-        db_table = 'rmp_dochan_cd'
+    source_file = 'rmp_dochan_cd'
 
 
 class DoctypCd(models.Model):
@@ -111,10 +103,7 @@ class DoctypCd(models.Model):
         help_text='Full description of the document type.'
     )
 
-    objects = CopyManager()
-
-    class Meta:
-        db_table = 'rmp_doctyp_cd'
+    source_file = 'rmp_doctyp_cd'
 
 
 class EventsCd(models.Model):
@@ -131,10 +120,7 @@ class EventsCd(models.Model):
         help_text='Full description of the event type.'
     )
 
-    objects = CopyManager()
-
-    class Meta:
-        db_table = 'rmp_events_cd'
+    source_file = 'rmp_events_cd'
 
 
 class LldescCd(models.Model):
@@ -146,10 +132,7 @@ class LldescCd(models.Model):
         max_length=36,
     )
 
-    objects = CopyManager()
-
-    class Meta:
-        db_table = 'rmp_lldesc_cd'
+    source_file = 'rmp_lldesc_cd'
 
 
 class LlmethCd(models.Model):
@@ -163,10 +146,7 @@ class LlmethCd(models.Model):
         max_length=83
     )
 
-    objects = CopyManager()
-
-    class Meta:
-        db_table = 'rmp_llmeth_cd'
+    source_file = 'rmp_llmeth_cd'
 
 
 class PhysCd(models.Model):
@@ -183,10 +163,7 @@ class PhysCd(models.Model):
         help_text='Full description of the physical state.'
     )
 
-    objects = CopyManager()
-
-    class Meta:
-        db_table = 'rmp_phys_cd'
+    source_file = 'rmp_phys_cd'
 
 
 class RejectCd(models.Model):
@@ -203,10 +180,7 @@ class RejectCd(models.Model):
         help_text='Full description of the rejection reason.'
     )
 
-    objects = CopyManager()
-
-    class Meta:
-        db_table = 'rmp_reject_cd'
+    source_file = 'rmp_reject_cd'
 
 
 class ScenCd(models.Model):
@@ -223,10 +197,7 @@ class ScenCd(models.Model):
         help_text='Full description of the scenario.'
     )
 
-    objects = CopyManager()
-
-    class Meta:
-        db_table = 'rmp_scen_cd'
+    source_file = 'rmp_scen_cd'
 
 
 class SubmitCd(models.Model):
@@ -243,10 +214,7 @@ class SubmitCd(models.Model):
         help_text='Full description of the submission reason.'
     )
 
-    objects = CopyManager()
-
-    class Meta:
-        db_table = 'rmp_submit_cd'
+    source_file = 'rmp_submit_cd'
 
 
 class TopoCd(models.Model):
@@ -263,20 +231,12 @@ class TopoCd(models.Model):
         help_text='Full description of the topography type.'
     )
 
-    objects = CopyManager()
 
-    class Meta:
-        db_table = 'rmp_topo_cd'
-
-class rmp_cities(models.Model):
-    city = models.CharField(max_length=30, blank=True, null=True)
-    state = models.CharField(max_length=2, blank=True, null=True)
+class Cities(models.Model):
+    city = models.CharField(max_length=30, blank=True)
+    state = models.CharField(max_length=2, blank=True)
     num_fac = models.IntegerField()
 
-    objects = CopyManager()
-
-    class Meta:
-         db_table = 'rmp_topo_cd'
 
 class WindCd(models.Model):
     """
@@ -292,7 +252,4 @@ class WindCd(models.Model):
         help_text='Full description of the wind speed measurement unit.'
     )
 
-    objects = CopyManager()
-
-    class Meta:
-        db_table = 'rmp_wind_cd'
+    source_file = 'rmp_wind_cd'
