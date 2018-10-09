@@ -12,7 +12,8 @@ from .processed import (
     ProcNaics,
 )
 from .raw import (
-    Tbls6Accidentchemicals,
+    Tbls6AccidentChemicals,
+    # Tbls6AccidentHistory,
 )
 from .codes import (
     ChemCd,
@@ -53,6 +54,6 @@ __all__ = (
     'SubmitCd',
     'TopoCd',
     'WindCd',
-    'Tbls6Accidentchemicals',
-    'Tbls6Flammablemixturechemicals',
+    'Tbls6AccidentChemicals',
+    # 'Tbls6AccidentHistory'
 )
