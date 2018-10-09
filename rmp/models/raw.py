@@ -227,8 +227,7 @@ class Tbls6AccidentChemicals(BaseRMPModel):
                   'in an accident.',
     )
 
-    class Meta:
-        db_table = 'tblS6AccidentChemicals'
+    source_file = 'tblS6AccidentChemicals'
 
 
 # class Tbls6AccidentHistory(BaseRMPModel):
