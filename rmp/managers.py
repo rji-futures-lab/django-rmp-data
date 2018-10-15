@@ -8,7 +8,7 @@ from postgres_copy import CopyManager
 
 class BaseRMPManager(CopyManager):
     """
-    Abstract subclass upon which all RMP models are based.
+    Base manager for RMP data models.
     """
     def copy_from_raw_csv(self):
         """
