@@ -4,7 +4,7 @@ from django.core.management.base import BaseCommand
 from rmp.models import (
     AccChem,
     AccFlam,
-    Tbls6Accidentchemicals,
+    Tbls6AccidentChemicals,
 )
 
 
@@ -13,7 +13,7 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         self.load_model(AccChem)
         self.load_model(AccFlam)
-        self.load_model(Tbls6Accidentchemicals)
+        self.load_model(Tbls6AccidentChemicals)
 
     def load_model(self, model):
         """
@@ -24,8 +24,8 @@ class Command(BaseCommand):
         model.objects.all().delete()
 
         copy_options = dict()
-        
-        if model._meta.object_name == 'Tbls6Accidentchemicals':
+
+        if model._meta.object_name == 'Tbls6AccidentChemicals':
             in_file_name = '%s.csv' % model._meta.db_table
             in_file_path = os.path.join(
                 settings.RMP_DATA_DIR, 'raw', in_file_name
@@ -37,7 +37,7 @@ class Command(BaseCommand):
             )
             copy_options['delimiter'] = '\t'
             copy_options['null'] = "NULL"
-        
+
         print(in_file_path)
 
         nullable_fields = self.get_null_fields(model)

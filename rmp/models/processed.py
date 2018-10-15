@@ -1,7 +1,6 @@
 """
 Models for processed RMP data.
 """
-from django.db import models
 from rmp.fields import (
     CopyFromBooleanField,
     CopyFromCharField,
@@ -10,32 +9,33 @@ from rmp.fields import (
     CopyFromForeignKey,
 )
 from .base import BaseRMPModel
+from django.db import models
 
 
-class AccChem(models.Model):
-    accchem_id = models.IntegerField(
+class AccChem(BaseRMPModel):
+    accchem_id = models.CopyFromIntegerField(
         primary_key=True,
         verbose_name='Accident Chemical Record ID',
         help_text='A unique ID for each accident chemical record.',
     )
-    accident = models.ForeignKey(
+    accident = models.CopyFromForeignKey(
         'Accident',
         on_delete=models.PROTECT,
         help_text='The unique ID for each accident record',
     )
-    chemical = models.ForeignKey(
+    chemical = models.CopyFromForeignKey(
         'ChemCd',
         on_delete=models.PROTECT,
         help_text='The identifying ID for a particular chemical released in an '
                   'accident.',
     )
-    quantity_lbs = models.IntegerField(
+    quantity_lbs = models.CopyFromIntegerField(
         null=True,
         verbose_name='Amount Released (lbs)',
         help_text='The amount of the substance released in the accident, in '
                   'pounds, to two significant digits.',
     )
-    percent_weight = models.DecimalField(
+    percent_weight = models.CopyFromDecimalField(
         decimal_places=2,
         null=True,
         max_digits=5,
@@ -43,13 +43,13 @@ class AccChem(models.Model):
         help_text='The percent weight of a chemical within a mixture released '
                   'in an accident.',
     )
-    num_acc_flam = models.IntegerField(
+    num_acc_flam = models.CopyFromIntegerField(
         null=True,
         verbose_name='Number of Flammable Components',
         help_text='The number of listed flammable component chemicals for this'
                   ' chemical record.',
     )
-    cas = models.CharField(
+    cas = models.CopyFromCharField(
         max_length=9,
         verbose_name='CAS number',
         help_text='The identifying CAS number for a chemical.',
@@ -58,7 +58,7 @@ class AccChem(models.Model):
         ('T', 'toxic'),
         ('F', 'flammable'),
     )
-    chemical_type = models.CharField(
+    chemical_type = models.CopyFromCharField(
         max_length=1,
         choices=CHEMICAL_TYPE_CHOICES,
         help_text='"The type of chemical.',
