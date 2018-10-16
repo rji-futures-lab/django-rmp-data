@@ -2,11 +2,23 @@
 tblExecutiveSummaries
 execSumLen?
 """
+from django.db import models
+from rmp.models import BaseRMPModel
+from rmp.fields import (
+    CopyFromTextField,
+    CopyFromIntegerField,
+    CopyFromForeignKey,
+)
 
 class Tblexecutivesummaries(BaseRMPModel):
-    esseqnum = models.CopyFromIntegerField(primary_key=True) # Field name made lowercase.
-    facilityid = models.CopyFromForeignKey()  # Field name made lowercase.
-    summarytext = models.CopyFromTextField() # Field name made lowercase.
+    esseqnum = CopyFromIntegerField(
+        primary_key=True,
+    )
+    facilityid = CopyFromForeignKey(
+        'Tblfacility',
+        on_delete=models.PROTECT,
+    )
+    summarytext = CopyFromTextField()
 
     source_file = 'tblExecutiveSummaries'
 

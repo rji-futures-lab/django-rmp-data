@@ -200,7 +200,6 @@ class Tbls6AccidentChemicals(BaseRMPModel):
         source_column='AccidentHistoryID',
         help_text='The unique ID for each accident record',
     )
-    # TODO: ForeignKeyField candidate
     chemicalid = CopyFromForeignKey(
         'ChemCd',
         on_delete=models.PROTECT,

@@ -1,6 +1,7 @@
 """
 Risk Management Plan (RMP) data models.
 """
+from .base import BaseRMPModel
 from .processed import (
     AccChem,
     AccFlam,
@@ -11,9 +12,30 @@ from .processed import (
     ProcFlam,
     ProcNaics,
 )
-from .raw import (
-    Tbls6AccidentChemicals,
-    # Tbls6AccidentHistory,
+# from .raw import (
+#     Tbls6AccidentChemicals,
+#     # Tbls6AccidentHistory,
+# )
+from .raw_split import (
+    Tblexecutivesummaries,
+    Tblfacility,
+    Tbls1Facilities,
+    Tbls1Flammablemixturechemicals,
+    Tbls1Processchemicals,
+    Tbls1ProcessNaics,
+    Tbls1Processes,
+    Tbls2Toxicsworstcase,
+    Tbls3Toxicsaltreleases,
+    Tbls4Flammablesworstcase,
+    Tbls5Flammablesaltreleases,
+    Tbls6Accidentchemicals,
+    Tbls6Accidenthistory,
+    Tbls6Flammablemixturechemicals,
+    Tbls7PreventionProgramChemicals,
+    Tbls7PreventionProgram3,
+    Tbls8PreventionProgramChemicals,
+    Tbls8PreventionProgram2,
+    Tbls9Emergencyresponses,
 )
 from .codes import (
     ChemCd,
@@ -31,8 +53,8 @@ from .codes import (
     WindCd,
 )
 
-
 __all__ = (
+    'BaseRMPModel',
     'AccChem',
     'AccFlam',
     'ChemCd',
@@ -54,6 +76,25 @@ __all__ = (
     'SubmitCd',
     'TopoCd',
     'WindCd',
-    'Tbls6AccidentChemicals',
+    # 'Tbls6AccidentChemicals',
     # 'Tbls6AccidentHistory'
+    'Tblexecutivesummaries',
+    'Tblfacility',
+    'Tbls1Facilities',
+    'Tbls1Flammablemixturechemicals',
+    'Tbls1Processchemicals',
+    'Tbls1ProcessNaics',
+    'Tbls1Processes',
+    'Tbls2Toxicsworstcase',
+    'Tbls3Toxicsaltreleases',
+    'Tbls4Flammablesworstcase',
+    'Tbls5Flammablesaltreleases',
+    'Tbls6Accidentchemicals',
+    'Tbls6Accidenthistory',
+    'Tbls6Flammablemixturechemicals',
+    'Tbls7PreventionProgramChemicals',
+    'Tbls7PreventionProgram3',
+    'Tbls8PreventionProgramChemicals',
+    'Tbls8PreventionProgram2',
+    'Tbls9Emergencyresponses',
 )

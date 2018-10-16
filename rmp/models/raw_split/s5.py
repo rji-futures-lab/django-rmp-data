@@ -10,44 +10,44 @@ from rmp.fields import (
     CopyFromIntegerField,
     CopyFromForeignKey,
 )
-from .base import BaseRMPModelx
+from rmp.models.base import BaseRMPModel
 
 class Tbls5Flammablesaltreleases(BaseRMPModel):
-    flammableid = models.CopyFromIntegerField(primary_key=True)
-    processchemicalid = models.CopyFromForeignKey(
-        Tbls1Processchemicals,
+    flammableid = CopyFromIntegerField(primary_key=True)
+    processchemicalid = CopyFromForeignKey(
+        'Tbls1Processchemicals',
         on_delete=models.PROTECT,
     )
-    analyticalbasis = models.CopyFromCharField(max_length=255, blank=True)
-    scenario = models.CopyFromCharField(max_length=200)
-    quantityreleased = models.CopyFromDecimalField(max_digits=5, decimal_places=2)
-    endpointused = models.CopyFromCharField(max_length=30, blank=True)
-    lfl_value = models.CopyFromDecimalField(max_digits=5, decimal_places=1)
-    endpoint_distance = models.CopyFromDecimalField(max_digits=5, decimal_places=1)
-    residentialpopulation = models.CopyFromCharField(max_length=9, blank=True)
-    pr_schools = models.CopyFromBooleanField()
-    pr_residences = models.CopyFromBooleanField()
-    pr_hospitals = models.CopyFromBooleanField()
-    pr_prisons = models.CopyFromBooleanField()
-    pr_publicrecreation = models.CopyFromBooleanField()
-    pr_comm_ind = models.CopyFromBooleanField()
-    pr_othertype = models.CopyFromCharField(max_length=200, blank=True)
-    er_natlstateparks = models.CopyFromBooleanField()
-    er_wildlifesactuary = models.CopyFromBooleanField()
-    er_fedwilderness = models.CopyFromBooleanField()
-    er_othertype = models.CopyFromCharField(max_length=200, blank=True)
-    pm_dikes = models.CopyFromBooleanField()
-    pm_firewalls = models.CopyFromBooleanField()
-    pm_blastwalls = models.CopyFromBooleanField()
-    pm_enclosures = models.CopyFromBooleanField()
-    pm_othertype = models.CopyFromCharField(max_length=200, blank=True)
-    am_sprinklersystems = models.CopyFromBooleanField()
-    am_delugesystems = models.CopyFromBooleanField()
-    am_watercurtain = models.CopyFromBooleanField()
-    am_excessflowvalve = models.CopyFromBooleanField()
-    am_othertype = models.CopyFromCharField(max_length=200, blank=True)
-    ptrgraphic = models.CopyFromCharField(max_length=12, blank=True)
-    cbi_flag = models.CopyFromBooleanField()
+    analyticalbasis = CopyFromCharField(max_length=255, blank=True)
+    scenario = CopyFromCharField(max_length=200)
+    quantityreleased = CopyFromDecimalField(max_digits=5, decimal_places=2)
+    endpointused = CopyFromCharField(max_length=30, blank=True)
+    lfl_value = CopyFromDecimalField(max_digits=5, decimal_places=1)
+    endpoint_distance = CopyFromDecimalField(max_digits=5, decimal_places=1)
+    residentialpopulation = CopyFromCharField(max_length=9, blank=True)
+    pr_schools = CopyFromBooleanField()
+    pr_residences = CopyFromBooleanField()
+    pr_hospitals = CopyFromBooleanField()
+    pr_prisons = CopyFromBooleanField()
+    pr_publicrecreation = CopyFromBooleanField()
+    pr_comm_ind = CopyFromBooleanField()
+    pr_othertype = CopyFromCharField(max_length=200, blank=True)
+    er_natlstateparks = CopyFromBooleanField()
+    er_wildlifesactuary = CopyFromBooleanField()
+    er_fedwilderness = CopyFromBooleanField()
+    er_othertype = CopyFromCharField(max_length=200, blank=True)
+    pm_dikes = CopyFromBooleanField()
+    pm_firewalls = CopyFromBooleanField()
+    pm_blastwalls = CopyFromBooleanField()
+    pm_enclosures = CopyFromBooleanField()
+    pm_othertype = CopyFromCharField(max_length=200, blank=True)
+    am_sprinklersystems = CopyFromBooleanField()
+    am_delugesystems = CopyFromBooleanField()
+    am_watercurtain = CopyFromBooleanField()
+    am_excessflowvalve = CopyFromBooleanField()
+    am_othertype = CopyFromCharField(max_length=200, blank=True)
+    ptrgraphic = CopyFromCharField(max_length=12, blank=True)
+    cbi_flag = CopyFromBooleanField()
 
     source_file = 'tblS5FlammablesAltReleases'
 

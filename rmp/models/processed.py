@@ -13,29 +13,29 @@ from django.db import models
 
 
 class AccChem(BaseRMPModel):
-    accchem_id = models.CopyFromIntegerField(
+    id = CopyFromIntegerField(
         primary_key=True,
         verbose_name='Accident Chemical Record ID',
         help_text='A unique ID for each accident chemical record.',
     )
-    accident = models.CopyFromForeignKey(
+    accident = CopyFromForeignKey(
         'Accident',
         on_delete=models.PROTECT,
         help_text='The unique ID for each accident record',
     )
-    chemical = models.CopyFromForeignKey(
+    chemical = CopyFromForeignKey(
         'ChemCd',
         on_delete=models.PROTECT,
         help_text='The identifying ID for a particular chemical released in an '
                   'accident.',
     )
-    quantity_lbs = models.CopyFromIntegerField(
+    quantity_lbs = CopyFromIntegerField(
         null=True,
         verbose_name='Amount Released (lbs)',
         help_text='The amount of the substance released in the accident, in '
                   'pounds, to two significant digits.',
     )
-    percent_weight = models.CopyFromDecimalField(
+    percent_weight = CopyFromDecimalField(
         decimal_places=2,
         null=True,
         max_digits=5,
@@ -43,13 +43,13 @@ class AccChem(BaseRMPModel):
         help_text='The percent weight of a chemical within a mixture released '
                   'in an accident.',
     )
-    num_acc_flam = models.CopyFromIntegerField(
+    num_acc_flam = CopyFromIntegerField(
         null=True,
         verbose_name='Number of Flammable Components',
         help_text='The number of listed flammable component chemicals for this'
                   ' chemical record.',
     )
-    cas = models.CopyFromCharField(
+    cas = CopyFromCharField(
         max_length=9,
         verbose_name='CAS number',
         help_text='The identifying CAS number for a chemical.',
@@ -58,7 +58,7 @@ class AccChem(BaseRMPModel):
         ('T', 'toxic'),
         ('F', 'flammable'),
     )
-    chemical_type = models.CopyFromCharField(
+    chemical_type = CopyFromCharField(
         max_length=1,
         choices=CHEMICAL_TYPE_CHOICES,
         help_text='"The type of chemical.',
@@ -66,7 +66,7 @@ class AccChem(BaseRMPModel):
 
 
 class AccFlam(BaseRMPModel):
-    flammixchem_id = CopyFromIntegerField(
+    id = CopyFromIntegerField(
         primary_key=True,
         source_column='FlamMixChemID',
         verbose_name='Flammable Chemical ID',
@@ -86,13 +86,12 @@ class AccFlam(BaseRMPModel):
         verbose_name='Chemical ID',
         help_text='The identifying ID for a particular flammable chemical released in an accident.',
     )
-
     source_file = 'tblS6FlammableMixtureChemicals'
 
 
 class Accident(models.Model):
-    accident_id = models.IntegerField(primary_key=True)
-    rmp_id = models.ForeignKey(
+    id = models.IntegerField(primary_key=True)
+    rmp = models.ForeignKey(
         'Registration',
         on_delete=models.CASCADE,
     )
@@ -198,8 +197,6 @@ class ExecutiveSummary(models.Model): #rmp_execsum
     )
     summarytext = models.TextField(blank=True)
 
-    class Meta:
-        db_table = 'tblExecutiveSummaries'
 
 class ExecSumLen(models.Model):
     rmp_id = models.ForeignKey(
@@ -211,11 +208,9 @@ class ExecSumLen(models.Model):
     line_count = models.IntegerField()
     edited_yn = models.CharField(max_length=1)
 
-    class Meta:
-        db_table = 'rmp_exec_sum_len'
 
-class RmpProcess(models.Model):
-    process_id = models.IntegerField(primary_key=True)
+class Process(models.Model):
+    id = models.IntegerField(primary_key=True)
     process_desc = models.CharField(max_length=25, blank=True)
     rmp_id = models.ForeignKey(
         'Registration',
@@ -452,8 +447,8 @@ class Registration(models.Model):
     num_exec_sum = models.IntegerField()
 
 
-class Tbls5Flammablesaltreleases(models.Model): #rmp_alt_flam
-    flammableid = models.IntegerField(primary_key=True)
+class FlammablesAltRelease(models.Model): #rmp_alt_flam
+    id = models.IntegerField(primary_key=True)
     processchemicalid = models.ForeignKey(
         'ProcChem',
         on_delete=models.CASCADE,
@@ -489,11 +484,9 @@ class Tbls5Flammablesaltreleases(models.Model): #rmp_alt_flam
     ptrgraphic = models.CharField(max_length=12, blank=True)
     cbi_flag = models.BooleanField()
 
-    class Meta:
-        db_table = 'tblS5FlammablesAltReleases'
 
-class Tbls3Toxicsaltreleases(models.Model): #rmp_alt_tox
-    toxicid = models.IntegerField(primary_key=True)
+class ToxicsAltRelease(models.Model): #rmp_alt_tox
+    id = models.IntegerField(primary_key=True)
     processchemicalid = models.ForeignKey(
         'ProcChem',
         on_delete=models.CASCADE,
@@ -539,11 +532,9 @@ class Tbls3Toxicsaltreleases(models.Model): #rmp_alt_tox
     ptrgraphic = models.CharField(max_length=12, blank=True)
     cbi_flag = models.BooleanField()
 
-    class Meta:
-        db_table = 'tblS3ToxicsAltReleases'
 
-class Tbls8Preventionprogram2(models.Model): #rmp_prevent_2
-    preventionprogram2id = models.IntegerField(primary_key=True)
+class PreventionProgram2(models.Model): #rmp_prevent_2
+    id = models.IntegerField(primary_key=True)
     process_naics_id = models.ForeignKey(
         'ProcNaics',
         on_delete=models.CASCADE
@@ -641,11 +632,9 @@ class Tbls8Preventionprogram2(models.Model): #rmp_prevent_2
     cbi_flag = models.BooleanField()
     description = models.TextField(blank=True)
 
-    class Meta:
-        db_table = 'tblS8PreventionProgram2'
 
-class rmp_prevent_3(models.Model):
-    prevent_3_id = models.IntegerField(primary_key=True)
+class Prevent3(models.Model):
+    id = models.IntegerField(primary_key=True)
     procnaics_id = models.ForeignKey(
         'ProcNaics',
         on_delete=models.CASCADE
@@ -753,7 +742,8 @@ class rmp_prevent_3(models.Model):
     num_prev3text = models.IntegerField()
     num_prev3_text = models.IntegerField()
 
-class Tbls9Emergencyresponses(models.Model): #rmp_response
+
+class EmergencyResponse(models.Model): #rmp_response
     facilityid = models.ForeignKey(
         'Registration',
         on_delete=models.CASCADE,
@@ -775,13 +765,11 @@ class Tbls9Emergencyresponses(models.Model): #rmp_response
     fr_epcra = models.BooleanField()
     fr_otherregulation = models.CharField(max_length=200, blank=True)
 
-    class Meta:
-        db_table = 'tblS9EmergencyResponses'
 
 class ProcChem(models.Model):
-    procchem_id = models.IntegerField(primary_key=True)
+    id = models.IntegerField(primary_key=True)
     process_id = models.ForeignKey(
-        'RmpProcess',
+        'Process',
         on_delete=models.CASCADE
     )
     chemical_id = models.ForeignKey(
@@ -800,12 +788,9 @@ class ProcChem(models.Model):
     cas = models.IntegerField()
     chemical_type = models.CharField(max_length=1)
 
-    class Meta:
-        db_table = 'rmp_proc_chem'
-
 
 class ProcFlam(models.Model):
-    flammixchem_id = models.IntegerField(primary_key=True)
+    id = models.IntegerField(primary_key=True)
     procchem_id = models.ForeignKey(
         ProcChem,
         on_delete=models.CASCADE
@@ -815,81 +800,61 @@ class ProcFlam(models.Model):
         on_delete=models.CASCADE
     )
 
-    class Meta:
-        db_table = 'rmp_proc_flam'
 
 class ProcNaics(models.Model):
-    procnaics_id = models.IntegerField(primary_key=True)
+    id = models.IntegerField(primary_key=True)
     process_id = models.ForeignKey(
-        'RmpProcess',
+        'Process',
         on_delete=models.CASCADE
     )
     naics = models.IntegerField()
     num_prevent_2 = models.IntegerField()
     num_prevent_3 = models.IntegerField()
 
-    class Meta:
-        db_table = 'rmp_proc_naics'
 
-class Rmp_prev2text(models.Model):
-    prevent_2_id = models.ForeignKey(
-        Tbls8Preventionprogram2,
+class Prev2text(models.Model):
+    prevent_2 = models.ForeignKey(
+        'PreventionProgram2',
         on_delete=models.CASCADE
     )
     desctext = models.TextField()
 
-    class Meta:
-        db_table = 'rmp_prev2text'
 
-class Rmp_prev3text(models.Model):
-    prevent_3_id = models.ForeignKey(
-        rmp_prevent_3,
-        on_delete=models.CASCADE
+class Prev3Text(models.Model):
+    prevent3 = models.ForeignKey(
+        'Prevent3',
+        on_delete=models.CASCADE,
     )
     desctext = models.TextField()
 
-    class Meta:
-        db_table = 'rmp_prev3text'
 
 class Prevent2Chem(models.Model):
-    primary_key = models.IntegerField(primary_key=True)
-
-    # TODO foreign key ?
-    prevent_2_id = models.ForeignKey(
-        Tbls8Preventionprogram2,
+    id = models.IntegerField(primary_key=True)
+    prevent2 = models.ForeignKey(
+        'PreventionProgram2',
         on_delete=models.CASCADE
     )
-
     # TODO foreign key ?
-    procchem_id = models.ForeignKey(
-        ProcChem,
+    procchem = models.ForeignKey(
+        'ProcChem',
         on_delete=models.CASCADE
     )
-
-    class Meta:
-        db_table = 'rmp_prevent_2_chem'
 
 
 class Prevent3Chem(models.Model):
-    primary_key = models.IntegerField(primary_key=True)
-
-    #TODO Foreign key ?
+    id = models.IntegerField(primary_key=True)
     prevent_3_id = models.ForeignKey(
-        rmp_prevent_3,
+        'Prevent3',
         on_delete=models.CASCADE
     )
-
-    # TODO Foreign key ?
     procchem_id = models.ForeignKey(
         'ProcChem',
         on_delete=models.CASCADE
     )
 
-    class Meta:
-        db_table = 'rmp_prevent_3_chem'
 
-class Tbls2Toxicsworstcase(models.Model):
-    toxicid = models.IntegerField(primary_key=True)
+class ToxicsWorstCase(models.Model):
+    id = models.IntegerField(primary_key=True)
     processchemicalid = models.ForeignKey(
         'ProcChem',
         on_delete=models.CASCADE
@@ -926,11 +891,9 @@ class Tbls2Toxicsworstcase(models.Model):
     ptrgraphic = models.BooleanField(max_length=12, blank=True)
     cbi_flag = models.BooleanField()
 
-    class Meta:
-        db_table = 'tblS2ToxicsWorstCase'
 
-class Tbls4Flammablesworstcase(models.Model):
-    flammableid = models.IntegerField(primary_key=True)
+class FlammablesWorstCase(models.Model):
+    id = models.IntegerField(primary_key=True)
     processchemicalid = models.ForeignKey(
         ProcChem,
         on_delete=models.CASCADE
@@ -954,6 +917,3 @@ class Tbls4Flammablesworstcase(models.Model):
     pm_othertype = models.CharField(max_length=200, blank=True)
     ptrgraphic = models.BooleanField(max_length=12, blank=True)
     cbi_flag = models.BooleanField()
-
-    class Meta:
-        db_table = 'tblS4FlammablesWorstCase'

@@ -1,38 +1,39 @@
 """
 tblS9EmergencyResponses.csv
 """
-
 from django.db import models
 from rmp.fields import (
     CopyFromBooleanField,
     CopyFromCharField,
+    CopyFromDateTimeField,
     CopyFromDecimalField,
     CopyFromIntegerField,
     CopyFromForeignKey,
 )
-from .base import BaseRMPModel
+from rmp.models.base import BaseRMPModel
+
 
 class Tbls9Emergencyresponses(BaseRMPModel):
-    facilityid = models.CopyFromForeignKey(
-        Tbls1Facilities,
+    facilityid = CopyFromForeignKey(
+        'Tbls1Facilities',
         on_delete=models.PROTECT,
     )
-    er_communityplan = models.CopyFromBooleanField()
-    er_facilityplan = models.CopyFromBooleanField()
-    er_responseactions = models.CopyFromBooleanField()
-    er_publicinfoprocedures = models.CopyFromBooleanField()
-    er_emergencyhealthcare = models.CopyFromBooleanField()
-    er_reviewdate = models.CopyFromDateTime(blank=True)
-    ertrainingdate = models.CopyFromDateTime(blank=True)
-    coordinatingagencyname = models.CopyFromCharField(max_length=250, blank=True)
-    coordinatingagencyphone = models.CopyFromCharField(max_length=10, blank=True)
-    fr_osha1910_38 = models.CopyFromBooleanField()
-    fr_osha1910_120 = models.CopyFromBooleanField()
-    fr_spcc = models.CopyFromBooleanField()
-    fr_rcra = models.CopyFromBooleanField()
-    fr_opa90 = models.CopyFromBooleanField()
-    fr_epcra = models.CopyFromBooleanField()
-    fr_otherregulation = models.CopyFromCharField(max_length=200, blank=True)
+    er_communityplan = CopyFromBooleanField()
+    er_facilityplan = CopyFromBooleanField()
+    er_responseactions = CopyFromBooleanField()
+    er_publicinfoprocedures = CopyFromBooleanField()
+    er_emergencyhealthcare = CopyFromBooleanField()
+    er_reviewdate = CopyFromDateTimeField(blank=True)
+    ertrainingdate = CopyFromDateTimeField(blank=True)
+    coordinatingagencyname = CopyFromCharField(max_length=250, blank=True)
+    coordinatingagencyphone = CopyFromCharField(max_length=10, blank=True)
+    fr_osha1910_38 = CopyFromBooleanField()
+    fr_osha1910_120 = CopyFromBooleanField()
+    fr_spcc = CopyFromBooleanField()
+    fr_rcra = CopyFromBooleanField()
+    fr_opa90 = CopyFromBooleanField()
+    fr_epcra = CopyFromBooleanField()
+    fr_otherregulation = CopyFromCharField(max_length=200, blank=True)
 
     source_file = 'tblS9EmergencyResponses'
 

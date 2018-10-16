@@ -15,27 +15,29 @@ from rmp.fields import (
     CopyFromIntegerField,
     CopyFromForeignKey,
 )
-from .base import BaseRMPModel
+from rmp.models import BaseRMPModel
+
 
 class Tblfacility(BaseRMPModel):
-    epafacilityid = models.CopyFromIntegerField(primary_key=True)  # Field name made lowercase.
-    facilityname = models.CopyFromCharField(max_length=200)  # Field name made lowercase.
-    marplotid = models.CopyFromBooleanField(null=True)  # Field name made lowercase.
-    cameoid = models.CopyFromBooleanField(null=True)  # Field name made lowercase.
-    rmpid = models.CopyFromForeignKey(
-        Tbls1Facilities,
-        on_delete=models.PROTECT,
-    )  # Field name made lowercase.
-    facilitystr1 = models.CopyFromCharField() # Field name made lowercase.
-    facilitystr2 = models.CopyFromCharField()  # Field name made lowercase.
-    facilitycity = models.CopyFromCharField()  # Field name made lowercase.
-    facilitystate = models.CopyFromCharField(max_length=2)  # Field name made lowercase.
-    facilityzipcode = models.CopyFromCharField(max_length=5)  # Field name made lowercase.
-    facility4digitzipext = models.CopyFromCharField(max_length=4)  # Field name made lowercase.
-    facilitycountyfips = models.CopyFromIntegerField()  # Field name made lowercase.
-    countoffacilityid = models.CopyFromIntegerField()  # Field name made lowercase.
-    facilitylatdecdegs = models.CopyFromIntegerField()  # Field name made lowercase.
-    facilitylongdecdegs = models.CopyFromIntegerField()  # Field name made lowercase.
+    epafacilityid = CopyFromIntegerField(primary_key=True)  # Field name made lowercase.
+    facilityname = CopyFromCharField(max_length=200)  # Field name made lowercase.
+    marplotid = CopyFromBooleanField(null=True)  # Field name made lowercase.
+    cameoid = CopyFromBooleanField(null=True)  # Field name made lowercase.
+    # rmpid = CopyFromForeignKey(
+    #     'Tblexecutivesummaries', # <-????
+    #     on_delete=models.PROTECT,
+    # )
+    rmpid = CopyFromIntegerField()
+    facilitystr1 = CopyFromCharField(max_length=35) # Field name made lowercase.
+    facilitystr2 = CopyFromCharField(max_length=35)  # Field name made lowercase.
+    facilitycity = CopyFromCharField(max_length=19)  # Field name made lowercase.
+    facilitystate = CopyFromCharField(max_length=2)  # Field name made lowercase.
+    facilityzipcode = CopyFromCharField(max_length=5)  # Field name made lowercase.
+    facility4digitzipext = CopyFromCharField(max_length=4)  # Field name made lowercase.
+    facilitycountyfips = CopyFromIntegerField()  # Field name made lowercase.
+    countoffacilityid = CopyFromIntegerField()  # Field name made lowercase.
+    facilitylatdecdegs = CopyFromIntegerField()  # Field name made lowercase.
+    facilitylongdecdegs = CopyFromIntegerField()  # Field name made lowercase.
 
     source_file = 'tblFacility'
 
@@ -43,107 +45,107 @@ class Tblfacility(BaseRMPModel):
         db_table = 'tblFacility'
 
 class Tbls1Facilities(BaseRMPModel):
-    facilityid = models.models.CopyFromIntegerField(
+    facilityid = CopyFromIntegerField(
         primary_key=True
     )
-    facilityname = models.CopyFromCharField(max_length=255, blank=True)
-    facilitystr1 = models.CopyFromCharField(max_length=35, blank=True)
-    facilitystr2 = models.CopyFromCharField(max_length=35, blank=True)
-    facilitycity = models.CopyFromCharField(max_length=19, blank=True)
-    facilitystate = models.CopyFromCharField(max_length=2, blank=True)
-    facilityzipcode = models.CopyFromCharField(max_length=5, blank=True)
-    facility4digitzipext = models.CopyFromCharField(max_length=4, blank=True)  # Field name made lowercase.
-    facilitycountyfips = models.CopyFromCharField(max_length=5, blank=True)  # Field name made lowercase.
-    lepc = models.CopyFromCharField(max_length=30, blank=True)  # Field name made lowercase.
-    facilitylatdecdegs = models.CopyFromDecimalField(max_digits=8, decimal_places=6)  # Field name made lowercase.
-    facilitylongdecdegs = models.CopyFromDecimalField(max_digits=8, decimal_places=6)  # Field name made lowercase.
-    validlatlongflag = models.CopyFromCharField(max_length=1, blank=True)  # Field name made lowercase.
-    latlongmethod = models.CopyFromCharField(max_length=2, blank=True)  # Field name made lowercase.
-    latlongdescription = models.CopyFromCharField(max_length=2, blank=True)  # Field name made lowercase.
-    facilityurl = models.CopyFromCharField(max_length=100, blank=True)  # Field name made lowercase.
-    facilityphonenumber = models.CopyFromCharField(max_length=10, blank=True)  # Field name made lowercase.
-    facilityemailaddress = models.CopyFromCharField(max_length=100, blank=True)  # Field name made lowercase.
-    facilityduns = models.CopyFromCharField(max_length=9, blank=True)  # Field name made lowercase.
-    parentcompanyname = models.CopyFromCharField(max_length=250, blank=True)  # Field name made lowercase.
-    company2name = models.CopyFromCharField(max_length=50, blank=True)  # Field name made lowercase.
-    companyduns = models.CopyFromCharField(max_length=9, blank=True)  # Field name made lowercase.
-    company2duns = models.CopyFromCharField(max_length=9, blank=True)  # Field name made lowercase.
-    operatorname = models.CopyFromCharField(max_length=250, blank=True)  # Field name made lowercase.
-    operatorphone = models.CopyFromCharField(max_length=10, blank=True)  # Field name made lowercase.
-    operatorstr1 = models.CopyFromCharField(max_length=35, blank=True)  # Field name made lowercase.
-    operatorstr2 = models.CopyFromCharField(max_length=35, blank=True)  # Field name made lowercase.
-    operatorcity = models.CopyFromCharField(max_length=19, blank=True)  # Field name made lowercase.
-    operatorstatefips = models.CopyFromCharField(max_length=2, blank=True)  # Field name made lowercase.
-    operatorzipcode = models.CopyFromCharField(max_length=5, blank=True)  # Field name made lowercase.
-    operatorzipcodeext = models.CopyFromCharField(max_length=4, blank=True)  # Field name made lowercase.
-    rmpcontact = models.CopyFromCharField(max_length=35, blank=True) # Field name made lowercase.
-    rmptitle = models.CopyFromCharField(max_length=250, blank=True)  # Field name made lowercase.
-    emergencycontactname = models.CopyFromCharField(max_length=250, blank=True)  # Field name made lowercase.
-    emergencycontacttitle = models.CopyFromCharField(max_length=35, blank=True)  # Field name made lowercase.
-    emergencycontactphone = models.CopyFromCharField(max_length=10, blank=True)  # Field name made lowercase.
-    phone24 = models.CopyFromCharField(max_length=10, blank=True)  # Field name made lowercase.
-    emergencycontactext_pin = models.CopyFromCharField(max_length=10, blank=True)  # Field name made lowercase.
-    fte = models.CopyFromIntegerField()  # Field name made lowercase.
-    otherepafacilityid = models.CopyFromIntegerField()  # Field name made lowercase.
-    epafacilityid = models.CopyFromForeignKey(
+    facilityname = CopyFromCharField(max_length=255, blank=True)
+    facilitystr1 = CopyFromCharField(max_length=35, blank=True)
+    facilitystr2 = CopyFromCharField(max_length=35, blank=True)
+    facilitycity = CopyFromCharField(max_length=19, blank=True)
+    facilitystate = CopyFromCharField(max_length=2, blank=True)
+    facilityzipcode = CopyFromCharField(max_length=5, blank=True)
+    facility4digitzipext = CopyFromCharField(max_length=4, blank=True)  # Field name made lowercase.
+    facilitycountyfips = CopyFromCharField(max_length=5, blank=True)  # Field name made lowercase.
+    lepc = CopyFromCharField(max_length=30, blank=True)  # Field name made lowercase.
+    facilitylatdecdegs = CopyFromDecimalField(max_digits=8, decimal_places=6)  # Field name made lowercase.
+    facilitylongdecdegs = CopyFromDecimalField(max_digits=8, decimal_places=6)  # Field name made lowercase.
+    validlatlongflag = CopyFromCharField(max_length=1, blank=True)  # Field name made lowercase.
+    latlongmethod = CopyFromCharField(max_length=2, blank=True)  # Field name made lowercase.
+    latlongdescription = CopyFromCharField(max_length=2, blank=True)  # Field name made lowercase.
+    facilityurl = CopyFromCharField(max_length=100, blank=True)  # Field name made lowercase.
+    facilityphonenumber = CopyFromCharField(max_length=10, blank=True)  # Field name made lowercase.
+    facilityemailaddress = CopyFromCharField(max_length=100, blank=True)  # Field name made lowercase.
+    facilityduns = CopyFromCharField(max_length=9, blank=True)  # Field name made lowercase.
+    parentcompanyname = CopyFromCharField(max_length=250, blank=True)  # Field name made lowercase.
+    company2name = CopyFromCharField(max_length=50, blank=True)  # Field name made lowercase.
+    companyduns = CopyFromCharField(max_length=9, blank=True)  # Field name made lowercase.
+    company2duns = CopyFromCharField(max_length=9, blank=True)  # Field name made lowercase.
+    operatorname = CopyFromCharField(max_length=250, blank=True)  # Field name made lowercase.
+    operatorphone = CopyFromCharField(max_length=10, blank=True)  # Field name made lowercase.
+    operatorstr1 = CopyFromCharField(max_length=35, blank=True)  # Field name made lowercase.
+    operatorstr2 = CopyFromCharField(max_length=35, blank=True)  # Field name made lowercase.
+    operatorcity = CopyFromCharField(max_length=19, blank=True)  # Field name made lowercase.
+    operatorstatefips = CopyFromCharField(max_length=2, blank=True)  # Field name made lowercase.
+    operatorzipcode = CopyFromCharField(max_length=5, blank=True)  # Field name made lowercase.
+    operatorzipcodeext = CopyFromCharField(max_length=4, blank=True)  # Field name made lowercase.
+    rmpcontact = CopyFromCharField(max_length=35, blank=True) # Field name made lowercase.
+    rmptitle = CopyFromCharField(max_length=250, blank=True)  # Field name made lowercase.
+    emergencycontactname = CopyFromCharField(max_length=250, blank=True)  # Field name made lowercase.
+    emergencycontacttitle = CopyFromCharField(max_length=35, blank=True)  # Field name made lowercase.
+    emergencycontactphone = CopyFromCharField(max_length=10, blank=True)  # Field name made lowercase.
+    phone24 = CopyFromCharField(max_length=10, blank=True)  # Field name made lowercase.
+    emergencycontactext_pin = CopyFromCharField(max_length=10, blank=True)  # Field name made lowercase.
+    fte = CopyFromIntegerField()  # Field name made lowercase.
+    otherepafacilityid = CopyFromIntegerField()  # Field name made lowercase.
+    epafacilityid = CopyFromForeignKey(
         Tblfacility,
-        on_delete=models.PROTECTED,
+        on_delete=models.PROTECT,
     )  # Field name made lowercase.
-    osha_psm = models.CopyFromBooleanField()  # Field name made lowercase.
-    epcra_302 = models.CopyFromBooleanField() # Field name made lowercase.
-    caa_titlev = models.CopyFromBooleanField()# Field name made lowercase.
-    clearairoppermitid = models.CopyFromIntegerField()  # Field name made lowercase.
+    osha_psm = CopyFromBooleanField()  # Field name made lowercase.
+    epcra_302 = CopyFromBooleanField() # Field name made lowercase.
+    caa_titlev = CopyFromBooleanField()# Field name made lowercase.
+    clearairoppermitid = CopyFromIntegerField()  # Field name made lowercase.
     safetyinspectiondate = models.DateTimeField(blank=True)  # Field name made lowercase.
-    safetyinspectionby = models.CopyFromCharField(max_length=50, blank=True)  # Field name made lowercase.
-    osharanking = models.CopyFromBooleanField()# Field name made lowercase.
-    predictivefilingflag = models.CopyFromBooleanField()  # Field name made lowercase.
-    submissiontype = models.CopyFromCharField(max_length=1, blank=True)  # Field name made lowercase.
-    rmpdescription = models.CopyFromCharField(max_length=50, blank=True)  # Field name made lowercase.
-    noaccidents = models.CopyFromBooleanField()  # Field name made lowercase.
-    foreignstateprov = models.CopyFromCharField(max_length=35, blank=True)  # Field name made lowercase.
-    foreignzipcode = models.CopyFromCharField(max_length=14, blank=True)  # Field name made lowercase.
-    foreigncountry = models.CopyFromCharField(max_length=2, blank=True)  # Field name made lowercase.
-    cbi_flag = models.CopyFromBooleanField() # Field name made lowercase.
+    safetyinspectionby = CopyFromCharField(max_length=50, blank=True)  # Field name made lowercase.
+    osharanking = CopyFromBooleanField()# Field name made lowercase.
+    predictivefilingflag = CopyFromBooleanField()  # Field name made lowercase.
+    submissiontype = CopyFromCharField(max_length=1, blank=True)  # Field name made lowercase.
+    rmpdescription = CopyFromCharField(max_length=50, blank=True)  # Field name made lowercase.
+    noaccidents = CopyFromBooleanField()  # Field name made lowercase.
+    foreignstateprov = CopyFromCharField(max_length=35, blank=True)  # Field name made lowercase.
+    foreignzipcode = CopyFromCharField(max_length=14, blank=True)  # Field name made lowercase.
+    foreigncountry = CopyFromCharField(max_length=2, blank=True)  # Field name made lowercase.
+    cbi_flag = CopyFromBooleanField() # Field name made lowercase.
     completioncheckdate = models.DateTimeField(blank=True) # Field name made lowercase.
     errorreportdate = models.DateTimeField(blank=True)  # Field name made lowercase.
-    receiptdate = models.CopyFromCharField(max_length=25, blank=True)  # Field name made lowercase.
-    graphicsindicator = models.CopyFromBooleanField()  # Field name made lowercase.
-    attachmentsindicator = models.CopyFromBooleanField()  # Field name made lowercase.
-    certificationreceivedflag = models.CopyFromBooleanField()  # Field name made lowercase.
-    submissionmethod = models.CopyFromCharField(max_length=50, blank=True)  # Field name made lowercase.
-    cbisubstantiationflag = models.CopyFromBooleanField()  # Field name made lowercase.
-    electronicwaiverreceivedflag = models.CopyFromBooleanField()  # Field name made lowercase.
+    receiptdate = CopyFromCharField(max_length=25, blank=True)  # Field name made lowercase.
+    graphicsindicator = CopyFromBooleanField()  # Field name made lowercase.
+    attachmentsindicator = CopyFromBooleanField()  # Field name made lowercase.
+    certificationreceivedflag = CopyFromBooleanField()  # Field name made lowercase.
+    submissionmethod = CopyFromCharField(max_length=50, blank=True)  # Field name made lowercase.
+    cbisubstantiationflag = CopyFromBooleanField()  # Field name made lowercase.
+    electronicwaiverreceivedflag = CopyFromBooleanField()  # Field name made lowercase.
     postmarkdate = models.DateTimeField(blank=True)  # Field name made lowercase.
-    rmpcompleteflag = models.CopyFromBooleanField()  # Field name made lowercase.
+    rmpcompleteflag = CopyFromBooleanField()  # Field name made lowercase.
     deregistrationdate = models.DateTimeField(blank=True)  # Field name made lowercase.
     deregistrationeffectivedate = models.DateTimeField(blank=True)  # Field name made lowercase.
     anniversarydate = models.DateTimeField(blank=True)  # Field name made lowercase.
-    cbiflag = models.CopyFromBooleanField()  # Field name made lowercase.
-    cbiunsanitizedversionflag = models.CopyFromBooleanField()  # Field name made lowercase.
-    versionnumber = models.CopyFromCharField(max_length=200, blank=True)  # Field name made lowercase.
-    frs_lat = models.CopyFromDecimalField(max_digits=8, decimal_places=5)  # Field name made lowercase.
-    frs_long = models.CopyFromDecimalField(max_digits=8, decimal_places=5)  # Field name made lowercase.
-    frs_description = models.CopyFromCharField(max_length=40, blank=True)  # Field name made lowercase.
-    frs_method = models.CopyFromCharField(max_length=60, blank=True)  # Field name made lowercase.
-    horizontalaccmeasure = models.CopyFromCharField(max_length=6, blank=True)  # Field name made lowercase.
-    horizontalrefdatumcode = models.CopyFromCharField(max_length=3, blank=True) # Field name made lowercase.
-    sourcemapscalenumber = models.CopyFromCharField(max_length=10, blank=True)  # Field name made lowercase.
-    emergencycontactemail = models.CopyFromCharField(max_length=100, blank=True)  # Field name made lowercase.
-    rmppreparername = models.CopyFromCharField(max_length=70, blank=True)  # Field name made lowercase.
-    rmppreparerstreet1 = models.CopyFromCharField(max_length=35, blank=True)  # Field name made lowercase.
-    rmppreparerstreet2 = models.CopyFromCharField(max_length=35, blank=True)  # Field name made lowercase.
-    rmppreparercity = models.CopyFromCharField(max_length=30, blank=True)  # Field name made lowercase.
-    rmppreparerstate = models.CopyFromCharField(max_length=2, blank=True)  # Field name made lowercase.
-    rmppreparerzip = models.CopyFromCharField(max_length=5, blank=True)  # Field name made lowercase.
-    rmppreparerzip4ext = models.CopyFromCharField(max_length=4, blank=True)  # Field name made lowercase.
-    rmppreparertelephone = models.CopyFromCharField(max_length=10, blank=True)# Field name made lowercase.
-    rmppreparerforeignstateorprovince = models.CopyFromCharField(max_length=35, blank=True)  # Field name made lowercase.
-    rmppreparerforeigncountry = models.CopyFromCharField(max_length=2, blank=True)  # Field name made lowercase.
-    rmppreparerforeignpostalcode = models.CopyFromCharField(max_length=14, blank=True)  # Field name made lowercase.
-    rmpsubmissionreasoncode = models.CopyFromCharField(max_length=3, blank=True)  # Field name made lowercase.
-    rmpemail = models.CopyFromCharField(max_length=100, blank=True)  # Field name made lowercase.
-    deregistrationreasoncode = models.CopyFromCharField(max_length=2, blank=True)  # Field name made lowercase.
-    deregistrationreasonothertext = models.CopyFromCharField(max_length=80, blank=True)  # Field name made lowercase.
+    cbiflag = CopyFromBooleanField()  # Field name made lowercase.
+    cbiunsanitizedversionflag = CopyFromBooleanField()  # Field name made lowercase.
+    versionnumber = CopyFromCharField(max_length=200, blank=True)  # Field name made lowercase.
+    frs_lat = CopyFromDecimalField(max_digits=8, decimal_places=5)  # Field name made lowercase.
+    frs_long = CopyFromDecimalField(max_digits=8, decimal_places=5)  # Field name made lowercase.
+    frs_description = CopyFromCharField(max_length=40, blank=True)  # Field name made lowercase.
+    frs_method = CopyFromCharField(max_length=60, blank=True)  # Field name made lowercase.
+    horizontalaccmeasure = CopyFromCharField(max_length=6, blank=True)  # Field name made lowercase.
+    horizontalrefdatumcode = CopyFromCharField(max_length=3, blank=True) # Field name made lowercase.
+    sourcemapscalenumber = CopyFromCharField(max_length=10, blank=True)  # Field name made lowercase.
+    emergencycontactemail = CopyFromCharField(max_length=100, blank=True)  # Field name made lowercase.
+    rmppreparername = CopyFromCharField(max_length=70, blank=True)  # Field name made lowercase.
+    rmppreparerstreet1 = CopyFromCharField(max_length=35, blank=True)  # Field name made lowercase.
+    rmppreparerstreet2 = CopyFromCharField(max_length=35, blank=True)  # Field name made lowercase.
+    rmppreparercity = CopyFromCharField(max_length=30, blank=True)  # Field name made lowercase.
+    rmppreparerstate = CopyFromCharField(max_length=2, blank=True)  # Field name made lowercase.
+    rmppreparerzip = CopyFromCharField(max_length=5, blank=True)  # Field name made lowercase.
+    rmppreparerzip4ext = CopyFromCharField(max_length=4, blank=True)  # Field name made lowercase.
+    rmppreparertelephone = CopyFromCharField(max_length=10, blank=True)# Field name made lowercase.
+    rmppreparerforeignstateorprovince = CopyFromCharField(max_length=35, blank=True)  # Field name made lowercase.
+    rmppreparerforeigncountry = CopyFromCharField(max_length=2, blank=True)  # Field name made lowercase.
+    rmppreparerforeignpostalcode = CopyFromCharField(max_length=14, blank=True)  # Field name made lowercase.
+    rmpsubmissionreasoncode = CopyFromCharField(max_length=3, blank=True)  # Field name made lowercase.
+    rmpemail = CopyFromCharField(max_length=100, blank=True)  # Field name made lowercase.
+    deregistrationreasoncode = CopyFromCharField(max_length=2, blank=True)  # Field name made lowercase.
+    deregistrationreasonothertext = CopyFromCharField(max_length=80, blank=True)  # Field name made lowercase.
 
     source_file = 'tblS1Facilities'
 
@@ -151,13 +153,14 @@ class Tbls1Facilities(BaseRMPModel):
         db_table = 'tblS1Facilities'
 
 class Tbls1Flammablemixturechemicals(BaseRMPModel):
-    flammixchemid = models.CopyFromIntegerField(primary_key=True)  # Field name made lowercase.
-    processchemicalid = models.CopyFromForeignKey(
-        tbls1ProcessChemicals,
+    flammixchemid = CopyFromIntegerField(primary_key=True)  # Field name made lowercase.
+    processchemicalid = CopyFromForeignKey(
+        'tbls1ProcessChemicals',
         on_delete=models.PROTECT,
     )  # Field name made lowercase.
-    chemicalid = models.CopyFromForeignKey(
-        TlkpChemicals,
+    chemicalid = CopyFromForeignKey(
+        # 'TlkpChemicals', # <- source file
+        'ChemCd',
         on_delete=models.PROTECT
     )  # Field name made lowercase.
 
@@ -168,30 +171,35 @@ class Tbls1Flammablemixturechemicals(BaseRMPModel):
 
 
 class Tbls1Processchemicals(BaseRMPModel):
-    processchemicalid = models.CopyFromIntegerField(primary_key=True)  # Field name made lowercase.
-    processid = models.CopyFromForeignKey(
-        Tbls1Processes,
+    processchemicalid = CopyFromIntegerField(primary_key=True)  # Field name made lowercase.
+    processid = CopyFromForeignKey(
+        'Tbls1Processes',
         on_delete=models.PROTECT
     )  # Field name made lowercase.
-    chemicalid = models.CopyFromForeignKey(
-        TlkpChemicals,
+    chemicalid = CopyFromForeignKey(
+        # 'TlkpChemicals', # <- source file
+        'ChemCd',
         on_delete=models.PROTECT
     )  # Field name made lowercase.
-    quantity = models.CopyFromDecimalField()  # Field name made lowercase.
-    cbi_flag = models.CopyFromBooleanField()  # Field name made lowercase.
+    quantity = CopyFromDecimalField(
+        max_digits=6,
+        decimal_places=2,
+    )  # Field name made lowercase.
+    cbi_flag = CopyFromBooleanField()  # Field name made lowercase.
 
     source_file = 'tblS1ProcessChemicals'
 
     class Meta:
         db_table = 'tblS1ProcessChemicals'
 
+
 class Tbls1ProcessNaics(BaseRMPModel):
-    process_naics_id = models.CopyFromIntegerField(primary_key=True)
-    processid = models.CopyFromForeignKey(
-        Tbls1Processes,
+    process_naics_id = CopyFromIntegerField(primary_key=True)
+    processid = CopyFromForeignKey(
+        'Tbls1Processes',
         on_delete=models.PROTECT,
     )
-    naicscode = models.CopyFromIntegerField()
+    naicscode = CopyFromIntegerField()
 
     source_file = 'tblS1Process_NAICS'
 
@@ -199,14 +207,18 @@ class Tbls1ProcessNaics(BaseRMPModel):
         db_table = 'tblS1Process_NAICS'
 
 class Tbls1Processes(BaseRMPModel):
-    processid = models.CopyFromIntegerField()
-    altid = models.CopyFromCharField()
-    facilityid = models.CopyFromForeignKey(
-        Tbls1Facilities,
+    processid = CopyFromIntegerField()
+    altid = CopyFromCharField(
+        max_length=25,
+    )
+    facilityid = CopyFromForeignKey(
+        'Tbls1Facilities',
         on_delete=models.PROTECT,
     )
-    programlevel = models.CopyFromCharField()
-    cbi_flag = models.CopyFromBooleanField()
+    programlevel = CopyFromCharField(
+        max_length=1,
+    )
+    cbi_flag = CopyFromBooleanField()
 
     source_file = 'tblS1Processes'
 

@@ -3,7 +3,6 @@ tblS6AccidentChemicals.csv
 tblS6AccidentHistory.csv
 tblS6FlammableMixtureChemicals.csv
 """
-
 from django.db import models
 from rmp.fields import (
     CopyFromBooleanField,
@@ -12,16 +11,17 @@ from rmp.fields import (
     CopyFromIntegerField,
     CopyFromForeignKey,
 )
-from .base import BaseRMPModel
+from rmp.models.base import BaseRMPModel
+
 
 class Tbls6Accidentchemicals(BaseRMPModel):
     accidentchemicalid = models.IntegerField(primary_key=True)  # Field name made lowercase.
     accidenthistoryid = models.ForeignKey(
-        Tbls6Accidenthistory,
+        'Tbls6Accidenthistory',
         on_delete=models.PROTECT,
     )  # Field name made lowercase.
     chemicalid = models.ForeignKey(
-        ChemCd,
+        'ChemCd',
         on_delete=models.PROTECT
     )  # Field name made lowercase.
     quantityreleased = models.IntegerField(null=True)  # Field name made lowercase.
@@ -36,7 +36,7 @@ class Tbls6Accidentchemicals(BaseRMPModel):
 class Tbls6Accidenthistory(BaseRMPModel):
     accidenthistoryid = models.IntegerField(primary_key=True)
     facilityid = models.ForeignKey(
-        Tbls1Facilities,
+        'Tbls1Facilities',
         on_delete=models.PROTECT,
     )
     accidentdate = models.DateTimeField(blank=True, null=True)
@@ -124,11 +124,11 @@ class Tbls6Accidenthistory(BaseRMPModel):
 class Tbls6Flammablemixturechemicals(BaseRMPModel):
     flammixchemid = models.IntegerField(primary_key=True)  # Field name made lowercase.
     accidentchemicalid = models.ForeignKey(
-        Tbls6Accidentchemicals,
+        'Tbls6Accidentchemicals',
         on_delete=models.PROTECT,
     )  # Field name made lowercase.
     chemicalid = models.ForeignKey(
-        ChemCd,
+        'ChemCd',
         on_delete=models.PROTECT
     )  # Field name made lowercase.
 

@@ -35,6 +35,13 @@ class CopyFromCharField(fields.CharField, CopyFromFieldMixin):
     pass
 
 
+class CopyFromDateTimeField(fields.DateTimeField, CopyFromFieldMixin):
+    """
+    DateTimeField subclass with attrs related to COPY FROM command.
+    """
+    pass
+
+
 class CopyFromDecimalField(fields.DecimalField, CopyFromFieldMixin):
     """
     DecimalField subclass with attrs related to COPY FROM command.
