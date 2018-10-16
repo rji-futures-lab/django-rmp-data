@@ -10,7 +10,7 @@ Python-related dependencies for this project are managed via [pipenv](https://pi
 
 ## Bootstrapping a (macOS) local development environment:
 
-Below are the steps to set up a local development on a Mac computer.
+Below are the steps to set up a local server on a Mac.
 
 Open your terminal application, and type in each of these commands in the order specified.
 
@@ -22,11 +22,15 @@ Xcode is a large suite of software development tools and libraries, provided by 
 xcode-select --install
 ```
 
-This will take a minute.
+You'll then see a prompt that looks like this:
+
+![xcode-select install prompt](/xcode-selecte-prompt.png)
+
+Select "Install", then chill for a few minutes.
 
 ### 2. Install Homebrew
 
-Homebrew is an un-official package manager for macOS. It helps us install and configure software that you can't find on the App Store.
+Homebrew is an un-official package manager for Macs. It helps us install and configure software that you can't find on the App Store.
 
 You may already have it installed. Let's check by updating to the latest version:
 
@@ -58,6 +62,39 @@ Then you need to install it like this:
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 ```
 
+You will see a prompt that looks like this:
+
+```bash
+==> This script will install:
+/usr/local/bin/brew
+/usr/local/share/doc/homebrew
+/usr/local/share/man/man1/brew.1
+/usr/local/share/zsh/site-functions/_brew
+/usr/local/etc/bash_completion.d/brew
+/usr/local/Homebrew
+==> The following new directories will be created:
+/usr/local/bin
+/usr/local/etc
+/usr/local/include
+/usr/local/lib
+/usr/local/sbin
+/usr/local/share
+/usr/local/var
+/usr/local/opt
+/usr/local/share/zsh
+/usr/local/share/zsh/site-functions
+/usr/local/var/homebrew
+/usr/local/var/homebrew/linked
+/usr/local/Cellar
+/usr/local/Caskroom
+/usr/local/Homebrew
+/usr/local/Frameworks
+
+Press RETURN to continue or any other key to abort
+```
+
+So then press RETURN.
+
 ### 3. Install pyenv
 
 [`pyenv`](https://github.com/pyenv/pyenv) helps you manage different versions of Python running on the same machine.
@@ -82,13 +119,15 @@ And here is what you should see:
 /bin/bash
 ```
 
-To initialize pyenv, we need to add a few lines of code to a file named `.bash_profile`, which is a configuration file that runs whenever a user starts their shell environment.
+We need to add a few lines of code to a file named `.bash_profile`, which is a configuration file that runs whenever a user starts their shell environment.
 
-According to pyenv's docs:
+First, we need to an environment variable, which is value stored in your shell environment that can be used by programs. The specific environment variable we need to set is `PYENV_ROOT`, which should point to the directory where pyenv stores its data:
 
-> Please make sure eval `"$(pyenv init -)"` is placed toward the end of the shell configuration file since it manipulates PATH during the initialization.
+```bash
+echo -e 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bash_profile
+```
 
-Add they provide a handy one-liner for doing exactly that:
+Then we run the command to initialize pyenv at the end of the profile, as directed by pyenv's [docs](https://github.com/pyenv/pyenv#basic-github-checkout):
 
 ```bash
 echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi' >> ~/.bash_profile
@@ -100,8 +139,6 @@ In order for this change to take effect, restart your shell.
 exec "$SHELL"
 ```
 
-TODO: This changes the command line prompt? Should we instead to `source .bash_profile`?
-
 ### 5. Install recommended Python dependencies
 
 Now we install six additional dependencies for Python, [recommended](https://github.com/pyenv/pyenv/wiki#suggested-build-environment) by pyenv, plus `mdbtools`, another tool we need for extracting the rmp data.
@@ -109,8 +146,6 @@ Now we install six additional dependencies for Python, [recommended](https://git
 ```bash
 brew install openssl readline sqlite3 xz zlib mdbtools
 ```
-
-TODO: Should this step come before `brew install pyenv`?
 
 ### 6. Install PostgreSQL
 
@@ -120,7 +155,7 @@ PostgreSQL is an open-source relational database manager, which is required for 
 brew install postgresql
 ```
 
-Then we use a shortcut provided by homebrew for starting PostgreSQL.
+Then, we use a shortcut provided by homebrew for starting PostgreSQL.
 
 ```bash
 brew services start postgresql
@@ -189,8 +224,6 @@ Warning: Python 3.6 was not found on your system...
 Would you like us to install CPython 3.6.6 with pyenv [Y/N]:
 ```
 Then you type `Y` and hit enter.
-
-TODO: This step did NOT complete because of an breaking issue between pip and pipenv. We'll let the big guns try to solve this and try again later. If it's still not working, there appears to be a work-around: Pin pip to an early release: <https://github.com/pypa/pipenv/issues/2924>
 
 After all of the project dependencies are instally, you can initiate your virtual environment:
 
