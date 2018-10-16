@@ -24,7 +24,7 @@ xcode-select --install
 
 You'll then see a prompt that looks like this:
 
-![xcode-select install prompt](/xcode-selecte-prompt.png)
+![xcode-select install prompt](/xcode-select-prompt.png)
 
 Select "Install", then chill for a few minutes.
 
