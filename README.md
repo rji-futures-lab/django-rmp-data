@@ -10,7 +10,7 @@ Python-related dependencies for this project are managed via [pipenv](https://pi
 
 ## Bootstrapping a (macOS) local development environment:
 
-Below are the steps to set up a local server on a Mac.
+Below are the steps to set up a local server on a Mac. These instructions have been tested on the latest releases of macOS High Sierra (10.13) and macOS Sierra (10.12).
 
 Open your terminal application, and type in each of these commands in the order specified.
 
@@ -93,7 +93,7 @@ You will see a prompt that looks like this:
 Press RETURN to continue or any other key to abort
 ```
 
-So then press RETURN.
+So then press RETURN, and enter your password for your user account on your Mac.
 
 ### 3. Install pyenv
 
@@ -133,11 +133,9 @@ Then we run the command to initialize pyenv at the end of the profile, as direct
 echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi' >> ~/.bash_profile
 ```
 
-In order for this change to take effect, restart your shell.
+In order for this change to take effect, restart your shell. Do this by closing your current Terminal application window and opening a new one.
 
-```bash
-exec "$SHELL"
-```
+TODO: Would be interesting to figure out why `exec "$SHELL"` doesn't work. Seemed like pipenv couldn't find pyenv on the `PATH`.
 
 ### 5. Install recommended Python dependencies
 
@@ -146,6 +144,8 @@ Now we install six additional dependencies for Python, [recommended](https://git
 ```bash
 brew install openssl readline sqlite3 xz zlib mdbtools
 ```
+
+TODO: Should users install the latest version of Python through pyenv before install pipenv?
 
 ### 6. Install PostgreSQL
 
@@ -224,6 +224,12 @@ Warning: Python 3.6 was not found on your system...
 Would you like us to install CPython 3.6.6 with pyenv [Y/N]:
 ```
 Then you type `Y` and hit enter.
+
+**If this doesnt' work**, then fall back to installing the necessary version of Python:
+
+```bash
+pyenv install 3.6.6
+```
 
 After all of the project dependencies are instally, you can initiate your virtual environment:
 
