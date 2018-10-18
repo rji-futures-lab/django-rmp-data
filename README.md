@@ -143,6 +143,19 @@ Now we install six additional dependencies for Python, [recommended](https://git
 brew install openssl readline sqlite3 xz zlib mdbtools
 ```
 
+One of these libraries, `zlib`, requires a couple of additional steps, per Homebrew's instructions:
+
+```bash 
+export LDFLAGS="-L/usr/local/opt/zlib/lib"
+```
+
+And:
+
+```
+export CPPFLAGS="-I/usr/local/opt/zlib/include"
+```
+
+
 ### 6. Install PostgreSQL
 
 PostgreSQL is an open-source relational database manager, which is required for this project.
