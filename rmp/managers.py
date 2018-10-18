@@ -10,17 +10,16 @@ class BaseRMPManager(CopyManager):
     """
     Base manager for RMP data models.
     """
-    def copy_from_raw_csv(self):
+    def copy_from_source_file(self, processed=False):
         """
-        Copy contents of a raw .csv file into model.
+        Copy contents of a source file into model.
+
+        By default, copy from a .csv file in RMP_RAW_DATA_DIR.
+
+        If True is passed to processed, copy from a .tsv file in
+        RMP_PROCESSED_DATA_DIR.
         """
         model = self.model
-
-        source_file = getattr(
-            model, 'source_file', model._meta.db_table
-        )
-        filename = '%s.csv' % source_file
-        path = os.path.join(settings.RMP_RAW_DATA_DIR, filename)
 
         options = dict(mapping=model.get_source_column_mapping())
 
@@ -32,5 +31,17 @@ class BaseRMPManager(CopyManager):
 
         if len(null_fields):
             options['force_null'] = null_fields
+
+        source_file = getattr(
+            model, 'source_file', model._meta.db_table
+        )
+
+        if processed:
+            filename = '%s.tsv' % source_file
+            path = os.path.join(settings.RMP_RAW_DATA_DIR, filename)
+            options['delimiter'] = '\t'
+        else:
+            filename = '%s.csv' % source_file
+            path = os.path.join(settings.RMP_PROCESSED_DATA_DIR, filename)
 
         return super().from_csv(path, **options)
