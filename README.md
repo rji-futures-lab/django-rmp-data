@@ -151,7 +151,7 @@ export LDFLAGS="-L/usr/local/opt/zlib/lib"
 
 And:
 
-```
+```bash
 export CPPFLAGS="-I/usr/local/opt/zlib/include"
 ```
 
