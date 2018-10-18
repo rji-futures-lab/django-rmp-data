@@ -10,7 +10,7 @@ Python-related dependencies for this project are managed via [pipenv](https://pi
 
 ## Bootstrapping a (macOS) local development environment
 
-Below are the steps to set up a local server on a Mac. These instructions have been tested on the latest releases of macOS High Sierra (10.13) and macOS Sierra (10.12).
+Below are the steps to set up a local server on a Mac. These instructions have been tested on the latest releases of macOS Mojave (10.14), High Sierra (10.13) and macOS Sierra (10.12).
 
 Open your terminal application, and type in each of these commands in the order specified.
 
