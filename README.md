@@ -8,7 +8,7 @@ Requires [PostgreSQL](https://www.postgresql.org/), because our ETL process reli
 
 Python-related dependencies for this project are managed via [pipenv](https://pipenv.readthedocs.io/en/latest/).
 
-## Bootstrapping a (macOS) local development environment:
+## Bootstrapping a (macOS) local development environment
 
 Below are the steps to set up a local server on a Mac. These instructions have been tested on the latest releases of macOS High Sierra (10.13) and macOS Sierra (10.12).
 
@@ -135,8 +135,6 @@ echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nf
 
 In order for this change to take effect, restart your shell. Do this by closing your current Terminal application window and opening a new one.
 
-TODO: Would be interesting to figure out why `exec "$SHELL"` doesn't work. Seemed like pipenv couldn't find pyenv on the `PATH`.
-
 ### 5. Install recommended Python dependencies
 
 Now we install six additional dependencies for Python, [recommended](https://github.com/pyenv/pyenv/wiki#suggested-build-environment) by pyenv, plus `mdbtools`, another tool we need for extracting the rmp data.
@@ -144,8 +142,6 @@ Now we install six additional dependencies for Python, [recommended](https://git
 ```bash
 brew install openssl readline sqlite3 xz zlib mdbtools
 ```
-
-TODO: Should users install the latest version of Python through pyenv before install pipenv?
 
 ### 6. Install PostgreSQL
 
@@ -185,9 +181,20 @@ brew install pipenv
 
 ### 9. Fork our repo
 
+Before we move on, we need to decide:
 
+- how many forks we're making
+- who is the owner of each fork
+
+For example, if there are two student groups working on separate front-end design concepts, we might create an organization for each student group and create a fork for each student group.
+
+Once this is decided, navigate to the homepage of our repo at <https://github.com/rji-futures-lab/django-rmp-data>, then click "Fork" button in the upper right corner of the page.
+
+You'll end up on the homepage for the new fork of the project, which is indicated in the title at the top of the page.
 
 ### 10. Clone your fork of the repo
+
+click the green "Clone or download" button.
 
 This will create a local copy of project directory in your present working directory.
 
@@ -203,13 +210,13 @@ Navigate into the project folder:
 cd django-rmp-data/
 ```
 
-Run this script to create a `.env` file where you'll keep secrets, such as database credentials.
+Similar to how we set an environment variable for our shell environment, we need to set a few environment variables particular to our project environment. These include secrets, such as database connection credentials, which we store in a `.env` file in the project directory.
+
+The rules for generate this `.env` file are already defined for in `Makefile`. So you just need to run one command:
 
 ```bash
 make env
 ```
-
-TODO: Add this makefile
 
 Then, use `pipenv` to set up your virtual environment and install all necessary dependencies (including the correct version of Python and Django):
 
@@ -225,7 +232,7 @@ Would you like us to install CPython 3.6.6 with pyenv [Y/N]:
 ```
 Then you type `Y` and hit enter.
 
-**If this doesnt' work**, then fall back to installing the necessary version of Python:
+**If this doesn't work**, then fall back to installing the necessary version of Python:
 
 ```bash
 pyenv install 3.6.6
@@ -253,7 +260,19 @@ python manage.py migrate
 
 ### 13. Import the data
 
-TODO: Figure out how we're going to share the starter data and what the exact commands will be:
+First, download sample data that we've made available for this project:
+
+```bash
+curl --request GET --url 'https://s3.us-east-2.amazonaws.com/rmp-sample-data/rmp.zip' > data/rmp.zip
+```
+
+Then unzip the download:
+
+```bash
+unzip data/rmp.zip -d data/
+```
+
+Then import it into your local instance:
 
 ```bash
 python manage.py import
@@ -266,5 +285,3 @@ At long last, we are ready to start the Django server:
 ```bash
 python manage.py runserver
 ```
-
-Open you favorite web browser and go to <http://127.0.0.1:8000/> to see our homepage.
