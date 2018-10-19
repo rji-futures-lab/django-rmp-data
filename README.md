@@ -155,7 +155,6 @@ And:
 export CPPFLAGS="-I/usr/local/opt/zlib/include"
 ```
 
-
 ### 6. Install PostgreSQL
 
 PostgreSQL is an open-source relational database manager, which is required for this project.
@@ -192,30 +191,17 @@ createuser -s postgres
 brew install pipenv
 ```
 
-### 9. Fork our repo
+### 9. Clone your team's fork of the repo
 
-Before we move on, we need to decide:
-
-- how many forks we're making
-- who is the owner of each fork
-
-For example, if there are two student groups working on separate front-end design concepts, we might create an organization for each student group and create a fork for each student group.
-
-Once this is decided, navigate to the homepage of our repo at <https://github.com/rji-futures-lab/django-rmp-data>, then click "Fork" button in the upper right corner of the page.
-
-You'll end up on the homepage for the new fork of the project, which is indicated in the title at the top of the page.
-
-### 10. Clone your fork of the repo
-
-click the green "Clone or download" button.
+Go here <https://github.com/J4502-FS18/django-rmp-data> and click the green "Clone or download" button.
 
 This will create a local copy of project directory in your present working directory.
 
 ```bash
-git clone https://github.com/[your-github-account-name-here]/django-rmp-data.git
+git clone https://github.com/J4502-FS18/django-rmp-data.git
 ```
 
-### 11. Set up and run your project environment
+### 10. Set up and run your project environment
 
 Navigate into the project folder:
 
@@ -257,7 +243,7 @@ After all of the project dependencies are instally, you can initiate your virtua
 pipenv shell
 ```
 
-### 12. Set up the database
+### 11. Set up the database
 
 We need to create a database on our local PostgreSQL server:
 
@@ -271,7 +257,7 @@ Then create all of the database tables:
 python manage.py migrate
 ```
 
-### 13. Import the data
+### 12. Import the data
 
 First, download sample data that we've made available for this project:
 
@@ -291,7 +277,7 @@ Then import it into your local instance:
 python manage.py import
 ```
 
-### 14. Start the Django server
+### 13. Start the Django server
 
 At long last, we are ready to start the Django server:
 
