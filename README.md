@@ -107,7 +107,7 @@ brew install pyenv
 
 ### 4. Initialize pyenv in your shell
 
-The default Unix shell for macOS is bash. Here is how we can confirm that this default is still intact:
+The default Unix shell for macOS is bash. We can confirm that this default is still intact:
 
 ```bash
 echo "$SHELL"
@@ -121,7 +121,7 @@ And here is what you should see:
 
 We need to add a few lines of code to a file named `.bash_profile`, which is a configuration file that runs whenever a user starts their shell environment.
 
-First, we need to an environment variable, which is value stored in your shell environment that can be used by programs. The specific environment variable we need to set is `PYENV_ROOT`, which should point to the directory where pyenv stores its data:
+First, we need to an environment variable, which is value stored in your shell environment that can be used by software running within that environment. The specific environment variable we need to set is `PYENV_ROOT`, which should point to the directory where pyenv stores its data:
 
 ```bash
 echo -e 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bash_profile
@@ -137,7 +137,7 @@ In order for this change to take effect, restart your shell. Do this by closing 
 
 ### 5. Install recommended Python dependencies
 
-Now we install six additional dependencies for Python, [recommended](https://github.com/pyenv/pyenv/wiki#suggested-build-environment) by pyenv, plus `mdbtools`, another tool we need for extracting the rmp data.
+Now we install five additional dependencies for Python, [recommended](https://github.com/pyenv/pyenv/wiki#suggested-build-environment) by pyenv, plus `mdbtools`, another tool we need for extracting the rmp data.
 
 ```bash
 brew install openssl readline sqlite3 xz zlib mdbtools
@@ -185,15 +185,13 @@ createuser -s postgres
 
 ### 8. Install pipenv
 
-`pipenv` has recently gained a lot of traction as tool to help Python developers manage workflows related to virtual environments, package installation and dependency management. As suchh, it is now the tool [recommended](https://packaging.python.org/tutorials/managing-dependencies/#installing-pipenv) by python.org for managing application dependencies.
+`pipenv` has recently gained a lot of traction as tool to help Python developers manage workflows related to virtual environments, package installation and dependency management. As such, it is now the tool [recommended](https://packaging.python.org/tutorials/managing-dependencies/#installing-pipenv) by python.org for managing application dependencies.
 
 ```bash
 brew install pipenv
 ```
 
 ### 9. Clone your team's fork of the repo
-
-Go here <https://github.com/J4502-FS18/django-rmp-data> and click the green "Clone or download" button.
 
 This will create a local copy of project directory in your present working directory.
 
@@ -211,13 +209,13 @@ cd django-rmp-data/
 
 Similar to how we set an environment variable for our shell environment, we need to set a few environment variables particular to our project environment. These include secrets, such as database connection credentials, which we store in a `.env` file in the project directory.
 
-The rules for generate this `.env` file are already defined for in `Makefile`. So you just need to run one command:
+The rule for generating this `.env` file are already defined in the `Makefile` in this repo. So you just need to run one command:
 
 ```bash
 make env
 ```
 
-Then, use `pipenv` to set up your virtual environment and install all necessary dependencies (including the correct version of Python and Django):
+Then use `pipenv` to set up your virtual environment and install all necessary dependencies (including the correct version of Python and Django):
 
 ```bash
 pipenv install
@@ -245,7 +243,7 @@ pipenv shell
 
 ### 11. Set up the database
 
-We need to create a database on our local PostgreSQL server:
+We need to create a database in our local PostgreSQL cluster:
 
 ```bash
 createdb rmp
