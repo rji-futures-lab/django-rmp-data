@@ -282,3 +282,31 @@ At long last, we are ready to start the Django server:
 ```bash
 python manage.py runserver
 ```
+
+## Updating your fork
+
+Because your team has forked our repository, you will occasionally need to catch up to the latest version of our source code.
+
+To do this, you'll add a new "remote" to your local copy of the repo. A remote is just a URL pointing to a git repo. Your cloned fork already has one remote on it called "origin", which points to the location of your fork of our repo on GitHub.
+
+We're going to add a new remote called "upstream" (since it's upstream of your fork's history), which points to our original repo. Here's how we do that:
+
+```bash
+git remote add upstream https://github.com/rji-futures-lab/django-rmp-data.git
+```
+
+You'll only need to run the above command once. Then, whenever you need to get our latest changes, you can pull them down like this:
+
+```bash
+git pull upstream master
+```
+
+The new changes you've pulled down might include changes to our data models, which also need to be propagated to the database in your local PostgreSQL cluster. This is called a database [migration](https://docs.djangoproject.com/en/2.1/topics/migrations/) in Django parlance.
+
+You should only ever have to run this single command:
+
+```bash
+python manage.py migrate
+```
+
+It's safe to `migrate` even if no new migrations have been added.
