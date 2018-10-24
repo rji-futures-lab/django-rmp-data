@@ -12,7 +12,7 @@ from rmp.fields import (
     CopyFromIntegerField,
     CopyFromTextField,
 )
-from .base import BaseRMPModel
+from rmp.models import BaseRMPModel
 from django.db import models
 
 
@@ -858,6 +858,9 @@ class PreventionProgram2(BaseRMPModel): #rmp_prevent_2
     source_file = 'rmp_prevent_2'
 
 
+# class Prevent2 
+
+
 class Prevent3(BaseRMPModel):
     id = CopyFromIntegerField(primary_key=True)
     procnaics_id = CopyFromForeignKey(
@@ -1047,7 +1050,7 @@ class ProcNaics(BaseRMPModel):
     source_file = 'rmp_proc_naics'
 
 
-class Prev2text(BaseRMPModel):
+class Prev2Text(BaseRMPModel):
     prevent_2 = CopyFromForeignKey(
         'PreventionProgram2',
         on_delete=models.CASCADE

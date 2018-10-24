@@ -8,8 +8,8 @@ from rmp.fields import (
     CopyFromDecimalField,
     CopyFromIntegerField,
 )
-from .base import BaseRMPModel
-from .choices import (
+from rmp.models import BaseRMPModel
+from rmp.models.choices import (
     CHEMICAL_TYPE_CHOICES,
 )
 
