@@ -38,10 +38,19 @@ class BaseRMPManager(CopyManager):
 
         if processed:
             filename = '%s.tsv' % source_file
-            path = os.path.join(settings.RMP_RAW_DATA_DIR, filename)
+            path = os.path.join(settings.RMP_PROCESSED_DATA_DIR, filename)
             options['delimiter'] = '\t'
+            options['null'] = "NULL"
+            options['quote_character'] = '\b' # <- This is a hack:
+            # https://stackoverflow.com/questions/20402696/is-it-possible-to-turn-off-quote-processing-in-the-postgres-copy-command-with-cs
+            # since postgres assumes " is the quote character, and the data isn't actually
+            # quoted, but there are quote chars in the data, and those quote chars
+            # are not properly escaped, we are lying and saying the quotes are escaped by 
+            # the backspace character.
+            # proper way to solve this is to output processed files where the quote
+            # chars are properly escaped, the default escape char is "
         else:
             filename = '%s.csv' % source_file
-            path = os.path.join(settings.RMP_PROCESSED_DATA_DIR, filename)
-
+            path = os.path.join(settings.RMP_RAW_DATA_DIR, filename)
+        
         return super().from_csv(path, **options)
