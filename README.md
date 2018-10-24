@@ -272,10 +272,10 @@ Then unzip the download:
 unzip data/rmp.zip -d data/
 ```
 
-Then import it into your local instance:
+Then load it into your local instance:
 
 ```bash
-python manage.py import
+python manage.py loadrmpdata
 ```
 
 ### 14. Start the Django server
