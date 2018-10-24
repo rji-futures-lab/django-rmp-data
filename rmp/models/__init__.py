@@ -2,6 +2,7 @@
 Risk Management Plan (RMP) data models.
 """
 from .base import BaseRMPModel
+from .helpers import get_models
 from .processed import (
     # codes
     ChemCd,
@@ -64,7 +65,6 @@ from .raw_split import (
     Tbls8PreventionProgram2,
     Tbls9Emergencyresponses,
 )
-
 # from .raw import (
 #     Tbls6AccidentChemicals,
 #     # Tbls6AccidentHistory,
@@ -72,6 +72,7 @@ from .raw_split import (
 
 __all__ = (
     'BaseRMPModel',
+    'get_models',
     # codes
     'ChemCd',
     'City',
