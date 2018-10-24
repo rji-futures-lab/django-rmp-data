@@ -8,8 +8,8 @@ from rmp.fields import (
     CopyFromDecimalField,
     CopyFromIntegerField,
 )
-from .base import BaseRMPModel
-from .choices import (
+from rmp.models import BaseRMPModel
+from rmp.models.choices import (
     CHEMICAL_TYPE_CHOICES,
 )
 
@@ -61,7 +61,7 @@ class ChemCd(BaseRMPModel):
     source_file = 'tlkpChemicals'
 
 
-class DeregCd(models.Model):
+class DeregCd(BaseRMPModel):
     """
     Reason for de-regulating a facility.
     """
@@ -77,7 +77,7 @@ class DeregCd(models.Model):
     source_file = 'rmp_dereg_cd'
 
 
-class DochanCd(models.Model):
+class DochanCd(BaseRMPModel):
     dochan = models.CharField(
         primary_key=True,
         max_length=1,
@@ -89,7 +89,7 @@ class DochanCd(models.Model):
     source_file = 'rmp_dochan_cd'
 
 
-class DoctypCd(models.Model):
+class DoctypCd(BaseRMPModel):
     """
     Type of RMP document.
     """
@@ -106,7 +106,7 @@ class DoctypCd(models.Model):
     source_file = 'rmp_doctyp_cd'
 
 
-class EventsCd(models.Model):
+class EventsCd(BaseRMPModel):
     """
     Type of event.
     """
@@ -123,7 +123,7 @@ class EventsCd(models.Model):
     source_file = 'rmp_events_cd'
 
 
-class LldescCd(models.Model):
+class LldescCd(BaseRMPModel):
     lldesc = models.CharField(
         primary_key=True,
         max_length=2,
@@ -135,7 +135,7 @@ class LldescCd(models.Model):
     source_file = 'rmp_lldesc_cd'
 
 
-class LlmethCd(models.Model):
+class LlmethCd(BaseRMPModel):
     primary_key = models.IntegerField(
         primary_key=True
     )
@@ -149,7 +149,7 @@ class LlmethCd(models.Model):
     source_file = 'rmp_llmeth_cd'
 
 
-class PhysCd(models.Model):
+class PhysCd(BaseRMPModel):
     """
     Physical state?
     """
@@ -166,7 +166,7 @@ class PhysCd(models.Model):
     source_file = 'rmp_phys_cd'
 
 
-class RejectCd(models.Model):
+class RejectCd(BaseRMPModel):
     """
     Reason an RMP submission may be rejected.
     """
@@ -183,7 +183,7 @@ class RejectCd(models.Model):
     source_file = 'rmp_reject_cd'
 
 
-class ScenCd(models.Model):
+class ScenCd(BaseRMPModel):
     """
     Accident(?) scenario.
     """
@@ -200,7 +200,7 @@ class ScenCd(models.Model):
     source_file = 'rmp_scen_cd'
 
 
-class SubmitCd(models.Model):
+class SubmitCd(BaseRMPModel):
     """
     Reason for an RMP submission.
     """
@@ -217,10 +217,10 @@ class SubmitCd(models.Model):
     source_file = 'rmp_submit_cd'
 
 
-class TopoCd(models.Model):
+class TopoCd(BaseRMPModel):
     """
     Type of topography(?).
-    """
+    """ 
     topo = models.CharField(
         primary_key=True,
         max_length=1,
@@ -231,14 +231,18 @@ class TopoCd(models.Model):
         help_text='Full description of the topography type.'
     )
 
+    source_file = 'rmp_topo_cd'
 
-class Cities(models.Model):
+
+class City(BaseRMPModel):
     city = models.CharField(max_length=30, blank=True)
     state = models.CharField(max_length=2, blank=True)
     num_fac = models.IntegerField()
 
+    source_file = 'rmp_cities_cd'
 
-class WindCd(models.Model):
+
+class WindCd(BaseRMPModel):
     """
     Wind speed measurement unit.
     """

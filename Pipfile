@@ -5,6 +5,7 @@ name = "pypi"
 
 [packages]
 django-rmp-data = {editable = true, path = "."}
+django-debug-toolbar = "*"
 
 [dev-packages]
 ipython = "*"

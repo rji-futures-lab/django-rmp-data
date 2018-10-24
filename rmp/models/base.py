@@ -7,7 +7,7 @@ from rmp.managers import BaseRMPManager
 
 class BaseRMPModel(models.Model):
     """
-    
+    Base, abstract class for RMP data models.
     """
     @classmethod
     def get_concrete_fields(cls):

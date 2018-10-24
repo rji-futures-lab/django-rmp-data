@@ -18,8 +18,15 @@ class CopyFromFieldMixin(fields.Field):
         """
         Return the name of field to use in COPY FROM command.
         """
-        return self.source_column or self.name
-    
+        return self.source_column or self.column
+
+
+class CopyFromBigIntegerField(fields.BigIntegerField, CopyFromFieldMixin):
+    """
+    BigIntegerField subclass with attrs related to COPY FROM command.
+    """
+    pass
+
 
 class CopyFromBooleanField(fields.BooleanField, CopyFromFieldMixin):
     """
@@ -35,6 +42,20 @@ class CopyFromCharField(fields.CharField, CopyFromFieldMixin):
     pass
 
 
+class CopyFromDateField(fields.DateField, CopyFromFieldMixin):
+    """
+    DateField subclass with attrs related to COPY FROM command.
+    """
+    pass
+
+
+class CopyFromDateTimeField(fields.DateTimeField, CopyFromFieldMixin):
+    """
+    DateTimeField subclass with attrs related to COPY FROM command.
+    """
+    pass
+
+
 class CopyFromDecimalField(fields.DecimalField, CopyFromFieldMixin):
     """
     DecimalField subclass with attrs related to COPY FROM command.
@@ -45,13 +66,6 @@ class CopyFromDecimalField(fields.DecimalField, CopyFromFieldMixin):
 class CopyFromIntegerField(fields.IntegerField, CopyFromFieldMixin):
     """
     IntegerField subclass with attrs related to COPY FROM command.
-    """
-    pass
-
-
-class CopyFromDateTimeField(fields.DateTimeField, CopyFromFieldMixin):
-    """
-    DateTimeField subclass with attrs related to COPY FROM command.
     """
     pass
 
