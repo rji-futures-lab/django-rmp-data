@@ -5,7 +5,7 @@ env:
 	echo 'DATABASE_URL=psql://'`whoami`':@127.0.0.1:5432/rmp' >> .env
 	echo 'DEBUG=True' >> .env
 
-syncsdbchema:
+syncdbschema:
 	dropdb rmp
 	createdb rmp
 	rm -rf rmp/migrations/
