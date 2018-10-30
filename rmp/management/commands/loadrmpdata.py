@@ -1,10 +1,9 @@
-"""
-Load RMP data from source files into models.
-"""
+"""Load RMP data from source files into models."""
 import os
 from django.conf import settings
 from django.core import management
 from django.core.management.base import BaseCommand, CommandError
+from django.db.utils import DataError
 from rmp.models import get_models
 import logging
 
@@ -54,7 +53,7 @@ class Command(BaseCommand):
             self.stdout.write("...loading %s" % model_name)
             try:
                 insert_count = model.objects.copy_from_source_file(processed)
-            except ValueError as e:
+            except (ValueError, DataError) as e:
                 self.stderr.write(
                     self.style.ERROR(e)
                 )
