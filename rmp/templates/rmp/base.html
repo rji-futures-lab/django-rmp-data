@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>RMP</title>
+  </head>
+  <body>
+    <a href='{% url 'accident' %}'>accidents</a>
+    <a href='{% url 'state_accidents' %}'>state accidents</a>
+    {% block content %}{% endblock %}
+  </body>
+</html>

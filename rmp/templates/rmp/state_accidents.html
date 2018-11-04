@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  <h1>Accidents by State</h1>
+  {% if state_list %}
+  <table>
+    {% for state in state_list %}
+    <tr>
+      <td>{{ state.state }}</td>
+      <td>{{ state.count }}</td>
+      <td>{{ state.num_accident }}</td>
+      <td>{{ state.num_deaths }}</td>
+      <td>{{ state.num_injuries }}</td>
+      <td>{{ state.num_evacuated }}</td>
+      <td>{{ state.property_damage }}</td>
+    </tr>
+    {% endfor %}
+  {% else %}
+  <h1>Error: No information for states</h1>
+  {% endif %}
+  </table>
+
+{% endblock %}

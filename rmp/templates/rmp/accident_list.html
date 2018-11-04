@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  <h1>5-year facility history</h1>
+  {% if facility_list %}
+  <table>
+    {% for facility in facility_list %}
+    <tr>
+      <td>{{ facility.facility_name }}</td>
+      <td>{{ facility.city }}</td>
+      <td>{{ facility.state }}</td>
+      <td>{{ facility.num_accident }}</td>
+      <td>{{ facility.num_deaths }}</td>
+      <td>{{ facility.num_injuries }}</td>
+      <td>{{ facility.num_evacuated }}</td>
+      <td>{{ facility.property_damage }}</td>
+    </tr>
+    {% endfor %}
+  {% else %}
+  <h1>No facilities</h1>
+  {% endif %}
+  </table>
+
+{% endblock %}
