@@ -14,7 +14,7 @@ def accident(request):
 def state_accidents(request):
     state_list = Facility.objects.values('state') \
                          .filter(deregistration_yn='n') \
-                         .annotate(count=Count('id'k)) \
+                         .annotate(count=Count('id')) \
                          .annotate(num_accidents=Sum('num_accident')) \
                          .annotate(num_deaths=Sum('num_deaths')) \
                          .annotate(num_injuries=Sum('num_injuries')) \
