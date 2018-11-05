@@ -877,7 +877,7 @@ class PreventionProgram2(BaseRMPModel): #rmp_prevent_2
 
 
 class PreventionProgram3(BaseRMPModel):
-    id = CopyFromIntegerField(
+    prevent_id = CopyFromIntegerField(
         primary_key=True,
         source_column='prevent_3_id',
     )
