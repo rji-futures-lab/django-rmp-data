@@ -1,0 +1,717 @@
+Table,Field,ShortDesc,Description,DataType,VisibleInRanking
+"tblAudit","AuditComments","Findings, Conclusions & Recommendations of the audit","Findings, Conclusions & Recommendations of the audit.","Memo",0
+"tblAudit","AuditDateDate of most recent Compliance Audit","Date of most recent Compliance Audit","Date of most recent Compliance Audit.","Date/Time",0
+"tblAudit","AuditID","Unique identifier for each audit","Unique identifier for each audit.","Long Integer",0
+"tblAudit","AuditStatusID","Most recent status of the audit","Most recent status of the audit.","Text",0
+"tblAudit","AuditTypeID","Type of audit conducted","Type of audit conducted.","Long Integer",0
+"tblAudit","EPAFacilityID","Unique identifier for all RMPs submitted by a specific facility","Unique identifier for all RMPs submitted by a specific facility (assigned by Reporting Center for first-time submission). * After this number is assigned to the first submission for a facility, subsequent submissions for the same facility must include this identifier.","Text",0
+"tblAuditor","AuditID","Unique identifier for each audit","Unique identifier for each audit.","Long Integer",0
+"tblAuditor","AuditorID","Unique identifer for each audit","Unique identifer for each audit.","Long Integer",0
+"tblAuditor","PersonID","Unique identifer of each person participating in audit","Unique identifer of each person participating in audit.","Long Integer",0
+"tblExecutiveSummaries","ESSeqNum","Unique sequence number for the executive summary","Unique sequence number for the executive summary.","Long Integer",0
+"tblExecutiveSummaries","FacilityID","Unique identifier for all RMPs submitted by a specific facility","Unique identifier for all RMPs submitted by a specific facility (assigned by Reporting Center for first-time submission). * After this number is assigned to the first submission for a facility, subsequent submissions for the same facility must include this identifier.","Long Integer",0
+"tblExecutiveSummaries","SummaryText","Executive Summary","The Executive Summary includes a brief description of the facility's risk management program.","Memo",1
+"tblFacility","CameoID","Cameo Identifier","Future Link to CAMEO","Text",0
+"tblFacility","EPAFacilityID","EPA Facility Identifier","Unique identifier for all RMPs submitted by a specific facility (assigned by Reporting Center for first-time submission). * After this number is assigned to the first submission for a facility, subsequent submissions for the same facility must include this identifier.","Text",0
+"tblFacility","FacilityName","Facility Name","Facility name specific to the site.","Text",0
+"tblFacility","MarplotID","Marplot Identifier","Future link to Marplot","Text",0
+"tblPerson","IsAuditor","Is the person an auditor?","Is the person an auditor?","Yes/No",0
+"tblPerson","IsInspector","Is the person an inspector?","Is the person an inspector?","Yes/No",0
+"tblPerson","PersonID","Person ID","Unique identifier for each Person.","Long Integer",0
+"tblPerson","PersonName","Person Name","Name of the person or entity that owns or operates the facility.","Text",0
+"tblPerson","PhoneNbr","Phone Nbr","Phone number for the Owner or Operator.","Text",0
+"tblRank","AggragateScore","Aggragate Score","Total score for the Facility.","Long Integer",0
+"tblRank","EPA Facility Identifier","EPA Facility Identifier","Foreign key to tblFacility.","Text",0
+"tblRank","Ranking","Ranking","Facility ranking.","Long Integer",0
+"tblRank","RMP Identifier","RMP Identifier","Current (latest) RMP for Facility","Long Integer",0
+"tblRMPError","ErrorText","Error Text","Error message text.","Memo",0
+"tblRMPError","FacilityID","Facility ID","Unique identifier for all RMPs submitted by a specific facility (assigned by Reporting Center for first-time submission). * After this number is assigned to the first submission for a facility, subsequent submissions for the same facility must include this identifier.","Long Integer",0
+"tblRMPError","SequenceNumber","Sequence Number","Unique sequence number.","Long Integer",0
+"tblRMPTrack","Comments","Comments","The text which contains comments about the RMP submission.","Memo",0
+"tblRMPTrack","DocumentHandle","Document Handle","The code which represents the method of handling used for the RMP submission.","Text",0
+"tblRMPTrack","DocumentType","Document Type","The code which represents the type of the document to which the RMP Tracking record applies.","Text",0
+"tblRMPTrack","EPAFacilityID","EPA Facility ID","Unique identifier for all RMPs submitted by a specific facility (assigned by Reporting Center for first-time submission). * After this number is assigned to the first submission for a facility, subsequent submissions for the same facility must include this identifier.","Text",0
+"tblRMPTrack","FacilityCity","Facility City","The name of the city in which the facility is located.","Text",0
+"tblRMPTrack","FacilityName1","Facility Name 1","The first line of the facility name.","Text",0
+"tblRMPTrack","FacilityName2","Facility Name 2","The second line of the facility name.","Text",0
+"tblRMPTrack","FacilityState","Facility State","The two-character FIPS abbreviation for the state in which the facility is located.","Text",0
+"tblRMPTrack","FacilityStreet1","Facility Street 1","The text which contains the first line of the mailing address of the facility.","Text",0
+"tblRMPTrack","FacilityStreet2","Facility Street 2","The text which contains the second line of the mailing address of the facility.","Text",0
+"tblRMPTrack","FacilityZip","Facility Zip","The code which represents the Zoning Improvement Plan (ZIP) zone of the facility mailing address.","Text",0
+"tblRMPTrack","FacilityZip4","Facility Zip4","The code which represents the Zoning Improve Plan (ZIP) Geographic Segment of the facility mailing address.","Text",0
+"tblRMPTrack","PostmarkDate","Postmark Date","The postmark date of the RMP received material.","Date/Time",0
+"tblRMPTrack","ReceiptDate","Receipt Date","The date the diskettes or paper submission was received by the Records Center.","Date/Time",0
+"tblRMPTrack","RejectionReason","Rejection Reason","The code which represents the reason the RMP submission could not be processed.","Text",0
+"tblRMPTrack","ResolutionDate","Resolution Date","The date on which the problems which prevented the RMP from being processed were finally resolved.","Date/Time",0
+"tblRMPTrack","TrackID","Track ID","Unique number used to identify each RMP Tracking record.","Long Integer",0
+"tblS1Facilities","AnniversaryDate","Anniversary Date","5 year anniversary date.","Date/Time",0
+"tblS1Facilities","AttachmentsIndicator","Attachments Indicator","An indication of whether one or more attachments other than graphics were submitted with the RMP. ‘Y’es or ‘N’o","Yes/No",0
+"tblS1Facilities","CAA_TitleV","1.12.c CAA Title V","Indicate if your facility has a CAA Title V Operating Permit with “Y.”  CAA Title V Air Operating Permit ID Title V (Part 70) of the Clean Air Act (40CFR70) requires major sources of air pollution to obtain permits.","Yes/No",0
+"tblS1Facilities","CBI_Flag","CBI Flag: Number of FTEs","If number of full time employees is claimed as CBI. ‘Y’es or ‘N’o","Yes/No",0
+"tblS1Facilities","CBIFlag","CBI Flag: RMP","An indication that Confidential Business Information (CBI) was claimed for certain data elements in the record.  ‘Y’es or ‘N’o","Yes/No",0
+"tblS1Facilities","CBISubstantiationFlag","CBI Flag: Substantiation Included","An indication that a CBI substantiation was included with the RMP.  ‘Y’es or ‘N’o","Yes/No",0
+"tblS1Facilities","CBIUnsanitizedVersionFlag","CBI Flag: Unsanitized Version Included","An indication of whether the unsanitized version of the RMP is present.  ‘Y’es or ‘N’o","Yes/No",0
+"tblS1Facilities","CertificationReceivedFlag","Certification Received Flag","A flag to indicate whether the certification letter accompanied the RMP submission.  The default for this field is “N.” ‘Y’es or ‘N’o","Yes/No",0
+"tblS1Facilities","ClearAirOpPermitID","1.12.d Air Operating Permit ID","Unique identifier for a CAA Title V Air Operating Permit or state equivalent ID.","Text",0
+"tblS1Facilities","Company2DUNS","1.4.c Parent Company #2 DUNS","If your facility is owned by a joint venture, this is the DUNS Number assigned by Dun & Bradstreet to the second parent company.","Text",0
+"tblS1Facilities","Company2Name","1.1.c Parent Company #2 Name","Second Parent Company name for joint ventures.","Text",0
+"tblS1Facilities","CompanyDUNS","1.4.b Parent Company #1 DUNS","The DUNS Number assigned by Dun & Bradstreet to the parent of the company of interest.","Text",0
+"tblS1Facilities","CompletionCheckDate","Completion Check Date","The date that the RMP was validated by EPA.","Date/Time",0
+"tblS1Facilities","DeRegistrationDate","De-registration Date","Date that the request to de-register the facility was entered into the system at the reporting center.","Date/Time",0
+"tblS1Facilities","DeRegistrationEffectiveDate","De-registration Effective Date","Date that the facility de-registration becomes effective.","Date/Time",0
+"tblS1Facilities","ElectronicWaiverReceivedFlag","Electronic Waiver Received Flag","An indication of whether an electronic waiver accompanied the submission, if the submission came in paper.  The default for this field is “N”. ‘Y’es or ‘N’o","Yes/No",0
+"tblS1Facilities","EmergencyContactExt_PIN","1.8.e 24-Hour Phone Extention/PIN","Phone extension or pager number for the 24-Hour Phone.","Text",0
+"tblS1Facilities","EmergencyContactName","1.8.a Emergency Contact Name","Name of person designated as the emergency contact for the facility.","Text",0
+"tblS1Facilities","EmergencyContactPhone","1.8.c Emergency Contact Phone","Phone number where the emergency contact can be reached during normal working hours.","Text",0
+"tblS1Facilities","EmergencyContactTitle","1.8.b Emergency Contact Title","Title or job classification of the emergency contact.","Text",0
+"tblS1Facilities","EPAFacilityID","1.2 EPA Facility Identifier","Unique identifier for all RMPs submitted by a specific facility (assigned by Reporting Center for first-time submission). * After this number is assigned to the first submission for a facility, subsequent submissions for the same facility must include this identifier.","Text",0
+"tblS1Facilities","EPCRA_302","1.12.b Covered by: EPCRA 302","EPCRA Section 302 pertains to the Extremely Hazardous Substances list.  Any facility with a toxic regulated substance above the threshold quantity in a process is subject to EPCRA 302.  If the facility is covered for only flammable regulated substances, the facility is not subject to 40 CFR 355
+for those substances, although the facility may be for toxic substances not affected by this Rule.","Yes/No",0
+"tblS1Facilities","ErrorReportDate","Error Report Date","System generated data element that indicates the date that the error report was created by the system.","Date/Time",0
+"tblS1Facilities","Facility4DigitZipExt","1.5.e Facility ZIP Extention","The four-digit extension code that represents the geographic segment that is a sub-unit of the ZIP Code and further refines the exact location of the facility.","Text",0
+"tblS1Facilities","FacilityCity","1.5.c Facility City","The name of the city, town, or village where the facility is located.","Text",0
+"tblS1Facilities","FacilityCountyFIPS","1.5.f Facility County","Federal Information Processing Standard (FIPS) code for the county in which the facility is located.","Text",0
+"tblS1Facilities","FacilityDUNS","1.4.a Facility DUNS","The Data Universal Numbering System (DUNS) number assigned by Dun & Bradstreet to the facility.","Text",0
+"tblS1Facilities","FacilityEmailAddress","1.9.a Facility or Parent Company E-mail Address","The text that represents the electronic mail (email) address for the facility or parent company.","Text",0
+"tblS1Facilities","FacilityID","RMP Identifier","Unique identifier for all RMPs submitted by a specific facility (assigned by Reporting Center for first-time submission). * After this number is assigned to the first submission for a facility, subsequent submissions for the same facility must include this identifier.","Long Integer",0
+"tblS1Facilities","FacilityLatDecDegs","1.5.g Facility Latitude (Decimal Degrees)","Facility Latitude in decimal degrees.","Double",0
+"tblS1Facilities","FacilityLongDecDegs","1.5.h Facility Longitude (Decimal Degrees)","Facility Longitude in decimal degrees.","Double",0
+"tblS1Facilities","FacilityName","1.1.a Facility Name","Facility name specific to the site.","Text",0
+"tblS1Facilities","FacilityPhoneNumber","1.9.b Facility Public Contact Phone Number","Facility phone number for public inquiries to contact owner, 112(r) person responsible, etc.","Text",0
+"tblS1Facilities","FacilityState","1.5.d Facility State","The U.S. Postal Service abbreviation for the state in which the facility is located.","Text",0
+"tblS1Facilities","FacilityStr1","1.5.a Facility Street - Line 1","Facility Street - Line 1 using local street and road designations.  No post office box numbers or rural route numbers.  This is not the mailing address.","Text",0
+"tblS1Facilities","FacilityStr2","1.5.b Facility Street - Line 2","Facility Street Address - Line 2","Text",0
+"tblS1Facilities","FacilityURL","1.9.c Facility or Parent Company WWW Homepage Address","Facility or Parent Company homepage web address.","Text",0
+"tblS1Facilities","FacilityZipCode","1.5.e Facility ZIP Code","The Zoning Improvement Plan (ZIP) Code assigned to the facility by the U.S. Postal Service which represents a geographic area that facilitates mail
+delivery.","Text",0
+"tblS1Facilities","ForeignCountry","1.6.g Foreign Country","If the Owner or Operator (reported in 1.6.a) has an address outside the USA as his or her primary mailing address, enter the foreign country’s code representing the name of the foreign country.  If the primary address is in the USA, leave this field blank.","Text",0
+"tblS1Facilities","ForeignStateProv","1.6.f Foreign State or Province","If the Owner or Operator (reported in 1.6.a) has an address outside the USA as his or her primary mailing address, enter the name of the foreign state
+or province.  If the primary address is in the USA, or if there is no state or province in the foreign mailing address, leave this field blank.","Text",0
+"tblS1Facilities","ForeignZipCode","1.6.h Foreign ZIP Code","If the Owner or Operator (reported in 1.6.a) has an address outside the USA as his or her primary mailing address, enter the International Postal Code
+that represents the address’s postal zone.  If the primary address is in the USA, or if there is no state or province in the foreign mailing address, leave this field blank.","Text",0
+"tblS1Facilities","FTE","1.11 Number of Full Time Employees (FTEs)","Number of full-time equivalent employees.","Long Integer",1
+"tblS1Facilities","GraphicsIndicator","Graphics Indicator","An indication of whether one or more attachments other than graphics were submitted with the RMP. ‘Y’es or ‘N’o","Yes/No",0
+"tblS1Facilities","LatLongDescription","1.5.j Lat/Long Description","Code for the physical place corresponding to the coordinate.  Codes can be obtained from MAD Version 6.1 Standard as implemented in Envirofacts Locational Reference Tables (EF LRT).  http://www.epa.gov/enviro/html/lrt/lrt_over.html","Text",0
+"tblS1Facilities","LatLongMethod","1.5.i Lat/Long Method","Code representing method used to obtain latitude or longitude data.  Codes can be obtained from Method Accuracy Description (MAD) Version 6.1
+Information Coding Standards as implemented in Envirofacts Locational Reference Tables (EF LRT).  http://www.epa.gov/enviro/html/lrt/lrt_over.html","Text",0
+"tblS1Facilities","LEPC","1.10 LEPC","Local Emergency Planning Committee (LEPC) associated with the facility county.  For LEPC information refer to the LEPC/SERC Net Web site
+at http://www.RTK.NET:80/lepc.  Must cover all or part of the Facility County.","Text",0
+"tblS1Facilities","NoAccidents","No Accidents Flag","Optional Flag to Indicate whether there are any accidents to report.","Yes/No",0
+"tblS1Facilities","OperatorCity","1.6.e Owner/Operator City","City for the business mailing address for the Owner or Operator.","Text",0
+"tblS1Facilities","OperatorName","1.6.a Owner/Operator Name","Name of the person or entity that owns or operates the facility.","Text",0
+"tblS1Facilities","OperatorPhone","1.6.b Owner/Operator Phone","Phone number for the Owner or Operator.","Text",0
+"tblS1Facilities","OperatorStateFIPS","1.6.f Owner/Operator State","The U.S. Postal Service state abbreviation for the address of the Owner or Operator.","Text",0
+"tblS1Facilities","OperatorStr1","1.6.c Owner/Operator Street - Line 1","Line 1 of the business street mailing address for the Owner or Operator.","Text",0
+"tblS1Facilities","OperatorStr2","1.6.d Owner/Operator Street - Line 2","Line 2 of the business street mailing address for the Owner or Operator.","Text",0
+"tblS1Facilities","OperatorZipCode","1.6.g Owner/Operator ZIP Code","ZIP Code for the business mailing address of the Owner or Operator.","Text",0
+"tblS1Facilities","OperatorZipCodeExt","1.6.g Owner/Operator ZIP four-digit extention code","The four-digit extension code that represents the geographic segment that is a subunit of the ZIP Code and further refines the business mailing address of the Owner or Operator.","Text",0
+"tblS1Facilities","OSHA_PSM","1.12.a Covered by: OSHA PSM","Occupational Safety and Health Act (OSHA) Process Safety Management (PSM) Standard. Question covers all processes at the facility; if any process at the facility is subject to OSHA PSM, must answer “Y” even if the PSM process is not covered by this Rule.","Yes/No",0
+"tblS1Facilities","OSHARanking","1.13 OSH Star or Merit Ranking","A stationary source with a Star or Merit ranking under OSHA's voluntary protection program shall be exempt from audits under paragraph (b)(2) and
+(b)(7) of [Section 68.220 - audits].","Yes/No",0
+"tblS1Facilities","OtherEPAFacilityID","1.3 Other EPA Systems Program Facility Identifier","The unique identification number assigned to a facility by the Facility Index System (FINDS) (or if not known, the Resource Conservation and Recovery Act (RCRA), Emergency Planning and Community Right-to-Know Act (EPCRA), TRI, or other EPA facility identifier).","Text",0
+"tblS1Facilities","ParentCompanyName","1.1.b Parent Company #1 Name","First Parent Company Name.","Text",0
+"tblS1Facilities","Phone24","1.8.d 24-Hour Phone","Number where emergency contact can be reached during non-working hours, such as a beeper number.","Text",0
+"tblS1Facilities","PostmarkDate","Postmark Date","The postmark date of the RMP received material.","Date/Time",0
+"tblS1Facilities","PredictiveFilingFlag","Predictive Filing Flag","An indication that the submitter is using Predictive Filing for the facility's RMP.","Yes/No",0
+"tblS1Facilities","ReceiptDate","Receipt Date","The date the diskettes or paper submission was received by the Records Center.","Date/Time",0
+"tblS1Facilities","RMPCompleteFlag","RMP Complete Flag","Flag to indicate whether the RMP passed RMP*Process validation and is considered complete, or failed and is considered incomplete.","Yes/No",0
+"tblS1Facilities","RMPContact","1.7.a Name of Person Responsible for RMP Implementaion","Person or position responsible for RMP implementation (40 CFR Part 68).","Text",0
+"tblS1Facilities","RMPDescription","RMP Description","RMP Description is an optional description for the whole RMP.  RMP Description is not accessible to  RMP*Info on the Web.","Text",0
+"tblS1Facilities","RMPTitle","1.7.b Title/Position of Person Responsible for RMP Implementaion","Title of person or position responsible for RMP implementation (40 CFR Part 68).","Text",0
+"tblS1Facilities","SafetyInspectionBy","1.15 Last Safety Inspection Performed by:","A designation representing the external agency that performed the last safety inspection. One or more of the following is expected: 
+   OSHA
+   State OSHA
+   EPA
+   State EPA
+   Fire Department
+   Never had a safety inspection
+   Other","Text",0
+"tblS1Facilities","SafetyInspectionDate","1.14 Last Safety Inspection Date","Date of last safety inspection, by an external Agency.","Date/Time",0
+"tblS1Facilities","SubmissionMethod","Submission Method","The method in which the RMP was submitted, either by RMP*Submit, paper, a commercial software vendor, or other submission method.","Text",0
+"tblS1Facilities","SubmissionType","Submission Type","Submission Type 
+“F” - First-time submission
+“R” - Resubmission
+“C” - Correction of existing RMP","Text",0
+"tblS1Facilities","ValidLatLongFlag","Valid Lat/Long Flag","Flag used to indicate whether the Latitude/Longitude is valid.","Yes/No",0
+"tblS1Facilities","VersionNumber","Version Number","Indicates which version of RMP software was used to submit the plan.  Generated by RMP*Submit and 3rd-party programs.","Text",0
+"tblS1FlammableMixtureChemicals","ChemicalID","Chemical ID","Chemical Abstract Service (CAS) registry number for the flammable chemical.","Long Integer",0
+"tblS1FlammableMixtureChemicals","FlamMixChemID","Flam Mix Chem ID","Unique identifier for the Section 1 Flammable Mixture Chemicals record destination table. Generated by RMP*Submit and 3rd-party programs.","Long Integer",0
+"tblS1FlammableMixtureChemicals","ProcessChemicalID","Process Chemical ID","Unique number used to identify each chemical within a single RMP. Generated by RMP*Submit and 3rd-party programs.","Long Integer",0
+"tblS1Process_NAICS","NAICSCode","1.17.b NAICS Code","The 5- or 6-digit NAICS Code.","Text",0
+"tblS1Process_NAICS","Process_NAICS_ID","Process NAICS ID","Unique number used to identify each NAICS code within a covered process in an RMP.  Generated by RMP*Submit and 3rd-party programs.","Long Integer",0
+"tblS1Process_NAICS","ProcessID","Process ID","Unique number used to identify each covered process in an RMP reported in Section 1. Generated by RMP*Submit and 3rd-party programs.","Long Integer",0
+"tblS1ProcessChemicals","CBI_Flag","CBI Flag","An indication that the quantity was claimed as CBI.","Yes/No",0
+"tblS1ProcessChemicals","ChemicalID","Chemical ID","Chemical Abstract Service (CAS) registry number for the chemical.","Long Integer",0
+"tblS1ProcessChemicals","ProcessChemicalID","Process Chemical ID","Unique number used to identify each chemical within a single RMP.  Generated by RMP*Submit and 3rd-party programs.","Long Integer",0
+"tblS1ProcessChemicals","ProcessID","Process ID","Unique number used to identify each covered process within an RMP from Section 1 Program Level for the Covered Process.  Generated by RMP*Submit and 3rd-party programs.","Long Integer",0
+"tblS1ProcessChemicals","Quantity","1.17.c.3 Quantity","The maximum inventory quantity of the regulated substance or mixture in the process in pounds.","Double",1
+"tblS1ProcessChemicals","Quantity/Threshold","Maximum quantity of each regulated substance divided by threshold quantity.",,"Double",1
+"tblS1Processes","AltID","Process Description","Optional Process Description.","Text",0
+"tblS1Processes","CBI_Flag","CBI Flag","If Process Record Contains CBI Data.","Yes/No",0
+"tblS1Processes","FacilityID","Facility ID","Unique identifier for all RMPs submitted by a specific facility (assigned by Reporting Center for first-time submission). * After this number is assigned to the first submission for a facility, subsequent submissions for the same facility must include this identifier.","Long Integer",0
+"tblS1Processes","ProcessID","Process ID","Unique number used to identify each process within the RMP.  The same number will not necessarily be assigned to the same process for an RMP in a resubmission.","Long Integer",0
+"tblS1Processes","ProgramLevel","1.17.a Program Level","Program category, (e.g., Program Level 1, 2, or 3), to identify with which program level the process complies.","Integer",1
+"tblS2ToxicsWorstCase","AnalyticalBasis","2.3 Model Used","The analytical basis for choosing the Toxics Worst Case Scenario.   One of the following is expected:
+EPA’s OCA Guidance Reference Tables or Equations; 
+EPA’s RMP Guidance for Ammonia Refrigeration
+Reference Tables or Equations;
+EPA’s RMP Guidance for Wastewater Treatment Plants Reference Tables or Equations;
+EPA’s RMP Guidance for Warehouses Reference Tables or Equations;
+EPA’s RMP Guidance for Chemical Distributors Reference Tables or Equations;
+EPA’s RMP*Comp (TM);
+Areal Locations of Hazardous Atmosphere
+[Aloha (R)];
+Other Model Name.","Text",0
+"tblS2ToxicsWorstCase","CBI_Flag","CBI Flag","An indication that Confidential Business Information (CBI) was claimed for certain data elements in the record.","Yes/No",0
+"tblS2ToxicsWorstCase","Distance2Endpoint","2.11 Distance to endpoint (miles)","The distance to the endpoint in miles for the chemical, using the endpoint specified for the chemical in Appendix A of the risk management program Rule.","Single",1
+"tblS2ToxicsWorstCase","ER_FedWilderness",,"An indication that federal wilderness areas are within a circle whose center is the point of the release and radius is determined by the distance to the endpoint.","Yes/No",0
+"tblS2ToxicsWorstCase","ER_NatlStateParks",,"An indication that national or state parks, forests, or monuments are within a circle whose center is the point of the release and radius is determined by
+the distance to the endpoint.","Yes/No",0
+"tblS2ToxicsWorstCase","ER_OtherType",,"The type of environmental receptor if the environmental receptor is other than those listed in 2.14.a. through 2.14.c.","Text",0
+"tblS2ToxicsWorstCase","ER_WildlifeSactuary",,"An indication that officially designated wildlife sanctuaries, preserves, or refuges are within a circle whose center is the point of the release and
+radius is determined by the distance to the endpoint.","Yes/No",0
+"tblS2ToxicsWorstCase","PercentWeight","2.1.b Percent weight of chemical in mixture","Percent weight of a toxic chemical in a mixture.","Single",1
+"tblS2ToxicsWorstCase","PhysicalState",,"Code representing the physical state of the regulated chemical as it is  released in the scenario.","Text",0
+"tblS2ToxicsWorstCase","PM_Berms",,"An indication that a mound or wall of earth at the top or bottom of a slope that prevents a spill from spreading is in place.","Yes/No",0
+"tblS2ToxicsWorstCase","PM_Dikes",,"An indication that a low wall that acts as a barrier to prevent a spill from spreading is in place.","Yes/No",0
+"tblS2ToxicsWorstCase","PM_Drains",,"An indication that a channel that carries off surface water is in place.","Yes/No",0
+"tblS2ToxicsWorstCase","PM_Enclosures",,"An indication that a physical containment of the release within a structure (e.g., a building) is in place.","Yes/No",0
+"tblS2ToxicsWorstCase","PM_OtherType",,"The Passive Mitigation type considered if other than those listed above.","Text",0
+"tblS2ToxicsWorstCase","PM_Sumps",,"An indication that a pit or tank that catches liquid runoff for drainage or disposal is in place.","Yes/No",0
+"tblS2ToxicsWorstCase","PR_Comm_Ind",,"Indication that a major commercial, office, or industrial area is within the distance to the endpoint specified in the worst case scenario. These include
+industrial parks, office buildings, shopping malls, commercial areas.","Yes/No",0
+"tblS2ToxicsWorstCase","PR_Hospitals",,"Indication that a hospital is within the distance to the endpoint specified in the worst case scenario.","Yes/No",0
+"tblS2ToxicsWorstCase","PR_OtherType",,"The type of public receptor if the public receptor is other than those listed in 2.13.a. through 2.13.f.","Text",0
+"tblS2ToxicsWorstCase","PR_Prisons",,"Indication that a prison or correction facility is within the distance to the endpoint specified in the worst case scenario.","Yes/No",0
+"tblS2ToxicsWorstCase","PR_PublicRecreation",,"Indication that a recreational area or arena is within the distance to the endpoint specified in the worst case scenario.  These include stadiums, parks, and public pools.","Yes/No",0
+"tblS2ToxicsWorstCase","PR_Residences",,"Indication that residences are within the distance to the endpoint specified in the worst case scenario.","Yes/No",0
+"tblS2ToxicsWorstCase","PR_Schools",,"Indication that a school is within the distance to the endpoint specified in the worst case scenario. Schools include: public and private elementary,
+secondary, and higher education schools.","Yes/No",0
+"tblS2ToxicsWorstCase","ProcessChemicalID",,"Unique number used to identify each chemical in a process.  From Section 1 Chemicals in Covered Process.","Long Integer",0
+"tblS2ToxicsWorstCase","ptrGraphic",,"The DOS file name for the toxics worst case graphic accompanying the scenario.  Should be “.JPG,” or “.GIF” with up to an 8-character prefix.","Text",0
+"tblS2ToxicsWorstCase","QuantityReleased","2.5 Quantity released (lbs)","The quantity of the chemical released in pounds during the worst case scenario.","Double",1
+"tblS2ToxicsWorstCase","ReleaseDuration","2.7 Release duration (min)","Indicate the length of time in minutes for the vessel, pipeline, or other location of the regulated substance to release all of its contents.  For gasses, the duration is 10 minutes.","Single",1
+"tblS2ToxicsWorstCase","ReleaseRate","2.6 Release rate (lbs/min)","The release rate of the chemical in pounds per minute.","Double",1
+"tblS2ToxicsWorstCase","ResidentialPopulation","2.12 Residential population within distance to endpoint","Population within the distance to endpoint of the area encompassed by the endpoint.  Need only include residential populations and may be rounded to two significant digits.","Long Integer",1
+"tblS2ToxicsWorstCase","Scenario",,"A code representing the toxics worst case scenario.","Text",0
+"tblS2ToxicsWorstCase","StabilityClass",,"Stability Class - “F” unless local meteorological data can demonstrate otherwise.","Text",0
+"tblS2ToxicsWorstCase","Topography",,"A code representing whether the local topography is urban or rural.","Text",0
+"tblS2ToxicsWorstCase","ToxicID",,"Unique identifier for Section 2 Toxics Worst Case record destination table.  Generated by RMP*Submit and 3rd-party programs.","Long Integer",0
+"tblS2ToxicsWorstCase","WindSpeed",,"The wind speed in meters per second. This is 1.5 meters per second unless local meteorological data applicable to the source is used to show a higher
+minimum wind speed at all times during the last 3 years.","Single",0
+"tblS3ToxicsAltReleases","AM_DelugeSystems",,"A system to overflow an area of a release with water or other extinguishing fluid.","Yes/No",0
+"tblS3ToxicsAltReleases","AM_EmergencyShutdown",,"Controls that are triggered when process limits are exceeded and that shut down that process.","Yes/No",0
+"tblS3ToxicsAltReleases","AM_ExcessFlowValve",,"A system for diverting overflow.","Yes/No",0
+"tblS3ToxicsAltReleases","AM_Flares",,"A device for disposing of combustible gases from a chemical process by burning them in the open.","Yes/No",0
+"tblS3ToxicsAltReleases","AM_Neutralization",,"Making a toxic chemical harmless through chemical reaction.","Yes/No",0
+"tblS3ToxicsAltReleases","AM_OtherType",,"The type of active mitigation in place if other than those listed in 3.16.a. through 3.16.h.","Text",0
+"tblS3ToxicsAltReleases","AM_Scrubbers",,"A pre-release protection measure that uses water or aqueous mixtures containing scrubbing reagents to remove discharging liquids and possibly also treating the discharging chemical.","Yes/No",0
+"tblS3ToxicsAltReleases","AM_SprinklerSystems",,"A system for protecting a building against fire by means of overhead pipes which convey an extinguishing fluid through heat activated outlets.","Yes/No",0
+"tblS3ToxicsAltReleases","AM_WaterCurtain",,"A spray of water from a horizontal pipe through nozzles, the curtain may be activated manually or automatically.","Yes/No",0
+"tblS3ToxicsAltReleases","AnalyticalBasis",,"The analytical basis for choosing the Toxics Alternative Release Scenario.  Users may add their own data source if it is not on the list.  One of the
+following is expected:
+EPA’s OCA Guidance Reference Tables or Equations; 
+EPA’s RMP Guidance for Ammonia Refrigeration
+Reference Tables or Equations;
+EPA’s RMP Guidance for Wastewater Treatment
+Plants Reference Tables or Equations;
+EPA’s RMP Guidance for Warehouses Reference
+Tables or Equations;
+EPA’s RMP Guidance for Chemical Distributors
+Reference Tables or Equations;
+EPA’s RMP*Comp (TM);
+Areal Locations of Hazardous Atmosphere
+[Aloha(R)];
+Other Model Name.","Text",0
+"tblS3ToxicsAltReleases","CBI_Flag",,"Set if record contains CBI data.","Yes/No",0
+"tblS3ToxicsAltReleases","Distance2Endpoint","3.11 Distance to endpoint  (miles)","The distance to the endpoint of the toxics alternative release scenario in miles using the endpoint specified for the chemical in Appendix A of the Risk Management Program Rule.","Single",1
+"tblS3ToxicsAltReleases","ER_FedWilderness",,"An indication that federal wilderness areas are within a circle whose center is the point of the release and radius is determined by the distance to the endpoint for the alternative release scenario.","Yes/No",0
+"tblS3ToxicsAltReleases","ER_NatlStateParks",,"An indication that national or state parks, forests, or monuments are within a circle whose center is the point of the release and radius is determined by
+the distance to the endpoint for the alternative release scenario.","Yes/No",0
+"tblS3ToxicsAltReleases","ER_OtherType",,"The type of environmental receptor if the environmental receptor is other than those listed in 3.14.a. through 3.14.c.","Text",0
+"tblS3ToxicsAltReleases","ER_WildlifeSactuary",,"An indication that officially designated wildlife sanctuaries, preserves, or refuges are within a circle whose center is the point of the release and
+radius is determined by the distance to the endpoint.","Yes/No",0
+"tblS3ToxicsAltReleases","PercentWeight","3.1.b Percent weight of chemical in mixture","Percent weight of the regulated substance in the chemical evaluated.","Single",1
+"tblS3ToxicsAltReleases","PhysicalState",,"Code representing the physical state of the toxic chemical as it is released in the scenario.","Text",0
+"tblS3ToxicsAltReleases","PM_Berms",,"An indication that a mound or wall of earth at the top or bottom of a slope that prevents a spill from spreading is in place.","Yes/No",0
+"tblS3ToxicsAltReleases","PM_Dikes",,"An indication that a low wall that acts as a barrier to prevent a spill from spreading is in place.","Yes/No",0
+"tblS3ToxicsAltReleases","PM_Drains",,"An indication that a channel that carries off surface
+water is in place.","Yes/No",0
+"tblS3ToxicsAltReleases","PM_Enclosures",,"An indication that a physical containment of the release within a structure (e.g., a building) is in place.","Yes/No",0
+"tblS3ToxicsAltReleases","PM_OtherType",,"The type of Passive Mitigation in place if the passive mitigation is other than those listed in 3.15.a. through 3.15.e.","Text",0
+"tblS3ToxicsAltReleases","PM_Sumps",,"An indication that a pit or tank that catches liquid runoff for drainage or disposal is in place.","Yes/No",0
+"tblS3ToxicsAltReleases","PR_Comm_Ind",,"An indication that a major commercial, office, or industrial area is within the distance to the endpoint specified in the alternative release scenario. These
+include industrial parks, office buildings, shopping malls, commercial areas.","Yes/No",0
+"tblS3ToxicsAltReleases","PR_Hospitals",,"An indication that a hospital is within the distance to the endpoint specified in the alternative release scenario.","Yes/No",0
+"tblS3ToxicsAltReleases","PR_OtherType",,"The type of public receptor if the public receptor is other than those listed in 3.13.a. through 3.13.f.","Text",0
+"tblS3ToxicsAltReleases","PR_Prisons",,"An indication that a prison or correction facility is within the distance to the endpoint specified in the alternative release scenario.","Yes/No",0
+"tblS3ToxicsAltReleases","PR_PublicRecreation",,"An indication that a recreational area or arena is within the distance to the endpoint specified in the alternative release scenario. These include stadiums, parks, and public pools.","Yes/No",0
+"tblS3ToxicsAltReleases","PR_Residences",,"An indication that residences are within the distance to the endpoint specified in the alternative release scenario.","Yes/No",0
+"tblS3ToxicsAltReleases","PR_Schools",,"An indication that a school is within the distance to the endpoint specified in the alternative release scenario. Schools include public and private elementary, secondary, or higher education schools.","Yes/No",0
+"tblS3ToxicsAltReleases","ProcessChemicalID",,"Unique number used to identify each chemical in a process from Section 1 Chemicals in Covered Process.  Generated by RMP*Submit and 3rd-party programs.","Long Integer",0
+"tblS3ToxicsAltReleases","ptrGraphic",,"The type of active mitigation in place if other than those listed in 3.16.a. through 3.16.h.","Text",0
+"tblS3ToxicsAltReleases","QuantityReleased","3.5 Quantity released (lbs)","The quantity of the chemical released during the alternative release scenario in pounds.","Double",1
+"tblS3ToxicsAltReleases","ReleaseDuration","3.7 Release duration (min)","The a length of time in minutes for the vessel, pipeline, or other location of the regulated substance to release the quantity.","Single",1
+"tblS3ToxicsAltReleases","ReleaseRate","3.6 Release rate (lbs/min)","The release rate in pounds per minute.","Double",1
+"tblS3ToxicsAltReleases","ResidentialPopulation","3.12 Residential population within distance to endpoint","The residential population within the distance to endpoint potentially impacted by the toxics alternative release scenario.","Long Integer",1
+"tblS3ToxicsAltReleases","Scenario",,"A description of the toxics alternative release scenario as follows: (a) Transfer hose failure is the failure of the connection between two or more
+vessels; (b) Pipe leak is the release through a rupture in a pipe; (c) Vessel leak is a release through a rupture in a vessel; (d) Overfilling is release due to filling a pipe, vessel, or other container past its capacity; (e) Ruptured disk/relief valve is a release due to failure of a rupture disk/relief valve to function properly.  A rupture disk/relief valve is a valve that relieves pressure
+beyond a specified limit; a relief valve re-closes upon return to normal operating conditions; (f) Excess flow device failure is a release caused by
+the failure of excess flow device to function properly and prevent surges from reaching downstream equipment; and (g) any other scenario not in list. One of the following should be specified:
+Transfer hose failure;
+Pipe leak;
+Vessel leak;
+Overfilling;
+Rupture disk/relief; Valve failure;
+Excess flow device failure;
+Other (specify).","Text",0
+"tblS3ToxicsAltReleases","StabilityClass",,"A code (A through F) representing the average daily stability based on annual data collected at the site or local meteorological station.  List ""D,"" if
+OCA guidance is used.  If scenario is modeled, use the average daily stability based on annual data collected at local meteorological station.","Text",0
+"tblS3ToxicsAltReleases","Topography",,"A code representing the topography of the area potentially impacted by the alternative release scenario.","Text",0
+"tblS3ToxicsAltReleases","ToxicID",,"Unique identifier for the Section 3 Toxics Alternative Release record destination table.  Generated by RMP*Submit and 3rd-party programs.","Long Integer",0
+"tblS3ToxicsAltReleases","WindSpeed",,"The wind speed in meters per second.  List 3 m/s if RMP Offsite Consequence Analysis (OCA) guidance is used.  If scenario is modeled, indicate the average daily wind speed based on annual data collected at the local meteorological station.","Single",0
+"tblS4FlammablesWorstCase","AnalyticalBasis",,"The analytical basis for choosing the Flammables Worst Case Scenario.  
+One of the following should be specified:
+EPA’s OCA Guidance Reference Tables or Equations; 
+EPA’s RMP Guidance for Propane Storage
+Reference Tables or Equations;
+EPA’s RMP Guidance for Wastewater Treatment Plants Reference Tables or Equations;
+EPA’s RMP Guidance for Warehouses Reference Tables or Equations;
+EPA’s RMP Guidance for Chemical Distributors Reference Tables or Equations;
+EPA’s RMP*Comp (TM);
+Other Model Name.","Text",0
+"tblS4FlammablesWorstCase","CBI_Flag",,"An indication that Confidential Business Information (CBI) was claimed for certain data elements in the record.","Yes/No",0
+"tblS4FlammablesWorstCase","Distance2Endpoint","4.6 Distance to endpoint  (miles)","The distance to the end of the impact zone for the flammables worst case scenario.","Single",1
+"tblS4FlammablesWorstCase","ER_FedWilderness",,"An indication that federal wilderness areas are within a circle whose center is the point of the release and radius is determined by the distance to the endpoint.","Yes/No",0
+"tblS4FlammablesWorstCase","ER_NatlStateParks",,"An indication that national or state parks, forests, or monuments are within a circle whose center is the point of the release and radius is determined by
+the distance to the endpoint.","Yes/No",0
+"tblS4FlammablesWorstCase","ER_OtherType",,"The type of environmental receptor if the environmental receptor is other than those listed in 4.9.a. through 4.9.c.","Text",0
+"tblS4FlammablesWorstCase","ER_WildlifeSactuary",,"An indication that officially designated wildlife sanctuaries, preserves, or refuges are within a circle whose center is the point of the release and
+radius is determined by the distance to the endpoint.","Yes/No",0
+"tblS4FlammablesWorstCase","FlammableID",,"Unique identifier for the flammables worst case record destination table.  Generated by RMP*Submit and 3rd-party programs.","Long Integer",0
+"tblS4FlammablesWorstCase","PM_BlastWalls",,"An indication that a heavy wall used to isolate buildings or areas that contain highly combustible or explosive materials is in place.","Yes/No",0
+"tblS4FlammablesWorstCase","PM_OtherType",,"The type of the passive mitigation considered if other than 4.10.a.","Text",0
+"tblS4FlammablesWorstCase","PR_Comm_Ind",,"An indication that a major commercial, office, or industrial area is within the distance to the endpoint specified in the worst case scenario. These include
+industrial parks, office buildings, shopping malls, commercial areas.","Yes/No",0
+"tblS4FlammablesWorstCase","PR_Hospitals",,"An indication that a hospital is within the distance to the endpoint specified in the worst case scenario.","Yes/No",0
+"tblS4FlammablesWorstCase","PR_OtherType",,"The type of public receptor if the public receptor is other than those listed in 4.8.a through 4.8.f.","Text",0
+"tblS4FlammablesWorstCase","PR_Prisons",,"An indication that a prison or correction facility is within the distance to the endpoint specified in the worst case scenario.","Yes/No",0
+"tblS4FlammablesWorstCase","PR_PublicRecreation",,"An indication that a recreational area or arena is within the distance to the endpoint specified in the worst case scenario. These include stadiums, parks, and public pools.","Yes/No",0
+"tblS4FlammablesWorstCase","PR_Residences",,"An indication that residences are within the distance to the endpoint specified in the worst case scenario.","Yes/No",0
+"tblS4FlammablesWorstCase","PR_Schools",,"An indication that a school is within the distance to the endpoint specified in the worst case scenario.  Schools include: public and private elementary,
+secondary, or higher education schools.","Yes/No",0
+"tblS4FlammablesWorstCase","ProcessChemicalID",,"Unique number used to identify each chemical in a process.  Generated by RMP*Submit and 3rd-party programs.","Long Integer",0
+"tblS4FlammablesWorstCase","ptrGraphic",,"The DOS file name of the graphic file for the flammables worst case scenario.  Should be “.JPG” or “.GIF” with up to an 8-character prefix.","Text",0
+"tblS4FlammablesWorstCase","QuantityReleased","4.4 Quantity released (lbs)","The quantity of the flammable chemical released in pounds.","Double",1
+"tblS4FlammablesWorstCase","ResidentialPopulation","4.7 Residential population within distance to endpoint","The population within the distance to endpoint potentially impacted by the worst case scenario.","Long Integer",1
+"tblS5FlammablesAltReleases","AM_DelugeSystems",,"An indication that a system to overflow an area of a release with water or other extinguishing fluid was considered.","Yes/No",0
+"tblS5FlammablesAltReleases","AM_ExcessFlowValve",,"An indication that a system for diverting overflow was considered.","Yes/No",0
+"tblS5FlammablesAltReleases","AM_OtherType",,"The type of active mitigation considered if other than those listed in 5.11.a through 5.11.d.","Text",0
+"tblS5FlammablesAltReleases","AM_SprinklerSystems",,"An indication that a system for protecting against fire by means of overhead pipes which convey an extinguishing fluid through heat activated outlets was considered.","Yes/No",0
+"tblS5FlammablesAltReleases","AM_WaterCurtain",,"An indication that a spray of water from a horizontal pipe through nozzles was considered.  The curtain may be activated manually or automatically.","Yes/No",0
+"tblS5FlammablesAltReleases","AnalyticalBasis",,"The analytical basis for choosing the Flammables Alternative Release Scenario.","Text",0
+"tblS5FlammablesAltReleases","CBI_Flag",,"An indication that Confidential Business Information (CBI) was claimed for certain data elements in the record.","Yes/No",0
+"tblS5FlammablesAltReleases","Distance2Endpoint","5.6 Distance to endpoint  (miles)","The distance impacted by the flammable release in miles.","Single",1
+"tblS5FlammablesAltReleases","EndpointUsed",,"The endpoint of the flammable reaction - “1 PSI” or “5 kw/m2 for 40 seconds” or “Lower flammability limit.”","Text",0
+"tblS5FlammablesAltReleases","ER_FedWilderness",,"An indication that federal wilderness areas are within a circle whose center is the point of the release and radius is determined by the distance to the endpoint.","Yes/No",0
+"tblS5FlammablesAltReleases","ER_NatlStateParks",,"An indication that national or state parks, forests, or monuments are within a circle whose center is the point of the release and radius is determined by the distance to the endpoint.","Yes/No",0
+"tblS5FlammablesAltReleases","ER_OtherType",,"The type of environmental receptor if the environmental receptor is other than those listed in 5.9.a. through 5.9.c.","Text",0
+"tblS5FlammablesAltReleases","ER_WildlifeSactuary",,"An indication that officially designated wildlife sanctuaries, preserves, or refuges are within a circle whose center is the point of the release and radius is determined by the distance to the endpoint.","Yes/No",0
+"tblS5FlammablesAltReleases","FlammableID",,"Unique identifier for the Flammables Alternative Release record.  Generated by RMP*Submit and 3rd-party programs.","Long Integer",0
+"tblS5FlammablesAltReleases","LFL_Value","5.5 LFL Value (% Volume)","The lower flammability limit in units of percent volume.","Single",1
+"tblS5FlammablesAltReleases","PM_BlastWalls",,"An indication that a heavy wall used to isolate buildings or areas that contain highly combustible or explosive materials is in place.","Yes/No",0
+"tblS5FlammablesAltReleases","PM_Dikes",,"An indication that a low wall that acts as a barrier to prevent a spill from spreading is in place.","Yes/No",0
+"tblS5FlammablesAltReleases","PM_Enclosures",,"An indication that a type of physical containment of the release within a structure (e.g., a building) is in place.","Yes/No",0
+"tblS5FlammablesAltReleases","PM_FireWalls",,"An indication that a wall constructed to prevent the spread of fire is in place.","Yes/No",0
+"tblS5FlammablesAltReleases","PM_OtherType",,"The type of the passive mitigation considered if other than those listed in 5.10.a. through 5.10.d.","Text",0
+"tblS5FlammablesAltReleases","PR_Comm_Ind",,"An indication that a major commercial, office, or industrial area is within the distance to the endpoint specified in the alternative release scenario. These
+include industrial parks, office buildings, shopping malls, and commercial areas.","Yes/No",0
+"tblS5FlammablesAltReleases","PR_Hospitals",,"An indication that a hospital is within the distance to the endpoint specified in the alternative release scenario.","Yes/No",0
+"tblS5FlammablesAltReleases","PR_OtherType",,"The type of public receptor if the public receptor is other than those listed in 5.8.a. through 5.8.f.","Text",0
+"tblS5FlammablesAltReleases","PR_Prisons",,"An indication that a prison or correction facility is within the distance to the endpoint specified in the alternative release scenario.","Yes/No",0
+"tblS5FlammablesAltReleases","PR_PublicRecreation",,"An indication that a recreational area or arena is within the distance to the endpoint specified in the alternative release scenario. These include stadiums, parks, and public pools.","Yes/No",0
+"tblS5FlammablesAltReleases","PR_Residences",,"An indication that residences are within the distance to the endpoint specified in the alternative release scenario.","Yes/No",0
+"tblS5FlammablesAltReleases","PR_Schools",,"An indication that a school is within the distance to the endpoint specified in the alternative release scenario.  Schools include: public and private elementary, secondary, and  higher education schools.","Yes/No",0
+"tblS5FlammablesAltReleases","ProcessChemicalID",,"From Section 1 Chemicals in Covered Process, the Process Chemical Identifier is a number unique to the chemical that is being reported and is used to identify each chemical within a process.  Generated by RMP*Submit and 3rd-party programs.","Long Integer",0
+"tblS5FlammablesAltReleases","ptrGraphic",,"The file name of the graphics file for the flammable alternative release scenario.  Should be “.JPG,” or “.GIF” with up to an 8-character prefix.","Text",0
+"tblS5FlammablesAltReleases","QuantityReleased","5.4 Quantity released (lbs)","The quantity of the flammable chemical released in pounds.","Double",1
+"tblS5FlammablesAltReleases","ResidentialPopulation","5.7 Residential population within distance to endpoint","The population within the distance to endpoint potentially impacted by the alternative release.","Long Integer",1
+"tblS5FlammablesAltReleases","Scenario",,"The type of flammable release scenario.   One of the following should be specified:
+Vapor cloud explosion;
+Fireball;
+BLEVE;
+Pool fire;
+Jet fire;
+Vapor cloud fire;
+Other (specify).","Text",0
+"tblS6AccidentChemicals","AccidentChemicalID",,"Unique identifier for the Five-year Accident History record.  Generated by RMP*Submit and 3rd-party programs.","Long Integer",0
+"tblS6AccidentChemicals","AccidentHistoryID",,"Unique identifier for the Five-year Accident History record.  Generated by RMP*Submit and 3rd-party programs.","Long Integer",0
+"tblS6AccidentChemicals","ChemicalID",,"Chemical Abstract Service (CAS) registry number for the chemical released.","Long Integer",0
+"tblS6AccidentChemicals","PercentWeight","6.5.c Percent Weight","Percent weight of chemical in release. This applies to toxic chemicals only.","Single",1
+"tblS6AccidentChemicals","QuantityReleased","6.5.b Quantity released (lbs)","The amount of the chemical released in pounds.","Double",1
+"tblS6AccidentHistory","AccidentDate",,"Date of the accident.","Date/Time",0
+"tblS6AccidentHistory","AccidentHistoryID",,"Unique identifier for the Five-year Accident History record.  Generated by RMP*Submit and 3rd-party programs.","Long Integer",0
+"tblS6AccidentHistory","AccidentReleaseDuration",,"Approximate length of time of the release in hours and minutes.","Text",0
+"tblS6AccidentHistory","AccidentTime",,"Time of the accident (Military Time).","Text",0
+"tblS6AccidentHistory","CBI_Flag",,"An indication that Confidential Business Information (CBI) was claimed for certain data elements in the record.","Yes/No",0
+"tblS6AccidentHistory","CF_BypassCondition",,"A pipe or channel that provides an alternative pathway that detours the main pathway fails releasing a substance.","Yes/No",0
+"tblS6AccidentHistory","CF_EquipmentFailure",,"A device or piece of equipment did not function as designed thereby allowing a substance to be released.","Yes/No",0
+"tblS6AccidentHistory","CF_HumanError",,"An operator performs an operation improperly or makes a mistake resulting in a release.","Yes/No",0
+"tblS6AccidentHistory","CF_ImproperProcedure",,"The procedure did not reflect the current method of operation, the procedure omitted steps that affected the accident, or the procedure was written in a
+manner that allowed for misinterpretation of the instructions.","Yes/No",0
+"tblS6AccidentHistory","CF_Maintenance",,"Any failure that occurs because of maintenance activity or inactivity.","Yes/No",0
+"tblS6AccidentHistory","CF_ManagementError",,"This may be used to describe failures that occur because management did not exercise its managerial control to prevent the situation from
+occurring.  This is usually used to describe faulty procedures, inadequate training, or failure to follow existing administrative procedures.","Yes/No",0
+"tblS6AccidentHistory","CF_Other",,"A description of the factor that contributed to the accident occurring if other than those listed in 6.12.a. through 6.12.k.","Text",0
+"tblS6AccidentHistory","CF_Overpressurization",,"The process was operated at pressures exceeding the design working pressure.","Yes/No",0
+"tblS6AccidentHistory","CF_ProcessDesignFailure",,"Any failure that occurs because of an inherent flaw in the design of the process.","Yes/No",0
+"tblS6AccidentHistory","CF_UnsuitableEquipment",,"The equipment used was incorrect for the process.","Yes/No",0
+"tblS6AccidentHistory","CF_UnusualWeather",,"Weather conditions, such as lightning, hail, ice storms, tornados, hurricanes, floods, or high winds caused the accident.","Yes/No",0
+"tblS6AccidentHistory","CF_UpsetCondition",,"The process was operated at pressures exceeding the design working pressure.","Yes/No",0
+"tblS6AccidentHistory","CI_ChangedProcess",,"An indication that the process was changed.","Yes/No",0
+"tblS6AccidentHistory","CI_ImprovedEquipment",,"A device or piece of equipment that did not function as designed was repaired or replaced.","Yes/No",0
+"tblS6AccidentHistory","CI_NewMitigationSystems",,"New mitigation systems were initiated to limit accidental releases.","Yes/No",0
+"tblS6AccidentHistory","CI_NewProcessControls",,"New process designs and controls were installed to correct problems and prevent recurrence of an accidental release.","Yes/No",0
+"tblS6AccidentHistory","CI_None",,"An indication that none of the measures were taken at the facility to prevent recurrence of the accident.","Yes/No",0
+"tblS6AccidentHistory","CI_OtherType",,"The name of the change introduced if other than one of the choices listed above.","Text",0
+"tblS6AccidentHistory","CI_ReducedInventory",,"An indication that Inventory was reduced at the source to prevent accidental release.","Yes/No",0
+"tblS6AccidentHistory","CI_RevisedERPlan",,"The emergency response plan was revised.","Yes/No",0
+"tblS6AccidentHistory","CI_RevisedMaintenance",,"Maintenance processes were clarified or changed to ensure employees and contract employees are aware of and are practicing correct safety, process,
+and administrative procedures.","Yes/No",0
+"tblS6AccidentHistory","CI_RevisedOpProcedures",,"Operating procedures were clarified or changed to ensure that employees and contract employees are trained on process operating procedures.","Yes/No",0
+"tblS6AccidentHistory","CI_RevisedTraining",,"Training programs were clarified or changed to ensure that employees and contract employees are aware of and are practicing correct safety, process,
+and administrative procedures.","Yes/No",0
+"tblS6AccidentHistory","DeathsPublic","6.9.a.iii On-site impacts: Deaths: Public","The number of public killed onsite during the accident or performing any mitigation activities.","Long Integer",1
+"tblS6AccidentHistory","DeathsPublicResponders","6.9.a.ii On-site impacts: Deaths: Public responders","The number of public responders killed onsite during the accident or performing any mitigation activities.","Long Integer",1
+"tblS6AccidentHistory","DeathsWorkers","6.9.a.i On-site impacts: Deaths: Employees or contractors","The number of workers or contractors killed onsite during the accident or performing any mitigation activities.","Long Integer",1
+"tblS6AccidentHistory","ED_Kills",,"An indication that the type of environmental damage that occurred involved fish or animal kills.","Yes/No",0
+"tblS6AccidentHistory","ED_MinorDefoliation",,"An indication that the type of environmental damage that occurred involved tree, lawn, shrub, or crop damage.","Yes/No",0
+"tblS6AccidentHistory","ED_Other",,"The name of the other type of environmental damage that occurred if other than those listed in 6.10.g.1 through 6.10.g.4.","Text",0
+"tblS6AccidentHistory","ED_SoilContamination",,"An indication that the type of environmental damage that occurred involved soil contamination.","Yes/No",0
+"tblS6AccidentHistory","ED_WaterContamination",,"An indication that the type of environmental damage that occurred involved water contamination.","Yes/No",0
+"tblS6AccidentHistory","Evacuated","6.10.d Known off-site impacts: Evacuated","The number of people evacuated.","Double",1
+"tblS6AccidentHistory","FacilityID",,"Unique identifier for all RMPs submitted by a specific facility (assigned by Reporting Center for first-time submission). * After this number is assigned to the first submission for a facility, subsequent submissions for the same facility must include this identifier.","Long Integer",0
+"tblS6AccidentHistory","Hospitalization","6.10.b Known off-site impacts: Hospitalizations","The total number of injuries to the community attributable to the accident that required hospitalization.","Double",1
+"tblS6AccidentHistory","InitiatingEvent",,"The name of the other type of environmental damage that occurred if other than those listed in 6.10.g.1 through 6.10.g.4.","Text",0
+"tblS6AccidentHistory","InjuriesPublic","6.9.b.iii On-site impacts: Injuries: Public","The number of public injured onsite during the accident or performing any mitigation activities.","Long Integer",1
+"tblS6AccidentHistory","InjuriesPublicResponders","6.9.b.ii On-site impacts: Injuries: Public responders","The number of public responders injured onsite during the accident or performing any mitigation activities.","Long Integer",1
+"tblS6AccidentHistory","InjuriesWorkers","6.9.b.i On-site impacts: Injuries: Employees or contractors","The number of workers or contractors injured onsite during the accident or performing any mitigation activities.","Long Integer",1
+"tblS6AccidentHistory","MedicalTreatment","6.10.c Known off-site impacts: Other medical treatment","The number of injuries to the community that required medical treatment, not including first aid.","Double",1
+"tblS6AccidentHistory","NAICSCode",,"The 5- or 6- digit NAICS code.","Text",0
+"tblS6AccidentHistory","OffsiteDeaths","6.10.a Known off-site impacts: Deaths","The number of offsite deaths attributable to the accident.","Long Integer",1
+"tblS6AccidentHistory","OffsitePropertyDamage","6.10.f Known off-site impacts: Property damage ($)","Estimated value of the off-site property damage, in whole American dollars, caused by the accident, including damage to response equipment.","Double",1
+"tblS6AccidentHistory","OffsiteRespondersNotify",,"Indication of whether agencies were contacted:
+	Notified only
+	Notified Responded
+	No, not notified
+	Unknown
+Users may add their own data if it is not on the list.","Text",0
+"tblS6AccidentHistory","OnsitePropertyDamage","6.9.c On-site impacts: Injuries: Property damage","Value of the equipment or business structures that were damaged by the accident or mitigation activities at the facility, in whole U.S. dollars.","Double",1
+"tblS6AccidentHistory","OtherReleaseSource",,"Value of the equipment or business structures that were damaged by the accident or mitigation activities at the facility, in whole U.S. dollars.","Text",0
+"tblS6AccidentHistory","Precipitation",,"An indicator of whether precipitation was present at the time of the accident.","Yes/No",0
+"tblS6AccidentHistory","RE_Explosion",,"Rapid chemical reaction with the production of noise, heat, and violent expansion of gases.","Yes/No",0
+"tblS6AccidentHistory","RE_Fire",,"Product (e.g., fuel) in a state of combustion.","Yes/No",0
+"tblS6AccidentHistory","RE_Gas",,"Release of the substance in a vapor state.","Yes/No",0
+"tblS6AccidentHistory","RE_Spill",,"Release of the substance in a liquid state with subsequent vaporization.","Yes/No",0
+"tblS6AccidentHistory","RS_Joint",,"The surface at which two or more mechanical components are united.","Yes/No",0
+"tblS6AccidentHistory","RS_Piping",,"System of pipes used to carry a fluid.","Yes/No",0
+"tblS6AccidentHistory","RS_ProcessVessel",,"Container in which regulated substances are blended to form a mixture or reacted to convert them into some other final product or form.","Yes/No",0
+"tblS6AccidentHistory","RS_Pump",,"Device that raises, transfers, or compresses fluids or that attenuates gases by suction or pressure or both.","Yes/No",0
+"tblS6AccidentHistory","RS_StorageVessel",,"Container for storing, holding, or transporting a liquid.","Yes/No",0
+"tblS6AccidentHistory","RS_TransferHose",,"Connection between two or more vessels.","Yes/No",0
+"tblS6AccidentHistory","RS_Valve",,"Structure that closes temporarily a passage or permits movement of fluid in one direction only.","Yes/No",0
+"tblS6AccidentHistory","ShelteredInPlace","6.10.e Known off-site impacts: Sheltered-in-place","Number of community members sheltered-in-place (ordered by the incident commander to remain inside their residence or place of work until the emergency is over).","Double",1
+"tblS6AccidentHistory","StabilityClass",,"A general indication of the degree of mixing present in the atmosphere accounting for wind speed and sunlight, where ""A"" represents extremely unstable conditions and ""F"" represents calm conditions.","Text",0
+"tblS6AccidentHistory","Temperature",,"The ambient temperature at the scene of the accident in degrees Fahrenheit.","Single",0
+"tblS6AccidentHistory","WeatherUnknown",,"A flag indicating the weather conditions at the time of the accident are unknown.","Yes/No",0
+"tblS6AccidentHistory","WindDirection",,"Direction from which the wind comes using standard compass reading.","Text",0
+"tblS6AccidentHistory","WindSpeed",,"An estimate of how fast the wind is traveling.","Single",0
+"tblS6AccidentHistory","WindSpeedUnitCode",,"Unit code for wind speed.","Text",0
+"tblS6FlammableMixtureChemicals","AccidentChemicalID",,"Unique identifier for each Accident History flammable mixture chemical.  Generated by RMP*Submit and 3rd-party programs.","Long Integer",0
+"tblS6FlammableMixtureChemicals","ChemicalID",,"Chemical Abstract Service (CAS) registry number for the flammable mixture chemical released.","Long Integer",0
+"tblS6FlammableMixtureChemicals","FlamMixChemID",,"Unique identifier for the Accident Flammable Mixture Chemical record.  Generated by RMP*Submit and 3rd-party programs.","Long Integer",0
+"tblS7_Prevention_Program_Chemicals","PreventionProgram3ID",,"A unique number used to identify each prevention program within a NAICS code within a process.  Generated by RMP*Submit and 3rd-party programs.","Long Integer",0
+"tblS7_Prevention_Program_Chemicals","PrimaryKey",,"Unique identifier for the Prevention Program 3 chemicals record destination table.  Generated by RMP*Submit and 3rd-party programs.","Long Integer",0
+"tblS7_Prevention_Program_Chemicals","ProcessChemicalID",,"A number used to identify each chemical within a single RMP from Section 1 Chemicals in Covered Process.  Generated by RMP*Submit and 3rd-party
+programs.","Long Integer",0
+"tblS7PreventionProgram3","AuditCompletionDate",,"The expected or actual date of completion of all changes resulting from the compliance audit.","Date/Time",0
+"tblS7PreventionProgram3","CBI_Flag",,"An indication that Confidential Business Information (CBI) was claimed for certain data elements in the record.","Yes/No",0
+"tblS7PreventionProgram3","CH_ChangeProcessParameters",,"An increase or decrease in temperature, pressure, flow rates, etc.","Yes/No",0
+"tblS7PreventionProgram3","CH_ChemicalIncrease",,"An  increase in the quantity of regulated substances stored on site.","Yes/No",0
+"tblS7PreventionProgram3","CH_ChemicalReduction",,"A decrease in the quantity of regulated substances stored on site.","Yes/No",0
+"tblS7PreventionProgram3","CH_InstallMitigationSystems",,"Additional mitigation systems have been put in place.","Yes/No",0
+"tblS7PreventionProgram3","CH_InstallPerimeterMonitoring",,"Additional perimeter monitoring systems have been installed to detect a release of a regulated substance from the process.","Yes/No",0
+"tblS7PreventionProgram3","CH_InstallProcessControls",,"The addition of process controls used to prevent or limit releases.","Yes/No",0
+"tblS7PreventionProgram3","CH_InstallProcessDetection",,"Additional detection systems have been installed to detect a release of a regulated substance from the process.","Yes/No",0
+"tblS7PreventionProgram3","CH_None",,"No Changes since last PHA update.","Yes/No",0
+"tblS7PreventionProgram3","CH_NoneRequired",,"The PHA or hazard review team did not recommend any changes to the process.","Yes/No",0
+"tblS7PreventionProgram3","CH_OtherChanges",,"Any other changes made to the process since the last PHA or hazard review.","Text",0
+"tblS7PreventionProgram3","ChangeMgmtDate",,"The date of the most recent change that triggered management of change procedures.","Date/Time",0
+"tblS7PreventionProgram3","ChangeMgmtReviewDate",,"The date of the most recent review or revision of management of change procedures.","Date/Time",0
+"tblS7PreventionProgram3","ComplianceAuditDate",,"Date of the most recent compliance audit.  Required if a resubmission.","Date/Time",0
+"tblS7PreventionProgram3","ContractorSafetyEvalDate",,"Date of most recent evaluation of contractor safety performance.","Date/Time",0
+"tblS7PreventionProgram3","ContractorSafetyReviewDate",,"Date of most recent review or revision of contractor safety procedures.","Date/Time",0
+"tblS7PreventionProgram3","CT_Demonstration",,"A demonstration was given to determine and evaluate employee comprehension of training materials.","Yes/No",0
+"tblS7PreventionProgram3","CT_Observation",,"Employees were observed to determine and evaluate employee comprehension of training materials.","Yes/No",0
+"tblS7PreventionProgram3","CT_OralTest",,"An oral test was given to determine and evaluate employee comprehension of training materials.","Yes/No",0
+"tblS7PreventionProgram3","CT_OtherType",,"The type of competency test used if other than the values for Competency Test.","Text",0
+"tblS7PreventionProgram3","CT_WrittenTest",,"A written test was given to determine and evaluate employee comprehension of training materials.","Yes/No",0
+"tblS7PreventionProgram3","Description",,"The Prevent Program includes an optional description field.","Memo",0
+"tblS7PreventionProgram3","EquipmentInspectionDate",,"The date of the most recent equipment inspection or test.","Date/Time",0
+"tblS7PreventionProgram3","EquipmentTested",,"The equipment tested or inspected.","Text",0
+"tblS7PreventionProgram3","HotWorkPermitReviewDate",,"Date of most recent review or revision of hot work permit procedures.","Date/Time",0
+"tblS7PreventionProgram3","IncidentInvestigationDate",,"The date of the most recent incident investigation.","Date/Time",0
+"tblS7PreventionProgram3","InvestigationChangeDate",,"The expected or actual date of completion of any changes resulting from an investigation.","Date/Time",0
+"tblS7PreventionProgram3","MaintenanceReviewDate",,"The date of most recent review or revision of maintenance procedures.","Date/Time",0
+"tblS7PreventionProgram3","MD_None",,"No Monitoring or detection in Use.","Yes/No",0
+"tblS7PreventionProgram3","MD_OtherType",,"The type of monitoring or detection system in place if other than the ones listed above.","Text",0
+"tblS7PreventionProgram3","MD_PerimeterMonitors",,"Integrated detection networks at the source boundary.  Detection systems can include fluorescent SO2 analyzers, photoelectric tape sensors, or electrolytic chlorine detectors.","Yes/No",0
+"tblS7PreventionProgram3","MD_ProcessAreaDetectors",,"Detection systems located on or close to process equipment.  Detection systems include indicator tubes, and chromatographic, spectrometric, electrochemical, and colorimetric gas analysis.","Yes/No",0
+"tblS7PreventionProgram3","MH_Contamination",,"A release could occur if inappropriate substances are introduced into storage or process vessels.  Contamination may be a major hazard when
+controlling inappropriate substances (e.g., H2O) is difficult.","Yes/No",0
+"tblS7PreventionProgram3","MH_CoolingLoss",,"These losses could be major hazards if they could lead to releases.  For example, loss of cooling could lead to an increase in pressure and failure of
+a vessel or pipe, and a loss of heating or power could lead to unstable processes.","Yes/No",0
+"tblS7PreventionProgram3","MH_Corrosion",,"The presence of the regulated substance could lead to destruction of equipment and a release.  Corrosion may be a major hazard for substances
+identified as corrosives on Material Safety Data Sheets unless the equipment used limits the hazard.","Yes/No",0
+"tblS7PreventionProgram3","MH_Earthquake",,"Report earthquakes as a major hazard only if they occur or are likely to occur at your site such that you design and plan for them.","Yes/No",0
+"tblS7PreventionProgram3","MH_EquipmentFailure",,"Equipment failure will be a major hazard for most processes because such failure could lead to a release.  Equipment failure includes cracks, weld
+failures, disk failures, ruptures, pump/gauge/control system failures, etc.","Yes/No",0
+"tblS7PreventionProgram3","MH_Explosion",,"Confined or unconfined vapor cloud explosions.","Yes/No",0
+"tblS7PreventionProgram3","MH_Fire",,"Process upsets, leaks, equipment failure, etc., could result in a fire.","Yes/No",0
+"tblS7PreventionProgram3","MH_Floods",,"Report floods as a major hazard only if they occur or are likely to occur at your site such that you design and plan for them.","Yes/No",0
+"tblS7PreventionProgram3","MH_Hurricanes",,"Report hurricanes as a major hazard only if they occur or are likely to occur at your site such that you design and plan for them.","Yes/No",0
+"tblS7PreventionProgram3","MH_OtherType",,"The name of the major hazard if other than those listed in 7.4.d.1. through 7.4.d.15.","Text",0
+"tblS7PreventionProgram3","MH_Overfilling",,"Filling a tank or vessel beyond its maximum safe capacity.","Yes/No",0
+"tblS7PreventionProgram3","MH_Overpressurization",,"Instantaneous energy release or detonation.","Yes/No",0
+"tblS7PreventionProgram3","MH_Polymerization",,"A chemical reaction that produces the bonding of two or more monomers.","Yes/No",0
+"tblS7PreventionProgram3","MH_RunawayReaction",,"An uncontrolled reaction that proceeds at an increasing rate.","Yes/No",0
+"tblS7PreventionProgram3","MH_Tornado",,"Report tornados as a major hazard only if they occur or are likely to occur at your site such that you design and plan for them.","Yes/No",0
+"tblS7PreventionProgram3","MH_ToxicRelease",,"If an accidental release occurred a regulated toxic substance could be released.","Yes/No",0
+"tblS7PreventionProgram3","MS_BlastWalls",,"A heavy wall used to isolate buildings or areas that contain highly combustible or explosive materials.","Yes/No",0
+"tblS7PreventionProgram3","MS_DelugeSystem",,"A system to overflow an area of a release with water or other extinguishing fluid.","Yes/No",0
+"tblS7PreventionProgram3","MS_Dikes",,"A low wall that acts as a barrier to prevent a spill from spreading.","Yes/No",0
+"tblS7PreventionProgram3","MS_Enclosure",,"A physical containment of the release within a structure (e.g., a building).","Yes/No",0
+"tblS7PreventionProgram3","MS_FireWalls",,"A wall constructed to prevent the spread of fire.","Yes/No",0
+"tblS7PreventionProgram3","MS_Neutralization",,"Something that facilitates and controls the release by neutralizing the released chemical.","Yes/No",0
+"tblS7PreventionProgram3","MS_None",,"No Mitigation systems in Use.","Yes/No",0
+"tblS7PreventionProgram3","MS_OtherType",,"The type of the mitigation system in use if other than one of the choices above.","Text",0
+"tblS7PreventionProgram3","MS_SprinklerSystem",,"A system for protecting a building against fire by means of overhead pipes that release an extinguishing fluid through heat activated outlets.","Yes/No",0
+"tblS7PreventionProgram3","MS_WaterCurtain",,"A spray of water from a horizontal pipe through nozzles.  The curtain may be activated manually or automatically.","Yes/No",0
+"tblS7PreventionProgram3","OpProceduresReviewDate",,"Date of most recent review of revision to operating procedures.","Date/Time",0
+"tblS7PreventionProgram3","ParticipationPlansReviewDate",,"Date of most recent review or revision of employee participation plans.","Date/Time",0
+"tblS7PreventionProgram3","PC_Alarms",,"Systems that operate a warning device after the occurrence of a Hazardous condition and procedures to activate the alarm system.","Yes/No",0
+"tblS7PreventionProgram3","PC_AutomaticShutoffs",,"Controls the shutoff flow to a pipe or vessel and are triggered automatically when process conditions are exceeded.","Yes/No",0
+"tblS7PreventionProgram3","PC_BackupPump",,"A secondary pump intended to serve the same function as the primary pump if the primary pump fails.","Yes/No",0
+"tblS7PreventionProgram3","PC_CheckValves",,"A device for automatically limiting the flow in a piping system to a single direction.","Yes/No",0
+"tblS7PreventionProgram3","PC_EmergencyAirSupply",,"A backup system to provide air to a process when the regular air supply fails.","Yes/No",0
+"tblS7PreventionProgram3","PC_EmergencyPower",,"Backup power systems.","Yes/No",0
+"tblS7PreventionProgram3","PC_ExcessFlowDevice",,"Flow-limiting equipment that protects downstream equipment from surges.","Yes/No",0
+"tblS7PreventionProgram3","PC_Flares",,"A pre-release protection measure used for flammable gases and vapors to remove and possibly treat discharged liquids.","Yes/No",0
+"tblS7PreventionProgram3","PC_GroundingEquipment",,"Devices that ground electrical equipment to avoid explosions.","Yes/No",0
+"tblS7PreventionProgram3","PC_InhibitorAddition",,"A substance that is added to a reaction that is capable of stopping or retarding a chemical reaction.","Yes/No",0
+"tblS7PreventionProgram3","PC_Interlocks",,"A switch or other device that prevents activation of a piece of equipment when a protective door is open or some other hazard exists.","Yes/No",0
+"tblS7PreventionProgram3","PC_KeyedBypass",,"A bypass system that is activated by a control signal.","Yes/No",0
+"tblS7PreventionProgram3","PC_ManualShutoffs",,"Manual controls of the shutoff flow to a pipe or vessel.","Yes/No",0
+"tblS7PreventionProgram3","PC_None",,"No Process Controls in Use.","Yes/No",0
+"tblS7PreventionProgram3","PC_OtherType",,"The name of the process control if other than those listed in 7.4.e.1. through 7.4.e.19.","Text",0
+"tblS7PreventionProgram3","PC_PurgeSystem",,"A system that replaces the atmosphere in a container with an inert substance to prevent the formation of an explosive mixture.","Yes/No",0
+"tblS7PreventionProgram3","PC_QuenchSystem",,"A system that cools by removing excess heat or immersing liquid into a cooling medium.","Yes/No",0
+"tblS7PreventionProgram3","PC_ReliefValves",,"A valve that relieves pressure beyond a specified limit and re-closes upon return to normal operating procedures.","Yes/No",0
+"tblS7PreventionProgram3","PC_RuptureDisks",,"A device that relieves pressure beyond a specified limit.","Yes/No",0
+"tblS7PreventionProgram3","PC_Scrubbers",,"A pre-release protection measure that uses water or aqueous mixtures containing scrubbing reagents to remove discharging liquids and may treat the discharging chemical.","Yes/No",0
+"tblS7PreventionProgram3","PC_Vents",,"An opening provided for the discharge of pressure or release of pressure from tanks, vessels, processing equipment, etc.","Yes/No",0
+"tblS7PreventionProgram3","PHA_Checklist",,"This technique involves developing a checklist of failure areas and reviewing each area to determine the possible effects of failure.","Yes/No",0
+"tblS7PreventionProgram3","PHA_Date",,"Date of completion of the most recent Process Hazard Analysis (PHA) or update.","Date/Time",0
+"tblS7PreventionProgram3","PHA_FMEA",,"This is a methodology of tabulating the source's equipment, failure modes (how equipment fails), each failure mode's effect on the source, and a
+ranking of each failure mode.","Yes/No",0
+"tblS7PreventionProgram3","PHA_FTA",,"This is a deductive technique that focuses on one particular accident event and provides a method for determining causes of the event. The fault tree is a
+graphic model that displays the various combinations of equipment faults and failures that can result in a release.","Yes/No",0
+"tblS7PreventionProgram3","PHA_HAZOP",,"Hazard and Operability Studies (HAZOPs) are conducted by teams that brainstorm to systematically identify hazards or operability problems through the use of certain guidewords.","Yes/No",0
+"tblS7PreventionProgram3","PHA_OtherTechnique",,"The name of the PHA technique used if other than 7.4.b.1 through 7.4.b.6.","Text",0
+"tblS7PreventionProgram3","PHA_WhatIf",,"A What If analysis considers the consequences associated with events that occurred as a result of failures involving equipment, design, or procedures.","Yes/No",0
+"tblS7PreventionProgram3","PHA_WhatIfChecklist",,"This technique combines the What If and checklist analysis techniques to identify and evaluate process hazards.","Yes/No",0
+"tblS7PreventionProgram3","PHACompletionDate",,"The expected or actual date of completion of all changes recommend by the PHA.","Date/Time",0
+"tblS7PreventionProgram3","PreStartupReviewDate",,"Date of the most recent pre-startup review.","Date/Time",0
+"tblS7PreventionProgram3","PreventionProgram3ID",,"A unique number used to identify each prevention program within a NAICS code within a process. Generated by RMP*Submit and 3rd-party programs.","Long Integer",0
+"tblS7PreventionProgram3","Process_NAICS_ID",,"A number from Section 1 Process NAICS.  Generated by RMP*Submit and 3rd-party programs.","Long Integer",0
+"tblS7PreventionProgram3","SafetyReviewDate",,"Date on which safety information was last reviewed or revised.","Date/Time",0
+"tblS7PreventionProgram3","TR_Classroom",,"An indication that training was in a classroom setting.","Yes/No",0
+"tblS7PreventionProgram3","TR_OnTheJob",,"An indication that training was on the job.","Yes/No",0
+"tblS7PreventionProgram3","TR_OtherType",,"The name of the type of training provided if other than those listed in 7.6.b.1 or 7.6.b.2.","Text",0
+"tblS7PreventionProgram3","TrainingReviewDate",,"The date of the most recent review or revision of training programs.","Date/Time",0
+"tblS8_Prevention_Program_Chemicals","PreventionProgram2ID",,"A unique number used to identify each prevention program within a NAICS code.  Generated by RMP*Submit and 3rd-party programs.","Long Integer",0
+"tblS8_Prevention_Program_Chemicals","PrimaryKey",,"Unique identifier for the Prevention Program 2 Chemicals record destination table.  Generated by RMP*Submit and 3rd-party programs.","Long Integer",0
+"tblS8_Prevention_Program_Chemicals","ProcessChemicalID",,"A number used to identify each chemical within a single RMP.  Generated by RMP*Submit and 3rd- party programs.","Long Integer",0
+"tblS8PreventionProgram2","AuditCompletionDate",,"Expected or actual date of completion of all changes resulting from the Compliance Audit.","Date/Time",0
+"tblS8PreventionProgram2","CBI_Flag",,"An indication that Confidential Business Information (CBI) was claimed for certain data elements in the record.","Yes/No",0
+"tblS8PreventionProgram2","CH_ChangeProcessParameters",,"An increase or decrease in temperature, pressure, flow rates, etc.","Yes/No",0
+"tblS8PreventionProgram2","CH_ChemicalIncrease",,"An increase in the quantity of regulated substances stored on site.","Yes/No",0
+"tblS8PreventionProgram2","CH_ChemicalReduction",,"A decrease in the quantity of regulated substances stored on site.","Yes/No",0
+"tblS8PreventionProgram2","CH_InstallMitigationSystems",,"Addition of systems such as those listed under Mitigation Systems.","Yes/No",0
+"tblS8PreventionProgram2","CH_InstallPerimeterMonitoring",,"Additional perimeter monitoring systems have been installed to detect a release of a regulated substance from a process.","Yes/No",0
+"tblS8PreventionProgram2","CH_InstallProcessControls",,"The addition of process controls used to prevent or limit releases.","Yes/No",0
+"tblS8PreventionProgram2","CH_InstallProcessDetection",,"Additional detection systems have been installed to detect a release of a regulated substance from the process.","Yes/No",0
+"tblS8PreventionProgram2","CH_None",,"No Changes since last PHA update.","Yes/No",0
+"tblS8PreventionProgram2","CH_NoneRequired",,"No changes were recommended to be made to the process.","Yes/No",0
+"tblS8PreventionProgram2","CH_OtherChanges",,"The name of the change since the last PHA update if other than those listed in 8.4.g.1. Through 8.4.g.9.","Text",0
+"tblS8PreventionProgram2","ChangeCompletionDate",,"Expected or actual date of completion of all changes resulting from the Compliance Audit.","Date/Time",0
+"tblS8PreventionProgram2","ComplianceAuditDate",,"Date of most recent Compliance Audit.  Required if a resubmission.","Date/Time",0
+"tblS8PreventionProgram2","CT_Demonstration",,"A demonstration was given to determine and evaluate employee comprehension of training materials.","Yes/No",0
+"tblS8PreventionProgram2","CT_Observation",,"Employees were observed to determine and evaluate employee comprehension of training materials.","Yes/No",0
+"tblS8PreventionProgram2","CT_OralTest",,"An oral test was given to determine and evaluate employee comprehension of training materials.","Yes/No",0
+"tblS8PreventionProgram2","CT_OtherType",,"A description of the type of competency test used if other than those listed in 8.6.c.1. through 8.6.c.4.","Text",0
+"tblS8PreventionProgram2","CT_WrittenTest",,"A written test was given to determine and evaluate employee comprehension of training materials.","Yes/No",0
+"tblS8PreventionProgram2","Description",,"The Prevention Program includes an optional description field.","Memo",0
+"tblS8PreventionProgram2","EquipmentInspectionDate",,"Date of most recent equipment inspection or test.","Date/Time",0
+"tblS8PreventionProgram2","EquipmentTested",,"The name or description of the equipment tested.","Text",0
+"tblS8PreventionProgram2","FR_ANSI",,"An indication of safety compliance with the American National Standards Institute (ANSI) standards.  Nationally coordinates voluntary standards.  Gives status to standards in such areas as definitions, terminology, symbols, and abbreviations; materials, performance characteristics, procedure, and methods of rating; methods of testing and analysis; size, weight, and volume; safety, health, and building construction.","Yes/No",0
+"tblS8PreventionProgram2","FR_ASME",,"An indication of safety compliance with the American Society of Mechanical Engineers standards.  Conducts research and develops boiler, pressure vessel, and power test codes.  Also develops safety codes and standards for equipment.","Yes/No",0
+"tblS8PreventionProgram2","FR_ASTM",,"An indication of safety compliance with the American Society of Testing Materials (ASTM) standards.  Establishes standards for materials, products, systems, services, test methods, specifications, classifications, definitions, and recommended practices.","Yes/No",0
+"tblS8PreventionProgram2","FR_Comments",,"A comment field to explain how Federal, State, or industry-specific design codes and standards are being used to demonstrate compliance with the
+safety information requirement.","Text",0
+"tblS8PreventionProgram2","FR_NFPA58",,"An indication of safety compliance with the National Fire Protection Association (NFPA) propane handling laws.  Propane laws are based on
+NFPA 59 except in the states of California and Texas.","Yes/No",0
+"tblS8PreventionProgram2","FR_None",,"An indication that no Federal or state regulations or industry-specific design codes or standards were used to demonstrate compliance with the safety information requirement.","Yes/No",0
+"tblS8PreventionProgram2","FR_OSHA",,"An indication of safety compliance with the Occupational Safety and Health Administration  (OSHA) rule for handling anhydrous ammonia.","Yes/No",0
+"tblS8PreventionProgram2","FR_OtherType",,"The name of the industry-specific design code or standard used to demonstrate compliance with the safety information requirement if other than one of the choices above.","Text",0
+"tblS8PreventionProgram2","HazardReviewDate",,"Date of completion of most recent hazard review or update.","Date/Time",0
+"tblS8PreventionProgram2","IncidentInvestigationDate",,"Date of most recent incident investigation.","Date/Time",0
+"tblS8PreventionProgram2","InvestigationChangeDate",,"The expected or actual date of completion of all changes resulting from the investigation.","Date/Time",0
+"tblS8PreventionProgram2","MaintenanceReviewDate",,"Date of most recent change that triggered review or revision of safety information, hazard review, operating or maintenance procedures or training.","Date/Time",0
+"tblS8PreventionProgram2","MD_None",,"No Monitoring or detection in Use.","Yes/No",0
+"tblS8PreventionProgram2","MD_OtherType",,"A description of the monitoring or detection mechanism in place if other than those specified in 8.4.f.1. and 8.4.f.3.","Text",0
+"tblS8PreventionProgram2","MD_PerimeterMonitors",,"Integrated detection networks at the source boundary.  Detection systems can include fluorescent SO2 analyzers, photoelectric tape sensors, or electrolytic chlorine detectors.","Yes/No",0
+"tblS8PreventionProgram2","MD_ProcessAreaDetectors",,"Detection systems located on or close to process equipment.  Detection systems include indicator tubes, and chromatographic, spectrometric, electrochemical, and colorimetric gas analysis.","Yes/No",0
+"tblS8PreventionProgram2","MH_Contamination",,"A release could occur if inappropriate substances are introduced into storage or process vessels.  Contamination may be a major hazard when 
+controlling inappropriate substances (e.g., H2O) is difficult.","Yes/No",0
+"tblS8PreventionProgram2","MH_CoolingLoss",,"These losses could be major hazards if they could lead to releases. For example, loss of cooling could lead to an increase in pressure and failure of a vessel or pipe, and a loss of heating or power could lead to unstable processes.","Yes/No",0
+"tblS8PreventionProgram2","MH_Corrosion",,"The presence of the regulated substance could lead to destruction of equipment and a release. Corrosion may be a major hazard for substances
+identified as corrosives on MSDSs unless the equipment used limits the hazard.","Yes/No",0
+"tblS8PreventionProgram2","MH_Earthquake",,"Report earthquakes as a major hazard only if they occur or are likely to occur at your site such that you design and plan for them.","Yes/No",0
+"tblS8PreventionProgram2","MH_EquipmentFailure",,"Equipment failure will be a major hazard for most processes because such failure could lead to a release.  Equipment failure includes cracks, weld
+failures, disk failures, ruptures, pump/gauge/control system failures, etc.","Yes/No",0
+"tblS8PreventionProgram2","MH_Explosion",,"Confined or unconfined vapor cloud explosions.","Yes/No",0
+"tblS8PreventionProgram2","MH_Fire",,"Process upsets, leaks, equipment failure, etc., could result in a fire.","Yes/No",0
+"tblS8PreventionProgram2","MH_Floods",,"Report floods as a major hazard only if they occur or are likely to occur at your site such that you design and plan for them.","Yes/No",0
+"tblS8PreventionProgram2","MH_Hurricanes",,"Report hurricanes as a major hazard only if they occur or are likely to occur at your site such that you design and plan for them.","Yes/No",0
+"tblS8PreventionProgram2","MH_OtherType",,"The name of the major hazard identified if other than those listed in 8.4.c.1 through 8.4.c.15.","Text",0
+"tblS8PreventionProgram2","MH_Overfilling",,"Filling a tank or vessel beyond its maximum safe capacity.","Yes/No",0
+"tblS8PreventionProgram2","MH_Overpressurization",,"Instantaneous energy release or detonation.","Yes/No",0
+"tblS8PreventionProgram2","MH_Polymerization",,"A chemical reaction that produces the bonding of two or more monomers.","Yes/No",0
+"tblS8PreventionProgram2","MH_RunawayReaction",,"An uncontrolled reaction that proceeds at an increasing rate.","Yes/No",0
+"tblS8PreventionProgram2","MH_Tornado",,"Report tornados as a major hazard only if they occur or are likely to occur at your site such that you design and plan for them.","Yes/No",0
+"tblS8PreventionProgram2","MH_ToxicRelease",,"If an accidental release occurred a regulated toxic substance could be released.","Yes/No",0
+"tblS8PreventionProgram2","MostRecentChangeDate",,"Date of most recent change that triggered review or revision of safety information, hazard review, operating or maintenance procedures or training.","Date/Time",0
+"tblS8PreventionProgram2","MS_BlastWalls",,"A mitigation system which uses a heavy wall used to isolate buildings or areas that contain highly combustible or explosive materials.","Yes/No",0
+"tblS8PreventionProgram2","MS_DelugeSystem",,"A mitigation system to overflow an area of a release with water or other extinguishing fluid.","Yes/No",0
+"tblS8PreventionProgram2","MS_Dikes",,"A low wall that acts as a barrier mitigating the spreading of a spill.","Yes/No",0
+"tblS8PreventionProgram2","MS_Enclosure",,"A mitigation system which uses physical containment of the release within a structure (e.g., a building).","Yes/No",0
+"tblS8PreventionProgram2","MS_FireWalls",,"A wall constructed to mitigate the spread of fire.","Yes/No",0
+"tblS8PreventionProgram2","MS_Neutralization",,"A mitigation system which controls a release by neutralizing the released chemical.","Yes/No",0
+"tblS8PreventionProgram2","MS_None",,"No Mitigation systems in Use.","Yes/No",0
+"tblS8PreventionProgram2","MS_OtherType",,"The name of the mitigation system if other than those listed in 8.4.e.1. through 8.4.e.9. are blank.","Text",0
+"tblS8PreventionProgram2","MS_SprinklerSystem",,"A mitigation system for protecting a building against fire by means of overhead pipes which convey an extinguishing fluid through heat activated outlets.","Yes/No",0
+"tblS8PreventionProgram2","MS_WaterCurtain",,"A mitigation system which uses a spray of water from a horizontal pipe through nozzles, the curtain may be activated manually or automatically.","Yes/No",0
+"tblS8PreventionProgram2","OpProceduresReviewDate",,"The date of most recent review or revision of operating procedures.","Date/Time",0
+"tblS8PreventionProgram2","PC_Alarms",,"Systems that operate a warning device after the occurrence of a Hazardous condition and procedures to activate the alarm system.","Yes/No",0
+"tblS8PreventionProgram2","PC_AutomaticShutoffs",,"Controls of the shutoff flow to a pipe or vessel and are triggered automatically when process conditions are exceeded.","Yes/No",0
+"tblS8PreventionProgram2","PC_BackupPump",,"A secondary pump intended to serve the same function as the primary pump if the primary pump fails.","Yes/No",0
+"tblS8PreventionProgram2","PC_CheckValves",,"A device for automatically limiting the flow in a piping system to a single direction.","Yes/No",0
+"tblS8PreventionProgram2","PC_EmergencyAirSupply",,"A backup system to provide air to a process when the regular air supply fails.","Yes/No",0
+"tblS8PreventionProgram2","PC_EmergencyPower",,"Backup power systems.","Yes/No",0
+"tblS8PreventionProgram2","PC_ExcessFlowDevice",,"Flow-limiting equipment that protects downstream equipment from surges.","Yes/No",0
+"tblS8PreventionProgram2","PC_Flares",,"A pre-release protection measure used for flammable gases and vapors to remove and possibly treat discharged liquids.","Yes/No",0
+"tblS8PreventionProgram2","PC_GroundingEquipment",,"Devices that ground electrical equipment to avoid explosions.","Yes/No",0
+"tblS8PreventionProgram2","PC_InhibitorAddition",,"A substance that is added to a reaction that is capable of stopping or retarding a chemical reaction.","Yes/No",0
+"tblS8PreventionProgram2","PC_Interlocks",,"A switch or other device that prevents activation of a piece of equipment when a protective door is open or some other hazard exists.","Yes/No",0
+"tblS8PreventionProgram2","PC_KeyedBypass",,"A bypass system that is activated by a control signal.","Yes/No",0
+"tblS8PreventionProgram2","PC_ManualShutoffs",,"Manual controls of the shutoff flow to a pipe or vessel.","Yes/No",0
+"tblS8PreventionProgram2","PC_None",,"No Process Controls in Use.","Yes/No",0
+"tblS8PreventionProgram2","PC_OtherType",,"The name of the process control in use if other than those listed in 8.4.d.1. - 8.4.d.20.","Text",0
+"tblS8PreventionProgram2","PC_PurgeSystem",,"A system that replaces the atmosphere in a container with an inert substance to prevent the formation of an explosive mixture.","Yes/No",0
+"tblS8PreventionProgram2","PC_QuenchSystem",,"A system that cools by removing excess heat or immersing liquid into a cooling medium.","Yes/No",0
+"tblS8PreventionProgram2","PC_ReliefValves",,"A valve that relieves pressure beyond a specified limit and re-closes upon return to normal operating procedures.","Yes/No",0
+"tblS8PreventionProgram2","PC_RuptureDisks",,"A device that relieves pressure beyond a specified limit.","Yes/No",0
+"tblS8PreventionProgram2","PC_Scrubbers",,"A pre-release protection measure that uses water or aqueous mixtures containing scrubbing reagents to remove discharging liquids and may treat the discharging chemical.","Yes/No",0
+"tblS8PreventionProgram2","PC_Vents",,"An opening provided for the discharge of pressure or release of pressure from tanks, vessels, processing equipment, etc.","Yes/No",0
+"tblS8PreventionProgram2","PreventionProgram2ID",,"A unique number used to identify each prevention program within a NAICS code within a process.  Generated by RMP*Submit and 3rd-party programs.","Long Integer",0
+"tblS8PreventionProgram2","Process_NAICS_ID",,"A number from Section 1 Process NAICS.  Generated by RMP*Submit and 3rd-party programs.","Long Integer",0
+"tblS8PreventionProgram2","SafetyReviewDate",,"Date of most recent review or revision of safety information.","Date/Time",0
+"tblS8PreventionProgram2","TR_Classroom",,"An indication that training was in a classroom setting.","Yes/No",0
+"tblS8PreventionProgram2","TR_OnTheJob",,"An indication that training was on the job.","Yes/No",0
+"tblS8PreventionProgram2","TR_OtherType",,"A description of the type of training type provided if other than those  listed in 8.6.b.1 through 8.6.b.2.","Text",0
+"tblS8PreventionProgram2","TrainingReviewDate",,"The date of most recent review or revision of training programs.","Date/Time",0
+"tblS9EmergencyResponses","CoordinatingAgencyName",,"Name of local agency with which the ER plan is coordinated.","Text",0
+"tblS9EmergencyResponses","CoordinatingAgencyPhone",,"Phone number of local agency with which the ER plan is coordinated.","Text",0
+"tblS9EmergencyResponses","ER_CommunityPlan",,"Flag indicating that the facility is included in the written Community Emergency Response Plan (ERP).","Yes/No",0
+"tblS9EmergencyResponses","ER_EmergencyHealthCare",,"Flag indicating that plan includes information on emergency health care.","Yes/No",0
+"tblS9EmergencyResponses","ER_FacilityPlan",,"Flag indicating that the facility has its own written Emergency Response Plan (ERP).","Yes/No",0
+"tblS9EmergencyResponses","ER_PublicInfoProcedures",,"Flag indicating that plan includes procedures for informing public and local agencies responding to the accidental releases.","Yes/No",0
+"tblS9EmergencyResponses","ER_ResponseActions",,"Flag indicating that the plan includes specific actions that should be taken in response to an accidental release of a regulated substance.","Yes/No",0
+"tblS9EmergencyResponses","ER_ReviewDate",,"Date of most recent review or update of ER plan.","Date/Time",0
+"tblS9EmergencyResponses","ERTrainingDate",,"Date of most recent ER training for employees.","Date/Time",0
+"tblS9EmergencyResponses","FacilityID",,"Unique identifier for all RMPs submitted by a specific facility (assigned by Reporting Center for first-time submission). * After this number is assigned to the first submission for a facility, subsequent submissions for the same facility must include this identifier.","Long Integer",0
+"tblS9EmergencyResponses","FR_EPCRA",,"These are the state Emergency Planning and Community Right-to-Know Act (EPCRA) laws.  Federal EPCRA does not require facility response plans, but some state laws may.","Yes/No",0
+"tblS9EmergencyResponses","FR_OPA90",,"An indication that the site is subject to EPA, U.S. Coast Guard, Department of Transportation, and Department of the Interior facility response plan requirements.  Currently these apply only to oil.","Yes/No",0
+"tblS9EmergencyResponses","FR_OSHA1910_120",,"An indication that the site is subject to OSHA's Hazardous Waste Operations and Emergency Response (HAZWOPER) plan.","Yes/No",0
+"tblS9EmergencyResponses","FR_OSHA1910_38",,"An indication that the site is subject to OSHA's Emergency Action Plan.  All sources are subject to this Rule except State and local governments in states without delegated OSHA programs.","Yes/No",0
+"tblS9EmergencyResponses","FR_OtherRegulation",,"The name of the other regulation which applies to the Emergency Response Plan if other than those listed in 9.8.a. through 9.8.f.","Text",0
+"tblS9EmergencyResponses","FR_RCRA",,"An indication that the site is subject to EPA's Resource Conservation and Recovery Act (RCRA) permitting requirements for solid waste.","Yes/No",0
+"tblS9EmergencyResponses","FR_SPCC",,"An indication that the site is subject to EPA's Oil Spill Prevention Control and Countermeasures Plan requirements.","Yes/No",0
+"tblUserUndefined","Checkbox1",,"User Deifned Checkbox 1.","Yes/No",0
+"tblUserUndefined","Checkbox2",,"User Deifned Checkbox 2.","Yes/No",0
+"tblUserUndefined","Checkbox3",,"User Deifned Checkbox 3.","Yes/No",0
+"tblUserUndefined","Date1",,"User Deifned Date 1.","Date/Time",0
+"tblUserUndefined","Date2",,"User Deifned Date 2.","Date/Time",0
+"tblUserUndefined","Date3",,"User Deifned Date 3.","Date/Time",0
+"tblUserUndefined","EPAFacilityID",,"Unique identifier for all RMPs submitted by a specific facility (assigned by Reporting Center for first-time submission). * After this number is assigned to the first submission for a facility, subsequent submissions for the same facility must include this identifier.","Text",0
+"tblUserUndefined","Memo1",,"User Deifned Memo 1.","Memo",0
+"tblUserUndefined","Number1",,"User Deifned Number 1.","Double",0
+"tblUserUndefined","Number2",,"User Deifned Number 2.","Double",0
+"tblUserUndefined","Number3",,"User Deifned Number 3.","Double",0
+"tblUserUndefined","Textbox1",,"User Deifned Text 1.","Text",0
+"tblUserUndefined","Textbox2",,"User Deifned Text 2.","Text",0
+"tblUserUndefined","Textbox3",,"User Deifned Text 3.","Text",0
+"tlkpAuditStatus","AuditStatus",,"Description of an audit status.","Text",0
+"tlkpAuditStatus","AuditStatusID",,"Unique Identifier of an audit status.","Text",0
+"tlkpAuditStatus","PrimaryKey",,"Unique key.","Long Integer",0
+"tlkpAuditType","AuditType",,"Description of an audit type.","Text",0
+"tlkpAuditType","AuditTypeID",,"Unique Identifier of an audit type.","Long Integer",0
+"tlkpAuditType","PrimaryKey",,"Unique key.","Long Integer",0
+"tlkpChemicals","CASNumber",,"Chemical Abstract Service (CAS) registry number for the chemical.","Text",0
+"tlkpChemicals","ChemicalID",,"Unique Identifier for a Chemical.","Long Integer",0
+"tlkpChemicals","ChemicalName",,"The name of the regulated chemical above the threshold quantity in a Process at the source.","Text",0
+"tlkpChemicals","ChemOwner",,"FED or State Abreviation","Text",0
+"tlkpChemicals","ChemType",,"Chemical Type - (T)oxic or (F)lammable.","Text",0
+"tlkpChemicals","flgCBI",,"An indication that the Chemical is determined to be Confidential Business Information (CBI). ‘Y’es or ‘N’o.","Yes/No",0
+"tlkpChemicals","Threshold",,"Is the chemical quantity limit upon which reporting is required.","Double",0
+"tlkpCountyFIPSCodes","County_Code",,"Federal Information Processing Standard (FIPS) code for the county in which the facility is located.","Text",0
+"tlkpCountyFIPSCodes","County_Name",,"The name of the county.","Text",0
+"tlkpCountyFIPSCodes","State_Code",,"The U.S. Postal Service abbreviation for the state in which the facility is located.","Text",0
+"tlkpDocHandle","Description",,"A description of how the document was handled","Text",0
+"tlkpDocHandle","LookupCode",,"Primary Key.","Text",0
+"tlkpDocType","Description",,"The type of document description","Text",0
+"tlkpDocType","LookupCode",,"Primary Key.","Text",0
+"tlkpLatLongDescriptions","Feat_Code",,"Unique identifier for each Latitude and longitude description.","Text",0
+"tlkpLatLongDescriptions","Feat_Desc",," Latitude and longitude description.","Text",0
+"tlkpLatLongMethods","Method_Code",,"Code representing method used to obtain latitude or longitude data.  Codes can be obtained from Method Accuracy Description (MAD) Version 6.1 Information Coding Standards as implemented in Envirofacts Locational Reference Tables (EF LRT).","Text",0
+"tlkpLatLongMethods","Method_Desc",,"Description of the method the Latitude and longitude was obtained.","Text",0
+"tlkpLatLongMethods","Primary_Key",," Primary Key for latitude and longitude methods.","Long Integer",0
+"tlkpNAICS","NAICS_CODE",,"The 5- or 6- digit NAICS code.","Text",0
+"tlkpNAICS","NAICS_DESCRIPTION",,"Description text for the NAICS code.","Text",0
+"tlkpPhysicalStateCodes","Description",,"Physical State description.","Text",0
+"tlkpPhysicalStateCodes","LookupCode",,"System generated Unique Primary key.","Text",0
+"tlkpRejectReason","Description",,"Rejection Reason descriptions.","Text",0
+"tlkpRejectReason","LookupCode",," System generated Unique Primary key.","Text",0
+"tlkpS2ScenarioCodes","Description",,"Pick-list text.","Text",0
+"tlkpS2ScenarioCodes","LookupCode",,"System generated Unique Primary key.","Text",0
+"tlkpS6InitiatingEvents","Description",,"Pick-list text.","Text",0
+"tlkpS6InitiatingEvents","LookupCode",,"System generated Unique Primary key.","Text",0
+"tlkpStateFIPSCodes","REGION",,"The code which represents the EPA Region in which the state resides.","Text",0
+"tlkpStateFIPSCodes","STATE_ABBR",,"The U.S. Postal Service abbreviation for the state in which the facility is located.","Text",0
+"tlkpStateFIPSCodes","STATE_CODE",,"Federal Information Processing Standard (FIPS) code for the county in which the facility is located.","Text",0
+"tlkpStateFIPSCodes","STATE_NAME",,"The state in which the facility is located.","Text",0
+"tlkpTopographyCode","Description",,"A code representing whether the local topography is urban or rural.","Text",0
+"tlkpTopographyCode","LookupCode",,"System generated Unique Primary key.","Text",0
+"tlkpWindSpeedUnitCodes","Description",,"Wind Speed Unit Descriptions.","Text",0
+"tlkpWindSpeedUnitCodes","LookupCode",,"System generated Unique Primary key.","Text",0

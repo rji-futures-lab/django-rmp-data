@@ -1,0 +1,43 @@
+Name,TableName,Visible,VisibleInRanking
+"tblAudit","Audit Information",1,0
+"tblAuditor","Auditors",1,0
+"tblExecutiveSummaries","Executive Summary",1,0
+"tblFacility","RMP Facility Information",1,0
+"tblPerson","Persons",1,0
+"tblRank","Ranking Values",1,0
+"tblRMPError","RMP ValidationErrors",1,0
+"tblRMPTrack","RMP Tracking",1,0
+"tblS1Facilities","Registration Information",1,1
+"tblS1FlammableMixtureChemicals","Process: Flammable Mixture Chemicals",1,0
+"tblS1Process_NAICS","Process: NAICS Codes",1,0
+"tblS1ProcessChemicals","Process: Chemicals",1,1
+"tblS1Processes","Process",1,1
+"tblS2ToxicsWorstCase","Toxics: Worst Case Scenarios",1,1
+"tblS3ToxicsAltReleases","Toxics: Alternative Release Scenarios",1,1
+"tblS4FlammablesWorstCase","Flammables: Worst Case Scenarios",1,1
+"tblS5FlammablesAltReleases","Flammables: Alternative Release Scenarios",1,1
+"tblS6AccidentChemicals","Accident History: Chemicals",1,1
+"tblS6AccidentHistory","Accident History",1,1
+"tblS6FlammableMixtureChemicals","Accident History: Flammable Mixture Chemicals",1,0
+"tblS7_Prevention_Program_Chemicals","Prevention Program: Program Level 3 Chemicals",1,0
+"tblS7PreventionProgram3","Prevention Program: Program Level 3",1,0
+"tblS8_Prevention_Program_Chemicals","Prevention Program: Program Level 2 Chemicals",1,0
+"tblS8PreventionProgram2","Prevention Program: Program Level 2",1,0
+"tblS9EmergencyResponses","Emergency Response Plan",1,0
+"tblUserUndefined","Lookup: User Undefined",1,0
+"tlkpAuditStatus","Lookup: Audit Status",1,0
+"tlkpAuditType","Lookup: Audit Types",1,0
+"tlkpChemicals","Lookup: Process Chemicals",1,0
+"tlkpCountyFIPSCodes","Lookup: Count FIPS codes",1,0
+"tlkpDocHandle","Lookup: Doc Handle",1,0
+"tlkpDocType","Lookup: Doc Type",1,0
+"tlkpLatLongDescriptions","Lookup: Lat/Long Descriptions",1,0
+"tlkpLatLongMethods","Lookup: Lat/Long Methods",1,0
+"tlkpNAICS","Lookup: NAICS codes",1,0
+"tlkpPhysicalStateCodes","Lookup: Physical State Codes",1,0
+"tlkpRejectReason","Lookup: Reject Reason",1,0
+"tlkpS2ScenarioCodes","Lookup: Toxics Scenario Codes",1,0
+"tlkpS6InitiatingEvents","Lookup: Initiating Events",1,0
+"tlkpStateFIPSCodes","Lookup: State FIPS Codes",1,0
+"tlkpTopographyCode","Lookup: Topography Code",1,0
+"tlkpWindSpeedUnitCodes","Lookup: Wind Speed Unit Codes",1,0
