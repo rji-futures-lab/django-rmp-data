@@ -1,6 +1,7 @@
 """
 Settings for the Django project that apply in any environment.
 """
+import os
 import environ
 env = environ.Env(DEBUG=(bool, False),) # set default values and casting
 environ.Env.read_env()
@@ -36,7 +37,9 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(APPS_DIR, 'templates/rmp')
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

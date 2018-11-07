@@ -10,7 +10,7 @@ Python-related dependencies for this project are managed via [pipenv](https://pi
 
 ## Bootstrapping a (macOS) local development environment
 
-Below are the steps to set up a local server on a Mac. These instructions have been tested on the latest releases of macOS High Sierra (10.13) and macOS Sierra (10.12).
+Below are the steps to set up a local server on a Mac. These instructions have been tested on the latest releases of macOS Mojave (10.14), High Sierra (10.13) and macOS Sierra (10.12).
 
 Open your terminal application, and type in each of these commands in the order specified.
 
@@ -107,7 +107,7 @@ brew install pyenv
 
 ### 4. Initialize pyenv in your shell
 
-The default Unix shell for macOS is bash. Here is how we can confirm that this default is still intact:
+The default Unix shell for macOS is bash. We can confirm that this default is still intact:
 
 ```bash
 echo "$SHELL"
@@ -121,7 +121,7 @@ And here is what you should see:
 
 We need to add a few lines of code to a file named `.bash_profile`, which is a configuration file that runs whenever a user starts their shell environment.
 
-First, we need to an environment variable, which is value stored in your shell environment that can be used by programs. The specific environment variable we need to set is `PYENV_ROOT`, which should point to the directory where pyenv stores its data:
+First, we need to an environment variable, which is value stored in your shell environment that can be used by software running within that environment. The specific environment variable we need to set is `PYENV_ROOT`, which should point to the directory where pyenv stores its data:
 
 ```bash
 echo -e 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bash_profile
@@ -137,10 +137,22 @@ In order for this change to take effect, restart your shell. Do this by closing 
 
 ### 5. Install recommended Python dependencies
 
-Now we install six additional dependencies for Python, [recommended](https://github.com/pyenv/pyenv/wiki#suggested-build-environment) by pyenv, plus `mdbtools`, another tool we need for extracting the rmp data.
+Now we install five additional dependencies for Python, [recommended](https://github.com/pyenv/pyenv/wiki#suggested-build-environment) by pyenv, plus `mdbtools`, another tool we need for extracting the rmp data.
 
 ```bash
 brew install openssl readline sqlite3 xz zlib mdbtools
+```
+
+One of these libraries, `zlib`, requires a couple of additional steps, per Homebrew's instructions:
+
+```bash 
+export LDFLAGS="-L/usr/local/opt/zlib/lib"
+```
+
+And:
+
+```bash
+export CPPFLAGS="-I/usr/local/opt/zlib/include"
 ```
 
 ### 6. Install PostgreSQL
@@ -173,36 +185,21 @@ createuser -s postgres
 
 ### 8. Install pipenv
 
-`pipenv` has recently gained a lot of traction as tool to help Python developers manage workflows related to virtual environments, package installation and dependency management. As suchh, it is now the tool [recommended](https://packaging.python.org/tutorials/managing-dependencies/#installing-pipenv) by python.org for managing application dependencies.
+`pipenv` has recently gained a lot of traction as tool to help Python developers manage workflows related to virtual environments, package installation and dependency management. As such, it is now the tool [recommended](https://packaging.python.org/tutorials/managing-dependencies/#installing-pipenv) by python.org for managing application dependencies.
 
 ```bash
 brew install pipenv
 ```
 
-### 9. Fork our repo
-
-Before we move on, we need to decide:
-
-- how many forks we're making
-- who is the owner of each fork
-
-For example, if there are two student groups working on separate front-end design concepts, we might create an organization for each student group and create a fork for each student group.
-
-Once this is decided, navigate to the homepage of our repo at <https://github.com/rji-futures-lab/django-rmp-data>, then click "Fork" button in the upper right corner of the page.
-
-You'll end up on the homepage for the new fork of the project, which is indicated in the title at the top of the page.
-
-### 10. Clone your fork of the repo
-
-click the green "Clone or download" button.
+### 9. Clone your team's fork of the repo
 
 This will create a local copy of project directory in your present working directory.
 
 ```bash
-git clone https://github.com/[your-github-account-name-here]/django-rmp-data.git
+git clone https://github.com/J4502-FS18/django-rmp-data.git
 ```
 
-### 11. Set up and run your project environment
+### 10. Set up and run your project environment
 
 Navigate into the project folder:
 
@@ -212,13 +209,13 @@ cd django-rmp-data/
 
 Similar to how we set an environment variable for our shell environment, we need to set a few environment variables particular to our project environment. These include secrets, such as database connection credentials, which we store in a `.env` file in the project directory.
 
-The rules for generate this `.env` file are already defined for in `Makefile`. So you just need to run one command:
+The rule for generating this `.env` file are already defined in the `Makefile` in this repo. So you just need to run one command:
 
 ```bash
 make env
 ```
 
-Then, use `pipenv` to set up your virtual environment and install all necessary dependencies (including the correct version of Python and Django):
+Then use `pipenv` to set up your virtual environment and install all necessary dependencies (including the correct version of Python and Django):
 
 ```bash
 pipenv install
@@ -244,9 +241,9 @@ After all of the project dependencies are instally, you can initiate your virtua
 pipenv shell
 ```
 
-### 12. Set up the database
+### 11. Set up the database
 
-We need to create a database on our local PostgreSQL server:
+We need to create a database in our local PostgreSQL cluster:
 
 ```bash
 createdb rmp
@@ -258,7 +255,7 @@ Then create all of the database tables:
 python manage.py migrate
 ```
 
-### 13. Import the data
+### 12. Import the data
 
 First, download sample data that we've made available for this project:
 
@@ -278,10 +275,38 @@ Then load it into your local instance:
 python manage.py loadrmpdata
 ```
 
-### 14. Start the Django server
+### 13. Start the Django server
 
 At long last, we are ready to start the Django server:
 
 ```bash
 python manage.py runserver
 ```
+
+## Updating your fork
+
+Because your team has forked our repository, you will occasionally need to catch up to the latest version of our source code.
+
+To do this, you'll add a new "remote" to your local copy of the repo. A remote is just a URL pointing to a git repo. Your cloned fork already has one remote on it called "origin", which points to the location of your fork of our repo on GitHub.
+
+We're going to add a new remote called "upstream" (since it's upstream of your fork's history), which points to our original repo. Here's how we do that:
+
+```bash
+git remote add upstream https://github.com/rji-futures-lab/django-rmp-data.git
+```
+
+You'll only need to run the above command once. Then, whenever you need to get our latest changes, you can pull them down like this:
+
+```bash
+git pull upstream master
+```
+
+The new changes you've pulled down might include changes to our data models, which also need to be propagated to the database in your local PostgreSQL cluster. This is called a database [migration](https://docs.djangoproject.com/en/2.1/topics/migrations/) in Django parlance.
+
+You should only ever have to run this single command:
+
+```bash
+python manage.py migrate
+```
+
+It's safe to `migrate` even if no new migrations have been added.

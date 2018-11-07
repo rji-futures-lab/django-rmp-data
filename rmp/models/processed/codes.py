@@ -15,7 +15,7 @@ from rmp.models.choices import (
 
 
 class ChemCd(BaseRMPModel):
-    chemical_id = CopyFromIntegerField(
+    id = CopyFromIntegerField(
         source_column='ChemicalID',
         primary_key=True,
         help_text="RMP's unique identifier of a chemical substance.",
@@ -58,7 +58,7 @@ class ChemCd(BaseRMPModel):
         blank=True,
     )
 
-    source_file = 'tlkpChemicals'
+    source_file = 'tlkpChemicals '
 
 
 class DeregCd(BaseRMPModel):
@@ -220,7 +220,7 @@ class SubmitCd(BaseRMPModel):
 class TopoCd(BaseRMPModel):
     """
     Type of topography(?).
-    """ 
+    """
     topo = models.CharField(
         primary_key=True,
         max_length=1,
