@@ -375,7 +375,7 @@ class Facility(BaseRMPModel):
     state = CopyFromCharField(max_length=2)
     zip_code = CopyFromCharField(
         max_length=5,
-        source_column='cameo_id',
+        source_column='zip',
     )
     zip_ext = CopyFromCharField(max_length=4)
     county_fips = CopyFromIntegerField()

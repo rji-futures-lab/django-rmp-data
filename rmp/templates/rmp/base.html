@@ -2,11 +2,14 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>RMP</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title> <!-- Where page title goes  -->
+    <!-- Add stylesheet name below  -->
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'rmp/style.css' %}"/>
+    <!-- Add Google fonts below  -->
   </head>
   <body>
-    <a href='{% url 'accident' %}'>accidents</a>
-    <a href='{% url 'state_accidents' %}'>state accidents</a>
-    {% block content %}{% endblock %}
+    {% block content %}{% endblock %} <!-- All page content will go here. Any client-side Javascript will go at the bottom -->
   </body>
 </html>

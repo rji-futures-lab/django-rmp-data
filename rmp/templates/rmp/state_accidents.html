@@ -5,6 +5,15 @@
   <h1>Accidents by State</h1>
   {% if state_list %}
   <table>
+    <tr>
+      <th>State</th>
+      <th>Number of Facilities</th>
+      <th>Number of Accidents</th>
+      <th>Number of Deaths</th>
+      <th>Number of Injuries</th>
+      <th>Number of Evacuations</th>
+      <th>Amount of Property Damage</th>
+    </tr>
     {% for state in state_list %}
     <tr>
       <td>{{ state.state }}</td>
