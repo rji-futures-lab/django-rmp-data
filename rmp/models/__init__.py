@@ -2,7 +2,6 @@
 Risk Management Plan (RMP) data models.
 """
 from .base import BaseRMPModel
-from .helpers import get_models
 from .processed import (
     # codes
     ChemCd,
@@ -43,7 +42,7 @@ from .processed import (
     ToxicsAltRelease,
     ToxicsWorstCase,
 )
-from .raw_split import (
+from .raw import (
     Tblexecutivesummaries,
     Tblfacility,
     Tbls1Facilities,
@@ -63,15 +62,25 @@ from .raw_split import (
     Tbls8PreventionProgramChemicals,
     Tbls8PreventionProgram2,
     Tbls9Emergencyresponses,
+    TlkpChemicals,
+    TlkpCountyFIPSCodes,
+    TlkpDeregistrationReason,
+    TlkpDocHandle,
+    TlkpDocType,
+    TlkpLatLongDescriptions,
+    TlkpLatLongMethods,
+    TlkpPhysicalStateCodes,
+    TlkpRejectReason,
+    TlkpS2ScenarioCodes,
+    TlkpS6InitiatingEvents,
+    TlkpStateFIPSCodes,
+    TlkpSubmissionReasonCodes,
+    TlkpTopographyCode,
+    TlkpWindSpeedUnitCodes,
 )
-# from .raw import (
-#     Tbls6AccidentChemicals,
-#     # Tbls6AccidentHistory,
-# )
 
 __all__ = (
     'BaseRMPModel',
-    'get_models',
     # codes
     'ChemCd',
     'City',
@@ -110,8 +119,7 @@ __all__ = (
     'Registration',
     'ToxicsAltRelease',
     'ToxicsWorstCase',
-    # 'Tbls6AccidentChemicals',
-    # 'Tbls6AccidentHistory'
+    # raw
     'Tblexecutivesummaries',
     'Tblfacility',
     'Tbls1Facilities',
@@ -131,4 +139,19 @@ __all__ = (
     'Tbls8PreventionProgramChemicals',
     'Tbls8PreventionProgram2',
     'Tbls9Emergencyresponses',
+    'TlkpChemicals',
+    'TlkpCountyFIPSCodes',
+    'TlkpDeregistrationReason',
+    'TlkpDocHandle',
+    'TlkpDocType',
+    'TlkpLatLongDescriptions',
+    'TlkpLatLongMethods',
+    'TlkpPhysicalStateCodes',
+    'TlkpRejectReason',
+    'TlkpS2ScenarioCodes',
+    'TlkpS6InitiatingEvents',
+    'TlkpStateFIPSCodes',
+    'TlkpSubmissionReasonCodes',
+    'TlkpTopographyCode',
+    'TlkpWindSpeedUnitCodes',
 )
