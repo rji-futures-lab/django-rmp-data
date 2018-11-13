@@ -1,6 +1,6 @@
 from django import forms
 
-class facility_search(forms.Form):
+class FacilitySearch(forms.Form):
     facility_name = forms.CharField()
     parent_company = forms.CharField()
 
