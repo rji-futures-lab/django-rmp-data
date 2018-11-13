@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>THIS IS THE LOCATION SEARCH FORM</h1>
+
+<a href="{% url 'rmp' %}">Back to RMP homepage</a>
+
+{% if error %}
+
+<p style="color: red;">Please submit a search term.</p>
+
+<form action="" method="get">
+  <input type="text" name="city" placeholder="City"/>
+  <select name="state">
+    <option value="" name="default"></option>
+    <option value="allStates" name="All States"></option>
+    {% for state in state_list %}
+    <option value="{{ state.state }}">{{ state.state }}</option>
+    {% endfor %}
+  </select>
+  <input type="text" name="county" placeholder="County"/>
+  <input type="text" name="zip" placeholder="Zip Code"/>
+  <input type="submit" value="Search" />
+</form>
+
+{% else %}
+
+<form action="search_by_location" method="get">
+  <input type="text" name="city" placeholder="City"/>
+  <select name="state">
+    <option value="" name="default"></option>
+    <option value="allStates" name="All States"></option>
+    {% for state in state_list %}
+    <option value="{{ state.state }}">{{ state.state }}</option>
+    {% endfor %}
+  </select>
+  <input type="text" name="county" placeholder="County"/>
+  <input type="text" name="zip" placeholder="Zip Code"/>
+  <input type="submit" value="Search" />
+</form>
+
+{% endif %}
+
+{% endblock %}

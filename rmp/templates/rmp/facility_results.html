@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<a href="{% url 'facility_search' %}">Back to search</a>
+
+{% if facility_query and pc_query %}
+<h1>RMP Facility Results: {{ facility_query }}, {{ pc_query }}</h1>
+
+{% elif facility_query %}
+<h1>RMP Facility Results: {{ facility_query }}</h1>
+
+{% elif pc_query %}
+<h1>RMP Parent Company Results: {{ pc_query }}</h1>
+
+{% endif %}
+
+{% if not facility_list %}
+
+<p style="color: red;">No records found. Please enter different search parameters.</p>
+
+{% elif facility_list %}
+
+  {% for facility in facility_list %}
+
+  <h4>{{ facility.facility_name }}</h4>
+
+  <h4>Basic Facility Info</h4>
+
+  <table>
+    <tr>
+      <td>Facility ID</td>
+      <td>{{ facility.id }}</td>
+    </tr>
+    <tr>
+      <td>Deregistered</td>
+      <td>{{ facility.deregistration_yn }}</td>
+    </tr>
+    <tr>
+      <td>Facility Name</td>
+      <td>{{ facility.facility_name }}</td>
+    </tr>
+    <tr>
+      <td>Street Address Line 1</td>
+      <td>{{ facility.street_1 }}</td>
+    </tr>
+    <tr>
+      <td>City</td>
+      <td>{{ facility.city }}</td>
+    </tr>
+    <tr>
+      <td>State</td>
+      <td>{{ facility.state }}</td>
+    </tr>
+    <tr>
+      <td>Zip Code</td>
+      <td>{{ facility.zip }}</td>
+    </tr>
+    <tr>
+      <td>Parent Company 1</td>
+      <td>{{ facility.parent }}</td>
+    </tr>
+    <tr>
+      <td>Parent Company 2</td>
+      <td>{{ facility.parent_2 }}</td>
+    </tr>
+    <tr>
+      <td>Number of RMP submissions</td>
+      <td>{{ facility.num_registration }}</td>
+    </tr>
+  </table>
+
+  {% endfor %}
+
+{% endif %}
+
+{% endblock %}

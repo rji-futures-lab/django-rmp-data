@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>THIS IS THE FACILITY SEARCH PAGE</h1>
+
+<a href="{% url 'rmp' %}">rmp</a>
+
+{% if error %}
+
+    <p style="color: red;">Please submit a search term.</p>
+
+    <form action="" method="get">
+      <input type="text" name="facility" placeholder="Facility Name"/>
+      <input type="text" name="parent_company" placeholder="Parent Company Name"/>
+      <input type="submit" value="Search" />
+    </form>
+
+{% else %}
+
+    <form action="search_by_facility" method="get">
+      <input type="text" name="facility" placeholder="Facility Name"/>
+      <input type="text" name="parent_company" placeholder="Parent Company Name"/>
+      <input type="submit" value="Search" />
+    </form>
+
+{% endif %}
+
+<!-- <form method="post" novalidate>
+  {% csrf_token %}
+
+  {{ form.non_field_errors }}
+
+  <table border="1">
+    {% for field in form.visible_fields %}
+      <tr>
+        <th>{{ field.label_tag }}</th>
+        <td>
+          {{ field.errors }}
+          {{ field }}
+          {{ field.help_text }}
+        </td>
+      </tr>
+    {% endfor %}
+  </table>
+
+  <button type="submit">Submit</button>
+</form> -->
+
+{% endblock %}
