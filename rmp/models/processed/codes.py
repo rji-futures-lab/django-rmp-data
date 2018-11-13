@@ -58,7 +58,7 @@ class ChemCd(BaseRMPModel):
         blank=True,
     )
 
-    source_file = 'tlkpChemicals '
+    source_file = 'tlkpChemicals'
 
 
 class DeregCd(BaseRMPModel):
