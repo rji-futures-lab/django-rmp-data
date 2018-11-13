@@ -16,49 +16,49 @@ from rmp.models.choices import (
 
 class ChemCd(BaseRMPModel):
     id = CopyFromIntegerField(
-        source_column='ChemicalID',
+        source_column='chemical_id',
         primary_key=True,
         help_text="RMP's unique identifier of a chemical substance.",
     )
     chemical_name = CopyFromCharField(
-        source_column='ChemicalName',
+        source_column='chemical_name',
         max_length=92,
         help_text="Chemical substance name.",
     )
     cas2 = CopyFromCharField(
-        source_column='CASNumber',
+        source_column='cas2',
         max_length=10,
         blank=True,
         help_text="Chemical Abstracts Service (CAS) registry number "
                   "(is 2 meaningful?)",
     )
     threshold = CopyFromDecimalField(
-        source_column='Threshold',
+        source_column='threshold',
         null=True,
         decimal_places=1,
         max_digits=8,
         help_text='Threshold above which the chemical is regulated???'
     )
     chemical_type = CopyFromCharField(
-        source_column='ChemType',
+        source_column='chemical_type',
         max_length=1,
         choices=CHEMICAL_TYPE_CHOICES,
         blank=True,
         help_text='"The type of chemical (T=toxic, F=Flammable).',
     )
     cbi_flag = CopyFromBooleanField(
-        source_column='flgCBI',
+        source_column='cbi_flag',
         help_text='Indicates whether this record contained Confidential '
                   'Business Information (CBI) which has been erased by EPA '
                   'from the public version of the data.'
     )
     chemical_owner = CopyFromCharField(
-        source_column='ChemOwner',
+        source_column='chemical_owner',
         max_length=3,
         blank=True,
     )
 
-    source_file = 'tlkpChemicals '
+    source_file = 'rmp_chem_cd'
 
 
 class DeregCd(BaseRMPModel):
