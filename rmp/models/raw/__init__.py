@@ -19,7 +19,21 @@ from .s6 import (
 from .s7 import Tbls7PreventionProgramChemicals, Tbls7PreventionProgram3
 from .s8 import Tbls8PreventionProgramChemicals, Tbls8PreventionProgram2
 from .s9 import Tbls9Emergencyresponses
-
+from .tlkp import (
+    TlkpChemicals,
+    TlkpDeregistrationReason,
+    TlkpDocHandle,
+    TlkpDocType,
+    TlkPlatlongDescriptions,
+    TlkpLatLongMethods,
+    TlkpPhysicalStateCodes,
+    TlkpRejectReason,
+    Tlkps2ScenarioCodes,
+    Tlkps6InitiatingEvents,
+    TlkpSubmissionReasonCodes,
+    TlkpTopographyCode,
+    TlkpWindSpeedUnitCodes,
+)
 
 __all__ = (
     'Tblexecutivesummaries',
