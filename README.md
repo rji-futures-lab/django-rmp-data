@@ -257,7 +257,13 @@ python manage.py migrate
 
 ### 12. Import the data
 
-First, download sample data that we've made available for this project:
+First we need to make a directory within or project folder where we'll keep all the tabular data files:
+
+```bash
+mkdir data/
+```
+
+Then download the data into that new directory:
 
 ```bash
 curl --request GET --url 'https://s3.us-east-2.amazonaws.com/rmp-sample-data/rmp.zip' > data/rmp.zip
