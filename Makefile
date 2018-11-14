@@ -8,6 +8,4 @@ env:
 syncdbschema:
 	dropdb rmp
 	createdb rmp
-	rm -rf rmp/migrations/
-	python manage.py makemigrations rmp
 	python manage.py migrate
