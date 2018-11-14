@@ -4,10 +4,13 @@
 
 {% block content %} <!-- This marks the beginning of where body content goes. If this tag is deleted, the page will not render.  -->
 
-  <h1>5-year facility history</h1>
+<h2 class="table"> Top RMP Facilities for 5-Year Accident Histories </h2>
+    <p class="chatter"> This table contains all facilities with accidents in the last five yeears before they last reported that involved fatalities, the top 20 for injuries, the top 20 for number of people evacuated, and the top 20 for reported property damage. It does not includee accidents at facilitiees that are no longer registered with RMP.
+    </p>
 
-  <p>List is sorted by number of deaths, then by number of evacuations and then by amount of property damage. Deregistered facilities are not included.</p>
-
+    <p class="info">
+      Table sorted by facility name. Re-sort using column headers.
+    </p>
   {% if facility_list %} <!-- Don't touch tags that look like this, but do style the markup inside them.  -->
   <table>
     <tr>
