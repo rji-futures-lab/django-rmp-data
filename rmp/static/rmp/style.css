@@ -299,3 +299,8 @@ table{
 	display: grid;
 	padding-top: 20px;
 }
+
+.thead{
+  color: black;
+  background: #4C4B41;
+}
