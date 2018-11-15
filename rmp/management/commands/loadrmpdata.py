@@ -4,7 +4,7 @@ from django.conf import settings
 from django.core import management
 from django.core.management.base import BaseCommand, CommandError
 from django.db.utils import DataError
-from rmp.models import get_models
+from rmp.models.helpers import get_models
 import logging
 
 logger = logging.getLogger(__name__)
