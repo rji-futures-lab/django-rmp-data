@@ -1,4 +1,4 @@
-"""Raw Lookup models."""
+"""Models for RMP "Lookup" source files (have a`tbl...` prefix.)."""
 from django.db import models
 from rmp.fields import (
     CopyFromBooleanField,
