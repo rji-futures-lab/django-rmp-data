@@ -1,14 +1,7 @@
-"""
-tblFacility
-tblS1Facilities.csv
-tblS1FlammableMixtureChemicals.csv
-tblS1Process_NAICS.csv
-tblS1ProcessChemicals.csv
-tblS1Processes.csv
-"""
-
+"""Models for raw RMP source files with `tblS1...` prefix."""
 from django.db import models
 from rmp.fields import (
+    CopyFromBigIntegerField,
     CopyFromBooleanField,
     CopyFromCharField,
     CopyFromDecimalField,
@@ -17,32 +10,6 @@ from rmp.fields import (
 )
 from rmp.models import BaseRMPModel
 
-
-class Tblfacility(BaseRMPModel):
-    epafacilityid = CopyFromIntegerField(primary_key=True)  # Field name made lowercase.
-    facilityname = CopyFromCharField(max_length=200)  # Field name made lowercase.
-    marplotid = CopyFromBooleanField(null=True)  # Field name made lowercase.
-    cameoid = CopyFromBooleanField(null=True)  # Field name made lowercase.
-    # rmpid = CopyFromForeignKey(
-    #     'Tblexecutivesummaries', # <-????
-    #     on_delete=models.PROTECT,
-    # )
-    rmpid = CopyFromIntegerField()
-    facilitystr1 = CopyFromCharField(max_length=35) # Field name made lowercase.
-    facilitystr2 = CopyFromCharField(max_length=35)  # Field name made lowercase.
-    facilitycity = CopyFromCharField(max_length=19)  # Field name made lowercase.
-    facilitystate = CopyFromCharField(max_length=2)  # Field name made lowercase.
-    facilityzipcode = CopyFromCharField(max_length=5)  # Field name made lowercase.
-    facility4digitzipext = CopyFromCharField(max_length=4)  # Field name made lowercase.
-    facilitycountyfips = CopyFromIntegerField()  # Field name made lowercase.
-    countoffacilityid = CopyFromIntegerField()  # Field name made lowercase.
-    facilitylatdecdegs = CopyFromIntegerField()  # Field name made lowercase.
-    facilitylongdecdegs = CopyFromIntegerField()  # Field name made lowercase.
-
-    source_file = 'tblFacility'
-
-    class Meta:
-        db_table = 'tblFacility'
 
 class Tbls1Facilities(BaseRMPModel):
     facilityid = CopyFromIntegerField(
@@ -88,7 +55,7 @@ class Tbls1Facilities(BaseRMPModel):
     fte = CopyFromIntegerField()  # Field name made lowercase.
     otherepafacilityid = CopyFromIntegerField()  # Field name made lowercase.
     epafacilityid = CopyFromForeignKey(
-        Tblfacility,
+        'tblFacility',
         on_delete=models.PROTECT,
     )  # Field name made lowercase.
     osha_psm = CopyFromBooleanField()  # Field name made lowercase.
@@ -152,6 +119,7 @@ class Tbls1Facilities(BaseRMPModel):
     class Meta:
         db_table = 'tblS1Facilities'
 
+
 class Tbls1Flammablemixturechemicals(BaseRMPModel):
     flammixchemid = CopyFromIntegerField(primary_key=True)  # Field name made lowercase.
     processchemicalid = CopyFromForeignKey(
@@ -205,6 +173,7 @@ class Tbls1ProcessNaics(BaseRMPModel):
 
     class Meta:
         db_table = 'tblS1Process_NAICS'
+
 
 class Tbls1Processes(BaseRMPModel):
     processid = CopyFromIntegerField()
