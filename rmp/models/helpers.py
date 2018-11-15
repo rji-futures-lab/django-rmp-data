@@ -26,7 +26,7 @@ def get_model_by_source_file(source_file_name):
     If none found, return None.
     """
     lookup = dict([
-        (getattr(i, 'source_file', i._meta.model_name), i)
+        (getattr(i, 'source_file', i._meta.object_name), i)
         for i in apps.get_app_config('rmp').models.values()
     ])
     try:

@@ -1,6 +1,10 @@
-from .execsum import Tblexecutivesummaries
+from .tbl import (
+    tblExecutiveSummaries,
+    tblFacility,
+    tblRMPError,
+    tblRMPTrack,
+)
 from .s1 import (
-    Tblfacility,
     Tbls1Facilities,
     Tbls1Flammablemixturechemicals,
     Tbls1Processchemicals,
@@ -38,8 +42,10 @@ from .tlkp import (
 )
 
 __all__ = (
-    'Tblexecutivesummaries',
-    'Tblfacility',
+    'tblExecutivesummaries',
+    'tblFacility',
+    'tblRMPError',
+    'tblRMPTrack',
     'Tbls1Facilities',
     'Tbls1Flammablemixturechemicals',
     'Tbls1Processchemicals',

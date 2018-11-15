@@ -26,6 +26,12 @@ class BaseRMPManager(CopyManager):
         blank_fields = model.get_blank_field_names()
         null_fields = model.get_null_field_names()
 
+        # HACK to deal with raw file lacking primary key
+        if model._meta.object_name in ['tblRMPError', 'tblExecutiveSummaries']:
+            # remove it from the source column mappings and blank fields
+            options['mapping'].pop('id')
+            blank_fields.remove('id')
+
         if len(blank_fields) > 0:
             options['force_not_null'] = blank_fields
 
@@ -33,7 +39,7 @@ class BaseRMPManager(CopyManager):
             options['force_null'] = null_fields
 
         source_file = getattr(
-            model, 'source_file', model._meta.db_table
+            model, 'source_file', model._meta.object_name
         )
 
         if processed:

@@ -43,8 +43,10 @@ from .processed import (
     ToxicsWorstCase,
 )
 from .raw import (
-    Tblexecutivesummaries,
-    Tblfacility,
+    tblExecutiveSummaries,
+    tblFacility,
+    tblRMPTrack,
+    tblRMPError,
     Tbls1Facilities,
     Tbls1Flammablemixturechemicals,
     Tbls1Processchemicals,
@@ -120,8 +122,10 @@ __all__ = (
     'ToxicsAltRelease',
     'ToxicsWorstCase',
     # raw
-    'Tblexecutivesummaries',
-    'Tblfacility',
+    'tblExecutiveSummaries',
+    'tblFacility',
+    'tblRMPTrack',
+    'tblRMPError',
     'Tbls1Facilities',
     'Tbls1Flammablemixturechemicals',
     'Tbls1Processchemicals',
