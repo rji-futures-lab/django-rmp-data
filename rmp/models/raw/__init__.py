@@ -12,7 +12,7 @@ from .tblS1 import (
     tblS1Processes,
 )
 from .tblS2 import tblS2ToxicsWorstCase
-from .s3 import Tbls3Toxicsaltreleases
+from .tblS3 import tblS3ToxicsAltReleases
 from .tblS4 import tblS4FlammablesWorstCase
 from .tblS5 import tblS5FlammablesAltReleases
 from .s6 import (
@@ -59,7 +59,7 @@ __all__ = (
     'tblS1ProcessNAICS',
     'TblS1Processes',
     'tblS2ToxicsWorstCase',
-    'Tbls3Toxicsaltreleases',
+    'tblS3ToxicsAltReleases',
     'tblS4FlammablesWorstCase',
     'tblS5FlammablesAltReleases',
     'Tbls6Accidentchemicals',
