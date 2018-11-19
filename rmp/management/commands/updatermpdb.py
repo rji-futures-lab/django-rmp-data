@@ -19,16 +19,22 @@ class Command(BaseCommand):
         """
         Handle the command.
         """
-        self.raw_files = [
+        raw_files = [
             f for f in listdir(settings.RMP_RAW_DATA_DIR)
             if isfile(join(settings.RMP_RAW_DATA_DIR, f))
         ]
 
-        self.stdout.write('...flushing current data from tables...')
-        management.call_command('flush', verbosity=1, interactive=False)
+        self.stdout.write('  Flushing current data from tables... ', ending='')
+        management.call_command('flush', verbosity=options['verbosity'], interactive=False)
         self.stdout.write(
-            self.style.SUCCESS('All data tables flushed.')
+            self.style.SUCCESS('OK')
         )
-
-        for f in self.raw_files:
+        
+        load_header = self.style.MIGRATE_HEADING(
+            'Loading %s .csv files:' % len(raw_files)
+        )
+        self.stdout.write(load_header)
+        for f in raw_files:
             management.call_command('loadsourcefile', f)
+
+        self.stdout.write(self.style.SUCCESS('Done.'))

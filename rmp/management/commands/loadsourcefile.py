@@ -36,10 +36,10 @@ class Command(BaseCommand):
         if self.model:
             self.load()
         else:
-            error_msg = "{} is not mapped to a raw RMP data model.".format(
+            error_msg = "  {} is not mapped to a raw RMP data model.".format(
                 options['file_name']
             )
-            self.stderr.write(
+            self.stdout.write(
                 self.style.ERROR(error_msg)
             )
 
@@ -53,12 +53,13 @@ class Command(BaseCommand):
         """
         model_name = self.model._meta.object_name
 
-        self.stdout.write("...loading %s" % model_name)
+        self.stdout.write("  Loading %s... " % model_name, ending="")
+        self.stdout.flush()
         try:
             insert_count = self.model.objects.copy_from_source_file()
         except (AttributeError, ValueError, DataError) as e:
-            self.stderr.write(
-                self.style.ERROR(e)
+            self.stdout.write(
+                self.style.ERROR('  %s' % e)
             )
         else:
             self.stdout.write(
