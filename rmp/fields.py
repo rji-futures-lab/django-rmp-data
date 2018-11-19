@@ -70,6 +70,13 @@ class CopyFromEmailField(fields.EmailField, CopyFromFieldMixin):
     pass
 
 
+class CopyFromFloatField(fields.FloatField, CopyFromFieldMixin):
+    """
+    FloatField subclass with attrs related to COPY FROM command.
+    """
+    pass
+
+
 class CopyFromForeignKey(models.ForeignKey, CopyFromFieldMixin):
     """
     ForeignKey subclass with attrs related to COPY FROM command.
