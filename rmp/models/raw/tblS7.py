@@ -50,12 +50,11 @@ class tblS7PreventionProgramChemicals(BaseRMPModel):
 
 class tblS7PreventionProgramChemicalsChangeHistory(BaseRMPModel):
     pp3chemchangehistoryid = CopyFromIntegerField(
-        #                    ^^^^^^^ ForeignKey?
+        primary_key=True,
         source_column='PP3ChemChangeHistoryID',
         verbose_name='PP3 Chemical Change History ID',
     )
     facilitychangehistoryid = CopyFromIntegerField(
-        #                     ^^^^^^^ ForeignKey?
         source_column='FacilityChangeHistoryID',
         verbose_name='Facility Change History ID',
     )
@@ -96,10 +95,6 @@ class tblS7PreventionProgramChemicalsChangeHistory(BaseRMPModel):
     )
 
     source_file = 'tblS7_Prevention_Program_Chemicals_ChangeHistory'
-
-    class Meta:
-        verbose_name = 'Prevention Program: Program Level 3 Chemicals Change History' #noqa
-        verbose_name_plural = 'Prevention Program: Program Level 3 Chemicals Change History' #noqa
 
 
 class tblS7PreventionProgram3(BaseRMPModel):
