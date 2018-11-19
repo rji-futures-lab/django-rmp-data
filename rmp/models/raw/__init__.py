@@ -4,7 +4,7 @@ from .tbl import (
     tblRMPError,
     tblRMPTrack,
 )
-from .s1 import (
+from .tblS1 import (
     tblS1Facilities,
     tblS1FlammableMixtureChemicals,
     tblS1ProcessChemicals,
