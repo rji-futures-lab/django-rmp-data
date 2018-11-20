@@ -34,7 +34,7 @@ class Command(BaseCommand):
             'Loading %s .csv files:' % len(raw_files)
         )
         self.stdout.write(load_header)
-        for f in raw_files:
+        for f in sorted(raw_files):
             management.call_command('loadsourcefile', f)
 
         self.stdout.write(self.style.SUCCESS('Done.'))
