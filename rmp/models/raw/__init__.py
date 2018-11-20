@@ -15,10 +15,10 @@ from .tblS2 import tblS2ToxicsWorstCase
 from .tblS3 import tblS3ToxicsAltReleases
 from .tblS4 import tblS4FlammablesWorstCase
 from .tblS5 import tblS5FlammablesAltReleases
-from .s6 import (
-    Tbls6Accidentchemicals,
-    Tbls6Accidenthistory,
-    Tbls6Flammablemixturechemicals,
+from .tblS6 import (
+    tblS6AccidentChemicals,
+    tblS6AccidentHistory,
+    tblS6FlammableMixtureChemicals,
 )
 from .tblS7 import (
     tblS7PreventionProgramChemicals,
@@ -62,9 +62,9 @@ __all__ = (
     'tblS3ToxicsAltReleases',
     'tblS4FlammablesWorstCase',
     'tblS5FlammablesAltReleases',
-    'Tbls6Accidentchemicals',
-    'Tbls6Accidenthistory',
-    'Tbls6Flammablemixturechemicals',
+    'tblS6AccidentChemicals',
+    'tblS6AccidentHistory',
+    'tblS6FlammableMixtureChemicals',
     'tblS7PreventionProgramChemicals',
     'tblS7PreventionProgramChemicalsChangeHistory',
     'tblS7PreventionProgram3',
