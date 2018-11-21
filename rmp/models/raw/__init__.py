@@ -26,7 +26,10 @@ from .tblS7 import (
     tblS7PreventionProgram3,
     tblS7PreventionProgram3Description_ChangeHistory,
 )
-from .s8 import Tbls8PreventionProgramChemicals, Tbls8PreventionProgram2
+from .tblS8 import (
+    tblS8_Prevention_Program_Chemicals,
+    tblS8PreventionProgram2,
+)
 from .s9 import Tbls9Emergencyresponses
 from .tlkp import (
     tlkpChemicals,
@@ -69,8 +72,8 @@ __all__ = (
     'tblS7PreventionProgramChemicalsChangeHistory',
     'tblS7PreventionProgram3',
     'tblS7PreventionProgram3Description_ChangeHistory',
-    'Tbls8PreventionProgramChemicals',
-    'Tbls8PreventionProgram2',
+    'tblS8_Prevention_Program_Chemicals',
+    'tblS8PreventionProgram2',
     'Tbls9Emergencyresponses',
     'tlkpChemicals',
     'tlkpCountyFIPSCodes',
