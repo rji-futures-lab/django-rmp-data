@@ -6,8 +6,9 @@ from rmp.fields import (
     CopyFromCharField,
     CopyFromDateTimeField,
     CopyFromDecimalField,
-    CopyFromIntegerField,
     CopyFromForeignKey,
+    CopyFromIntegerField,
+    CopyFromOneToOneField,
     CopyFromTextField,
 )
 from rmp.models import BaseRMPModel
@@ -44,7 +45,9 @@ class tblFacility(BaseRMPModel):
         verbose_name='Cameo Identifier',
         help_text='Future Link to CAMEO',
     )
-    rmpid = CopyFromIntegerField(# <--ForeignKey to what????
+    rmpid = CopyFromOneToOneField(
+        'tblS1Facilities',
+        on_delete=models.PROTECT,
         source_column='RMPID',
     ) 
     facilitystr1 = CopyFromCharField(
