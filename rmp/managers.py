@@ -43,6 +43,9 @@ class BaseRMPManager(CopyManager):
         )
 
         if processed:
+            source_file = getattr(
+                model, 'source_file', model._meta.db_table
+            )
             filename = '%s.tsv' % source_file
             path = os.path.join(settings.RMP_PROCESSED_DATA_DIR, filename)
             options['delimiter'] = '\t'
@@ -56,6 +59,9 @@ class BaseRMPManager(CopyManager):
             # proper way to solve this is to output processed files where the quote
             # chars are properly escaped, the default escape char is "
         else:
+            source_file = getattr(
+                model, 'source_file', model._meta.object_name
+            )
             filename = '%s.csv' % source_file
             path = os.path.join(settings.RMP_RAW_DATA_DIR, filename)
         

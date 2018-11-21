@@ -21,22 +21,39 @@ class Command(BaseCommand):
             'file_name',
             type=str,
         )
+        parser.add_argument(
+            '-p',
+            '--processed',
+            action='store_true',
+            dest='processed',
+            help='Load processed files',
+        )
 
     def handle(self, *args, **options):
         """
         Handle the command.
         """
         self.file_name = options['file_name']
+        self.processed = options['processed']
         self.file_name_no_ext = self.file_name.split('.')[0]
-        self.file_path = os.path.join(
-            settings.RMP_RAW_DATA_DIR, self.file_name
-        )
-        self.model = get_model_by_source_file(self.file_name_no_ext)
+        
+        if self.processed:
+            self.file_path = os.path.join(
+                    settings.RMP_PROCESSED_DATA_DIR, self.file_name
+                )
+            self.model = get_model_by_source_file(
+                self.file_name_no_ext, processed=True
+            )
+        else:
+            self.file_path = os.path.join(
+                settings.RMP_RAW_DATA_DIR, self.file_name
+            )
+            self.model = get_model_by_source_file(self.file_name_no_ext)
 
         if self.model:
             self.load()
         else:
-            error_msg = "  {} is not mapped to a raw RMP data model.".format(
+            error_msg = "  {} is not mapped to a RMP data model.".format(
                 options['file_name']
             )
             self.stdout.write(
@@ -54,9 +71,11 @@ class Command(BaseCommand):
         model_name = self.model._meta.object_name
 
         self.stdout.write("  Loading %s... " % model_name, ending="")
-        self.stdout.flush()
+        # self.stdout.flush()
         try:
-            insert_count = self.model.objects.copy_from_source_file()
+            insert_count = self.model.objects.copy_from_source_file(
+                processed=self.processed
+            )
         except (AttributeError, ValueError, DataError) as e:
             self.stdout.write(
                 self.style.ERROR('  %s' % e)

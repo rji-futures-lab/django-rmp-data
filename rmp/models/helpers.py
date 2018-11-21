@@ -19,16 +19,22 @@ def get_models(module_name):
     return filtered_models
 
 
-def get_model_by_source_file(source_file_name):
+def get_model_by_source_file(source_file_name, processed=False):
     """
     Return a Django model class to which source_file_name is mapped.
 
     If none found, return None.
     """
-    lookup = dict([
-        (getattr(i, 'source_file', i._meta.object_name), i)
-        for i in apps.get_app_config('rmp').models.values()
-    ])
+    if processed:    
+        lookup = dict([
+            (getattr(i, 'source_file', i._meta.db_table), i)
+            for i in apps.get_app_config('rmp').models.values()
+        ])
+    else:
+        lookup = dict([
+            (getattr(i, 'source_file', i._meta.object_name), i)
+            for i in apps.get_app_config('rmp').models.values()
+        ])
     try:
         model = lookup[source_file_name]
     except KeyError:
