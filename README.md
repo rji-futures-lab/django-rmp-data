@@ -2,6 +2,8 @@
 
 A Django app to extract, refine and publish Risk Management Plan (RMP) data collected by the U.S. Federal Environment Protection Agency.
 
+This [RMP eSubmit User's Manual](https://www.epa.gov/sites/production/files/2018-02/documents/rmpesubmit_users_manual_-_revised_february_09_2018.pdf) (revised in Feb 2018) includes screenshots of the forms through which users submit their RMP data.
+
 ## Dependencies
 
 Requires [PostgreSQL](https://www.postgresql.org/), because our ETL process relies heavily on [`django-postgres-copy`](https://django-postgres-copy.readthedocs.io/en/latest/).
