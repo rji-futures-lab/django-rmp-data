@@ -1,24 +1,22 @@
-"""
-tblS9EmergencyResponses.csv
-"""
+"""Models for raw RMP source files with `tblS9...` prefix."""
 from django.db import models
 from rmp.fields import (
     CopyFromBooleanField,
     CopyFromCharField,
     CopyFromDateTimeField,
     CopyFromDecimalField,
-    CopyFromIntegerField,
     CopyFromForeignKey,
+    CopyFromIntegerField,
+    CopyFromOneToOneField,
 )
 from rmp.models.base import BaseRMPModel
 
 
 class tblS9EmergencyResponses(BaseRMPModel):
-    facilityid = CopyFromForeignKey(
+    facilityid = CopyFromOneToOneField(
         'tblS1Facilities',
         source_column='FacilityID',
         on_delete=models.PROTECT,
-        primary_key=True,
     )
     er_communityplan = CopyFromBooleanField(
         source_column='ER_CommunityPlan',
