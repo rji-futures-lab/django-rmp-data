@@ -360,7 +360,10 @@ class Facility(BaseRMPModel):
         max_length=50,
     )
     # ForeignKey Candidate?
-    rmp_id = CopyFromIntegerField()
+    rmp_id = CopyFromIntegerField(
+        # 'Registration',
+        # on_delete=models.CASCADE,
+    )
     street_1 = CopyFromCharField(
         # check that values going into this field match facility_str_1
         max_length=35,
@@ -394,7 +397,10 @@ class Facility(BaseRMPModel):
     sub_type = CopyFromCharField(max_length=1, blank=True)
     sub_date = CopyFromDateTimeField()
     exec_type = CopyFromCharField(max_length=1, blank=True)
-    execsum_rmp_id = CopyFromIntegerField()
+    execsum_rmp_id = CopyFromIntegerField(
+        # 'ExecutiveSummary',
+        # on_delete=models.CASCADE,
+    )
     exec_sub_type = CopyFromCharField(max_length=1, blank=True)
     exec_sub_date = CopyFromDateTimeField()
     # these fields could be converted to DateTime once we replace "0000-00-00" with NULL

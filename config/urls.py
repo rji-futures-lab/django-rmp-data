@@ -7,6 +7,9 @@ from rmp import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
+    path('contact/', views.contact, name='contact'),
+    path('databases/', views.databases, name='databases'),
+    path('about/', views.about, name='about'),
     path('rmp/', include('rmp.urls')),
 ] + static(
     settings.MEDIA_URL, document_root=settings.MEDIA_ROOT

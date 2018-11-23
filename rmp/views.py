@@ -1,11 +1,20 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.db.models import Count, Sum
-from rmp.models.processed.processed import Facility
+from rmp.models.processed.processed import Facility, ExecutiveSummary, Registration
 # from .forms import facility_search
 
 def index(request):
     return render(request, 'rmp/index.html')
+
+def contact(request):
+    return render(request, 'rmp/contact.html')
+
+def about(request):
+    return render(request, 'rmp/about.html')
+
+def databases(request):
+    return render(request, 'rmp/databases.html')
 
 def rmp(request):
     return render(request, 'rmp/rmp.html')
@@ -32,13 +41,6 @@ def state_accidents(request):
 
 def facility_search(request):
     return render(request, 'rmp/facility_search.html')
-    # if request.method == 'GET':
-    #     form = facility_search(request.GET)
-    #     if form.is_valid():
-    #         pass
-    # else:
-    #     form = ContactForm()
-    # return render(request, 'rmp/facility_search', {'form': form})
 
 def location_search(request):
     state_list = Facility.objects.order_by('state').values('state').distinct()
@@ -64,16 +66,22 @@ def search_by_facility(request):
             error=True
         elif facility_query and pc_query:
             facility_list = Facility.objects.filter(facility_name__search=facility_query).filter(parent__search=pc_query)
-            return render(request, 'rmp/facility_results.html', {'facility_query': facility_query, 'pc_query': pc_query, 'facility_list': facility_list})
+            registration = Registration.objects.filter(facility_name__search=facility_query).filter(parent__search=pc_query).order_by('-complete_check_dt')[:1]
+            # execsum = Facility.objects.select_related('rmp')
+            context = {'facility_list': facility_list, 'facility_query': facility_query, 'pc_query': pc_query, 'execsum': execsum, 'registration': registration}
+            return render(request, 'rmp/facility_results.html', context)
 
         elif len(facility_query) != 0:
             facility_query = request.GET['facility']
             facility_list = Facility.objects.filter(facility_name__search=facility_query)
-            return render(request, 'rmp/facility_results.html', {'facility_list': facility_list, 'facility_query': facility_query})
+            # facility_id = Facility.objects.filter(facility_name__search=facility_query).values_list('rmp', flat=True) , 'facility_id': facility_id}
+            registration = Registration.objects.filter(facility_name__search=facility_query).order_by('-complete_check_dt')[:1]
+            return render(request, 'rmp/facility_results.html', {'facility_list': facility_list, 'facility_query': facility_query, 'registration': registration})
 
         elif len(pc_query) != 0:
             pc_query = request.GET['parent_company']
             facility_list = Facility.objects.filter(parent__search=pc_query)
-            return render(request, 'rmp/facility_results.html', {'facility_list': facility_list, 'pc_query': pc_query})
+            registration = Registration.objects.filter(parent__search=pc_query).order_by('-complete_check_dt')[:1]
+            return render(request, 'rmp/facility_results.html', {'facility_list': facility_list, 'pc_query': pc_query, 'registration': registration})
 
     return render(request, 'rmp/facility_search.html', {'error': error})

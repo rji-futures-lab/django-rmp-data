@@ -4,5 +4,13 @@
 
 <h1>THIS IS THE HOME PAGE</h1>
 
-<a href='{% url 'rmp' %}'>rmp</a>
+<ul>
+  <li><a href="{% url 'rmp' %}">rmp</a></li>
+  <li><a href="{% url 'contact' %}">contact</a></li>
+  <li><a href="{% url 'about' %}">about</a></li>
+  <li><a href="{% url 'databases' %}">databases</a></li>
+</ul>
+
+
+
 {% endblock %}
