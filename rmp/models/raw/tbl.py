@@ -113,7 +113,7 @@ class tblExecutiveSummaries(BaseRMPModel):
         help_text='Unique sequence number for the executive summary.',
     )
     facilityid = CopyFromForeignKey(
-        'Tblfacility',
+        'tblFacility',
         on_delete=models.PROTECT,
         source_column='FacilityID',
         verbose_name='Facility ID',
