@@ -63,6 +63,20 @@ class CopyFromDecimalField(fields.DecimalField, CopyFromFieldMixin):
     pass
 
 
+class CopyFromEmailField(fields.EmailField, CopyFromFieldMixin):
+    """
+    EmailField subclass with attrs related to COPY FROM command.
+    """
+    pass
+
+
+class CopyFromFloatField(fields.FloatField, CopyFromFieldMixin):
+    """
+    FloatField subclass with attrs related to COPY FROM command.
+    """
+    pass
+
+
 class CopyFromForeignKey(models.ForeignKey, CopyFromFieldMixin):
     """
     ForeignKey subclass with attrs related to COPY FROM command.
@@ -87,5 +101,11 @@ class CopyFromOneToOneField(models.OneToOneField, CopyFromFieldMixin):
 class CopyFromTextField(fields.TextField, CopyFromFieldMixin):
     """
     TextField subclass with attrs related to COPY FROM command.
+    """
+    pass
+
+class CopyFromURLField(fields.URLField, CopyFromFieldMixin):
+    """
+    URLField subclass with attrs related to COPY FROM command.
     """
     pass
