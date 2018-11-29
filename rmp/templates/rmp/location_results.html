@@ -30,6 +30,7 @@
     <th>Number of Evacuations</th>
     <th>Amount of Property Damage</th>
   </tr>
+
   {% for facility in facility_list %}
   <tr>
     <td>{{ facility.facility_name }}</td>
@@ -44,9 +45,8 @@
     <td>{{ facility.num_evacuated }}</td>
     <td>{{ facility.property_damage }}</td>
   </tr>
-
-
   {% endfor %}
+  
 </table>
 
 {% endif %}
