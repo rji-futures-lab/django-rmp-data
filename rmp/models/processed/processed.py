@@ -296,8 +296,9 @@ class Accident(BaseRMPModel):
 
 
 class ExecutiveSummary(BaseRMPModel): #rmp_execsum
-    rmp_id = CopyFromIntegerField(
+    id = CopyFromIntegerField(
         primary_key=True,
+        source_column='rmp_id',
     )
     summary_text = CopyFromTextField(
         source_column='execsum',
@@ -397,9 +398,9 @@ class Facility(BaseRMPModel):
     sub_type = CopyFromCharField(max_length=1, blank=True)
     sub_date = CopyFromDateTimeField()
     exec_type = CopyFromCharField(max_length=1, blank=True)
-    execsum_rmp_id = CopyFromIntegerField(
-        # 'ExecutiveSummary',
-        # on_delete=models.CASCADE,
+    execsum_rmp = CopyFromForeignKey(
+        'ExecutiveSummary',
+        on_delete=models.PROTECT,
     )
     exec_sub_type = CopyFromCharField(max_length=1, blank=True)
     exec_sub_date = CopyFromDateTimeField()

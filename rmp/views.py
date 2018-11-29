@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.db.models import Count, Sum
 from rmp.models.processed.processed import Facility, ExecutiveSummary, Registration
+from django.template.defaultfilters import linebreaks
 # from .forms import facility_search
 
 def index(request):
@@ -47,14 +48,24 @@ def location_search(request):
     context = {'state_list': state_list}
     return render(request, 'rmp/location_search.html', context)
 
-def search_by_location(request):
+def search_by_state(request):
     error=False
     if 'state' in request.GET:
         state_query = request.GET['state']
         facility_list = Facility.objects.filter(state__search=state_query)
         return render(request, 'rmp/location_results.html', {'facility_list': facility_list, 'state_query': state_query})
+    return render(request, 'rmp/location_search.html', {'error': error})
 
-
+def search_by_city(request):
+    error=False
+    if 'state' in request.GET and 'city' in request.GET and 'zip' in request.GET:
+        state_query = request.GET['state']
+        city_query = request.GET['city']
+        if not state_query and not city_query:
+            error=True
+        elif state_query and  city_query:
+            facility_list = Facility.objects.filter(state__search=state_query).filter(city__search=city_query)
+            return render(request, 'rmp/location_results.html', {'facility_list': facility_list, 'state_query': state_query, 'city_query': city_query})
     return render(request, 'rmp/location_search.html', {'error': error})
 
 def search_by_facility(request):
@@ -67,21 +78,23 @@ def search_by_facility(request):
         elif facility_query and pc_query:
             facility_list = Facility.objects.filter(facility_name__search=facility_query).filter(parent__search=pc_query)
             registration = Registration.objects.filter(facility_name__search=facility_query).filter(parent__search=pc_query).order_by('-complete_check_dt')[:1]
-            # execsum = Facility.objects.select_related('rmp')
+            execsum = Facility.objects.filter(facility_name__search=facility_query).filter(parent__search=pc_query).select_related('execsum_rmp')
             context = {'facility_list': facility_list, 'facility_query': facility_query, 'pc_query': pc_query, 'execsum': execsum, 'registration': registration}
             return render(request, 'rmp/facility_results.html', context)
 
         elif len(facility_query) != 0:
             facility_query = request.GET['facility']
             facility_list = Facility.objects.filter(facility_name__search=facility_query)
+            execsum = Facility.objects.filter(facility_name__search=facility_query).select_related('execsum_rmp')
             # facility_id = Facility.objects.filter(facility_name__search=facility_query).values_list('rmp', flat=True) , 'facility_id': facility_id}
             registration = Registration.objects.filter(facility_name__search=facility_query).order_by('-complete_check_dt')[:1]
-            return render(request, 'rmp/facility_results.html', {'facility_list': facility_list, 'facility_query': facility_query, 'registration': registration})
+            return render(request, 'rmp/facility_results.html', {'facility_list': facility_list, 'facility_query': facility_query, 'execsum': execsum, 'registration': registration})
 
         elif len(pc_query) != 0:
             pc_query = request.GET['parent_company']
             facility_list = Facility.objects.filter(parent__search=pc_query)
             registration = Registration.objects.filter(parent__search=pc_query).order_by('-complete_check_dt')[:1]
-            return render(request, 'rmp/facility_results.html', {'facility_list': facility_list, 'pc_query': pc_query, 'registration': registration})
+            execsum = Facility.objects.filter(parent__search=pc_query).select_related('execsum_rmp')
+            return render(request, 'rmp/facility_results.html', {'facility_list': facility_list, 'pc_query': pc_query, 'execsum': execsum, 'registration': registration})
 
     return render(request, 'rmp/facility_search.html', {'error': error})
