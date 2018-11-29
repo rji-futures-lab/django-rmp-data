@@ -4,11 +4,17 @@
 
 {% block content %}
 
+{% if state_query and not city_query %}
+<h1>RMP Facilities in {{ state_query }}</h1>
+
+{% elif state_query and city_query %}
+<h1>RMP Facility Results: {{ city_query }}, {{ state_query }}</h1>
+
+{% endif %}
+
 <a href="{% url 'location_search' %}">Back to search</a>
 
 {% if facility_list %}
-
-<h1>RMP Facilities in {{ state_query }}</h1>
 
 <table>
   <tr>
@@ -24,6 +30,7 @@
     <th>Number of Evacuations</th>
     <th>Amount of Property Damage</th>
   </tr>
+
   {% for facility in facility_list %}
   <tr>
     <td>{{ facility.facility_name }}</td>
@@ -38,9 +45,8 @@
     <td>{{ facility.num_evacuated }}</td>
     <td>{{ facility.property_damage }}</td>
   </tr>
-
-
   {% endfor %}
+  
 </table>
 
 {% endif %}

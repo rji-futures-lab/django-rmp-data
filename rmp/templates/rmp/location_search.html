@@ -10,35 +10,59 @@
 
 <p style="color: red;">Please submit a search term.</p>
 
+<h4>Search by State</h4>
+
 <form action="" method="get">
-  <input type="text" name="city" placeholder="City"/>
-  <select name="state">
+  <select name="state" onchange="this.form.submit()">
     <option value="" name="default"></option>
-    <option value="allStates" name="All States"></option>
     {% for state in state_list %}
     <option value="{{ state.state }}">{{ state.state }}</option>
     {% endfor %}
   </select>
-  <input type="text" name="county" placeholder="County"/>
+</form>
+
+<h4>Or search by city</h4>
+
+<form action="" method="get">
+  <input type="text" name="city" placeholder="City"/>
+  <select name="state">
+    <option value="" name="default"></option>
+    {% for state in state_list %}
+    <option value="{{ state.state }}">{{ state.state }}</option>
+    {% endfor %}
+  </select>
   <input type="text" name="zip" placeholder="Zip Code"/>
   <input type="submit" value="Search" />
 </form>
 
 {% else %}
 
-<form action="search_by_location" method="get">
-  <input type="text" name="city" placeholder="City"/>
-  <select name="state">
+<h4>Search for RMP Facilities by State</h4>
+
+<form action="search_by_state" method="get">
+  <select name="state" onchange="this.form.submit()">
     <option value="" name="default"></option>
-    <option value="allStates" name="All States"></option>
     {% for state in state_list %}
     <option value="{{ state.state }}">{{ state.state }}</option>
     {% endfor %}
   </select>
-  <input type="text" name="county" placeholder="County"/>
+  <input type="submit" value="Search" />
+</form>
+
+<h4>Or search by city</h4>
+
+<form action="search_by_city" method="get">
+  <input type="text" name="city" placeholder="City" />
+  <select name="state" required>
+    <option value="" name="default"></option>
+    {% for state in state_list %}
+    <option value="{{ state.state }}">{{ state.state }}</option>
+    {% endfor %}
+  </select>
   <input type="text" name="zip" placeholder="Zip Code"/>
   <input type="submit" value="Search" />
 </form>
+
 
 {% endif %}
 

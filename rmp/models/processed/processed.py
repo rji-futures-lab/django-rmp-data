@@ -296,8 +296,9 @@ class Accident(BaseRMPModel):
 
 
 class ExecutiveSummary(BaseRMPModel): #rmp_execsum
-    rmp_id = CopyFromIntegerField(
+    id = CopyFromIntegerField(
         primary_key=True,
+        source_column='rmp_id',
     )
     summary_text = CopyFromTextField(
         source_column='execsum',
@@ -360,7 +361,10 @@ class Facility(BaseRMPModel):
         max_length=50,
     )
     # ForeignKey Candidate?
-    rmp_id = CopyFromIntegerField()
+    rmp = CopyFromForeignKey(
+        'Registration',
+        on_delete=models.PROTECT,
+    )
     street_1 = CopyFromCharField(
         # check that values going into this field match facility_str_1
         max_length=35,
@@ -394,7 +398,10 @@ class Facility(BaseRMPModel):
     sub_type = CopyFromCharField(max_length=1, blank=True)
     sub_date = CopyFromDateTimeField()
     exec_type = CopyFromCharField(max_length=1, blank=True)
-    execsum_rmp_id = CopyFromIntegerField()
+    execsum_rmp = CopyFromForeignKey(
+        'ExecutiveSummary',
+        on_delete=models.PROTECT,
+    )
     exec_sub_type = CopyFromCharField(max_length=1, blank=True)
     exec_sub_date = CopyFromDateTimeField()
     # these fields could be converted to DateTime once we replace "0000-00-00" with NULL
@@ -481,9 +488,9 @@ class Registration(BaseRMPModel):
     phone_24hour_ext = CopyFromCharField(max_length=10, blank=True)
     num_fte = CopyFromIntegerField(null=True)
     other_facility_id = CopyFromCharField(blank=True, max_length=15)
-    facility = CopyFromForeignKey(
-        'Facility',
-        on_delete=models.CASCADE,
+    facility_id = CopyFromBigIntegerField(
+        # 'Facility',
+        # on_delete=models.CASCADE,
     )
     osha_psm_yn = CopyFromBooleanField()
     epcra_302_yn = CopyFromBooleanField()

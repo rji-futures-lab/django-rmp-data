@@ -27,7 +27,47 @@
 
   <h4>Basic Facility Info</h4>
 
-  <table>
+  <ul>
+    <li>Facility ID: {{ facility.id }}</li>
+    <li>Deregistered: {{ facility.deregistration_yn }}</li>
+    <li>Facility Name: {{ facility.facility_name }}</li>
+    <li>Street Address Line 1: {{ facility.street_1 }}</li>
+    <li>City: {{ facility.city }}</li>
+    <li>State: {{ facility.state }}</li>
+    <li>Zip Code: {{ facility.zip_code }}</li>
+    <li>Parent Company 1: {{ facility.parent }}</li>
+    <li>Parent Company 2: {{ facility.parent_2 }}</li>
+    <li>Number of RMP Registrations: {{ facility.num_registration }}</li>
+  </ul>
+
+  <h4>Most Recent RMP Submission Info</h4>
+
+  <ul>
+    <li>RMP ID: {{ facility.rmp.rmp_id }}</li>
+    <li>Submission Type: {{ facility.rmp.submission_type }}</li>
+    <li>Submission Date: {{ facility.rmp.complete_check_dt }}</li>
+    <li>Deregistration Date: {{ facility.rmp.deregistration_dt }}</li>
+    <li>Deregistration Effective Date : {{ facility.rmp.dereg_effect_dt }}</li>
+    <li>Deregistration Reason: {{ facility.rmp.dereg_reason }}</li>
+    <li>Process Toxic Amount Total: {{ facility.rmp.toxic_tot }}</li>
+    <li>Process Flammable Amount Total: {{ facility.rmp.flam_tot }}</li>
+    <li>Number of Potential Offsite Consequence Processes: {{ facility.rmp.num_process }}</li>
+    <li>Potential Offsite Consequence Toxic Amount Total (lbs): {{ facility.rmp.toxic_tot_23 }}</li>
+    <li>Potential Offsite Consequence Flammable Amount Total (lbs): {{ facility.rmp.flam_tot_23}}</li>
+    <li>Potential Offsite Consequence Amount Total (lbs): {{ facility.rmp.quantity_tot_23 }}</li>
+  </ul>
+
+  <h4>Executive Summary Information</h4>
+
+  {{ facility.execsum_rmp.summary_text }}
+
+  {% endfor %}
+
+{% endif %}
+
+{% endblock %}
+
+  <!-- <table>
     <tr>
       <td>Facility ID</td>
       <td>{{ facility.id }}</td>
@@ -68,10 +108,31 @@
       <td>Number of RMP submissions</td>
       <td>{{ facility.num_registration }}</td>
     </tr>
-  </table>
+  </table> -->
+
+  <!-- {% if not registration %}
+
+  <p style="color: red;">No registration</p>
+
+  {% elif registration %}
+
+  {% for facility in registration %}
+
+  <ul>
+    <li>RMP ID: {{ facility.rmp_id }}</li>
+    <li>Submission Type: {{ facility.submission_type }}</li>
+    <li>Submission Date: {{ facility.complete_check_dt }}</li>
+    <li>Deregistration Date: {{ facility.deregistration_dt }}</li>
+    <li>Deregistration Effective Date : {{ facility.dereg_effect_dt }}</li>
+    <li>Deregistration Reason: {{ facility.dereg_reason }}</li>
+    <li>Process Toxic Amount Total: {{ facility.toxic_tot }}</li>
+    <li>Process Flammable Amount Total: {{ facility.flam_tot }}</li>
+    <li>Number of Potential Offsite Consequence Processes: {{ facility.num_process }}</li>
+    <li>Potential Offsite Consequence Toxic Amount Total (lbs): {{ facility.toxic_tot_23 }}</li>
+    <li>Potential Offsite Consequence Flammable Amount Total (lbs): {{ facility.flam_tot_23}}</li>
+    <li>Potential Offsite Consequence Amount Total (lbs): {{ facility.quantity_tot_23 }}</li>
+  </ul>
 
   {% endfor %}
 
-{% endif %}
-
-{% endblock %}
+{% endif %} -->
