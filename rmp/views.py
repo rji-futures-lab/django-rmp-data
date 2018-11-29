@@ -76,25 +76,25 @@ def search_by_facility(request):
         if not facility_query and not pc_query:
             error=True
         elif facility_query and pc_query:
-            facility_list = Facility.objects.filter(facility_name__search=facility_query).filter(parent__search=pc_query)
-            registration = Registration.objects.filter(facility_name__search=facility_query).filter(parent__search=pc_query).order_by('-complete_check_dt')[:1]
-            execsum = Facility.objects.filter(facility_name__search=facility_query).filter(parent__search=pc_query).select_related('execsum_rmp')
-            context = {'facility_list': facility_list, 'facility_query': facility_query, 'pc_query': pc_query, 'execsum': execsum, 'registration': registration}
+            facility_list = Facility.objects.filter(facility_name__search=facility_query).filter(parent__search=pc_query).select_related('execsum_rmp').select_related('rmp')
+            # registration = Registration.objects.filter(facility_name__search=facility_query).filter(parent__search=pc_query).order_by('-complete_check_dt')[:1] , 'execsum': execsum, 'registration': registration
+            # execsum = Facility.objects.filter(facility_name__search=facility_query).filter(parent__search=pc_query).select_related('execsum_rmp')
+            context = {'facility_list': facility_list, 'facility_query': facility_query, 'pc_query': pc_query}
             return render(request, 'rmp/facility_results.html', context)
 
         elif len(facility_query) != 0:
             facility_query = request.GET['facility']
-            facility_list = Facility.objects.filter(facility_name__search=facility_query)
-            execsum = Facility.objects.filter(facility_name__search=facility_query).select_related('execsum_rmp')
-            # facility_id = Facility.objects.filter(facility_name__search=facility_query).values_list('rmp', flat=True) , 'facility_id': facility_id}
-            registration = Registration.objects.filter(facility_name__search=facility_query).order_by('-complete_check_dt')[:1]
-            return render(request, 'rmp/facility_results.html', {'facility_list': facility_list, 'facility_query': facility_query, 'execsum': execsum, 'registration': registration})
+            facility_list = Facility.objects.filter(facility_name__search=facility_query).select_related('execsum_rmp').select_related('rmp')
+            # execsum = Facility.objects.filter(facility_name__search=facility_query).select_related('execsum_rmp')
+            # facility_id = Facility.objects.filter(facility_name__search=facility_query).values_list('rmp', flat=True) , 'facility_id': facility_id})
+            # registration = Registration.objects.filter(facility_name__search=facility_query).order_by('-complete_check_dt')[:1] , 'execsum': execsum, 'registration': registration
+            return render(request, 'rmp/facility_results.html', {'facility_list': facility_list, 'facility_query': facility_query})
 
         elif len(pc_query) != 0:
             pc_query = request.GET['parent_company']
-            facility_list = Facility.objects.filter(parent__search=pc_query)
-            registration = Registration.objects.filter(parent__search=pc_query).order_by('-complete_check_dt')[:1]
-            execsum = Facility.objects.filter(parent__search=pc_query).select_related('execsum_rmp')
-            return render(request, 'rmp/facility_results.html', {'facility_list': facility_list, 'pc_query': pc_query, 'execsum': execsum, 'registration': registration})
+            facility_list = Facility.objects.filter(parent__search=pc_query).select_related('execsum_rmp').select_related('rmp')
+            # registration = Registration.objects.filter(parent__search=pc_query).order_by('-complete_check_dt')[:1] , 'execsum': execsum, 'registration': registration
+            # execsum = Facility.objects.filter(parent__search=pc_query).select_related('execsum_rmp')
+            return render(request, 'rmp/facility_results.html', {'facility_list': facility_list, 'pc_query': pc_query})
 
     return render(request, 'rmp/facility_search.html', {'error': error})

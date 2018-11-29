@@ -361,9 +361,9 @@ class Facility(BaseRMPModel):
         max_length=50,
     )
     # ForeignKey Candidate?
-    rmp_id = CopyFromIntegerField(
-        # 'Registration',
-        # on_delete=models.CASCADE,
+    rmp = CopyFromForeignKey(
+        'Registration',
+        on_delete=models.PROTECT,
     )
     street_1 = CopyFromCharField(
         # check that values going into this field match facility_str_1
@@ -488,9 +488,9 @@ class Registration(BaseRMPModel):
     phone_24hour_ext = CopyFromCharField(max_length=10, blank=True)
     num_fte = CopyFromIntegerField(null=True)
     other_facility_id = CopyFromCharField(blank=True, max_length=15)
-    facility = CopyFromForeignKey(
-        'Facility',
-        on_delete=models.CASCADE,
+    facility_id = CopyFromBigIntegerField(
+        # 'Facility',
+        # on_delete=models.CASCADE,
     )
     osha_psm_yn = CopyFromBooleanField()
     epcra_302_yn = CopyFromBooleanField()
