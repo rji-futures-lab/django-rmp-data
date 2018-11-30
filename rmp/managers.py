@@ -42,7 +42,10 @@ class BaseRMPManager(CopyManager):
             model, 'source_file', model._meta.object_name
         )
 
-        if processed:
+        new_processed_files = ['ExecutiveSummary']
+        is_new_processed_file = model._meta.object_name in new_processed_files
+
+        if processed and not is_new_processed_file:
             source_file = getattr(
                 model, 'source_file', model._meta.db_table
             )
@@ -59,10 +62,16 @@ class BaseRMPManager(CopyManager):
             # proper way to solve this is to output processed files where the quote
             # chars are properly escaped, the default escape char is "
         else:
+                
             source_file = getattr(
                 model, 'source_file', model._meta.object_name
             )
             filename = '%s.csv' % source_file
-            path = os.path.join(settings.RMP_RAW_DATA_DIR, filename)
+            if is_new_processed_file:
+                path = os.path.join(settings.RMP_PROCESSED_DATA_DIR, filename)
+            else:
+                path = os.path.join(settings.RMP_RAW_DATA_DIR, filename)
+
+        print(path)
         
         return super().from_csv(path, **options)

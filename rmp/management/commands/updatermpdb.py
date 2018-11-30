@@ -5,6 +5,7 @@ from django.conf import settings
 from django.core import management
 from django.core.management.base import BaseCommand, CommandError
 from django.db.utils import DataError
+from rmp.transformers import transform_executive_summaries
 import logging
 
 logger = logging.getLogger(__name__)
@@ -35,6 +36,8 @@ class Command(BaseCommand):
         for f in sorted(raw_files):
             management.call_command('loadsourcefile', f)
         self.stdout.write(self.style.SUCCESS('Done.'))
+
+        transform_executive_summaries()
 
         # handle processed files
         processed_files = [
