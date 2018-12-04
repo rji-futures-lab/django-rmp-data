@@ -3,6 +3,18 @@
 {% block content %}
 
 <h1>THIS IS THE NRC DATA HOMEPAGE</h1>
+
+<div id="brscontainer">
+
+
+  <div class="cards-2 cards">
+
+    <h2><a href="{% url 'nrc' %}" style="color:black;text-decoration:none;">National Response center (NRP)</a></h2>
+
+    <center>
+    <img src="photo1.jpg"alt="databasephoto" width="400px"/>
+      </center>
+
 <ul>
   <li>
     <a href="{% url 'accident' %}">5-year accident history</a>
@@ -17,5 +29,14 @@
     <a href="{% url 'facility_search' %}">Search by facility name</a>
   </li>
 </ul>
+
+<div id="About">
+<h2> About the Database</h2>
+</div>
+<div class="brstext">
+<p>The NRC database was last updated on RTK NET with a copy updated as of June 25, 2018, and includes incidents from 1982 through part of 2018.</p>
+<p>
+The NRC spills and accidents database is a database of incidents reported to the National Response Center. These incidents include chemical spills, accidents involving chemicals (such as fires or explosions), oil spills, transportation accidents that involve oil or chemicals, releases of radioactive materials, sightings of oil sheens on bodies of water, terrorist incidents involving chemicals, incidents where illegally dumped chemicals have been found, and drills intended to prepare responders to handle these kinds of incidents. The National Repsonse Center is operated by the U.S. Coast Guard, and has become the central point of contact of contact used for the reporting of many different kinds of incidents involving hazardous materials.</p>
+</div>
 
 {% endblock %}
