@@ -3,6 +3,17 @@
 {% block content %}
 
 <h1>THIS IS THE RMP DATA HOMEPAGE</h1>
+<div id="brscontainer">
+
+
+  <div class="cards-4 cards">
+
+    <h2><a href="{% url 'rmp' %}" style="color:black;text-decoration:none;">Risk Management Plans (RMP)</a></h2>
+  <center>
+    {% load static %}
+    <img src="{% static 'rmp/img/photo4.jpg' %}"alt="databasephoto" width="400px"/>
+  </center>
+
 <ul>
   <li>
     <a href="{% url 'accident' %}">5-year accident history</a>
@@ -18,6 +29,15 @@
   </li>
 </ul>
 
+<div id="About">
+<h2> About the Database</h2>
+</div>
+<div class="brstext">
+  <p>RMP was last updated on RTK NET with a set of EPA data made on April 30, 2018.</p>
+  <p>Federal law requires industrial facilities that use large amounts of extremely hazardous substances to file a Risk Management Plan with the Environmental Protection Agency (EPA). EPA then creates a national database of RMP information. These RMP data are intended to save lives, protect property, and prevent pollution. In particular, some industrial facilities are switching to safer and more secure chemicals that do not endanger employees and surrounding communities. You can identify hazardous chemical facilities in your area using the RMP Search tool.</p>
+  <p>
+  By June 21, 1999, a summary of the facility's risk management program (known as a "Risk Management Plan" or "RMP") was to be submitted to EPA, which will make the information publicly available. The plans must be revised and resubmitted every five years. The Risk Management Program is about reducing chemical risk at the local level. This information helps local fire, police, and emergency response personnel (who must prepare for and respond to chemical accidents), and is useful to citizens in understanding the chemical hazards in communities. EPA anticipates that making the RMPs available to the public stimulates communication between industry and the public to improve accident prevention and emergency response practices at the local level."</p>
+</div>
 
 
 
