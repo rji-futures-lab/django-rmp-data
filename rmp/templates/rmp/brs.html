@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>THIS IS THE BRS DATA HOMEPAGE</h1>
+<ul>
+  <li>
+    <a href="{% url 'accident' %}">5-year accident history</a>
+  </li>
+  <li>
+    <a href="{% url 'state_accidents' %}">Accidents by State</a>
+  </li>
+  <li>
+    <a href= "{% url 'location_search' %}">Search by location</a>
+  </li>
+  <li>
+    <a href="{% url 'facility_search' %}">Search by facility name</a>
+  </li>
+</ul>
+
+{% endblock %}
