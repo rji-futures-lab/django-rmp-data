@@ -354,6 +354,7 @@ th,td {
 
 .cards-1{
 	grid-area:c;
+	margin-left: 20px;
 }
 
 .cards-2{
@@ -405,4 +406,8 @@ width: 100%;
 		grid-gap: 20px;
 		grid-template-areas:
 		"g h "
+	}
+
+	.p {
+		padding-left: 20px;
 	}
