@@ -411,3 +411,8 @@ width: 100%;
 	.p {
 		padding-left: 20px;
 	}
+
+	.data{
+	text-align: center;
+	font-style: bold;
+}
