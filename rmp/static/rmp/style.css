@@ -107,7 +107,7 @@ background-color: #f4f4f4;
 	margin-top: 5px;
 }
 .cards img{
-	margin-left: 5%;
+	margin-left: auto;
 
 }
 .cards-2 {
@@ -134,6 +134,7 @@ background-color: #f4f4f4;
 
 .cards-5 {
 background-color: #f4f4f4;
+
 }
 .cards-5 h2{
 	margin-top: 5px;
