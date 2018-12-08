@@ -289,6 +289,11 @@ input{
   border-radius: 4px;
 }
 
+input::placeholder{
+	font-weight: bolder;
+	font-size: 10px;
+}
+
 input[type=button], input[type=submit], input[type=reset] {
   background-color: #E8AD0C;
   border: none;
