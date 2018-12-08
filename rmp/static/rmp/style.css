@@ -340,7 +340,6 @@ div{
 }
 
 .table{
-	color:#E8AD0C;
 	text-align: center;
 }
 
@@ -361,7 +360,7 @@ table{
 	padding: 20px;
 }
 
-.thead {
+th{
 	background-color: #E8AD0C;
 	text-align: center;
 }
