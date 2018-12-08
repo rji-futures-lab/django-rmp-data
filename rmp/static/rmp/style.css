@@ -36,14 +36,14 @@ h2 {
 
 h3 {
 	font-family: 'Muli', Helvetica, sans-serif;
-	text-align: center;
+	text-align: left;
 	font-weight: bolder;
 	text-shadow: -.5px .5px 0 #000;
-	color: #ffffff;
-	width:150px ;
+	color: black;
+	width:50%;
 	height:30px ;
-	background-color:#E8AD0C;
-	margin: 15px auto;
+	margin-left: 40px;
+	margin-bottom: 20px;
 }
 
 
@@ -271,9 +271,7 @@ input[type=button], input[type=submit], input[type=reset] {
 	font-size: 15px;
 }
 
-.location-search{
-	text-align: left;
-}
+
 
 
 @media (min-width: 600px) {
