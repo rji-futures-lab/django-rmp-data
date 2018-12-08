@@ -275,6 +275,10 @@ li{
 	color: black;
 }
 
+.search{
+	margin-left: 30px;
+}
+
 @media (min-width: 600px) {
 	.flex-container {
 		flex-direction: row;
