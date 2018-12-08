@@ -410,7 +410,7 @@ th,td {
 #contacttext{
 	grid-area: h;
 	padding-right:20px;
-	padding-top: 175px;
+	padding-top: 125px;
 	text-align: center;
 }
 
@@ -454,4 +454,9 @@ width: 100%;
 
 .title{
 	margin-left: 30px;
+}
+
+.title-contact {
+	padding-top: 20px;
+	padding-left: 20px;
 }
