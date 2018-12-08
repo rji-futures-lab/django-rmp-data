@@ -238,6 +238,36 @@ li{
 	color: black;
 }
 
+.search{
+	margin-left: 40px;
+}
+
+input{
+	width: 50%;
+	padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+	border: 2px solid #82806F;
+  border-radius: 4px;
+}
+
+input::placeholder{
+	font-weight: bolder;
+	font-size: 10px;
+}
+
+input[type=button], input[type=submit], input[type=reset] {
+  background-color: #E8AD0C;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+	font-weight: bolder;
+	font-size: 15px;
+}
+
 @media (min-width: 600px) {
 	.flex-container {
 		flex-direction: row;
@@ -286,7 +316,9 @@ div{
 .info{
 	color: black;
 	text-align: left;
-	text-decoration: none;
+	text-decoration: italic;
+	margin-left: 20px;
+	margin-right: 20px;
 }
 
 
