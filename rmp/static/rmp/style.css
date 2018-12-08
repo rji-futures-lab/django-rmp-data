@@ -268,7 +268,13 @@ input[type=button], input[type=submit], input[type=reset] {
 	font-size: 15px;
 }
 
+<<<<<<< HEAD
 
+=======
+.brstext p{
+	font-size: 20px;
+}
+>>>>>>> 3e83af16c92831f68cd428985325913791180a9f
 
 @media (min-width: 600px) {
 	.flex-container {
@@ -327,8 +333,10 @@ div{
 table{
 	display: grid;
 	padding-top: 20px;
-	width: 100%;
+	width: 95%;
 	padding: 20px;
+	justify-content: center;
+	margin-right: none;
 }
 
 th{
@@ -378,7 +386,7 @@ th,td {
 #contacttext{
 	grid-area: h;
 	padding-right:20px;
-	padding-top: 175px;
+	padding-top: 125px;
 	text-align: center;
 }
 
@@ -422,4 +430,9 @@ width: 100%;
 
 .title{
 	margin-left: 30px;
+}
+
+.title-contact {
+	padding-top: 20px;
+	padding-left: 20px;
 }
