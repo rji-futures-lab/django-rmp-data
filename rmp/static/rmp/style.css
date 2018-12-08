@@ -271,6 +271,9 @@ input[type=button], input[type=submit], input[type=reset] {
 	font-size: 15px;
 }
 
+h3, .location-search{
+	text-align: left;
+}
 
 
 @media (min-width: 600px) {
