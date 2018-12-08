@@ -299,8 +299,6 @@ input[type=button], input[type=submit], input[type=reset] {
 }
 
 
-
-
 @media (min-width: 600px) {
 	.flex-container {
 		flex-direction: row;
