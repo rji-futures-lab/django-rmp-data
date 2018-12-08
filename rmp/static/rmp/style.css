@@ -96,48 +96,12 @@ body{
 	margin-right: 15%;
 	padding-bottom: 2.5%;
 }
- .cards-1{
-background-color: #f4f4f4;
-	background-repeat: no-repeat;
-	background-size: cover;
-	grid-area:a;
 
-}
-.cards-1 h2{
-	width: 90%;
-	margin-top: 5px;
-}
-.cards img{
-	margin-left: auto;
 
-}
-.cards-2 {
+.card-database {
 background-color: #f4f4f4;
 }
-.cards-2 h2{
-	margin-top: 5px;
-}
-
-.cards-3 {
-background-color: #f4f4f4;
-}
-.cards-3 h2{
-	margin-top: 5px;
-}
-
-.cards-4 {
-background-color: #f4f4f4;
-}
-.cards-4 h2{
-	margin-top: 5px;
-}
-
-
-.cards-5 {
-background-color: #f4f4f4;
-
-}
-.cards-5 h2{
+.card-database h2{
 	margin-top: 5px;
 }
 
@@ -197,8 +161,6 @@ a.black:link, a.black:visted{
 image{
 	border:none;
 }
-
-
 
 h4{
 	font-size: 0.8em;
@@ -386,12 +348,8 @@ th,td {
 
 
 .cards{
-
     border-radius: 6px;
 }
-
-
-
 
 .cards-1{
 	grid-area:c;
@@ -461,24 +419,11 @@ width: 100%;
 	margin-left: 30px;
 }
 
-.center {
-	margin-right: 0;
-}
-
-.data{
+	.data{
 	text-align: center;
 	font-style: bold;
 }
 
 .title{
 	margin-left: 30px;
-}
-
-.data-title{
-	text-align: center;
-	margin-right: 0;
-}
-
-.matt{
-	margin-left: 10px;
 }
