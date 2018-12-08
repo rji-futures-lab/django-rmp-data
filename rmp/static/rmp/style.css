@@ -276,6 +276,19 @@ li{
 	color: black;
 }
 
+.search{
+	margin-left: 30px;
+}
+
+input{
+	width: 50%;
+	padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+	border: 2px solid #82806F;
+  border-radius: 4px;
+}
+
 @media (min-width: 600px) {
 	.flex-container {
 		flex-direction: row;
