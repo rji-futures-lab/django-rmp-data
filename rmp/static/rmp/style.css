@@ -36,19 +36,19 @@ h2 {
 
 h3 {
 	font-family: 'Muli', Helvetica, sans-serif;
-	text-align: left;
+	text-align: center;
 	font-weight: bolder;
 	text-shadow: -.5px .5px 0 #000;
-	color: black;
-	width:50%;
+	color: #ffffff;
+	width:150px ;
 	height:30px ;
-	margin-left: 40px;
-	margin-bottom: 20px;
+	background-color:#E8AD0C;
+	margin: 15px auto;
 }
 
 
 h1{
-font-family:'Muli', Helvetica, sans-serif;
+font-family: 'Oswald', sans-serif;
 	background-color: #ffffff;
 	color: Black;
  font-size:2.6em ;
@@ -97,34 +97,7 @@ body{
 	padding-bottom: 2.5%;
 }
 
-/*card style for the index page (start)*/
-.card-index-1 {
-	background-color: #f4f4f4;
-	margin-left: 20px;
-}
 
-.card-index-2 {
-	background-color: #f4f4f4;
-	margin-right: 20px;
-}
-
-.card-index-3 {
-	background-color: #f4f4f4;
-	margin-left: 20px;
-}
-
-.card-index-4 {
-	background-color: #f4f4f4;
-	margin-right: 20px;
-}
-
-.card-index-5 {
-	background-color: #f4f4f4;
-	margin-left: 20px;
-}
-/*card style for the index page (end)*/
-
-/*card style for the database page (start)*/
 .card-database {
 background-color: #f4f4f4;
 margin-left: 20px;
@@ -139,7 +112,7 @@ a.black:link, a.black:visted{
     text-decoration: none;
     font-family: 'Muli', Helvetica, sans-serif;
 }
-/*card style for the database page (end)*/
+
 
 #nav {
     padding: 0;
@@ -148,8 +121,8 @@ a.black:link, a.black:visted{
 }
 
 #nav li {
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
 	border-bottom: 1px solid #ccc;
 	text-decoration: none;
 	text-shadow: -.5px .5px 0 #000;
@@ -221,8 +194,8 @@ margin-left: 30px;
 	text-align: left;
 }
 .brstext{
-	margin-left: 30px;
-	margin-right: 30px;
+	margin-left: 60px;
+	margin-right: 60px;
 }
 #brsdatabase {
 	color: #ffffff;
@@ -244,10 +217,6 @@ margin-left: 30px;
 }
 #brscontainer h2{
 	margin: 5px;
-}
-
-#brsdatabase a{
-	color:black;
 }
 
 
@@ -300,9 +269,13 @@ input[type=button], input[type=submit], input[type=reset] {
 	font-size: 15px;
 }
 
+<<<<<<< HEAD
+
+=======
 .brstext p{
 	font-size: 20px;
 }
+>>>>>>> 3e83af16c92831f68cd428985325913791180a9f
 
 @media (min-width: 600px) {
 	.flex-container {
@@ -336,6 +309,7 @@ div{
 	}
 
 
+
 .chatter{
 	color: black;
 	margin-left: 20px;
@@ -356,6 +330,7 @@ div{
 }
 
 
+
 table{
 	display: grid;
 	padding-top: 20px;
@@ -374,6 +349,7 @@ th,td {
 	border: 1px solid black;
 	width: 10%;
 }
+
 
 
 .cards{
@@ -448,7 +424,7 @@ width: 100%;
 	margin-left: 30px;
 }
 
-	.data-title{
+	.data{
 	text-align: center;
 	font-style: bold;
 }
