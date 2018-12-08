@@ -337,7 +337,9 @@ div{
 .info{
 	color: black;
 	text-align: left;
-	text-decoration: none;
+	text-decoration: italic;
+	margin-left: 20px;
+	margin-right: 20px;
 }
 
 
