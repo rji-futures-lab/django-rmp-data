@@ -299,6 +299,10 @@ input[type=button], input[type=submit], input[type=reset] {
 	font-size: 15px;
 }
 
+.brstext p{
+	font-size: 20px;
+}
+
 @media (min-width: 600px) {
 	.flex-container {
 		flex-direction: row;
