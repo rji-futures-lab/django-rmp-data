@@ -14,7 +14,7 @@ Search RMP Facilities by Location
 
 <p style="color: red;">Please submit a search term.</p>
 
-<h3 class="location">Search by State</h3>
+<h3>Search by State</h3>
 
 <form action="" method="get">
   <select name="state" onchange="this.form.submit()">
@@ -27,7 +27,7 @@ Search RMP Facilities by Location
 
 <h3 class="location">Or search by city</h3>
 
-<form action="" method="get">
+<form class="search" action="" method="get">
   <input type="text" name="city" placeholder="City"/>
   <select name="state">
     <option value="" name="default"></option>
@@ -41,9 +41,9 @@ Search RMP Facilities by Location
 
 {% else %}
 
-<h4>Search for RMP Facilities by State</h4>
+<h3>Search for RMP Facilities by State</h3>
 
-<form action="search_by_state" method="get">
+<form class="search" action="search_by_state" method="get">
   <select name="state" onchange="this.form.submit()">
     <option value="" name="default"></option>
     {% for state in state_list %}
@@ -53,9 +53,9 @@ Search RMP Facilities by Location
   <input type="submit" value="Search" />
 </form>
 
-<h4>Or search by city</h4>
+<h3>Or search by city</h3>
 
-<form action="search_by_city" method="get">
+<form class="search" action="search_by_city" method="get">
   <input type="text" name="city" placeholder="City" />
   <select name="state" required>
     <option value="" name="default"></option>
