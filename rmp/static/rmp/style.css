@@ -358,8 +358,10 @@ div{
 table{
 	display: grid;
 	padding-top: 20px;
-	width: 100%;
+	width: 95%;
 	padding: 20px;
+	justify-content: center;
+	margin-right: none;
 }
 
 th{
