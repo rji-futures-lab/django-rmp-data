@@ -39,18 +39,23 @@ h3 {
 	text-align: left;
 	font-weight: bolder;
 	text-shadow: -.5px .5px 0 #000;
+<<<<<<< HEAD
 	color: Black;
 	width:50%;
 	margin-left: 40px;
 	margin-bottom: 20px;
+=======
+	color: black;
+	width:50%;
+>>>>>>> dc980b6d08827828c5ef23696bc8cccbd6aed8b7
 	height:30px ;
-	background-color:#E8AD0C;
-	margin: 15px auto;
+	margin-left: 40px;
+	margin-bottom: 20px;
 }
 
 
 h1{
-font-family: 'Oswald', sans-serif;
+font-family:'Muli', Helvetica, sans-serif;
 	background-color: #ffffff;
 	color: Black;
  font-size:2.6em ;
@@ -99,7 +104,34 @@ body{
 	padding-bottom: 2.5%;
 }
 
+/*card style for the index page (start)*/
+.card-index-1 {
+	background-color: #f4f4f4;
+	margin-left: 20px;
+}
 
+.card-index-2 {
+	background-color: #f4f4f4;
+	margin-right: 20px;
+}
+
+.card-index-3 {
+	background-color: #f4f4f4;
+	margin-left: 20px;
+}
+
+.card-index-4 {
+	background-color: #f4f4f4;
+	margin-right: 20px;
+}
+
+.card-index-5 {
+	background-color: #f4f4f4;
+	margin-left: 20px;
+}
+/*card style for the index page (end)*/
+
+/*card style for the database page (start)*/
 .card-database {
 background-color: #f4f4f4;
 margin-left: 20px;
@@ -114,7 +146,7 @@ a.black:link, a.black:visted{
     text-decoration: none;
     font-family: 'Muli', Helvetica, sans-serif;
 }
-
+/*card style for the database page (end)*/
 
 #nav {
     padding: 0;
@@ -123,8 +155,8 @@ a.black:link, a.black:visted{
 }
 
 #nav li {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 	border-bottom: 1px solid #ccc;
 	text-decoration: none;
 	text-shadow: -.5px .5px 0 #000;
@@ -183,8 +215,7 @@ h4{
 
 #About h2{
 color:black;
-font-weight: bolder;
-font-size: 1.6em;
+font-size: 1.1em;
 margin-left: 30px;
 
 }
@@ -196,8 +227,8 @@ margin-left: 30px;
 	text-align: left;
 }
 .brstext{
-	margin-left: 60px;
-	margin-right: 60px;
+	margin-left: 30px;
+	margin-right: 30px;
 }
 #brsdatabase {
 	color: #ffffff;
@@ -219,6 +250,10 @@ margin-left: 30px;
 }
 #brscontainer h2{
 	margin: 5px;
+}
+
+#brsdatabase a{
+	color:black;
 }
 
 
@@ -271,13 +306,9 @@ input[type=button], input[type=submit], input[type=reset] {
 	font-size: 15px;
 }
 
-<<<<<<< HEAD
-
-=======
 .brstext p{
 	font-size: 20px;
 }
->>>>>>> 3e83af16c92831f68cd428985325913791180a9f
 
 @media (min-width: 600px) {
 	.flex-container {
@@ -311,7 +342,6 @@ div{
 	}
 
 
-
 .chatter{
 	color: black;
 	margin-left: 20px;
@@ -332,7 +362,6 @@ div{
 }
 
 
-
 table{
 	display: grid;
 	padding-top: 20px;
@@ -351,7 +380,6 @@ th,td {
 	border: 1px solid black;
 	width: 10%;
 }
-
 
 
 .cards{
@@ -426,7 +454,7 @@ width: 100%;
 	margin-left: 30px;
 }
 
-	.data{
+	.data-title{
 	text-align: center;
 	font-style: bold;
 }
@@ -439,3 +467,30 @@ width: 100%;
 	padding-top: 20px;
 	padding-left: 20px;
 }
+
+/*card style for the index page (start)*/
+.card-index-1 {
+	background-color: #f4f4f4;
+	margin-left: 20px;
+}
+
+.card-index-2 {
+	background-color: #f4f4f4;
+	margin-right: 20px;
+}
+
+.card-index-3 {
+	background-color: #f4f4f4;
+	margin-left: 20px;
+}
+
+.card-index-4 {
+	background-color: #f4f4f4;
+	margin-right: 20px;
+}
+
+.card-index-5 {
+	background-color: #f4f4f4;
+	margin-left: 20px;
+}
+/*card style for the index page (end)*/
