@@ -212,7 +212,6 @@ h4{
 color:black;
 font-size: 1.1em;
 margin-left: 30px;
-
 }
 
 .brstext p{
@@ -220,11 +219,10 @@ margin-left: 30px;
   font-family: 'Muli', Helvetica, sans-serif;
   font-size: 0.8em;
 	text-align: left;
-}
-.brstext{
 	margin-left: 30px;
 	margin-right: 30px;
 }
+
 #brsdatabase {
 	color: #ffffff;
 	font-family: 'Muli', Helvetica, sans-serif;
