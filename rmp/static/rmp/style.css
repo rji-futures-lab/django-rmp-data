@@ -277,7 +277,7 @@ li{
 }
 
 .search{
-	margin-left: 30px;
+	margin-left: 40px;
 }
 
 input{
@@ -287,6 +287,16 @@ input{
   box-sizing: border-box;
 	border: 2px solid #82806F;
   border-radius: 4px;
+}
+
+input[type=button], input[type=submit], input[type=reset] {
+  background-color: #E8AD0C;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
 }
 
 @media (min-width: 600px) {
