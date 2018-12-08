@@ -298,35 +298,6 @@ input[type=button], input[type=submit], input[type=reset] {
 	font-size: 15px;
 }
 
-#data {
-    padding: 0;
-	list-style-type: none;
-
-}
-
-#data li{
-	margin: 0;
-  padding: 0;
-	border-bottom: 1px solid #ccc;
-	text-decoration: none;
-	text-shadow: -.5px .5px 0 #000;
-}
-
-#data a:link, a:visited {
-	display:block;
-    color: #ffffff;
-    background-color: #E8AD0C;
-    font-weight: bold;
-    text-align:center;
-    text-decoration: none;
-    padding: 7px;
-    font-family: 'Muli', Helvetica, sans-serif;
-		font-size: 1.2em;}
-
-#data a:hover{
-		background-color: #b88909;
-		}
-
 @media (min-width: 600px) {
 	.flex-container {
 		flex-direction: row;
