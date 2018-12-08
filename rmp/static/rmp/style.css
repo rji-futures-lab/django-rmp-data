@@ -36,11 +36,13 @@ h2 {
 
 h3 {
 	font-family: 'Muli', Helvetica, sans-serif;
-	text-align: center;
+	text-align: left;
 	font-weight: bolder;
 	text-shadow: -.5px .5px 0 #000;
-	color: #ffffff;
-	width:150px ;
+	color: Black;
+	width:50%;
+	margin-left: 40px;
+	margin-bottom: 20px;
 	height:30px ;
 	background-color:#E8AD0C;
 	margin: 15px auto;
