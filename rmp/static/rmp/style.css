@@ -16,7 +16,7 @@ h2 {
 
 .container{
 	background-color: #82806F;
-height: 50px;
+	height: 50px;
 	text-align: center;
 	padding-left: 20px;
 	color: #ffffff;
@@ -76,6 +76,8 @@ body{
 	margin-bottom: 30px;
 	margin-top: 30px;
 	height: 25%;
+	margin-left: 20px;
+	margin-right: 20px;
 }
 
 #aboutus h3{
@@ -191,6 +193,7 @@ a.black:link, a.black:visted{
 	padding-top: 15px;
 	color: white;
 	font-family: 'Muli', Helvetica, sans-serif;
+	text-align: center;
 }
 image{
 	border:none;
@@ -359,15 +362,20 @@ th,td {
 
 .cards-2{
 	grid-area:b;
+	margin-right: 20px;
 }
 .cards-3{
 	grid-area:d;
+	margin-left: 20px;
+
 }
 .cards-4{
 	grid-area:e;
+	margin-right: 20px;
 }
 .cards-5{
 	grid-area:f;
+	margin-left: 20px
 }
 
 #image{
@@ -389,6 +397,8 @@ th,td {
 #gridbox{
 width: 100%;
 	display: grid;
+	text-align: center;
+	align-content: center;
 	grid-column-gap:10px;
 	grid-row-gap: 20px;
 	grid-template-columns: 1fr 1fr;
