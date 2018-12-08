@@ -97,7 +97,34 @@ body{
 	padding-bottom: 2.5%;
 }
 
+/*card style for the index page (start)*/
+.card-index-1 {
+	background-color: #f4f4f4;
+	margin-left: 20px;
+}
 
+.card-index-2 {
+	background-color: #f4f4f4;
+	margin-right: 20px;
+}
+
+.card-index-3 {
+	background-color: #f4f4f4;
+	margin-left: 20px;
+}
+
+.card-index-4 {
+	background-color: #f4f4f4;
+	margin-right: 20px;
+}
+
+.card-index-5 {
+	background-color: #f4f4f4;
+	margin-left: 20px;
+}
+/*card style for the index page (end)*/
+
+/*card style for the database page (start)*/
 .card-database {
 background-color: #f4f4f4;
 margin-left: 20px;
@@ -112,7 +139,7 @@ a.black:link, a.black:visted{
     text-decoration: none;
     font-family: 'Muli', Helvetica, sans-serif;
 }
-
+/*card style for the database page (end)*/
 
 #nav {
     padding: 0;
