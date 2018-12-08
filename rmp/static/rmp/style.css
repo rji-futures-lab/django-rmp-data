@@ -48,7 +48,7 @@ h3 {
 
 
 h1{
-font-family: 'Oswald', sans-serif;
+font-family:'Muli', Helvetica, sans-serif;
 	background-color: #ffffff;
 	color: Black;
  font-size:2.6em ;
@@ -335,7 +335,6 @@ div{
 	}
 
 
-
 .chatter{
 	color: black;
 	margin-left: 20px;
@@ -356,7 +355,6 @@ div{
 }
 
 
-
 table{
 	display: grid;
 	padding-top: 20px;
@@ -373,7 +371,6 @@ th,td {
 	border: 1px solid black;
 	width: 10%;
 }
-
 
 
 .cards{
