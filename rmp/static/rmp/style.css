@@ -191,6 +191,7 @@ a.black:link, a.black:visted{
 	padding-top: 15px;
 	color: white;
 	font-family: 'Muli', Helvetica, sans-serif;
+	text-align: center;
 }
 image{
 	border:none;
@@ -359,15 +360,20 @@ th,td {
 
 .cards-2{
 	grid-area:b;
+	margin-right: 20px;
 }
 .cards-3{
 	grid-area:d;
+	margin-left: 20px;
+
 }
 .cards-4{
 	grid-area:e;
+	margin-right: 20px;
 }
 .cards-5{
 	grid-area:f;
+	margin-left: 20px
 }
 
 #image{
