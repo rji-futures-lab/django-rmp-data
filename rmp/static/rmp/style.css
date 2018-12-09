@@ -318,15 +318,11 @@ input[type=button], input[type=submit], input[type=reset] {
 	font-size: 20px;
 }
 
-@media screen and (min-width: 200px;) {
+@media screen and (min-width: 200px) {
 	#image {
-		margin-left: auto;
- 	 	margin-right: auto;
- 	 	width: 50%;
-		padding-right: 200px;
+
 	}
 }
-
 @media screen and (min-width: 300px) {
 #gridbox img{
 	width: 80%;
@@ -369,7 +365,8 @@ height: 100px;
    margin-left: auto;
 	 margin-right: auto;
 	 width: 50%;
-	 padding-right: 120px;
+	 padding-right: 200px;
+	 padding-left: none;
 }
 
 
