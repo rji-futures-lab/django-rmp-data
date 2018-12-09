@@ -6,7 +6,7 @@ p {
 	text-decoration-color: #000000;
 	text-align: center;
 	margin-left: 10px;
-	margin-right: 10px;
+	margin-left: 10px;
 
 }
 
@@ -147,10 +147,13 @@ background-color: #f4f4f4;
 margin-left: 20px;
 margin-right: 20px;
 margin-bottom: 10px;
+text-align: center;
 
 }
-.card-database h2{
+
+ h2{
 	margin-top: 5px;
+	text-align: center;
 }
 
 a.black:link, a.black:visted{
@@ -595,13 +598,21 @@ width: 100%;
 	margin-left: 30px;
 }
 
-	.data-title{
+.data-title{
 	text-align: center;
 	font-style: bold;
 }
 
+.data-about {
+	text-align: center;
+}
+
+.database-title {
+	text-align: center;
+}
+
 .title{
-	margin-left: 30px;
+	margin-right: 175px;
 }
 
 .title-contact {
