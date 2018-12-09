@@ -444,13 +444,6 @@ th,td {
 	padding-left: 20px;
 }
 
-#contacttext{
-	grid-area: h;
-	padding-right:20px;
-	padding-top: 125px;
-	text-align: center;
-}
-
 #databases{
 		margin:0 auto;
 		width:70%;
@@ -475,8 +468,29 @@ width: 100%;
 			"d e "
 			"f . ";
 }
+#contacttext {
+				grid-area: h;
+				padding-right:20px;
+				padding-left: 20px;
+				text-align: center;
+			}
+
+
+.title-contact {
+	text-align: center;
+	padding-top: 20px;
 }
 
+#image {
+	display: block;
+   margin-left: auto;
+	 margin-right: auto;
+	 width: 50%;
+}
+}
+
+
+}
 @media screen and (min-width: 1000px) {
 	article {
 		display: grid;
@@ -528,6 +542,25 @@ width: 100%;
 .card-index-5 {
 	background-color: #f4f4f4;
 	margin-left: 20px;
+}
+
+#contacttext{
+	grid-area: h;
+	padding-right:20px;
+	padding-top: 85px;
+	text-align: center;
+}
+
+#image {
+	display: block;
+   margin-left: 0px;
+	 padding-left: 20px;
+}
+
+.title-contact {
+	text-align: left;
+	padding-left: 20px;
+	padding-top: 20px;
 }
 }
 /*card style for the index page (end)*/
