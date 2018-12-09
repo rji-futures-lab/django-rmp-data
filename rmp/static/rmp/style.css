@@ -317,39 +317,120 @@ input[type=button], input[type=submit], input[type=reset] {
 .brstext p{
 	font-size: 20px;
 }
-@media (min-width: 300px) {
+
+@media screen and (min-width: 200px;) {
+	#image {
+		margin-left: auto;
+ 	 	margin-right: auto;
+ 	 	width: 50%;
+		padding-right: 200px;
+	}
+}
+
+@media screen and (min-width: 300px) {
 #gridbox img{
 	width: 80%;
 	margin-left: 10%;
 	margin-right: 10%;
 }
+
 #aboutus h3{
 height: 100px;
 }
 #aboutus .homepage h3{
 	height: 20px;
 }
+
+#brs p{
+	font-size: 1.1em;
+	margin-left: 10%;
+	margin-right: 10%;
 }
+
+#brs h2{
+	margin-left: 10%;
+}
+
+#contacttext {
+				grid-area: h;
+				padding-right: 20px;
+				padding-left: 20px;
+				text-align: center;
+			}
+
+
+.title-contact {
+	text-align: center;
+	padding-top: 20px;
+}
+
+#image {
+	display: block;
+   margin-left: auto;
+	 margin-right: auto;
+	 width: 50%;
+	 padding-right: 120px;
+}
+
 
 @media (min-width: 600px) {
 	.flex-container {
 		flex-direction: row;
 		justify-content: space-between;
 	}
+
   ul {
 		flex-direction: row;
 	justify-content: space-between;
 }
+
 #aboutus h3{
 height: 40px;
+}
+
+#contacttext {
+				grid-area: h;
+				padding-right:20px;
+				padding-left: 20px;
+				text-align: center;
+			}
+
+
+.title-contact {
+	text-align: center;
+	padding-top: 20px;
+}
+
+#image {
+	display: block;
+   margin-left: auto;
+	 margin-right: auto;
+	 padding-left: 0px;
+	 padding-right: 150px;
+	 width: 35%;
+}
+}
+
+@media (min-width: 700px){
+	#image {
+		display: block;
+		padding-left: 0px;
+		padding-right: 10px;
+		 width: 50%;
+	}
 }
 
 @media (min-width: 800px) {
 	#gridbox img {
 	    width: 80%;
 		}
-div{
-
+#brs p{
+	font-size: 1.1em;
+	margin-left: 16%;
+	margin-right: 16%;
+}
+#brs h2{
+	margin-left: 16%;
 }
 	.item-1 {
 		margin-right: auto;
@@ -441,14 +522,6 @@ th,td {
 
 #image{
 	grid-area: g;
-	padding-left: 20px;
-}
-
-#contacttext{
-	grid-area: h;
-	padding-right:20px;
-	padding-top: 125px;
-	text-align: center;
 }
 
 #databases{
@@ -475,8 +548,37 @@ width: 100%;
 			"d e "
 			"f . ";
 }
+
+#contacttext {
+				grid-area: h;
+				padding-right:20px;
+				padding-left: 20px;
+				text-align: center;
+			}
+
+.title-contact {
+	text-align: center;
+	padding-top: 20px;
 }
 
+#image {
+	display: block;
+	padding-left: 20px;
+	padding-right: 10px;
+	 width: 50%;
+}
+}
+
+@media screen and (min-width:900px) {
+	#image {
+		display: block;
+		padding-left: 100px;
+		padding-right: 10px;
+		 width: 50%;
+	}
+}
+
+}
 @media screen and (min-width: 1000px) {
 	article {
 		display: grid;
@@ -528,6 +630,25 @@ width: 100%;
 .card-index-5 {
 	background-color: #f4f4f4;
 	margin-left: 20px;
+}
+
+#contacttext{
+	grid-area: h;
+	padding-right:20px;
+	padding-top: 85px;
+	text-align: center;
+}
+
+#image {
+	display: block;
+   margin-left: 0px;
+	 padding-left: 20px;
+}
+
+.title-contact {
+	text-align: left;
+	padding-left: 20px;
+	padding-top: 20px;
 }
 }
 /*card style for the index page (end)*/
