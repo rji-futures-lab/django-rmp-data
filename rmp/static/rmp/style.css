@@ -105,27 +105,32 @@ body{
 /*card style for the index page (start)*/
 .card-index-1 {
 	background-color: #f4f4f4;
-	margin-left: 20px;
+	margin-left:20px;
+	margin-right: 20px;
 }
 
 .card-index-2 {
 	background-color: #f4f4f4;
+	margin-left:20px;
 	margin-right: 20px;
 }
 
 .card-index-3 {
 	background-color: #f4f4f4;
-	margin-left: 20px;
+	margin-left:20px;
+	margin-right: 20px;
 }
 
 .card-index-4 {
 	background-color: #f4f4f4;
+	margin-left:20px;
 	margin-right: 20px;
 }
 
 .card-index-5 {
 	background-color: #f4f4f4;
-	margin-left: 20px;
+	margin-left:20px;
+	margin-right: 20px;
 }
 /*card style for the index page (end)*/
 
@@ -309,6 +314,12 @@ input[type=button], input[type=submit], input[type=reset] {
 .brstext p{
 	font-size: 20px;
 }
+@media (min-width: 300px) {
+#gridbox img{
+	width: 80%;
+	margin-left: 15%;
+}
+}
 
 @media (min-width: 600px) {
 	.flex-container {
@@ -319,6 +330,8 @@ input[type=button], input[type=submit], input[type=reset] {
 		flex-direction: row;
 	justify-content: space-between;
 }
+
+
 	}
 @media (min-width: 800px) {
 
@@ -389,15 +402,18 @@ th,td {
 .cards-1{
 	grid-area:c;
 	margin-left: 20px;
+	margin-right: 20px;
 }
 
 .cards-2{
 	grid-area:b;
 	margin-right: 20px;
+	margin-left: 20px;
 }
 .cards-3{
 	grid-area:d;
 	margin-left: 20px;
+	margin-right: 20px;
 
 }
 .cards-4{
