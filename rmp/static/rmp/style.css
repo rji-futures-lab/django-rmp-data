@@ -90,9 +90,10 @@ body{
 	color: black;
 	text-align: left;
 	margin-left: 15%;
-	padding-top: 2.5%;
+	padding-top: 3.5%;
 	text-shadow: none;
 	font-size: 1.5em;
+
 }
 #aboutus p{
 	font-style: normal;
@@ -317,7 +318,14 @@ input[type=button], input[type=submit], input[type=reset] {
 @media (min-width: 300px) {
 #gridbox img{
 	width: 80%;
-	margin-left: 15%;
+	margin-left: 10%;
+	margin-right: 10%;
+}
+#aboutus h3{
+height: 100px;
+}
+#aboutus .homepage h3{
+	height: 20px;
 }
 }
 
@@ -330,11 +338,14 @@ input[type=button], input[type=submit], input[type=reset] {
 		flex-direction: row;
 	justify-content: space-between;
 }
+#aboutus h3{
+height: 40px;
+}
 
-
-	}
 @media (min-width: 800px) {
-
+	#gridbox img {
+	    width: 80%;
+		}
 div{
 
 }
