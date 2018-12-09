@@ -329,6 +329,13 @@ height: 100px;
 #aboutus .homepage h3{
 	height: 20px;
 }
+#brs p{
+	font-size: 1.1em;
+	margin-left: 10%;
+	margin-right: 10%;
+}
+#brs h2{
+	margin-left: 10%;
 }
 
 @media (min-width: 600px) {
@@ -348,8 +355,13 @@ height: 40px;
 	#gridbox img {
 	    width: 80%;
 		}
-div{
-
+#brs p{
+	font-size: 1.1em;
+	margin-left: 16%;
+	margin-right: 16%;
+}
+#brs h2{
+	margin-left: 16%;
 }
 	.item-1 {
 		margin-right: auto;
