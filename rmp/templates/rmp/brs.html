@@ -10,8 +10,9 @@ Biennial Reporting System
 
 <div id="brscontainer">
 
-
   <div class="cards-2 cards">
+
+
 
     <h2 class="data-title"><a href="{% url 'brs' %}" style="color:black;text-decoration:none;">Biennial Reporting System (BRS)</a></h2></div>
 
@@ -20,22 +21,25 @@ Biennial Reporting System
     <img src="{% static 'rmp/img/photo1.jpg' %}"alt="databasephoto" width="400px"/>
       </center>
 
-<ul>
-  <li>
-    <a class="data" href="{% url 'accident' %}">5-year accident history</a>
-  </li>
-  <li>
-    <a class="data" href="{% url 'state_accidents' %}">Accidents by State</a>
-  </li>
-  <li>
-    <a class="data" href= "{% url 'location_search' %}">Search by location</a>
-  </li>
-  <li>
-    <a class="data" href="{% url 'facility_search' %}">Search by facility name</a>
-  </li>
-</ul>
+
 </div>
+
+
+<p align="center">
+    <a class="data" href="{% url 'accident' %}" style="color:black;" >5-year accident history</a>
+  </p>
+  <p align="center">
+    <a class="data" href="{% url 'state_accidents' %}" style="color:black;">Accidents by State</a>
+  </p>
+  <p align="center">
+    <a class="data" href= "{% url 'location_search' %}" style="color:black;">Search by location</a>
+  </p>
+  <p align="center">
+    <a class="data" href="{% url 'facility_search' %}" style="color:black;">Search by facility name</a>
+  </p>
 </div>
+
+
 
 
 <div id="About">
