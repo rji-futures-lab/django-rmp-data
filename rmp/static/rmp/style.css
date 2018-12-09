@@ -317,7 +317,17 @@ input[type=button], input[type=submit], input[type=reset] {
 .brstext p{
 	font-size: 20px;
 }
-@media (min-width: 300px) {
+
+@media screen and (min-width: 200px;) {
+	#image {
+		margin-left: auto;
+ 	 	margin-right: auto;
+ 	 	width: 50%;
+		padding-right: 200px;
+	}
+}
+
+@media screen and (min-width: 300px) {
 #gridbox img{
 	width: 80%;
 	margin-left: 10%;
@@ -343,7 +353,7 @@ height: 100px;
 
 #contacttext {
 				grid-area: h;
-				padding-right:20px;
+				padding-right: 20px;
 				padding-left: 20px;
 				text-align: center;
 			}
@@ -359,6 +369,7 @@ height: 100px;
    margin-left: auto;
 	 margin-right: auto;
 	 width: 50%;
+	 padding-right: 120px;
 }
 
 
