@@ -103,35 +103,38 @@ body{
 	padding-bottom: 2.5%;
 }
 
+h2 {
+	text-align: center;
+}
 /*card style for the index page (start)*/
 .card-index-1 {
 	background-color: #f4f4f4;
-	margin-left:10px;
-	margin-right: 10px;
+	margin-left: 20px;
+	margin-right: 20px;
 }
 
 .card-index-2 {
 	background-color: #f4f4f4;
-	margin-left:10px;
-	margin-right: 10px;
+	margin-left: 20px;
+	margin-right: 20px;
 }
 
 .card-index-3 {
 	background-color: #f4f4f4;
-	margin-left:10px;
-	margin-right: 10px;
+	margin-left: 20px;
+	margin-right: 20px;
 }
 
 .card-index-4 {
 	background-color: #f4f4f4;
-	margin-left:10px;
-	margin-right: 10px;
+	margin-left: 20px;
+	margin-right: 20px;
 }
 
 .card-index-5 {
 	background-color: #f4f4f4;
-	margin-left:10px;
-	margin-right: 10px;
+	margin-left: 20px;
+	margin-right: 20px;
 }
 /*card style for the index page (end)*/
 
