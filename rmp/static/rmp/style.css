@@ -106,32 +106,32 @@ body{
 /*card style for the index page (start)*/
 .card-index-1 {
 	background-color: #f4f4f4;
-	margin-left:20px;
-	margin-right: 20px;
+	margin-left:10px;
+	margin-right: 10px;
 }
 
 .card-index-2 {
 	background-color: #f4f4f4;
-	margin-left:20px;
-	margin-right: 20px;
+	margin-left:10px;
+	margin-right: 10px;
 }
 
 .card-index-3 {
 	background-color: #f4f4f4;
-	margin-left:20px;
-	margin-right: 20px;
+	margin-left:10px;
+	margin-right: 10px;
 }
 
 .card-index-4 {
 	background-color: #f4f4f4;
-	margin-left:20px;
-	margin-right: 20px;
+	margin-left:10px;
+	margin-right: 10px;
 }
 
 .card-index-5 {
 	background-color: #f4f4f4;
-	margin-left:20px;
-	margin-right: 20px;
+	margin-left:10px;
+	margin-right: 10px;
 }
 /*card style for the index page (end)*/
 
@@ -140,6 +140,8 @@ body{
 background-color: #f4f4f4;
 margin-left: 20px;
 margin-right: 20px;
+margin-bottom: 10px;
+
 }
 .card-database h2{
 	margin-top: 5px;
@@ -380,17 +382,18 @@ div{
 .info{
 	color: black;
 	text-align: left;
-	text-decoration: italic;
-	margin-left: 20px;
+font-style: italic;
+	margin-left: 2.5%;
 	margin-right: 20px;
+	margin-bottom: 0;
 }
 
 
 table{
 	display: grid;
-	padding-top: 20px;
 	width: 95%;
-	padding: 20px;
+	padding-left:2.5%;
+padding-top: 10px;
 	justify-content: center;
 	margin-right: none;
 }
