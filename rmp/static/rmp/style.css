@@ -12,6 +12,7 @@ p {
 
 h2 {
 	font-family: 'Muli', Helvetica, sans-serif;
+	font-size: 1.6em;
 	margin-top: 5px;
 	color: black;
 	margin-right: 5%;
@@ -25,14 +26,25 @@ h2 {
 	color: #ffffff;
 }
 
-#email{
+#email p1{
 	color: black;
 	font-family: 'Muli', Helvetica, sans-serif;
 	font-size: 1.1em;
-	font-weight: bold;
-	text-decoration: underline;
-	margin-top: -10px;
+	font-weight:bolder;
+	margin-top: 60px;
 	margin-bottom: 40px;
+	margin-left: 45px;
+	margin-right: 20px;
+	text-align: left;
+
+}
+#email p2{
+	color: black;
+	font-family: 'Muli', Helvetica, sans-serif;
+	font-size: 1em;
+	font-weight:normal;
+	text-decoration: underline;
+	margin-bottom: 50px;
 	margin-left: 45px;
 	margin-right: 20px;
 	text-align: left;
@@ -400,8 +412,9 @@ padding-top: 2%
 
 #contacttext {
 				grid-area: h;
+				margin-top: 10px;
 				padding-right: 40px;
-				padding-left: 40px;
+				padding-left: 35px;
 				text-align: center;
 			}
 
