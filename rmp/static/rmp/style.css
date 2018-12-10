@@ -563,6 +563,12 @@ th,td {
 		height:100%;
  }
 
+#contactpage{
+ 		margin:0 auto;
+ 		width:70%;
+ 		height:100%;
+  }
+
 .email{
 	font-family:'Muli', Helvetica, sans-serif;
 }
