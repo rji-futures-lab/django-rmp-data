@@ -28,7 +28,9 @@ h2 {
 #email{
 	color: black;
 	font-family: 'Muli', Helvetica, sans-serif;
+	font-size: 1.1em;
 	font-weight: bold;
+	text-decoration: underline;
 	margin-top: -10px;
 	margin-bottom: 40px;
 	margin-left: 45px;
