@@ -395,8 +395,8 @@ padding-top: 2%
 
 #contacttext {
 				grid-area: h;
-				padding-right: 20px;
-				padding-left: 20px;
+				padding-right: 40px;
+				padding-left: 40px;
 				text-align: center;
 			}
 
@@ -404,17 +404,17 @@ padding-top: 2%
 .title-contact {
 	text-align: left;
 	padding-top: 20px;
-	padding-left: 14px;
+	padding-left: 45px;
 }
 
 #image {
 	display: block;
-	margin-top: 30px;
+	margin-top: 36px;
   margin-left: auto;
 	margin-right: auto;
 	width: 90%;
 	padding-right: 150px;
-	padding-left: 45px;
+	padding-left: 40px;
 
 
 }
