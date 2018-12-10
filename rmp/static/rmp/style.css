@@ -412,6 +412,10 @@ height: 100px;
 
 
 @media (min-width: 600px) {
+#brscontainer .cards-2 h2{
+	text-align: left;
+}
+
 	#databases .card-database h2{
 		text-align: left;
 	}
