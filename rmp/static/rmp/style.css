@@ -26,12 +26,15 @@ h2 {
 }
 
 #email{
-	color: white;
+	color: black;
 	font-family: 'Muli', Helvetica, sans-serif;
-	margin-left: 20px;
+	font-weight: bold;
+	margin-top: -10px;
+	margin-bottom: 40px;
+	margin-left: 45px;
 	margin-right: 20px;
-	text-align: center;
-	background-color: #82806F;
+	text-align: left;
+
 }
 
 .container img{
