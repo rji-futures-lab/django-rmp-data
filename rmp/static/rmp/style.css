@@ -58,7 +58,7 @@ font-family:'Muli', Helvetica, sans-serif;
 	background-color: #ffffff;
 	color: Black;
  font-size:2.6em ;
- margin-left: 5%;
+
  text-align: center;
 }
 
@@ -412,6 +412,9 @@ height: 100px;
 
 
 @media (min-width: 600px) {
+#brs h2{
+	text-align: left;
+}
 #brscontainer .cards-2 h2{
 	text-align: left;
 }
