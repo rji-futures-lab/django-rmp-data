@@ -4,7 +4,7 @@ p {
 	font-family: 'Muli', Helvetica, sans-serif;
 
 	text-decoration-color: #000000;
-	text-align: center;
+	text-align: left;
 	margin-left: 10px;
 	margin-left: 10px;
 
@@ -14,6 +14,7 @@ h2 {
 	font-family: 'Muli', Helvetica, sans-serif;
 	margin-top: 5px;
 	color: black;
+	margin-right: 5%;
 }
 
 .container{
@@ -142,12 +143,20 @@ h2 {
 /*card style for the index page (end)*/
 
 /*card style for the database page (start)*/
+#databases .card-database h2{
+	text-align: left;
+}
 .card-database {
 background-color: #f4f4f4;
 margin-left: 20px;
 margin-right: 20px;
-margin-bottom: 10px;
 text-align: center;
+margin-bottom: 10px;
+
+}
+#brs .card-database {
+
+margin-bottom: 0;
 
 }
 
@@ -266,8 +275,10 @@ margin-left: 30px;
 #brscontainer h2{
 	margin-top:5%;
 	margin-bottom:5%;
-text-align: center;
+	margin-left: 8%;
+text-align: left;
 font-size: 2em;
+
 
 }
 #brsdatabase a{
@@ -336,6 +347,21 @@ input[type=button], input[type=submit], input[type=reset] {
 	}
 }
 @media screen and (min-width: 300px) {
+#brscontainer h2{
+	text-align: center;
+}
+.box1 p{
+	text-align: center;
+}
+.box2 p{
+	text-align: center;
+}
+.box3 p{
+	text-align: center;
+}
+.box4 p{
+	text-align: center;
+}
 	.sidebar {
 		text-align: center;
 	}
@@ -386,22 +412,73 @@ height: 100px;
 
 
 @media (min-width: 600px) {
-	.sidebar {
-		        grid-area: sidebar;
-						text-align: left;
-		    }
+	#brscontainer h2{
+		text-align: left;
+	}
+	.box1 {
+		   background-color: #f4f4f4;
+		        grid-area: box1;
 
+
+font-size: 130%;
+
+		    }
+		.box1 p{
+			margin-top:40px;
+			text-align: left;
+			margin-left: 20%;
+			margin-right: 20%;
+		}
+
+				.box2 {background-color: #f4f4f4;
+									grid-area: box2;
+									text-align: center;
+									font-size: 130%;
+							}
+							.box2 p{
+								margin-top:40px;
+								text-align: left;
+								margin-left: 20%;
+								margin-right: 20%;
+							}
+			.box3 {background-color: #f4f4f4;
+								        grid-area: box3;
+												text-align: center;
+												font-size: 130%;
+								    }
+				.box3 p{
+											margin-top:40px;
+											text-align: left;
+											margin-left: 20%;
+											margin-right: 20%;
+										}
+				.box4 {background-color: #f4f4f4;
+							grid-area: box4;
+						text-align: center;
+						font-size: 130%;
+																	}
+						.box4 p{
+									margin-top:40px;
+							   text-align: left;
+									margin-left: 20%;
+								margin-right: 20%;
+																	}
 		    .content {
 		        grid-area: content;
 		    }
 				.wrapper {
-					margin-left: 13%;
+margin-bottom: 10%;
+					margin-left: 10%;
+					margin-right: 10%;
 				        display: grid;
 				    grid-gap: 5px;
-				        grid-template-columns: 260px 400px 400px;
+				        grid-template-columns: 1fr 1fr 1fr;
+								grid-template-rows: 1fr 1fr 1fr 1fr;
 				        grid-template-areas:
-
-				        "sidebar content content";
+                "box1 content content"
+								"box2 content content"
+								"box3 content content"
+				        "box4 content content";
 				        background-color: #ffffff;
 				        color: #f4f4f4;
 				    }
@@ -409,6 +486,7 @@ height: 100px;
 		flex-direction: row;
 		justify-content: space-between;
 	}
+
 
   ul {
 		flex-direction: row;
@@ -452,6 +530,7 @@ height: 40px;
 }
 
 @media (min-width: 800px) {
+
 	#gridbox img {
 	    width: 80%;
 		}
@@ -535,6 +614,7 @@ th,td {
 	grid-area:b;
 	margin-right: 20px;
 	margin-left: 20px;
+	height: 70%;
 }
 .cards-3{
 	grid-area:d;
@@ -607,9 +687,9 @@ width: 100%;
 		padding-right: 10px;
 		 width: 50%;
 	}
-}
 
 }
+
 @media screen and (min-width: 1000px) {
 	article {
 		display: grid;
@@ -619,8 +699,9 @@ width: 100%;
 	}
 
 .p{
-	margin-right: 30px;
-	margin-left: 30px;
+	margin-right: 5%;
+	margin-left: 5%;
+	margin-bottom: 0;
 }
 
 .data-title{
@@ -632,8 +713,9 @@ width: 100%;
 	text-align: center;
 }
 
-.database-title {
-	text-align: center;
+.database-title a{
+margin-left: 5%;
+text-align: left;
 }
 
 .title{

@@ -4,45 +4,64 @@
 
 <div id="brscontainer">
 
+  <div class="cards-2 cards">
 
-  <div class="cards-4 cards">
 
-    <h2 class="data-title"><a href="{% url 'rmp' %}" style="color:black;text-decoration:none;">Risk Management Plans (RMP)</a></h2>
-  <center>
-    {% load static %}
-    <img src="{% static 'rmp/img/photo4.jpg' %}"alt="databasephoto" width="400px"/>
-  </center>
 
-<p>
-    <a class="data" href="{% url 'accident' %}" style="color:black;">5-year accident history</a>
-  </p>
-<p>
-    <a class="data" href="{% url 'state_accidents' %}" style="color:black;">Accidents by State</a>
-  </p>
-<p>
-    <a class="data" href= "{% url 'location_search' %}" style="color:black;">Search by location</a>
-  </p>
-<p>
-    <a class="data" href="{% url 'facility_search' %}" style="color:black;">Search by facility name</a>
-  </p>
+    <h2 class="data-title"><a href="{% url 'brs' %}" style="color:black;text-decoration:none;">Risk Management Plans (RMP)</a></h2></div>
+
+
+
+
 </div>
-</div>
-<div id="brs">
-<div class="card-database">
+<div class="wrapper">
+
+    <div class="box1">
+    <p  style="font-size:130%" >
+      <a class="data" href="{% url 'accident' %}" style="color:black;">5-year accident history</a>
+    </p>
+    </div>
+    <div class="box2">
+    <p  style="font-size:130%">
+      <a class="data" href="{% url 'state_accidents' %}" style="color:black;">Accidents by State</a>
+    </p>
+    </div>
+    <div class="box3">
+    <p  style="font-size:130%">
+      <a class="data" href= "{% url 'location_search' %}" style="color:black;">Search by location</a>
+    </p>
+    </div>
+    <div class="box4">
+    <p style="font-size:130%">
+      <a class="data" href="{% url 'facility_search' %}" style="color:black;">Search by facility name</a>
+    </p>
+    </div>
+
+  <div class="box content"><div id="brs">
+  <div class="card-database">
+    <br/>
+   <h2 class="title">About the Database</h2>
+  <p class="p">RMP was last updated on RTK NET with a set of EPA data made on April 30, 2018.
   <br/>
- <h2 class="title">About the Database</h2>
-<p class="p">RMP was last updated on RTK NET with a set of EPA data made on April 30, 2018.
-<br/>
-<br/>
-Federal law requires industrial facilities that use large amounts of extremely hazardous substances to file a Risk Management Plan with the Environmental Protection Agency (EPA). EPA then creates a national database of RMP information. These RMP data are intended to save lives, protect property, and prevent pollution. In particular, some industrial facilities are switching to safer and more secure chemicals that do not endanger employees and surrounding communities. You can identify hazardous chemical facilities in your area using the RMP Search tool.
-<br/>
-<br/>
-By June 21, 1999, a summary of the facility's risk management program (known as a "Risk Management Plan" or "RMP") was to be submitted to EPA, which will make the information publicly available. The plans must be revised and resubmitted every five years. The Risk Management Program is about reducing chemical risk at the local level. This information helps local fire, police, and emergency response personnel (who must prepare for and respond to chemical accidents), and is useful to citizens in understanding the chemical hazards in communities. EPA anticipates that making the RMPs available to the public stimulates communication between industry and the public to improve accident prevention and emergency response practices at the local level."
-</p>
-<br/>
-<br/>
+  <br/>
+  Federal law requires industrial facilities that use large amounts of extremely hazardous substances to file a Risk Management Plan with the Environmental Protection Agency (EPA). EPA then creates a national database of RMP information. These RMP data are intended to save lives, protect property, and prevent pollution. In particular, some industrial facilities are switching to safer and more secure chemicals that do not endanger employees and surrounding communities. You can identify hazardous chemical facilities in your area using the RMP Search tool.
+  <br/>
+  <br/>
+  By June 21, 1999, a summary of the facility's risk management program (known as a "Risk Management Plan" or "RMP") was to be submitted to EPA, which will make the information publicly available. The plans must be revised and resubmitted every five years. The Risk Management Program is about reducing chemical risk at the local level. This information helps local fire, police, and emergency response personnel (who must prepare for and respond to chemical accidents), and is useful to citizens in understanding the chemical hazards in communities. EPA anticipates that making the RMPs available to the public stimulates communication between industry and the public to improve accident prevention and emergency response practices at the local level."
+  <br/>
+  <br/>
+  <br/>
+  <br/>
+  </p>
+  </div>
+  </div>
+
+  </div>
+
+
 </div>
-</div>
+
+
 
 
 {% endblock %}
