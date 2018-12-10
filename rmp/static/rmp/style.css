@@ -437,14 +437,12 @@ padding-top: 2%
 	.box1 {
 		   background-color: #f4f4f4;
 		        grid-area: box1;
-
-
-font-size: 130%;
+font-size: 120%;
 
 		    }
 		.box1 p{
-			margin-top:40px;
-			text-align: left;
+			margin-top: 12%;
+			text-align: center;
 			margin-left: 20%;
 			margin-right: 20%;
 		}
@@ -452,35 +450,37 @@ font-size: 130%;
 				.box2 {background-color: #f4f4f4;
 									grid-area: box2;
 									text-align: center;
-									font-size: 130%;
+									font-size: 120%;
 							}
 							.box2 p{
-								margin-top:40px;
-								text-align: left;
+							margin-top: 12%;
+								text-align: center;
 								margin-left: 20%;
 								margin-right: 20%;
 							}
 			.box3 {background-color: #f4f4f4;
 								        grid-area: box3;
 												text-align: center;
-												font-size: 130%;
+												font-size: 120%;
 								    }
 				.box3 p{
-											margin-top:40px;
-											text-align: left;
+
+											text-align: center;
 											margin-left: 20%;
 											margin-right: 20%;
+											margin-top: 12%;
 										}
 				.box4 {background-color: #f4f4f4;
 							grid-area: box4;
 						text-align: center;
-						font-size: 130%;
+						font-size: 120%;
 																	}
 						.box4 p{
-									margin-top:40px;
-							   text-align: left;
+									margin-top: 12%;
+							   text-align: center;
 									margin-left: 20%;
 								margin-right: 20%;
+								margin-bottom: 10%;
 																	}
 		    .content {
 		        grid-area: content;
