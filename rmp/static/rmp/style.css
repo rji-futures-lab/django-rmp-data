@@ -342,8 +342,8 @@ input[type=button], input[type=submit], input[type=reset] {
 }
 
 @media screen and (min-width: 200px) {
-	#image {
-
+	#databases .card-database h2{
+		text-align: center;
 	}
 }
 @media screen and (min-width: 300px) {
@@ -412,7 +412,7 @@ height: 100px;
 
 
 @media (min-width: 600px) {
-	#brscontainer h2{
+	#databases .card-database h2{
 		text-align: left;
 	}
 	.box1 {
