@@ -374,6 +374,11 @@ input[type=button], input[type=submit], input[type=reset] {
 #aboutus h3{
 height: 100px;
 }
+
+#aboutus p{
+padding-top: 2%
+}
+
 #aboutus .homepage h3{
 	height: 20px;
 }
