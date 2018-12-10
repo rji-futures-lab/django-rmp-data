@@ -572,6 +572,7 @@ height: 40px;
 
 .table{
 	text-align: center;
+	font-family: 'Muli', Helvetica, sans-serif;
 }
 
 .info{
@@ -591,6 +592,7 @@ table{
 padding-top: 10px;
 	justify-content: center;
 	margin-right: none;
+	font-family: 'Muli', Helvetica, sans-serif;
 }
 
 th{
