@@ -5,7 +5,8 @@ from django.conf import settings
 from django.core import management
 from django.core.management.base import BaseCommand, CommandError
 from django.db.utils import DataError
-from rmp.transformers import transform_executive_summaries
+from rmp.models.helpers import get_models
+# from rmp.transformers import transform_executive_summaries
 import logging
 
 logger = logging.getLogger(__name__)
@@ -20,7 +21,9 @@ class Command(BaseCommand):
         Handle the command.
         """
         self.stdout.write('  Flushing current data from tables... ', ending='')
-        management.call_command('flush', verbosity=options['verbosity'], interactive=False)
+        management.call_command(
+            'flush', verbosity=options['verbosity'], interactive=False
+        )
         self.stdout.write(
             self.style.SUCCESS('OK')
         )
@@ -37,7 +40,7 @@ class Command(BaseCommand):
             management.call_command('loadsourcefile', f)
         self.stdout.write(self.style.SUCCESS('Done.'))
 
-        transform_executive_summaries()
+        self.transform()
 
         # handle processed files
         processed_files = [
@@ -51,3 +54,10 @@ class Command(BaseCommand):
         for f in sorted(processed_files):
             management.call_command('loadsourcefile', f, processed=True)
         self.stdout.write(self.style.SUCCESS('Done.'))
+
+    def transform(self):
+        for m in get_models('processed'):
+            try:
+                m.copy_to_processed_csv()
+            except AttributeError:
+                pass

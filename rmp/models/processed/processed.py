@@ -1,6 +1,10 @@
 """
 Models for processed RMP data.
 """
+import os
+from django.conf import settings
+from django.db import models
+from django.db.models import F, Max, OuterRef, Subquery
 from rmp.fields import (
     CopyFromBigIntegerField,
     CopyFromBooleanField,
@@ -13,8 +17,8 @@ from rmp.fields import (
     CopyFromOneToOneField,
     CopyFromTextField,
 )
+from rmp import models as raw_models
 from rmp.models import BaseRMPModel
-from django.db import models
 
 
 class AccChem(BaseRMPModel):
@@ -295,7 +299,7 @@ class Accident(BaseRMPModel):
         super(Accident, self).save(*args, **kwargs)
 
 
-class ExecutiveSummary(BaseRMPModel): #rmp_execsum
+class ExecutiveSummary(BaseRMPModel):
     id = CopyFromIntegerField(
         primary_key=True,
         source_column='rmp_id',
@@ -305,7 +309,27 @@ class ExecutiveSummary(BaseRMPModel): #rmp_execsum
         blank=True,
     )
 
-    source_file = 'rmp_execsum'
+    @classmethod
+    def copy_to_processed_csv(self, qs):
+        qs = raw_models.tblExecutiveSummaries.objects.filter(
+            esseqnum=Subquery(
+                raw_models.tblExecutiveSummaries.objects.filter(
+                    facilityid=OuterRef('facilityid'),
+                ).values('facilityid').annotate(
+                    max_seqnum=Max('esseqnum')
+                ).values('max_seqnum')[:1]
+            )
+        ).annotate(
+            rmp_id=F('facilityid_id'),
+            execsum=F('summarytext')
+        )
+        
+        file_path = os.path.join(
+            settings.RMP_PROCESSED_DATA_DIR,
+            '%s.csv' % self._meta.db_table
+        )
+
+        return qs.to_csv(file_path, 'rmp_id', 'execsum', header=True)
 
 
 class ExecutiveSummaryLength(BaseRMPModel):
