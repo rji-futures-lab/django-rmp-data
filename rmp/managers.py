@@ -71,7 +71,5 @@ class BaseRMPManager(CopyManager):
                 path = os.path.join(settings.RMP_PROCESSED_DATA_DIR, filename)
             else:
                 path = os.path.join(settings.RMP_RAW_DATA_DIR, filename)
-
-        print(path)
         
         return super().from_csv(path, **options)
