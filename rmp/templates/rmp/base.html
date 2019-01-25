@@ -8,6 +8,7 @@
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'rmp/style.css' %}"/>
     <!-- Add Google fonts below  -->
+    <link href="https://fonts.googleapis.com/css?family=Muli:400,600,700" rel="stylesheet">
   </head>
   <body>
     <div class="container">
@@ -17,7 +18,7 @@
       <img src="{% static 'rmp/img/pu8EgQuz_400x400.png'%}" alt="rjilogo" width="21px" />
 		</div>
     <div class="header">
-      <h1>The Right-to-Know Network </h1>
+      <h1>The Right-to-Know Network</h1>
     </div>
     <div id="nav">
       <ul class="flex-container">
@@ -29,10 +30,7 @@
     </div>
     {% block content %}{% endblock %} <!-- All page content will go here. Any client-side Javascript will go at the bottom -->
     <div id="footer">
-
-    <p> The Right To Know Network@2018 </p>
-
-
+      <p>The Right To Know Network &copy; 2018</p>
     </div>
 
   </body>
