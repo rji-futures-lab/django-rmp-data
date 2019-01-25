@@ -22,6 +22,13 @@ class Command(BaseCommand):
             type=str,
         )
         parser.add_argument(
+            '-f',
+            '--flush',
+            action='store_true',
+            dest='flush',
+            help='Flush current data first',
+        )
+        parser.add_argument(
             '-p',
             '--processed',
             action='store_true',
