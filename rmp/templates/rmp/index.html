@@ -7,66 +7,54 @@ RTK Home
 {% block content %}
 
 <div id="aboutus">
-  <div class="homepage">
   <h3> About Us </h3>
-</div>
-
-<p style="color:black;">     The Right-to-Know Network provides free access to numerous databases, text files,
-and conferences on the environment, housing, and sustainable development. With
-this resourse you can identify specific factories and their environmental effects; analyze
-reinvestment by banks in their conmmunities; and assess people and communities affected.</p >
+  <p>
+    The Right-to-Know Network provides free access to numerous databases and text files on the environment, housing, and sustainable development. With
+    this resource you can identify specific factories and their environmental effects; analyze
+    reinvestment by banks in their communities; and assess people and communities affected.
+  </p>
 </div>
 
 <div id="gridbox">
 
-  <div class="card-index-1">
-    <h2><a href="{% url 'brs' %}" style="color:black;text-decoration:underline;">Biennial Reporting System (BRS)</a></h2>
+  <div class="card-index">
+    <a href="{% url 'brs' %}" class="card-header" style="color:black;text-decoration:underline;">Biennial Reporting System (BRS)</a>
     {% load static %}
     <img src="{% static 'rmp/img/photo2.jpg' %}" alt="databasephoto" width="400px"/>
-<br/>
-<br/>
+    <br/>
+    <br/>
   </div>
 
-  <div class="card-index-2">
-
-
-<h2><a href="{% url 'nrc' %}" style="color:black;text-decoration:underline;text-alignment:center;">National Response Center
-(NRC)</a></h2>
-{% load static %}
-<img src="{% static 'rmp/img/photo1.jpg' %}"alt="databasephoto"width="400px"/>
-<br/>
-<br/>
-
-
-</div>
-
-    <div class="card-index-3">
-
-    <h2> <a href="{% url 'rcris' %}" style="color:black;text-decoration:underine;">RCRIS/RCRAINFO </a></h2>
+  <div class="card-index">
+    <a href="{% url 'nrc' %}" class="card-header" style="color:black;text-decoration:underline;text-alignment:center;">National Response Center
+    (NRC)</a>
     {% load static %}
-<img src="{% static 'rmp/img/photo3.jpg' %}"alt="databasephoto" width="400px"/>
+    <img src="{% static 'rmp/img/photo1.jpg' %}"alt="databasephoto"width="400px"/>
     <br/>
     <br/>
-
   </div>
 
-    <div class="card-index-4">
+  <div class="card-index">
+     <a href="{% url 'rcris' %}" class="card-header" style="color:black;text-decoration:underine;">RCRIS/RCRAINFO </a>
+    {% load static %}
+    <img src="{% static 'rmp/img/photo3.jpg' %}"alt="databasephoto" width="400px"/>
+    <br/>
+    <br/>
+  </div>
 
-    <h2><a href="{% url 'rmp' %}" style="color:black;text-decoration:underline;">Risk Management Plans (RMP) </a></h2>
+  <div class="card-index">
+    <a href="{% url 'rmp' %}" class="card-header" style="color:black;text-decoration:underline;">Risk Management Plans (RMP) </a>
     {% load static %}
       <img src="{% static 'rmp/img/photo4.jpg' %}"alt="databasephoto" width="400px"/>
     <br/>
     <br/>
   </div>
-
-
-
-    <div class="card-index-5">
-
-    <h2><a href="{% url 'tri' %}" style="color:black;text-decoration:underline;">Toxic Release Inventory (TRI)</a></h2>
+  
+  <div class="card-index">
+    <a href="{% url 'tri' %}" class="card-header" style="color:black;text-decoration:underline;">Toxic Release Inventory (TRI)</a>
     {% load static %}
     <img src="{% static 'rmp/img/photo5.jpg' %}"alt="databasephoto" width="400px"/>
-  <br/>
+    <br/>
     <br/>
   </div>
 </div>
