@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}RMP Facilities{% endblock %} <!-- Fill in Page Title Here -->
+
+{% block content %} <!-- This marks the beginning of where body content goes. If this tag is deleted, the page will not render.  -->
+
+<h2 class="table"> RMP on-site Quantities by Chemical </h2>
+    <p class="chatter"> This table shows amounts of each chemical within process that have worst-case accidents that could potentially reach off-site. Facilities no longer registered with RMP are not included.
+    </p>
+
+    <p class="info">
+      Table sorted by facility name. Re-sort using column headers.
+    </p>
+  {% if facility_list %} <!-- Don't touch tags that look like this, but do style the markup inside them.  -->
+  <table>
+    <tr>
+      <th>Chemical Name</th>
+      <th>Chemical Type</th>
+      <th>Number of Facilities</th>
+      <th>Pounds in Process</th>
+
+    </tr>
+    {% for facility in facility_list %}
+    <tr>
+      <td>{{ facility.facility_name }}</td>
+      <td>{{ facility.city }}</td>
+      <td>{{ facility.state }}</td>
+      <td>{{ facility.num_accident }}</td>
+
+    </tr>
+    {% endfor %}
+
+    {% for facility in evacuated_list %}
+    <tr>
+      <td>{{ facility.facility_name }}</td>
+      <td>{{ facility.city }}</td>
+      <td>{{ facility.state }}</td>
+      <td>{{ facility.num_accident }}</td>
+    
+    </tr>
+    {% endfor %}
+
+    {% for facility in prop_damage_list %}
+    <tr>
+      <td>{{ facility.facility_name }}</td>
+      <td>{{ facility.city }}</td>
+      <td>{{ facility.state }}</td>
+      <td>{{ facility.num_accident }}</td>
+      <td>{{ facility.num_deaths }}</td>
+      <td>{{ facility.num_injuries }}</td>
+      <td>{{ facility.num_evacuated }}</td>
+      <td>{{ facility.property_damage }}</td>
+    </tr>
+    {% endfor %}
+  {% else %}
+  <h1>No facilitys</h1>
+  {% endif %}
+  </table>
+
+{% endblock %} <!-- This marks the end of where body content goes. If this tag is deleted, the page will not render -->

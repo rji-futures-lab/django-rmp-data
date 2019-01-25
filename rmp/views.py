@@ -20,6 +20,18 @@ def databases(request):
 def rmp(request):
     return render(request, 'rmp/rmp.html')
 
+def tri(request):
+    return render(request, 'rmp/tri.html')
+
+def nrc(request):
+    return render(request, 'rmp/nrc.html')
+
+def rcris(request):
+    return render(request, 'rmp/rcris.html')
+
+def brs(request):
+    return render(request, 'rmp/brs.html')
+
 def accident(request):
     facility_list = Facility.objects.filter(deregistration_yn='n').order_by('-num_deaths')[:20]
     evacuated_list = Facility.objects.filter(deregistration_yn='n').order_by('-num_evacuated')[:20]

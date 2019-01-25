@@ -3,13 +3,35 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}{% endblock %}</title> 
+    <title>{% block title %}{% endblock %}</title>
     <!-- Add stylesheet name below  -->
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'rmp/style.css' %}"/>
     <!-- Add Google fonts below  -->
+    <link href="https://fonts.googleapis.com/css?family=Muli:400,600,700" rel="stylesheet">
   </head>
   <body>
+    <div class="container">
+      {% load static %}
+		  <img src="{% static 'rmp/img/Houston_Chronicle_Logo_2016.svg.png'%}" alt="houstonlogo" width="200px" />
+      {% load static %}
+      <img src="{% static 'rmp/img/pu8EgQuz_400x400.png'%}" alt="rjilogo" width="21px" />
+		</div>
+    <div class="header">
+      <h1>The Right-to-Know Network</h1>
+    </div>
+    <div id="nav">
+      <ul class="flex-container">
+        <li><a href="{% url 'index' %}">Home</a></li>
+		    <li><a href="https://www.houstonchronicle.com/local/texas/chemical-breakdown/" target="_blank">Press</a></li>
+		    <li><a href="{% url 'databases' %}">Databases</a></li>
+		    <li><a href="{% url 'contact' %}">Contact</a> </li>
+      </ul>
+    </div>
     {% block content %}{% endblock %} <!-- All page content will go here. Any client-side Javascript will go at the bottom -->
+    <div id="footer">
+      <p>The Right To Know Network &copy; 2018</p>
+    </div>
+
   </body>
 </html>

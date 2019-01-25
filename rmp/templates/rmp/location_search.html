@@ -1,8 +1,12 @@
 {% extends "base.html" %}
 
+{% block title %}
+Search RMP Facilities by Location
+{% endblock %}
+
 {% block content %}
 
-<h1>THIS IS THE LOCATION SEARCH FORM</h1>
+<h2 class="search">Search By Location</h2>
 
 <a href="{% url 'rmp' %}">Back to RMP homepage</a>
 
@@ -10,7 +14,7 @@
 
 <p style="color: red;">Please submit a search term.</p>
 
-<h4>Search by State</h4>
+<h3>Search by State</h3>
 
 <form action="" method="get">
   <select name="state" onchange="this.form.submit()">
@@ -21,9 +25,9 @@
   </select>
 </form>
 
-<h4>Or search by city</h4>
+<h3>Or search by city</h3>
 
-<form action="" method="get">
+<form class="search" action="" method="get">
   <input type="text" name="city" placeholder="City"/>
   <select name="state">
     <option value="" name="default"></option>
@@ -37,21 +41,24 @@
 
 {% else %}
 
-<h4>Search for RMP Facilities by State</h4>
+<h3>Search for RMP Facilities by State</h3>
 
-<form action="search_by_state" method="get">
+<form class="search" action="search_by_state" method="get">
+  <input type="submit" value="Search" />
   <select name="state" onchange="this.form.submit()">
     <option value="" name="default"></option>
     {% for state in state_list %}
     <option value="{{ state.state }}">{{ state.state }}</option>
     {% endfor %}
   </select>
-  <input type="submit" value="Search" />
 </form>
 
-<h4>Or search by city</h4>
+/<br>
+/<br>
 
-<form action="search_by_city" method="get">
+<h3>Or search by city</h3>
+
+<form class="search" action="search_by_city" method="get">
   <input type="text" name="city" placeholder="City" />
   <select name="state" required>
     <option value="" name="default"></option>

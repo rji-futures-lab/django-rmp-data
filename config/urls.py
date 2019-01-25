@@ -10,6 +10,10 @@ urlpatterns = [
     path('contact/', views.contact, name='contact'),
     path('databases/', views.databases, name='databases'),
     path('about/', views.about, name='about'),
+    path('tri/', views.tri, name='tri'),
+    path('nrc/', views.nrc, name='nrc'),
+    path('rcris/', views.rcris, name='rcris'),
+    path('brs/', views.brs, name='brs'),
     path('rmp/', include('rmp.urls')),
 ] + static(
     settings.MEDIA_URL, document_root=settings.MEDIA_ROOT

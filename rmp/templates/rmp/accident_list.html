@@ -3,64 +3,72 @@
 {% block title %}RMP Facilities{% endblock %} <!-- Fill in Page Title Here -->
 
 {% block content %} <!-- This marks the beginning of where body content goes. If this tag is deleted, the page will not render.  -->
-
-  <h1>5-year facility history</h1>
-
-  <p>List is sorted by number of deaths, then by number of evacuations and then by amount of property damage. Deregistered facilities are not included.</p>
-
+<div id="aboutus">
+  <h3>Top RMP Facilities for 5-Year Accident Histories</h3>
+  <p>
+    This table contains all facilities with accidents in the last five yeears before they last reported that involved fatalities, the top 20 for injuries, the top 20 for number of people evacuated, and the top 20 for reported property damage. It does not includee accidents at facilities that are no longer registered with RMP.
+  </p>
+</div>
+<!--
+    <p class="info">
+      Table sorted by facility name. Re-sort using column headers.
+    </p>-->
   {% if facility_list %} <!-- Don't touch tags that look like this, but do style the markup inside them.  -->
-  <table>
-    <tr>
-      <th>Facility Name</th>
-      <th>City</th>
-      <th>State</th>
-      <th>Number of Accidents</th>
-      <th>Number of Deaths</th>
-      <th>Number of Injuries</th>
-      <th>Number of Evacuations</th>
-      <th>Amount of Property Damage</th>
-    </tr>
-    {% for facility in facility_list %}
-    <tr>
-      <td>{{ facility.facility_name }}</td>
-      <td>{{ facility.city }}</td>
-      <td>{{ facility.state }}</td>
-      <td>{{ facility.num_accident }}</td>
-      <td>{{ facility.num_deaths }}</td>
-      <td>{{ facility.num_injuries }}</td>
-      <td>{{ facility.num_evacuated }}</td>
-      <td>{{ facility.property_damage }}</td>
-    </tr>
-    {% endfor %}
+  <div style="overflow-x:auto">
+    <table>
+      <tr>
+        <th>Facility Name</th>
+        <th>City</th>
+        <th>State</th>
+        <th>Number of Accidents</th>
+        <th>Number of Deaths</th>
+        <th>Number of Injuries</th>
+        <th>Number of Evacuations</th>
+        <th>Amount of Property Damage</th>
+      </tr>
+      {% load humanize %}
+      {% for facility in facility_list %}
+      <tr>
+        <td>{{ facility.facility_name }}</td>
+        <td>{{ facility.city|title }}</td>
+        <td>{{ facility.state }}</td>
+        <td>{{ facility.num_accident|intcomma }}</td>
+        <td>{{ facility.num_deaths|intcomma }}</td>
+        <td>{{ facility.num_injuries|intcomma }}</td>
+        <td>{{ facility.num_evacuated|intcomma }}</td>
+        <td>{{ facility.property_damage|intcomma }}</td>
+      </tr>
+      {% endfor %}
 
-    {% for facility in evacuated_list %}
-    <tr>
-      <td>{{ facility.facility_name }}</td>
-      <td>{{ facility.city }}</td>
-      <td>{{ facility.state }}</td>
-      <td>{{ facility.num_accident }}</td>
-      <td>{{ facility.num_deaths }}</td>
-      <td>{{ facility.num_injuries }}</td>
-      <td>{{ facility.num_evacuated }}</td>
-      <td>{{ facility.property_damage }}</td>
-    </tr>
-    {% endfor %}
+      {% for facility in evacuated_list %}
+      <tr>
+        <td>{{ facility.facility_name }}</td>
+        <td>{{ facility.city|title }}</td>
+        <td>{{ facility.state }}</td>
+        <td>{{ facility.num_accident|intcomma }}</td>
+        <td>{{ facility.num_deaths|intcomma }}</td>
+        <td>{{ facility.num_injuries|intcomma }}</td>
+        <td>{{ facility.num_evacuated|intcomma }}</td>
+        <td>{{ facility.property_damage|intcomma }}</td>
+      </tr>
+      {% endfor %}
 
-    {% for facility in prop_damage_list %}
-    <tr>
-      <td>{{ facility.facility_name }}</td>
-      <td>{{ facility.city }}</td>
-      <td>{{ facility.state }}</td>
-      <td>{{ facility.num_accident }}</td>
-      <td>{{ facility.num_deaths }}</td>
-      <td>{{ facility.num_injuries }}</td>
-      <td>{{ facility.num_evacuated }}</td>
-      <td>{{ facility.property_damage }}</td>
-    </tr>
-    {% endfor %}
-  {% else %}
-  <h1>No facilitys</h1>
-  {% endif %}
-  </table>
+      {% for facility in prop_damage_list %}
+      <tr>
+        <td>{{ facility.facility_name }}</td>
+        <td>{{ facility.city|title }}</td>
+        <td>{{ facility.state }}</td>
+        <td>{{ facility.num_accident|intcomma }}</td>
+        <td>{{ facility.num_deaths|intcomma }}</td>
+        <td>{{ facility.num_injuries|intcomma }}</td>
+        <td>{{ facility.num_evacuated|intcomma }}</td>
+        <td>{{ facility.property_damage|intcomma }}</td>
+      </tr>
+      {% endfor %}
+    {% else %}
+    <h1>No facilitys</h1>
+    {% endif %}
+    </table>
+  </div>
 
 {% endblock %} <!-- This marks the end of where body content goes. If this tag is deleted, the page will not render -->

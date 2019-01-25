@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}
+RCRIS
+{% endblock %}
+
+{% block content %}
+<div id="brscontainer">
+
+  <div class="cards-2 cards">
+
+
+
+    <h2 class="data-title"><a href="{% url 'brs' %}" style="color:black;text-decoration:none;">RCRIS/RCRAINFO</a></h2></div>
+
+
+
+
+</div>
+<div class="wrapper">
+
+  <div class="box1">
+  <p  >
+    <a class="data" href="{% url 'accident' %}" style="color:black;" >5-year accident history</a>
+  </p>
+  </div>
+  <div class="box2">
+  <p  >
+    <a class="data" href="{% url 'state_accidents' %}" style="color:black;">Accidents by State</a>
+  </p>
+  </div>
+  <div class="box3">
+  <p  >
+    <a class="data" href= "{% url 'location_search' %}" style="color:black;">Search by location</a>
+  </p>
+  </div>
+  <div class="box4">
+  <p >
+    <a class="data" href="{% url 'facility_search' %}" style="color:black;">Search by facility name</a>
+  </p>
+  </div>
+  <div class="box content"><div id="brs">
+  <div class="card-database">
+    <br/>
+   <h2 class="title">About the Database</h2>
+  <p class="p">RCRAINFO was last updated on RTK NET with a set of EPA data made on May 18, 2018. The data on RTK NET are from EPA's RCRAInfo database.
+  <br/>
+  <br/>
+  RCRAInfo includes both data on hazardous waste permits and activities and data on biennial hazardous waste generation and transfer forms (which used to be held in BRS). RTK NET still keeps the two sets of information separate, both because of presentation issues and for continuity with historical data, so RTK NET uses the name "RCRAINFO" for all RCRA data except for the biennial waste forms, which it calls "BRS".
+  <br/>
+  <br/>
+The data in RCRAInfo consist of information about generators, transporters, treaters, storers, and disposers of hazardous waste, which are required to give certain reports about their activities to state-level regulators. These regulators pass the information on to Federal EPA. The law regulating the provision of this information is the Resource Conservation and Recovery Act (RCRA), as amended by the Hazardous and Solid Waste Amendments of 1984. Data includes permit status, compliance and violation information, and cleanup activities.
+  <br/>
+  <br/>
+  <br/>
+  <br/>
+  </p>
+  </div>
+  </div>
+
+  </div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+{% endblock %}

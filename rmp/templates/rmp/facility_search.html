@@ -1,8 +1,12 @@
 {% extends "base.html" %}
 
+{% block title %}
+RMP Facility Search
+{% endblock %}
+
 {% block content %}
 
-<h1>THIS IS THE FACILITY SEARCH PAGE</h1>
+<h2 class="search">Search By Facility</h2>
 
 <a href="{% url 'rmp' %}">rmp</a>
 
@@ -18,7 +22,7 @@
 
 {% else %}
 
-    <form action="search_by_facility" method="get">
+    <form class ="search" action="search_by_facility" method="get">
       <input type="text" name="facility" placeholder="Facility Name"/>
       <input type="text" name="parent_company" placeholder="Parent Company Name"/>
       <input type="submit" value="Search" />

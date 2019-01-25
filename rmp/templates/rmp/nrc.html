@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}
+National Response Center
+{% endblock %}
+
+{% block content %}
+
+
+<div id="brscontainer">
+
+
+  <div class="cards-2 cards">
+
+    <h2 class="data-title"><a href="{% url 'nrc' %}" style="color:black;text-decoration:none;">National Response Center (NRC)</a></h2></div>
+</div>
+
+<div class="wrapper">
+
+  <div class="box1">
+  <p  >
+    <a class="data" href="{% url 'accident' %}" style="color:black;" >5-year accident history</a>
+  </p>
+  </div>
+  <div class="box2">
+  <p  >
+    <a class="data" href="{% url 'state_accidents' %}" style="color:black;">Accidents by State</a>
+  </p>
+  </div>
+  <div class="box3">
+  <p  >
+    <a class="data" href= "{% url 'location_search' %}" style="color:black;">Search by location</a>
+  </p>
+  </div>
+  <div class="box4">
+  <p >
+    <a class="data" href="{% url 'facility_search' %}" style="color:black;">Search by facility name</a>
+  </p>
+  </div>
+
+  <div class="box content"><div id="brs">
+  <div class="card-database">
+    <br/>
+   <h2 class="title">About the Database</h2>
+   <p class="p">The NRC database was last updated on RTK NET with a copy updated as of June 25, 2018, and includes incidents from 1982 through part of 2018.
+   <br/>
+   <br/>
+   The NRC spills and accidents database is a database of incidents reported to the National Response Center. These incidents include chemical spills, accidents involving chemicals (such as fires or explosions), oil spills, transportation accidents that involve oil or chemicals, releases of radioactive materials, sightings of oil sheens on bodies of water, terrorist incidents involving chemicals, incidents where illegally dumped chemicals have been found, and drills intended to prepare responders to handle these kinds of incidents.
+    <br/>
+   <br/>
+   The National Repsonse Center is operated by the U.S. Coast Guard, and has become the central point of contact of contact used for the reporting of many different kinds of incidents involving hazardous materials.
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+
+   </p>
+   </div>
+   </div>
+
+  </div>
+</div>
+
+
+
+{% endblock %}
