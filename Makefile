@@ -1,4 +1,4 @@
-.PHONY: env
+.PHONY: env syncdbschema
 
 env:
 	echo 'DJANGO_SECRET_KEY=dev123' >> .env
