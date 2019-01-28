@@ -27,15 +27,16 @@ RMP Accidents by State
       <th>Number of Evacuations</th>
       <th>Amount of Property Damage</th>
     </tr>
+    {% load humanize %}
     {% for state in state_list %}
     <tr>
       <td>{{ state.state }}</td>
       <td>{{ state.count }}</td>
-      <td>{{ state.num_accident }}</td>
-      <td>{{ state.num_deaths }}</td>
-      <td>{{ state.num_injuries }}</td>
-      <td>{{ state.num_evacuated }}</td>
-      <td>{{ state.property_damage }}</td>
+      <td>{{ state.num_accident|intcomma }}</td>
+      <td>{{ state.num_deaths|intcomma }}</td>
+      <td>{{ state.num_injuries|intcomma }}</td>
+      <td>{{ state.num_evacuated|intcomma }}</td>
+      <td>{{ state.property_damage|intcomma }}</td>
     </tr>
     {% endfor %}
   {% else %}

@@ -6,15 +6,13 @@ RMP Facility Search
 
 {% block content %}
 
-<h2 class="search">Search By Facility</h2>
-
-<a href="{% url 'rmp' %}">rmp</a>
+<h2 class="searchhead">Search By Facility</h2>
 
 {% if error %}
 
-    <p style="color: red;">Please submit a search term.</p>
+    <p class="error">Please submit a search term.</p>
 
-    <form action="" method="get">
+    <form class="search" action="" method="get">
       <input type="text" name="facility" placeholder="Facility Name"/>
       <input type="text" name="parent_company" placeholder="Parent Company Name"/>
       <input type="submit" value="Search" />
@@ -22,7 +20,7 @@ RMP Facility Search
 
 {% else %}
 
-    <form class ="search" action="search_by_facility" method="get">
+    <form class="search" action="search_by_facility" method="get">
       <input type="text" name="facility" placeholder="Facility Name"/>
       <input type="text" name="parent_company" placeholder="Parent Company Name"/>
       <input type="submit" value="Search" />

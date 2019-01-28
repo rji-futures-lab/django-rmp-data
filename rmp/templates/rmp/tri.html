@@ -5,12 +5,9 @@ Toxic Release Inventory
 {% endblock %}
 
 {% block content %}
-<div id="brscontainer">
-
+<!-- <div id="brscontainer">
   <div class="cards-2 cards">
-
     <h2 class="data-title"><a href="{% url 'brs' %}" style="color:black;text-decoration:none;">Toxic Release Inventory (TRI)</a></h2></div>
-
 </div>
 <div class="wrapper">
 
@@ -60,7 +57,28 @@ Toxic Release Inventory
   </div>
 
 
-</div>
+</div> -->
+
+<h2 id="dbheader">Toxic Release Inventory (TRI)</h2>
+  <div class="dbcontainer">
+    <div class="links">
+      <a href="{% url 'accident' %}">5-year accident history</a>
+      <a href="{% url 'state_accidents' %}">Accidents by State</a>
+      <a href= "{% url 'location_search' %}">Search by location</a>
+      <a href="{% url 'facility_search' %}">Search by facility name</a>
+    </div>
+    <div class="description">
+      <h3 id="about">About the Database</h3>
+      <p>
+        TRI was last updated on RTK NET with a set of EPA data last updated in 2017, and includes records from reporting years 1987 through 2016. These data should match the data used in EPA's TRI National Analysis documents.      </p>
+      <p>
+        The Toxic Release Inventory (TRI) is a database of information about releases and transfers of toxic chemicals from facilities in certain industrial sectors, including manufacturing, waste handling, mining, and electricity generation. Facilities must also report the total amount of toxic chemicals in waste that they produce.
+      </p>
+      <p>
+        RTK NET provides access to the 2.3.6 version of RSEI risk screening data along with TRI. This version has 2016 as its latest TRI reporting year.
+      </p>
+    </div>
+  </div>
 
 
 {% endblock %}
