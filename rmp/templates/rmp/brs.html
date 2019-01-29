@@ -8,17 +8,9 @@ Biennial Reporting System
 
 
 
-<div id="brscontainer">
-
+<!-- <div id="brscontainer">
   <div class="cards-2 cards">
-
-
-
     <h2 class="data-title"><a href="{% url 'brs' %}" style="color:black;text-decoration:none;">Biennial Reporting System (BRS)</a></h2></div>
-
-
-
-
 </div>
 <div class="wrapper">
 
@@ -66,7 +58,30 @@ Biennial Reporting System
   </div>
 
 
-</div>
+</div> -->
+
+<h2 id="dbheader">Biennial Reporting System (BRS)</h2>
+  <div class="dbcontainer">
+    <div class="links">
+      <a href="{% url 'accident' %}">5-year accident history</a>
+      <a href="{% url 'state_accidents' %}">Accidents by State</a>
+      <a href= "{% url 'location_search' %}">Search by location</a>
+      <a href="{% url 'facility_search' %}">Search by facility name</a>
+    </div>
+    <div class="description">
+      <h3 id="about">About the Database</h3>
+      <p>
+        BRS was last updated on RTK NET with a set of EPA data made on December 15, 2016, and includes records from 1989 through 2015.
+      </p>
+      <p>
+        For 2003 data only, some waste generation forms from the state of Texas had duplicate ID numbers to other waste generation forms. These forms were not loaded into the database by EPA. As a result, tens or hundreds of thousands of tons of waste have potentially gone missing from the database for this year. EPA has no current plans to fix this problem.
+      </p>
+      <p>
+        The Biennial Reporting System (BRS) is one of EPA's primary tools for tracking the generation, shipment, and receipt of hazardous waste. It contains information from the Hazardous Waste Reports that must be filed every two years under the RCRA program. RCRA (the Resource Conservation and Recovery Act) is the Federal statute that regulates the generation, treatment, storage, disposal, or recycling of solid and hazardous waste. Facilities must report their activities involving hazardous waste to BRS if they fulfill one of two criteria:They are a Large Quantity Generator (LQG) of waste, or
+        They treated, stored, or disposed (TSD) of RCRA hazardous waste on site in units subject to RCRA permitting requirements.
+      </p>
+    </div>
+  </div>
 
 
 

@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.db.models import Count, Sum
 from rmp.models.processed.processed import Facility, ExecutiveSummary, Registration
-from django.template.defaultfilters import linebreaks
+
 # from .forms import facility_search
 
 def index(request):

@@ -32,7 +32,7 @@ RMP Facilities
     <th>Number of Evacuations</th>
     <th>Amount of Property Damage</th>
   </tr>
-
+  {% load humanize %}
   {% for facility in facility_list %}
   <tr>
     <td>{{ facility.facility_name }}</td>
@@ -40,12 +40,12 @@ RMP Facilities
     <td>{{ facility.state }}</td>
     <td>{{ facility.zip_code }}</td>
     <td>{{ facility.deregistration_yn }}</td>
-    <td>{{ facility.quantity_tot }}</td>
-    <td>{{ facility.num_accident }}</td>
-    <td>{{ facility.num_deaths }}</td>
-    <td>{{ facility.num_injuries }}</td>
-    <td>{{ facility.num_evacuated }}</td>
-    <td>{{ facility.property_damage }}</td>
+    <td>{{ facility.quantity_tot|intcomma }}</td>
+    <td>{{ facility.num_accident|intcomma }}</td>
+    <td>{{ facility.num_deaths|intcomma }}</td>
+    <td>{{ facility.num_injuries|intcomma }}</td>
+    <td>{{ facility.num_evacuated|intcomma }}</td>
+    <td>{{ facility.property_damage|intcomma }}</td>
   </tr>
   {% endfor %}
 

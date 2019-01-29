@@ -18,46 +18,35 @@ RTK Home
 <div id="gridbox">
 
   <div class="card-index">
-    <a href="{% url 'brs' %}" class="card-header" style="color:black;text-decoration:underline;">Biennial Reporting System (BRS)</a>
+    <h2 class="database-title"><a href="{% url 'brs' %}">Biennial Reporting System (BRS)</a></h2>
     {% load static %}
     <img src="{% static 'rmp/img/photo2.jpg' %}" alt="databasephoto" width="400px"/>
-    <br/>
-    <br/>
   </div>
 
   <div class="card-index">
-    <a href="{% url 'nrc' %}" class="card-header" style="color:black;text-decoration:underline;text-alignment:center;">National Response Center
-    (NRC)</a>
+    <h2 class="database-title"><a href="{% url 'nrc' %}">National Response Center (NRC)</a></h2>
     {% load static %}
-    <img src="{% static 'rmp/img/photo1.jpg' %}"alt="databasephoto"width="400px"/>
-    <br/>
-    <br/>
+    <img src="{% static 'rmp/img/photo1.jpg' %}" alt="databasephoto" width="400px"/>
   </div>
 
   <div class="card-index">
-     <a href="{% url 'rcris' %}" class="card-header" style="color:black;text-decoration:underine;">RCRIS/RCRAINFO </a>
+     <h2 class="database-title"><a href="{% url 'rcris' %}">RCRIS/RCRAINFO</a></h2>
     {% load static %}
-    <img src="{% static 'rmp/img/photo3.jpg' %}"alt="databasephoto" width="400px"/>
-    <br/>
-    <br/>
+    <img src="{% static 'rmp/img/photo3.jpg' %}" alt="databasephoto" width="400px"/>
   </div>
 
   <div class="card-index">
-    <a href="{% url 'rmp' %}" class="card-header" style="color:black;text-decoration:underline;">Risk Management Plans (RMP) </a>
+    <h2 class="database-title"><a href="{% url 'rmp' %}">Risk Management Plans (RMP)</a></h2>
     {% load static %}
-      <img src="{% static 'rmp/img/photo4.jpg' %}"alt="databasephoto" width="400px"/>
-    <br/>
-    <br/>
+      <img src="{% static 'rmp/img/photo4.jpg' %}" alt="databasephoto" width="400px"/>
   </div>
-  
+
   <div class="card-index">
-    <a href="{% url 'tri' %}" class="card-header" style="color:black;text-decoration:underline;">Toxic Release Inventory (TRI)</a>
+    <h2 class="database-title"><a href="{% url 'tri' %}">Toxic Release Inventory (TRI)</a></h2>
     {% load static %}
     <img src="{% static 'rmp/img/photo5.jpg' %}"alt="databasephoto" width="400px"/>
-    <br/>
-    <br/>
   </div>
 </div>
-<br/>
+
 
 {% endblock %}
