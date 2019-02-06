@@ -11,124 +11,92 @@ from rmp.fields import (
 from rmp.models.base import BaseRMPModel
 
 class tblS5FlammablesAltReleases(BaseRMPModel):
-    flammableid = CopyFromIntegerField(
+    FlammableID = CopyFromIntegerField(
         primary_key=True,
-        source_column='FlammableID',
     )
-    processchemicalid = CopyFromForeignKey(
+    ProcessChemicalID = CopyFromForeignKey(
         'tblS1ProcessChemicals',
         on_delete=models.PROTECT,
-        source_column='ProcessChemicalID',
     )
-    analyticalbasis = CopyFromCharField(
-        source_column='AnalyticalBasis',
+    AnalyticalBasis = CopyFromCharField(
         max_length=255,
         blank=True,
     )
-    scenario = CopyFromCharField(
-        source_column='Scenario',
+    Scenario = CopyFromCharField(
         max_length=200,
         null=True,
     )
-    quantityreleased = CopyFromFloatField(
-        source_column='QuantityReleased',
+    QuantityReleased = CopyFromFloatField(
         null=True,
     )
-    endpointused = CopyFromCharField(
-        source_column='EndpointUsed',
+    EndpointUsed = CopyFromCharField(
         max_length=30,
         blank=True,
     )
-    lfl_value = CopyFromFloatField(
-        source_column='LFL_Value',
+    LFL_Value = CopyFromFloatField(
         null=True,
     )
-    distance2endpoint = CopyFromFloatField(
-        source_column='Distance2Endpoint',
+    Distance2Endpoint = CopyFromFloatField(
         null=True,
     )
-    residentialpopulation = CopyFromBigIntegerField(
-        source_column='ResidentialPopulation',
+    ResidentialPopulation = CopyFromBigIntegerField(
         null=True,
     )
-    pr_schools = CopyFromBooleanField(
-        source_column='PR_Schools',
+    PR_Schools = CopyFromBooleanField(
     )
-    pr_residences = CopyFromBooleanField(
-        source_column='PR_Residences',
+    PR_Residences = CopyFromBooleanField(
     )
-    pr_hospitals = CopyFromBooleanField(
-        source_column='PR_Hospitals',
+    PR_Hospitals = CopyFromBooleanField(
     )
-    pr_prisons = CopyFromBooleanField(
-        source_column='PR_Prisons',
+    PR_Prisons = CopyFromBooleanField(
     )
-    pr_publicrecreation = CopyFromBooleanField(
-        source_column='PR_PublicRecreation',
+    PR_PublicRecreation = CopyFromBooleanField(
     )
-    pr_comm_ind = CopyFromBooleanField(
-        source_column='PR_Comm_Ind',
+    PR_Comm_Ind = CopyFromBooleanField(
     )
-    pr_othertype = CopyFromCharField(
-        source_column='PR_OtherType',
+    PR_OtherType = CopyFromCharField(
         max_length=200,
         blank=True,
     )
-    er_natlstateparks = CopyFromBooleanField(
-        source_column='ER_NatlStateParks',
+    ER_NatlStateParks = CopyFromBooleanField(
     )
-    er_wildlifesactuary = CopyFromBooleanField(
-        source_column='ER_WildlifeSactuary',
+    ER_WildlifeSactuary = CopyFromBooleanField(
     )
-    er_fedwilderness = CopyFromBooleanField(
-        source_column='ER_FedWilderness',
+    ER_FedWilderness = CopyFromBooleanField(
     )
-    er_othertype = CopyFromCharField(
-        source_column='ER_OtherType',
+    ER_OtherType = CopyFromCharField(
         max_length=200,
         blank=True,
     )
-    pm_dikes = CopyFromBooleanField(
-        source_column='PM_Dikes',
+    PM_Dikes = CopyFromBooleanField(
     )
-    pm_firewalls = CopyFromBooleanField(
-        source_column='PM_FireWalls',
+    PM_FireWalls = CopyFromBooleanField(
     )
-    pm_blastwalls = CopyFromBooleanField(
-        source_column='PM_BlastWalls',
+    PM_BlastWalls = CopyFromBooleanField(
     )
-    pm_enclosures = CopyFromBooleanField(
-        source_column='PM_Enclosures',
+    PM_Enclosures = CopyFromBooleanField(
     )
-    pm_othertype = CopyFromCharField(
-        source_column='PM_OtherType',
+    PM_OtherType = CopyFromCharField(
         max_length=200,
         blank=True,
     )
-    am_sprinklersystems = CopyFromBooleanField(
-        source_column='AM_SprinklerSystems',
+    AM_SprinklerSystems = CopyFromBooleanField(
     )
-    am_delugesystems = CopyFromBooleanField(
-        source_column='AM_DelugeSystems',
+    AM_DelugeSystems = CopyFromBooleanField(
     )
-    am_watercurtain = CopyFromBooleanField(
-        source_column='AM_WaterCurtain',
+    AM_WaterCurtain = CopyFromBooleanField(
     )
-    am_excessflowvalve = CopyFromBooleanField(
-        source_column='AM_ExcessFlowValve',
+    AM_ExcessFlowValve = CopyFromBooleanField(
     )
-    am_othertype = CopyFromCharField(
-        source_column='AM_OtherType',
+    AM_OtherType = CopyFromCharField(
         max_length=200,
         blank=True,
     )
-    ptrgraphic = CopyFromCharField(
-        source_column='ptrGraphic',
+    ptrGraphic = CopyFromCharField(
         max_length=12,
         blank=True,
     )
-    cbi_flag = CopyFromBooleanField(
-        source_column='CBI_Flag',
+    CBI_Flag = CopyFromBooleanField(
     )
 
     class Meta:

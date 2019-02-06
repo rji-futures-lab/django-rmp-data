@@ -12,163 +12,123 @@ from rmp.models.base import BaseRMPModel
 
 
 class tblS3ToxicsAltReleases(BaseRMPModel):
-    toxicid = CopyFromIntegerField(
-        source_column='ToxicID',
+    ToxicID = CopyFromIntegerField(
         primary_key=True,
     )
-    processchemicalid = CopyFromForeignKey(
+    ProcessChemicalID = CopyFromForeignKey(
         'tblS1ProcessChemicals',
         on_delete=models.PROTECT,
-        source_column='ProcessChemicalID',
     )
-    percentweight = CopyFromFloatField(
-        source_column='PercentWeight',
+    PercentWeight = CopyFromFloatField(
         null=True,
     )
-    physicalstate = CopyFromForeignKey(
+    PhysicalState = CopyFromForeignKey(
         'tlkpPhysicalStateCodes',
         on_delete=models.PROTECT,
-        source_column='PhysicalState',
         blank=True,
     )
-    analyticalbasis = CopyFromCharField(
-        source_column='AnalyticalBasis',
+    AnalyticalBasis = CopyFromCharField(
         max_length=255,
         blank=True,
     )
-    scenario = CopyFromCharField(
-        source_column='Scenario',
+    Scenario = CopyFromCharField(
         max_length=200,
         blank=True,
     )
-    quantityreleased = CopyFromFloatField(
-        source_column='QuantityReleased',
+    QuantityReleased = CopyFromFloatField(
         null=True,
     )
-    releaseduration = CopyFromFloatField(
-        source_column='ReleaseDuration',
+    ReleaseDuration = CopyFromFloatField(
         null=True,
     )
-    releaserate = CopyFromFloatField(
-        source_column='ReleaseRate',
+    ReleaseRate = CopyFromFloatField(
         null=True,
     )
-    windspeed = CopyFromFloatField(
-        source_column='WindSpeed',
+    WindSpeed = CopyFromFloatField(
         null=True,
     )
-    stabilityclass = CopyFromCharField(
-        source_column='StabilityClass',
+    StabilityClass = CopyFromCharField(
         max_length=1,
         blank=True,
     )
-    topography = CopyFromForeignKey(
+    Topography = CopyFromForeignKey(
         'tlkpTopographyCode',
         on_delete=models.PROTECT,
-        source_column='Topography',
         blank=True,
     )
-    endpoint_distance = CopyFromFloatField(
+    Distance2Endpoint = CopyFromFloatField(
         source_column='Distance2Endpoint',
         null=True,
     )
-    residentialpopulation = CopyFromBigIntegerField(
+    ResidentialPopulation = CopyFromBigIntegerField(
         source_column='ResidentialPopulation',
         null=True,
     )
-    pr_schools = CopyFromBooleanField(
-        source_column='PR_Schools',
+    PR_Schools = CopyFromBooleanField(
     )
-    pr_residences = CopyFromBooleanField(
-        source_column='PR_Residences',
+    PR_Residences = CopyFromBooleanField(
     )
-    pr_hospitals = CopyFromBooleanField(
-        source_column='PR_Hospitals',
+    PR_Hospitals = CopyFromBooleanField(
     )
-    pr_prisons = CopyFromBooleanField(
-        source_column='PR_Prisons',
+    PR_Prisons = CopyFromBooleanField(
     )
-    pr_publicrecreation = CopyFromBooleanField(
-        source_column='PR_PublicRecreation',
+    PR_PublicRecreation = CopyFromBooleanField(
     )
-    pr_comm_ind = CopyFromBooleanField(
-        source_column='PR_Comm_Ind',
+    PR_Comm_Ind = CopyFromBooleanField(
     )
-    pr_othertype = CopyFromCharField(
-        source_column='PR_OtherType',
+    PR_OtherType = CopyFromCharField(
         max_length=200,
         blank=True,
     )
-    er_natlstateparks = CopyFromBooleanField(
-        source_column='ER_NatlStateParks',
+    ER_NatlStateParks = CopyFromBooleanField(
     )
-    er_wildlifesactuary = CopyFromBooleanField(
-        source_column='ER_WildlifeSactuary',
+    ER_WildlifeSactuary = CopyFromBooleanField(
     )
-    er_fedwilderness = CopyFromBooleanField(
-        source_column='ER_FedWilderness',
+    ER_FedWilderness = CopyFromBooleanField(
     )
-    er_othertype = CopyFromCharField(
-        source_column='ER_OtherType',
+    ER_OtherType = CopyFromCharField(
         max_length=200,
         blank=True,
     )
-    pm_dikes = CopyFromBooleanField(
-        source_column='PM_Dikes',
+    PM_Dikes = CopyFromBooleanField(
     )
-    pm_enclosures = CopyFromBooleanField(
-        source_column='PM_Enclosures',
+    PM_Enclosures = CopyFromBooleanField(
     )
-    pm_berms = CopyFromBooleanField(
-        source_column='PM_Berms',
+    PM_Berms = CopyFromBooleanField(
     )
-    pm_drains = CopyFromBooleanField(
-        source_column='PM_Drains',
+    PM_Drains = CopyFromBooleanField(
     )
-    pm_sumps = CopyFromBooleanField(
-        source_column='PM_Sumps',
+    PM_Sumps = CopyFromBooleanField(
     )
-    pm_othertype = CopyFromCharField(
-        source_column='PM_OtherType',
+    PM_OtherType = CopyFromCharField(
         max_length=200,
         blank=True,
     )
-    am_sprinklersystems = CopyFromBooleanField(
-        source_column='AM_SprinklerSystems',
+    AM_SprinklerSystems = CopyFromBooleanField(
     )
-    am_delugesystems = CopyFromBooleanField(
-        source_column='AM_DelugeSystems',
+    AM_DelugeSystems = CopyFromBooleanField(
     )
-    am_watercurtain = CopyFromBooleanField(
-        source_column='AM_WaterCurtain',
+    AM_WaterCurtain = CopyFromBooleanField(
     )
-    am_neutralization = CopyFromBooleanField(
-        source_column='AM_Neutralization',
+    AM_Neutralization = CopyFromBooleanField(
     )
-    am_excessflowvalve = CopyFromBooleanField(
-        source_column='AM_ExcessFlowValve',
+    AM_ExcessFlowValve = CopyFromBooleanField(
     )
-    am_flares = CopyFromBooleanField(
-        source_column='AM_Flares',
+    AM_Flares = CopyFromBooleanField(
     )
-    am_scrubbers = CopyFromBooleanField(
-        source_column='AM_Scrubbers',
+    AM_Scrubbers = CopyFromBooleanField(
     )
-    am_emergencyshutdown = CopyFromBooleanField(
-        source_column='AM_EmergencyShutdown',
+    AM_EmergencyShutdown = CopyFromBooleanField(
     )
-    am_othertype = CopyFromCharField(
-        source_column='AM_OtherType',
+    AM_OtherType = CopyFromCharField(
         max_length=200,
         blank=True,
     )
-    ptrgraphic = CopyFromCharField(
-        source_column='ptrGraphic',
+    ptrGraphic = CopyFromCharField(
         max_length=12,
         blank=True,
     )
-    cbi_flag = CopyFromBooleanField(
-        source_column='CBI_Flag',
+    CBI_Flag = CopyFromBooleanField(
     )
 
     class Meta:

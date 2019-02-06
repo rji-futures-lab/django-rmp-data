@@ -13,18 +13,15 @@ from rmp.models.base import BaseRMPModel
 
 
 class tblS8_Prevention_Program_Chemicals(BaseRMPModel):
-    primarykey = CopyFromIntegerField(
-        source_column='PrimaryKey',
+    PrimaryKey = CopyFromIntegerField(
         primary_key=True,
     )
-    preventionprogram2id = CopyFromForeignKey(
+    PreventionProgram2ID = CopyFromForeignKey(
         'tblS8PreventionProgram2',
-        source_column='PreventionProgram2ID',
         on_delete=models.PROTECT
     )
-    processchemicalid = CopyFromForeignKey(
+    ProcessChemicalID = CopyFromForeignKey(
         'tblS1ProcessChemicals',
-        source_column='ProcessChemicalID',
         on_delete=models.PROTECT
     )
 
@@ -34,322 +31,228 @@ class tblS8_Prevention_Program_Chemicals(BaseRMPModel):
 
 
 class tblS8PreventionProgram2(BaseRMPModel):
-    preventionprogram2id = CopyFromIntegerField(
-        source_column='PreventionProgram2ID',
+    PreventionProgram2ID = CopyFromIntegerField(
         primary_key=True,
     )
-    process_naics_id = CopyFromForeignKey(
+    Process_NAICS_ID = CopyFromForeignKey(
         'tblS1ProcessNAICS',
-        source_column='Process_NAICS_ID',
         on_delete=models.PROTECT,
     )
-    safetyreviewdate = CopyFromDateTimeField(
-        source_column='SafetyReviewDate',
+    SafetyReviewDate = CopyFromDateTimeField(
         null=True,
     )
-    fr_nfpa58 = CopyFromBooleanField(
-        source_column='FR_NFPA58',
+    FR_NFPA58 = CopyFromBooleanField(
     )
-    fr_osha = CopyFromBooleanField(
-        source_column='FR_OSHA',
+    FR_OSHA = CopyFromBooleanField(
     )
-    fr_astm = CopyFromBooleanField(
-        source_column='FR_ASTM',
+    FR_ASTM = CopyFromBooleanField(
     )
-    fr_ansi = CopyFromBooleanField(
-        source_column='FR_ANSI',
+    FR_ANSI = CopyFromBooleanField(
     )
-    fr_asme = CopyFromBooleanField(
-        source_column='FR_ASME',
+    FR_ASME = CopyFromBooleanField(
     )
-    fr_none = CopyFromBooleanField(
-        source_column='FR_None',
+    FR_None = CopyFromBooleanField(
     )
-    fr_othertype = CopyFromCharField(
-        source_column='FR_OtherType',
+    FR_OtherType = CopyFromCharField(
         max_length=200,
         blank=True,
     )
-    fr_comments = CopyFromCharField(
-        source_column='FR_Comments',
+    FR_Comments = CopyFromCharField(
         max_length=200,
         blank=True,
     )
-    hazardreviewdate = CopyFromDateTimeField(
-        source_column='HazardReviewDate',
+    HazardReviewDate = CopyFromDateTimeField(
         null=True,
     )
-    changecompletiondate = CopyFromDateTimeField(
-        source_column='ChangeCompletionDate',
+    ChangeCompletionDate = CopyFromDateTimeField(
         null=True,
     )
-    mh_toxicrelease = CopyFromBooleanField(
-        source_column='MH_ToxicRelease',
+    MH_ToxicRelease = CopyFromBooleanField(
     )
-    mh_fire = CopyFromBooleanField(
-        source_column='MH_Fire',
+    MH_Fire = CopyFromBooleanField(
     )
-    mh_explosion = CopyFromBooleanField(
-        source_column='MH_Explosion',
+    MH_Explosion = CopyFromBooleanField(
     )
-    mh_runawayreaction = CopyFromBooleanField(
-        source_column='MH_RunawayReaction',
+    MH_RunawayReaction = CopyFromBooleanField(
     )
-    mh_polymerization = CopyFromBooleanField(
-        source_column='MH_Polymerization',
+    MH_Polymerization = CopyFromBooleanField(
     )
-    mh_overpressurization = CopyFromBooleanField(
-        source_column='MH_Overpressurization',
+    MH_Overpressurization = CopyFromBooleanField(
     )
-    mh_corrosion = CopyFromBooleanField(
-        source_column='MH_Corrosion',
+    MH_Corrosion = CopyFromBooleanField(
     )
-    mh_overfilling = CopyFromBooleanField(
-        source_column='MH_Overfilling',
+    MH_Overfilling = CopyFromBooleanField(
     )
-    mh_contamination = CopyFromBooleanField(
-        source_column='MH_Contamination',
+    MH_Contamination = CopyFromBooleanField(
     )
-    mh_equipmentfailure = CopyFromBooleanField(
-        source_column='MH_EquipmentFailure',
+    MH_EquipmentFailure = CopyFromBooleanField(
     )
-    mh_coolingloss = CopyFromBooleanField(
-        source_column='MH_CoolingLoss',
+    MH_CoolingLoss = CopyFromBooleanField(
     )
-    mh_earthquake = CopyFromBooleanField(
-        source_column='MH_Earthquake',
+    MH_Earthquake = CopyFromBooleanField(
     )
-    mh_floods = CopyFromBooleanField(
-        source_column='MH_Floods',
+    MH_Floods = CopyFromBooleanField(
     )
-    mh_tornado = CopyFromBooleanField(
-        source_column='MH_Tornado',
+    MH_Tornado = CopyFromBooleanField(
     )
-    mh_hurricanes = CopyFromBooleanField(
-        source_column='MH_Hurricanes',
+    MH_Hurricanes = CopyFromBooleanField(
     )
-    mh_othertype = CopyFromCharField(
-        source_column='MH_OtherType',
+    MH_OtherType = CopyFromCharField(
         max_length=200,
         blank=True,
     )
-    pc_vents = CopyFromBooleanField(
-        source_column='PC_Vents',
+    PC_Vents = CopyFromBooleanField(
     )
-    pc_reliefvalves = CopyFromBooleanField(
-        source_column='PC_ReliefValves',
+    PC_ReliefValves = CopyFromBooleanField(
     )
-    pc_checkvalves = CopyFromBooleanField(
-        source_column='PC_CheckValves',
+    PC_CheckValves = CopyFromBooleanField(
     )
-    pc_scrubbers = CopyFromBooleanField(
-        source_column='PC_Scrubbers',
+    PC_Scrubbers = CopyFromBooleanField(
     )
-    pc_flares = CopyFromBooleanField(
-        source_column='PC_Flares',
+    PC_Flares = CopyFromBooleanField(
     )
-    pc_manualshutoffs = CopyFromBooleanField(
-        source_column='PC_ManualShutoffs',
+    PC_ManualShutoffs = CopyFromBooleanField(
     )
-    pc_automaticshutoffs = CopyFromBooleanField(
-        source_column='PC_AutomaticShutoffs',
+    PC_AutomaticShutoffs = CopyFromBooleanField(
     )
-    pc_interlocks = CopyFromBooleanField(
-        source_column='PC_Interlocks',
+    PC_Interlocks = CopyFromBooleanField(
     )
-    pc_alarms = CopyFromBooleanField(
-        source_column='PC_Alarms',
+    PC_Alarms = CopyFromBooleanField(
     )
-    pc_keyedbypass = CopyFromBooleanField(
-        source_column='PC_KeyedBypass',
+    PC_KeyedBypass = CopyFromBooleanField(
     )
-    pc_emergencyairsupply = CopyFromBooleanField(
-        source_column='PC_EmergencyAirSupply',
+    PC_EmergencyAirSupply = CopyFromBooleanField(
     )
-    pc_emergencypower = CopyFromBooleanField(
-        source_column='PC_EmergencyPower',
+    PC_EmergencyPower = CopyFromBooleanField(
     )
-    pc_backuppump = CopyFromBooleanField(
-        source_column='PC_BackupPump',
+    PC_BackupPump = CopyFromBooleanField(
     )
-    pc_groundingequipment = CopyFromBooleanField(
-        source_column='PC_GroundingEquipment',
+    PC_GroundingEquipment = CopyFromBooleanField(
     )
-    pc_inhibitoraddition = CopyFromBooleanField(
-        source_column='PC_InhibitorAddition',
+    PC_InhibitorAddition = CopyFromBooleanField(
     )
-    pc_rupturedisks = CopyFromBooleanField(
-        source_column='PC_RuptureDisks',
+    PC_RuptureDisks = CopyFromBooleanField(
     )
-    pc_excessflowdevice = CopyFromBooleanField(
-        source_column='PC_ExcessFlowDevice',
+    PC_ExcessFlowDevice = CopyFromBooleanField(
     )
-    pc_quenchsystem = CopyFromBooleanField(
-        source_column='PC_QuenchSystem',
+    PC_QuenchSystem = CopyFromBooleanField(
     )
-    pc_purgesystem = CopyFromBooleanField(
-        source_column='PC_PurgeSystem',
+    PC_PurgeSystem = CopyFromBooleanField(
     )
-    pc_none = CopyFromBooleanField(
-        source_column='PC_None',
+    PC_None = CopyFromBooleanField(
     )
-    pc_othertype = CopyFromCharField(
-        source_column='PC_OtherType',
+    PC_OtherType = CopyFromCharField(
         max_length=200,
         blank=True,
     )
-    ms_sprinklersystem = CopyFromBooleanField(
-        source_column='MS_SprinklerSystem',
+    MS_SprinklerSystem = CopyFromBooleanField(
     )
-    ms_dikes = CopyFromBooleanField(
-        source_column='MS_Dikes',
+    MS_Dikes = CopyFromBooleanField(
     )
-    ms_firewalls = CopyFromBooleanField(
-        source_column='MS_FireWalls',
+    MS_FireWalls = CopyFromBooleanField(
     )
-    ms_blastwalls = CopyFromBooleanField(
-        source_column='MS_BlastWalls',
+    MS_BlastWalls = CopyFromBooleanField(
     )
-    ms_delugesystem = CopyFromBooleanField(
-        source_column='MS_DelugeSystem',
+    MS_DelugeSystem = CopyFromBooleanField(
     )
-    ms_watercurtain = CopyFromBooleanField(
-        source_column='MS_WaterCurtain',
+    MS_WaterCurtain = CopyFromBooleanField(
     )
-    ms_enclosure = CopyFromBooleanField(
-        source_column='MS_Enclosure',
+    MS_Enclosure = CopyFromBooleanField(
     )
-    ms_neutralization = CopyFromBooleanField(
-        source_column='MS_Neutralization',
+    MS_Neutralization = CopyFromBooleanField(
     )
-    ms_none = CopyFromBooleanField(
-        source_column='MS_None',
+    MS_None = CopyFromBooleanField(
     )
-    ms_othertype = CopyFromCharField(
-        source_column='MS_OtherType',
+    MS_OtherType = CopyFromCharField(
         max_length=200,
         blank=True,
     )
-    md_processareadetectors = CopyFromBooleanField(
-        source_column='MD_ProcessAreaDetectors',
+    MD_ProcessAreaDetectors = CopyFromBooleanField(
     )
-    md_perimetermonitors = CopyFromBooleanField(
-        source_column='MD_PerimeterMonitors',
+    MD_PerimeterMonitors = CopyFromBooleanField(
     )
-    md_none = CopyFromBooleanField(
-        source_column='MD_None',
+    MD_None = CopyFromBooleanField(
     )
-    md_othertype = CopyFromCharField(
-        source_column='MD_OtherType',
+    MD_OtherType = CopyFromCharField(
         max_length=200,
         blank=True,
     )
-    ch_chemicalreduction = CopyFromBooleanField(
-        source_column='CH_ChemicalReduction',
+    CH_ChemicalReduction = CopyFromBooleanField(
     )
-    ch_chemicalincrease = CopyFromBooleanField(
-        source_column='CH_ChemicalIncrease',
+    CH_ChemicalIncrease = CopyFromBooleanField(
     )
-    ch_changeprocessparameters = CopyFromBooleanField(
-        source_column='CH_ChangeProcessParameters',
+    CH_ChangeProcessParameters = CopyFromBooleanField(
     )
-    ch_installprocesscontrols = CopyFromBooleanField(
-        source_column='CH_InstallProcessControls',
+    CH_InstallProcessControls = CopyFromBooleanField(
     )
-    ch_installprocessdetection = CopyFromBooleanField(
-        source_column='CH_InstallProcessDetection',
+    CH_InstallProcessDetection = CopyFromBooleanField(
     )
-    ch_installperimetermonitoring = CopyFromBooleanField(
-        source_column='CH_InstallPerimeterMonitoring',
+    CH_InstallPerimeterMonitoring = CopyFromBooleanField(
     )
-    ch_installmitigationsystems = CopyFromBooleanField(
-        source_column='CH_InstallMitigationSystems',
+    CH_InstallMitigationSystems = CopyFromBooleanField(
     )
-    ch_nonerequired = CopyFromBooleanField(
-        source_column='CH_NoneRequired',
+    CH_NoneRequired = CopyFromBooleanField(
     )
-    ch_none = CopyFromBooleanField(
-        source_column='CH_None',
+    CH_None = CopyFromBooleanField(
     )
-    ch_otherchanges = CopyFromCharField(
-        source_column='CH_OtherChanges',
+    CH_OtherChanges = CopyFromCharField(
         max_length=200,
         blank=True,
     )
-    opproceduresreviewdate = CopyFromDateTimeField(
-        source_column='OpProceduresReviewDate',
+    OpProceduresReviewDate = CopyFromDateTimeField(
         null=True,
     )
-    trainingreviewdate = CopyFromDateTimeField(
-        source_column='TrainingReviewDate',
+    TrainingReviewDate = CopyFromDateTimeField(
         null=True,
     )
-    tr_classroom = CopyFromBooleanField(
-        source_column='TR_Classroom',
+    TR_Classroom = CopyFromBooleanField(
     )
-    tr_onthejob = CopyFromBooleanField(
-        source_column='TR_OnTheJob',
+    TR_OnTheJob = CopyFromBooleanField(
     )
-    tr_othertype = CopyFromCharField(
-        source_column='TR_OtherType',
+    TR_OtherType = CopyFromCharField(
         max_length=200,
         blank=True,
     )
-    ct_writtentest = CopyFromBooleanField(
-        source_column='CT_WrittenTest',
+    CT_WrittenTest = CopyFromBooleanField(
     )
-    ct_oraltest = CopyFromBooleanField(
-        source_column='CT_OralTest',
+    CT_OralTest = CopyFromBooleanField(
     )
-    ct_demonstration = CopyFromBooleanField(
-        source_column='CT_Demonstration',
+    CT_Demonstration = CopyFromBooleanField(
     )
-    ct_observation = CopyFromBooleanField(
-        source_column='CT_Observation',
+    CT_Observation = CopyFromBooleanField(
     )
-    ct_othertype = CopyFromCharField(
-        source_column='CT_OtherType',
+    CT_OtherType = CopyFromCharField(
         max_length=200,
         blank=True,
     )
-    maintenancereviewdate = CopyFromDateTimeField(
-        source_column='MaintenanceReviewDate',
+    MaintenanceReviewDate = CopyFromDateTimeField(
         null=True,
     )
-    equipmentinspectiondate = CopyFromDateTimeField(
-        source_column='EquipmentInspectionDate',
+    EquipmentInspectionDate = CopyFromDateTimeField(
         null=True,
     )
-    equipmenttested = CopyFromCharField(
-        source_column='EquipmentTested',
+    EquipmentTested = CopyFromCharField(
         max_length=200,
         blank=True,
     )
-    complianceauditdate = CopyFromDateTimeField(
-        source_column='ComplianceAuditDate',
+    ComplianceAuditDate = CopyFromDateTimeField(
         null=True,
     )
-    auditcompletiondate = CopyFromDateTimeField(
-        source_column='AuditCompletionDate',
+    AuditCompletionDate = CopyFromDateTimeField(
         null=True,
     )
-    incidentinvestigationdate = CopyFromDateTimeField(
-        source_column='IncidentInvestigationDate',
+    IncidentInvestigationDate = CopyFromDateTimeField(
         null=True,
     )
     investigationchangedate = CopyFromDateTimeField(
-        source_column='InvestigationChangeDate',
         null=True,
     )
-    mostrecentchangedate = CopyFromDateTimeField(
-        source_column='MostRecentChangeDate',
+    MostRecentChangeDate = CopyFromDateTimeField(
         null=True,
     )
-    cbi_flag = CopyFromBooleanField(
-        source_column='CBI_Flag',
+    CBI_Flag = CopyFromBooleanField(
     )
-    description = CopyFromTextField(
-        source_column='Description',
+    Description = CopyFromTextField(
         blank=True,
     )
 

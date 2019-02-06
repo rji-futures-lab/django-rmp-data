@@ -13,64 +13,48 @@ from rmp.models.base import BaseRMPModel
 
 
 class tblS9EmergencyResponses(BaseRMPModel):
-    facilityid = CopyFromOneToOneField(
+    FacilityID = CopyFromOneToOneField(
         'tblS1Facilities',
-        source_column='FacilityID',
         on_delete=models.PROTECT,
     )
-    er_communityplan = CopyFromBooleanField(
-        source_column='ER_CommunityPlan',
+    ER_CommunityPlan = CopyFromBooleanField(
     )
-    er_facilityplan = CopyFromBooleanField(
-        source_column='ER_FacilityPlan',
+    ER_FacilityPlan = CopyFromBooleanField(
     )
-    er_responseactions = CopyFromBooleanField(
-        source_column='ER_ResponseActions',
+    ER_ResponseActions = CopyFromBooleanField(
     )
-    er_publicinfoprocedures = CopyFromBooleanField(
-        source_column='ER_PublicInfoProcedures',
+    ER_PublicInfoProcedures = CopyFromBooleanField(
     )
-    er_emergencyhealthcare = CopyFromBooleanField(
-        source_column='ER_EmergencyHealthCare',
+    ER_EmergencyHealthCare = CopyFromBooleanField(
     )
-    er_reviewdate = CopyFromDateTimeField(
-        source_column='ER_ReviewDate',
+    ER_ReviewDate = CopyFromDateTimeField(
         null=True,
     )
-    ertrainingdate = CopyFromDateTimeField(
-        source_column='ERTrainingDate',
+    ERTrainingDate = CopyFromDateTimeField(
         null=True,
     )
-    coordinatingagencyname = CopyFromCharField(
-        source_column='CoordinatingAgencyName',
+    CoordinatingAgencyName = CopyFromCharField(
         max_length=250,
         blank=True,
     )
-    coordinatingagencyphone = CopyFromCharField(
+    CoordinatingAgencyPhone = CopyFromCharField(
         source_column='CoordinatingAgencyPhone',
-        max_length=10, 
+        max_length=10,
         blank=True,
     )
-    fr_osha1910_38 = CopyFromBooleanField(
-        source_column='FR_OSHA1910_38',
+    FR_OSHA1910_38 = CopyFromBooleanField(
     )
-    fr_osha1910_120 = CopyFromBooleanField(
-        source_column='FR_OSHA1910_120',
+    FR_OSHA1910_120 = CopyFromBooleanField(
     )
-    fr_spcc = CopyFromBooleanField(
-        source_column='FR_SPCC',
+    FR_SPCC = CopyFromBooleanField(
     )
-    fr_rcra = CopyFromBooleanField(
-        source_column='FR_RCRA',
+    FR_RCRA = CopyFromBooleanField(
     )
-    fr_opa90 = CopyFromBooleanField(
-        source_column='FR_OPA90',
+    FR_OPA90 = CopyFromBooleanField(
     )
-    fr_epcra = CopyFromBooleanField(
-        source_column='FR_EPCRA',
+    FR_EPCRA = CopyFromBooleanField(
     )
-    fr_otherregulation = CopyFromCharField(
-        source_column='FR_OtherRegulation',
+    FR_OtherRegulation = CopyFromCharField(
         max_length=200,
         blank=True,
     )

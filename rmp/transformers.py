@@ -18,7 +18,7 @@ def transform_executive_summaries():
         rmp_id=F('facilityid_id'),
         execsum=F('summarytext')
     )
-    
+
     file_path = os.path.join(settings.RMP_PROCESSED_DATA_DIR, 'rmp_execsum.csv')
 
     return qs.to_csv(file_path, 'rmp_id', 'execsum', header=True)
@@ -36,6 +36,3 @@ def transform_executive_summaries():
 #     file_path = os.path.join(settings.RMP_PROCESSED_DATA_DIR, 'rmp_registration.csv')
 
 #     return qs.to_csv(file_path, header=True)
-
-
-
