@@ -485,7 +485,7 @@ class tblS1Facilities(BaseRMPModel):
         help_text='',
     )
     CBIFlag = CopyFromBooleanField(
-        verbose_name=''
+        verbose_name='',
         help_text='',
     )
     CBIUnsanitizedVersionFlag = CopyFromBooleanField(
@@ -598,7 +598,7 @@ class tblS1Facilities(BaseRMPModel):
     )
     RMPPreparerForeignStateOrProvince = CopyFromCharField(
         max_length=35,
-        blank=Tru
+        blank=True,
         verbose_name='',
         help_text='',
     )
