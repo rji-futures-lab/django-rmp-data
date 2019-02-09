@@ -10,6 +10,14 @@ class BaseRMPManager(CopyManager):
     """
     Base manager for RMP data models.
     """
+    def get_default_transform_queryset(self):
+        """
+        Return a QuerySet with default transformations for raw models.
+        """
+        annotations = self.model.get_renamed_fields()
+
+        return super().annotate(**annotations)
+
     def copy_from_source_file(self, processed=False):
         """
         Copy contents of a source file into model.
@@ -61,8 +69,7 @@ class BaseRMPManager(CopyManager):
             # the backspace character.
             # proper way to solve this is to output processed files where the quote
             # chars are properly escaped, the default escape char is "
-        else:
-                
+        else: 
             source_file = getattr(
                 model, 'source_file', model._meta.object_name
             )

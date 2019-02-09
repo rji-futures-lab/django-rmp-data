@@ -6,7 +6,6 @@ from django.core import management
 from django.core.management.base import BaseCommand, CommandError
 from django.db.utils import DataError
 from rmp.models.helpers import get_models
-# from rmp.transformers import transform_executive_summaries
 import logging
 
 logger = logging.getLogger(__name__)
@@ -33,14 +32,39 @@ class Command(BaseCommand):
             if isfile(join(settings.RMP_RAW_DATA_DIR, f))
         ]
         load_header = self.style.MIGRATE_HEADING(
-            'Loading %s .csv files:' % len(raw_files)
+            '%s .csv files to load:' % len(raw_files)
         )
         self.stdout.write(load_header)
         for f in sorted(raw_files):
             management.call_command('loadsourcefile', f)
-        self.stdout.write(self.style.SUCCESS('Done.'))
+        self.stdout.write(
+            self.style.SUCCESS('Done.')
+        )
 
-        self.transform()
+        # handle transformations
+        processed_models = [
+            m for m in get_models('processed').values()
+        ]
+        load_header = self.style.MIGRATE_HEADING(
+            'Writing transformed %s .csv files:' % len(processed_models)
+        )
+        for m in processed_models:
+            self.stdout.write(
+                "  Writing %s.csv... " % m._meta.object_name, ending=""
+            )
+            try:
+                m.transform_to_csv()
+            except NotImplementedError:
+                msg = '   Add get_transformations() to {0}'.format(
+                    m._meta.object_name
+                )
+                self.stdout.write(
+                    self.style.ERROR(msg)
+                )
+            else:
+                self.stdout.write(
+                    self.style.SUCCESS("Done.")
+                )
 
         # handle processed files
         processed_files = [
@@ -54,10 +78,3 @@ class Command(BaseCommand):
         for f in sorted(processed_files):
             management.call_command('loadsourcefile', f, processed=True)
         self.stdout.write(self.style.SUCCESS('Done.'))
-
-    def transform(self):
-        for m in get_models('processed'):
-            try:
-                m.copy_to_processed_csv()
-            except AttributeError:
-                pass
