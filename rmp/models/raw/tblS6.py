@@ -17,10 +17,12 @@ class tblS6AccidentChemicals(BaseRMPModel):
     )
     AccidentHistoryID = CopyFromForeignKey(
         'tblS6AccidentHistory',
+        db_column='AccidentHistoryID',
         on_delete=models.PROTECT,
     )
     ChemicalID = CopyFromForeignKey(
         'tlkpChemicals',
+        db_column='ChemicalID',
         on_delete=models.PROTECT,
     )
     QuantityReleased = CopyFromFloatField(
@@ -41,6 +43,7 @@ class tblS6AccidentHistory(BaseRMPModel):
     )
     FacilityID = CopyFromForeignKey(
         'Tbls1Facilities',
+        db_column='FacilityID',
         on_delete=models.PROTECT,
     )
     AccidentDate = CopyFromDateTimeField(
@@ -52,6 +55,7 @@ class tblS6AccidentHistory(BaseRMPModel):
     )
     NAICSCode = CopyFromForeignKey(
         'tlkpNAICS',
+        db_column='NAICSCode',
         on_delete=models.PROTECT,
         blank=True,
     )
@@ -92,6 +96,7 @@ class tblS6AccidentHistory(BaseRMPModel):
     )
     WindSpeedUnitCode = CopyFromForeignKey(
         'tlkpWindSpeedUnitCodes',
+        db_column='WindSpeedUnitCode',
         on_delete=models.PROTECT,
         blank=True,
     )
@@ -234,10 +239,12 @@ class tblS6FlammableMixtureChemicals(BaseRMPModel):
     )
     AccidentChemicalID = CopyFromForeignKey(
         'Tbls6Accidentchemicals',
+        db_column='AccidentChemicalID',
         on_delete=models.PROTECT,
     )
     ChemicalID = CopyFromForeignKey(
         'tlkpChemicals',
+        db_column='ChemicalID',
         on_delete=models.PROTECT
     )
 

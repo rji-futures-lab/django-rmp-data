@@ -51,6 +51,7 @@ class tblS2ToxicsWorstCase(BaseRMPModel):
     )
     Topography = CopyFromForeignKey(
         'tlkpTopographyCode',
+        db_column='Topography',
         on_delete=models.PROTECT,
         blank=True,
     )

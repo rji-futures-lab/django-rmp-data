@@ -43,6 +43,7 @@ class tblFacility(BaseRMPModel):
     )
     RMPID = CopyFromOneToOneField(
         'tblS1Facilities',
+        db_column='RMPID',
         on_delete=models.PROTECT,
     )
     FacilityStr1 = CopyFromCharField(
@@ -58,6 +59,7 @@ class tblFacility(BaseRMPModel):
     )
     FacilityState = CopyFromForeignKey(
         'tlkpStateFIPSCodes',
+        db_column='FacilityState',
         on_delete=models.PROTECT,
         max_length=2,
     )
@@ -70,6 +72,7 @@ class tblFacility(BaseRMPModel):
     )
     FacilityCountyFIPS = CopyFromForeignKey(
         'TlkpCountyFIPSCodes',
+        db_column='FacilityCountyFIPS',
         on_delete=models.PROTECT,
         blank=True,
     )
@@ -98,6 +101,7 @@ class tblExecutiveSummaries(BaseRMPModel):
     )
     FacilityID = CopyFromForeignKey(
         'tblFacility',
+        db_column='FacilityID',
         on_delete=models.PROTECT,
         verbose_name='Facility ID',
         help_text='Unique identifier for all RMPs submitted by a specific '
@@ -122,6 +126,7 @@ class tblExecutiveSummaries(BaseRMPModel):
 class tblRMPError(BaseRMPModel):
     FacilityID = CopyFromForeignKey(
         'tblFacility',
+        db_column='FacilityID',
         on_delete=models.PROTECT,
         verbose_name='Facility ID',
         help_text='Unique identifier for all RMPs submitted by a specific '
@@ -153,6 +158,7 @@ class tblRMPTrack(BaseRMPModel):
     )
     EPAFacilityID = CopyFromForeignKey(
         'tblFacility',
+        db_column='EPAFacilityID',
         on_delete=models.PROTECT,
         db_column='epafacilityid',
         null=True,

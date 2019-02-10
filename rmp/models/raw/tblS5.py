@@ -16,6 +16,7 @@ class tblS5FlammablesAltReleases(BaseRMPModel):
     )
     ProcessChemicalID = CopyFromForeignKey(
         'tblS1ProcessChemicals',
+        db_column='ProcessChemicalID',
         on_delete=models.PROTECT,
     )
     AnalyticalBasis = CopyFromCharField(

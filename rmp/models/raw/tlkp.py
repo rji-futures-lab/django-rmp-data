@@ -276,11 +276,14 @@ class tlkpS6InitiatingEvents(BaseRMPModel):
 class tlkpStateFIPSCodes(BaseRMPModel):
     STATE_CODE = CopyFromCharField(
         max_length=2,
+        unique=True,
         help_text='Federal Information Processing Standard (FIPS) code for the'
                   ' county in which the facility is located.'
+
     )
     STATE_ABBR = CopyFromCharField(
         primary_key=True,
+        unique=True,
         max_length=2,
         help_text='The U.S. Postal Service abbreviation for the state in which'
                   ' the facility is located.',

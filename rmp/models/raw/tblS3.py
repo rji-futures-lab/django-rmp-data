@@ -17,6 +17,7 @@ class tblS3ToxicsAltReleases(BaseRMPModel):
     )
     ProcessChemicalID = CopyFromForeignKey(
         'tblS1ProcessChemicals',
+        db_column='ProcessChemicalID',
         on_delete=models.PROTECT,
     )
     PercentWeight = CopyFromFloatField(
@@ -24,6 +25,7 @@ class tblS3ToxicsAltReleases(BaseRMPModel):
     )
     PhysicalState = CopyFromForeignKey(
         'tlkpPhysicalStateCodes',
+        db_column='PhysicalState',
         on_delete=models.PROTECT,
         blank=True,
     )
@@ -53,6 +55,7 @@ class tblS3ToxicsAltReleases(BaseRMPModel):
     )
     Topography = CopyFromForeignKey(
         'tlkpTopographyCode',
+        db_column='Topography',
         on_delete=models.PROTECT,
         blank=True,
     )

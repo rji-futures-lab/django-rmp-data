@@ -15,6 +15,7 @@ from rmp.models.base import BaseRMPModel
 class tblS9EmergencyResponses(BaseRMPModel):
     FacilityID = CopyFromOneToOneField(
         'tblS1Facilities',
+        db_column='FacilityID',
         on_delete=models.PROTECT,
     )
     ER_CommunityPlan = CopyFromBooleanField(

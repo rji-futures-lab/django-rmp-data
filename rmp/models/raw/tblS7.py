@@ -23,6 +23,7 @@ class tblS7PreventionProgramChemicals(BaseRMPModel):
     )
     PreventionProgram3ID = CopyFromForeignKey(
         'Tbls7PreventionProgram3',
+        db_column='PreventionProgram3ID',
         verbose_name='Prevention Program 3 ID',
         on_delete=models.PROTECT,
         help_text='A unique number used to identify each prevention program '
@@ -31,6 +32,7 @@ class tblS7PreventionProgramChemicals(BaseRMPModel):
     )
     ProcessChemicalID = CopyFromForeignKey(
         'tbls1ProcessChemicals',
+        db_column='ProcessChemicalID',
         on_delete=models.PROTECT,
         verbose_name='Process Chemical ID',
         help_text='A number used to identify each chemical within a single RMP'
@@ -59,26 +61,31 @@ class tblS7PreventionProgramChemicalsChangeHistory(BaseRMPModel):
     )
     PP3ChemID = CopyFromForeignKey(
         'tblS7PreventionProgramChemicals',
+        db_column='PP3ChemID',
         on_delete=models.PROTECT,
         verbose_name='Prevention Program Chemical ID',
     )
     PreventionProgram3ID = CopyFromForeignKey(
         'tblS7PreventionProgram3',
+        db_column='PreventionProgram3ID',
         on_delete=models.PROTECT,
         verbose_name='Prevention Program3 ID',
     )
     ProcessChemicalID = CopyFromForeignKey(
         'tblS1ProcessChemicals',
+        db_column='ProcessChemicalID',
         on_delete=models.PROTECT,
         verbose_name='Process Chemical ID',
     )
     process_naics_id = CopyFromForeignKey(
         'tblS1Process_NAICS',
+        db_column='process_naics_id',
         on_delete=models.PROTECT,
         verbose_name='',
     )
     NAICSCode = CopyFromForeignKey(
         'tlkpNAICS',
+        db_column='NAICSCode',
         on_delete=models.PROTECT,
         verbose_name='NAICS Code',
     )
@@ -90,8 +97,9 @@ class tblS7PreventionProgram3(BaseRMPModel):
     PreventionProgram3ID = CopyFromIntegerField(
         primary_key=True,
     )
-    process_naics_id = CopyFromForeignKey(
+    Process_NAICS_ID = CopyFromForeignKey(
         'tblS1Process_NAICS',
+        db_column='Process_NAICS_ID',
         on_delete=models.PROTECT,
     )
     SafetyReviewDate = CopyFromDateTimeField(
@@ -341,6 +349,7 @@ class tblS7PreventionProgram3Description_ChangeHistory(BaseRMPModel):
     )
     PreventionProgram3ID = CopyFromForeignKey(
         'tblS7PreventionProgram3',
+        db_column='PreventionProgram3ID',
         on_delete=models.PROTECT,
     )
     Description = CopyFromTextField(

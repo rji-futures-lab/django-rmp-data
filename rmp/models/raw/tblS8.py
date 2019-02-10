@@ -18,10 +18,12 @@ class tblS8_Prevention_Program_Chemicals(BaseRMPModel):
     )
     PreventionProgram2ID = CopyFromForeignKey(
         'tblS8PreventionProgram2',
+        db_column='PreventionProgram2ID',
         on_delete=models.PROTECT
     )
     ProcessChemicalID = CopyFromForeignKey(
         'tblS1ProcessChemicals',
+        db_column='ProcessChemicalID',
         on_delete=models.PROTECT
     )
 
@@ -34,9 +36,9 @@ class tblS8PreventionProgram2(BaseRMPModel):
     PreventionProgram2ID = CopyFromIntegerField(
         primary_key=True,
     )
-    process_naics_id = CopyFromForeignKey(
+    Process_NAICS_ID = CopyFromForeignKey(
         'tblS1Process_NAICS',
-        source_column='Process_NAICS_ID',
+        db_column='Process_NAICS_ID',
         on_delete=models.PROTECT,
     )
     SafetyReviewDate = CopyFromDateTimeField(

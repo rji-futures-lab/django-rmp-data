@@ -52,6 +52,8 @@ class tblS1Facilities(BaseRMPModel):
     )
     FacilityState = CopyFromForeignKey(
         'tlkpStateFIPSCodes',
+        to_field='STATE_ABBR',
+        db_column='FacilityState',
         on_delete=models.PROTECT,
         related_name='facilitystate',
         verbose_name='1.5.d Facility State',
@@ -75,6 +77,8 @@ class tblS1Facilities(BaseRMPModel):
     )
     FacilityCountyFIPS = CopyFromForeignKey(
         'tlkpCountyFIPSCodes',
+        to_field='StateCounty_Code',
+        db_column='FacilityCountyFIPS',
         on_delete=models.PROTECT,
         blank=True,
         verbose_name='1.5.f Facility County',
@@ -112,7 +116,7 @@ class tblS1Facilities(BaseRMPModel):
     )
     LatLongMethod = CopyFromForeignKey(
         'tlkpLatLongMethods',
-        to_field='method_code',
+        to_field='Method_Code',
         on_delete=models.PROTECT,
         blank=True,
         source_column='LatLongMethod',
@@ -220,6 +224,7 @@ class tblS1Facilities(BaseRMPModel):
     )
     OperatorStateFIPS = CopyFromForeignKey(
         'tlkpStateFIPSCodes',
+        db_column='OperatorStateFIPS',
         on_delete=models.PROTECT,
         blank=True,
         verbose_name='1.6.f Owner/Operator State',
@@ -307,6 +312,7 @@ class tblS1Facilities(BaseRMPModel):
     )
     EPAFacilityID = CopyFromForeignKey(
         'tblFacility',
+        db_column='EPAFacilityID',
         on_delete=models.PROTECT,
         verbose_name='1.2 EPA Facility Identifier',
         help_text='1.2 EPA Facility Identifier',
@@ -411,6 +417,7 @@ class tblS1Facilities(BaseRMPModel):
     )
     ForeignCountry = CopyFromForeignKey(
         'tlkpForeignCountry',
+        db_column='ForeignCountry',
         on_delete=models.PROTECT,
         related_name='foreigncountry',
         blank=True,
@@ -572,6 +579,7 @@ class tblS1Facilities(BaseRMPModel):
     )
     RMPPreparerState = CopyFromForeignKey(
         'tlkpStateFIPSCodes',
+        db_column='RMPPreparerState',
         on_delete=models.PROTECT,
         related_name='rmppreparerstate',
         blank=True,
@@ -604,6 +612,7 @@ class tblS1Facilities(BaseRMPModel):
     )
     RMPPreparerForeignCountry = CopyFromForeignKey(
         'tlkpForeignCountry',
+        db_column='RMPPreparerForeignCountry',
         on_delete=models.PROTECT,
         related_name='rmppreparerforeigncountry',
         blank=True,
@@ -632,6 +641,7 @@ class tblS1Facilities(BaseRMPModel):
     )
     DeregistrationReasonCode = CopyFromForeignKey(
         'tlkpDeregistrationReason',
+        db_column='DeregistrationReasonCode',
         on_delete=models.PROTECT,
         blank=True,
         verbose_name='',
@@ -661,6 +671,7 @@ class tblS1FlammableMixtureChemicals(BaseRMPModel):
     )
     ProcessChemicalID = CopyFromForeignKey(
         'tbls1ProcessChemicals',
+        db_column='ProcessChemicalID',
         on_delete=models.PROTECT,
         verbose_name='Process Chemical ID',
         help_text='Unique number used to identify each chemical within a '
@@ -669,6 +680,7 @@ class tblS1FlammableMixtureChemicals(BaseRMPModel):
     )
     ChemicalID = CopyFromForeignKey(
         'tlkpChemicals',
+        db_column='ChemicalID',
         on_delete=models.PROTECT,
         verbose_name='Chemical ID',
         help_text='Chemical Abstract Service (CAS) registry number for the '
@@ -689,6 +701,7 @@ class tblS1ProcessChemicals(BaseRMPModel):
     )
     ProcessID = CopyFromForeignKey(
         'tblS1Processes',
+        db_column='ProcessID',
         on_delete=models.PROTECT,
         verbose_name='Process ID',
         help_text='Unique number used to identify each covered process within '
@@ -697,6 +710,7 @@ class tblS1ProcessChemicals(BaseRMPModel):
     )
     ChemicalID = CopyFromForeignKey(
         'tlkpChemicals',
+        db_column='ChemicalID',
         on_delete=models.PROTECT,
         verbose_name='Chemical ID',
         help_text='Chemical Abstract Service (CAS) registry number for the '
@@ -721,7 +735,7 @@ class tblS1ProcessChemicals(BaseRMPModel):
 
 
 class tblS1Process_NAICS(BaseRMPModel):
-    process_naics_id = CopyFromIntegerField(
+    Process_NAICS_ID = CopyFromIntegerField(
         primary_key=True,
         verbose_name='Process NAICS ID',
         help_text='Unique number used to identify each NAICS code within a '
@@ -730,6 +744,7 @@ class tblS1Process_NAICS(BaseRMPModel):
     )
     ProcessID = CopyFromForeignKey(
         'tblS1Processes',
+        db_column='ProcessID',
         on_delete=models.PROTECT,
         verbose_name='Process ID',
         help_text='Unique number used to identify each covered process in an '
@@ -738,6 +753,7 @@ class tblS1Process_NAICS(BaseRMPModel):
     )
     NAICSCode = CopyFromForeignKey(
         'tlkpNAICS',
+        db_column='NAICSCode',
         on_delete=models.PROTECT,
         verbose_name='1.17.b NAICS Code',
         help_text='The 5- or 6-digit NAICS Code.',
@@ -764,6 +780,7 @@ class tblS1Processes(BaseRMPModel):
     )
     FacilityID = CopyFromForeignKey(
         'tblFacility',
+        db_column='FacilityID',
         on_delete=models.PROTECT,
         verbose_name='Facility ID',
         help_text='Unique identifier for all RMPs submitted by a specific '
