@@ -10,16 +10,22 @@ class BaseRMPManager(CopyManager):
     """
     Base manager for RMP data models.
     """
-    def copy_from_source_file(self, processed=False):
+    def get_default_transform_queryset(self):
         """
-        Copy contents of a source file into model.
+        Return a QuerySet with default transformations for raw models.
+        """
+        annotations = self.model.get_renamed_fields()
 
-        By default, copy from a .csv file in RMP_RAW_DATA_DIR.
+        return super().annotate(**annotations)
 
-        If True is passed to processed, copy from a .tsv file in
-        RMP_PROCESSED_DATA_DIR.
+    def copy_from_csv(self):
+        """
+        Copy contents of a csv file into model.
         """
         model = self.model
+        stage = model.__module__.split('.')[2]
+        file_name = '%s.csv' % model._meta.object_name
+        file_path = os.path.join(settings.RMP_DATA_DIR, stage, file_name)
 
         options = dict(mapping=model.get_source_column_mapping())
 
@@ -37,39 +43,5 @@ class BaseRMPManager(CopyManager):
 
         if len(null_fields):
             options['force_null'] = null_fields
-
-        source_file = getattr(
-            model, 'source_file', model._meta.object_name
-        )
-
-        new_processed_files = ['ExecutiveSummary']
-        is_new_processed_file = model._meta.object_name in new_processed_files
-
-        if processed and not is_new_processed_file:
-            source_file = getattr(
-                model, 'source_file', model._meta.db_table
-            )
-            filename = '%s.tsv' % source_file
-            path = os.path.join(settings.RMP_PROCESSED_DATA_DIR, filename)
-            options['delimiter'] = '\t'
-            options['null'] = "NULL"
-            options['quote_character'] = '\b' # <- This is a hack:
-            # https://stackoverflow.com/questions/20402696/is-it-possible-to-turn-off-quote-processing-in-the-postgres-copy-command-with-cs
-            # since postgres assumes " is the quote character, and the data isn't actually
-            # quoted, but there are quote chars in the data, and those quote chars
-            # are not properly escaped, we are lying and saying the quotes are escaped by 
-            # the backspace character.
-            # proper way to solve this is to output processed files where the quote
-            # chars are properly escaped, the default escape char is "
-        else:
-                
-            source_file = getattr(
-                model, 'source_file', model._meta.object_name
-            )
-            filename = '%s.csv' % source_file
-            if is_new_processed_file:
-                path = os.path.join(settings.RMP_PROCESSED_DATA_DIR, filename)
-            else:
-                path = os.path.join(settings.RMP_RAW_DATA_DIR, filename)
         
-        return super().from_csv(path, **options)
+        return super().from_csv(file_path, **options)

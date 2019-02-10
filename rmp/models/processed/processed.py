@@ -17,8 +17,8 @@ from rmp.fields import (
     CopyFromOneToOneField,
     CopyFromTextField,
 )
-from rmp import models as raw_models
-from rmp.models import BaseRMPModel
+from rmp.models import raw as raw_models
+from rmp.models.base import BaseRMPModel
 
 
 class AccChem(BaseRMPModel):
@@ -310,7 +310,7 @@ class ExecutiveSummary(BaseRMPModel):
     )
 
     @classmethod
-    def copy_to_processed_csv(self, qs):
+    def get_transform_queryset(self):
         qs = raw_models.tblExecutiveSummaries.objects.filter(
             esseqnum=Subquery(
                 raw_models.tblExecutiveSummaries.objects.filter(
@@ -324,12 +324,7 @@ class ExecutiveSummary(BaseRMPModel):
             execsum=F('summarytext')
         )
         
-        file_path = os.path.join(
-            settings.RMP_PROCESSED_DATA_DIR,
-            '%s.csv' % self._meta.db_table
-        )
-
-        return qs.to_csv(file_path, 'rmp_id', 'execsum', header=True)
+        return qs
 
 
 class ExecutiveSummaryLength(BaseRMPModel):
@@ -619,20 +614,21 @@ class Registration(BaseRMPModel):
 
 
 class FlammablesAltRelease(BaseRMPModel):
-    id = CopyFromIntegerField(
+    flammable_id = CopyFromIntegerField(
         primary_key=True,
         source_column='flammable_id'
     )
     procchem = CopyFromForeignKey(
         'ProcChem',
         on_delete=models.CASCADE,
+        source_column='process_chemical_id'
     )
     analytical_basis = CopyFromCharField(max_length=255, blank=True)
     scenario = CopyFromCharField(max_length=200)
     quantity_released = CopyFromDecimalField(
         max_digits=5,
         decimal_places=2,
-        source_column='quantity_lbs',
+        # source_column='quantity_lbs',
         null=True,
     )
     endpoint_used = CopyFromCharField(max_length=30, blank=True)
@@ -640,56 +636,61 @@ class FlammablesAltRelease(BaseRMPModel):
         max_digits=5, decimal_places=1, null=True,
     )
     endpoint_distance = CopyFromDecimalField(
-        max_digits=5, decimal_places=1, null=True,
+        source_column="distance2_endpoint",
+        max_digits=5,
+        decimal_places=1,
+        null=True, 
     )
     population = CopyFromCharField(
-        max_length=9, blank=True, verbose_name='Residential population',
+        source_column="residential_population",
+        max_length=9,
+        blank=True,
+        verbose_name='Residential population',
     )
     pr_schools = CopyFromBooleanField()
     pr_residences = CopyFromBooleanField()
     pr_hospitals = CopyFromBooleanField()
     pr_prisons = CopyFromBooleanField()
-    pr_public_recreation = CopyFromBooleanField(
-        source_column='pr_public_rec'
-    )
+    pr_public_recreation = CopyFromBooleanField()
     pr_comm_ind = CopyFromBooleanField()
     pr_other_type = CopyFromCharField(
-        max_length=200, blank=True, source_column='pr_othertype',
+        max_length=200, blank=True
     )
-    er_natl_state_parks = CopyFromBooleanField(
-        source_column='er_natlstateparks'
-    )
-    er_wildlife_sactuary = CopyFromBooleanField(
-        source_column='er_wildlifesanct'
-    )
-    er_fed_wilderness = CopyFromBooleanField(
-        source_column='er_fedwilderness'
-    )
+    er_natl_state_parks = CopyFromBooleanField()
+    er_wildlife_sactuary = CopyFromBooleanField()
+    er_fed_wilderness = CopyFromBooleanField()
     er_other_type = CopyFromCharField(
-        max_length=200, blank=True, source_column='er_othertype'
+        max_length=200,
+        blank=True,
     )
     pm_dikes = CopyFromBooleanField()
-    pm_firewalls = CopyFromBooleanField()
-    pm_blastwalls = CopyFromBooleanField()
+    pm_firewalls = CopyFromBooleanField(source_column='pm_fire_walls')
+    pm_blastwalls = CopyFromBooleanField(source_column='pm_blast_walls')
     pm_enclosures = CopyFromBooleanField()
     pm_other_type = CopyFromCharField(
-        source_column='pm_othertype', max_length=200, blank=True
+        max_length=200,
+        blank=True,
     )
-    am_sprinklers = CopyFromBooleanField()
-    am_deluge_systems = CopyFromBooleanField(
-        source_column='am_delugesystems'
-    )
-    am_watercurtain = CopyFromBooleanField()
-    am_excess_flowvalve = CopyFromBooleanField(
-        source_column='am_excessflowvalve'
-    )
+    am_sprinklers = CopyFromBooleanField(source_column='am_sprinkler_systems')
+    am_deluge_systems = CopyFromBooleanField()
+    am_watercurtain = CopyFromBooleanField(source_column='am_water_curtain')
+    am_excess_flowvalve = CopyFromBooleanField(source_column='am_excess_flow_valve')
     am_other_type = CopyFromCharField(
-        max_length=200, blank=True, source_column='am_othertype'
+        max_length=200,
+        blank=True,
     )
-    ptrgraphic = CopyFromCharField(max_length=12, blank=True)
+    ptrgraphic = CopyFromCharField(
+        source_column='ptr_graphic',
+        max_length=12,
+        blank=True,
+    )
     cbi_flag = CopyFromBooleanField()
 
-    source_file = 'rmp_alt_flam'
+    @classmethod
+    def get_transform_queryset(self):
+        m = raw_models.tblS5FlammablesAltReleases
+
+        return m.objects.get_default_transform_queryset()
 
 
 class ToxicsAltRelease(BaseRMPModel):
