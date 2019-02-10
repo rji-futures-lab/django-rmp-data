@@ -82,7 +82,7 @@ class tblS7PreventionProgramChemicalsChangeHistory(BaseRMPModel):
         verbose_name='Process Chemical ID',
     )
     process_naics_id = CopyFromForeignKey(
-        'tblS1ProcessNAICS',
+        'tblS1Process_NAICS',
         on_delete=models.PROTECT,
         source_column='Process_NAICS_ID',
         verbose_name='',
@@ -103,7 +103,7 @@ class tblS7PreventionProgram3(BaseRMPModel):
         source_column='PreventionProgram3ID',
     )
     process_naics_id = CopyFromForeignKey(
-        'tblS1ProcessNAICS',
+        'tblS1Process_NAICS',
         on_delete=models.PROTECT,
         source_column='Process_NAICS_ID',
     )

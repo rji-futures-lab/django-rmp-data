@@ -39,7 +39,7 @@ class tblS8PreventionProgram2(BaseRMPModel):
         primary_key=True,
     )
     process_naics_id = CopyFromForeignKey(
-        'tblS1ProcessNAICS',
+        'tblS1Process_NAICS',
         source_column='Process_NAICS_ID',
         on_delete=models.PROTECT,
     )

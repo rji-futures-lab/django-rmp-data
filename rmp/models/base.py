@@ -72,7 +72,10 @@ class BaseRMPModel(models.Model):
         """
         Should be implemented on RMP model subclasses.
         """
-        raise NotImplementedError
+        model_name = cls._meta.object_name
+        msg = '%s does not have get_transform_queryset() defined' % model_name
+    
+        raise NotImplementedError(msg)
 
     @classmethod
     def transform_to_csv(cls):
@@ -89,7 +92,6 @@ class BaseRMPModel(models.Model):
         path = os.path.join(settings.RMP_PROCESSED_DATA_DIR, file_name)
 
         return cls.get_transform_queryset().to_csv(path, *fields)
-
 
     objects = BaseRMPManager()
 

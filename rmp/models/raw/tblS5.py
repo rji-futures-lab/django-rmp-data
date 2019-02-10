@@ -28,7 +28,7 @@ class tblS5FlammablesAltReleases(BaseRMPModel):
     Scenario = CopyFromCharField(
         source_column='Scenario',
         max_length=200,
-        null=True,
+        blank=True,
     )
     QuantityReleased = CopyFromFloatField(
         source_column='QuantityReleased',

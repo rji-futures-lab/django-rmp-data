@@ -821,7 +821,7 @@ class tblS1ProcessChemicals(BaseRMPModel):
         verbose_name_plural = 'Process: Chemicals'
 
 
-class tblS1ProcessNAICS(BaseRMPModel):
+class tblS1Process_NAICS(BaseRMPModel):
     process_naics_id = CopyFromIntegerField(
         primary_key=True,
         source_column='Process_NAICS_ID',
@@ -846,8 +846,6 @@ class tblS1ProcessNAICS(BaseRMPModel):
         verbose_name='1.17.b NAICS Code',
         help_text='The 5- or 6-digit NAICS Code.',
     )
-
-    source_file = 'tblS1Process_NAICS'
 
     class Meta:
         verbose_name = 'Process: NAICS Code'
