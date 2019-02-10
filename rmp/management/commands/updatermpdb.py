@@ -5,7 +5,7 @@ from django.conf import settings
 from django.core import management
 from django.core.management.base import BaseCommand, CommandError
 from django.db.utils import DataError
-from rmp.transformers import transform_executive_summaries
+from rmp.models.helpers import get_models
 import logging
 
 logger = logging.getLogger(__name__)
@@ -19,35 +19,50 @@ class Command(BaseCommand):
         """
         Handle the command.
         """
-        self.stdout.write('  Flushing current data from tables... ', ending='')
-        management.call_command('flush', verbosity=options['verbosity'], interactive=False)
+        self.stdout.write('  Flushing current data from tables...', ending='')
+        management.call_command(
+            'flush', verbosity=options['verbosity'], interactive=False
+        )
         self.stdout.write(
             self.style.SUCCESS('OK')
         )
         # handle raw files
-        raw_files = [
-            f for f in listdir(settings.RMP_RAW_DATA_DIR)
-            if isfile(join(settings.RMP_RAW_DATA_DIR, f))
-        ]
-        load_header = self.style.MIGRATE_HEADING(
-            'Loading %s .csv files:' % len(raw_files)
+        self.stdout.write(
+            self.style.MIGRATE_HEADING('Loading raw files. '), ending=""
         )
-        self.stdout.write(load_header)
-        for f in sorted(raw_files):
-            management.call_command('loadsourcefile', f)
-        self.stdout.write(self.style.SUCCESS('Done.'))
+        self.load_from_dir(settings.RMP_RAW_DATA_DIR)
 
-        transform_executive_summaries()
+        # handle transformations
+        processed_models = [
+            m for m in get_models('processed').values()
+        ]
+        transform_header = self.style.MIGRATE_HEADING(
+            'Writing %s transformed .csv files:' % len(processed_models)
+        )
+        self.stdout.write(transform_header)
+        for m in processed_models:
+            management.call_command('transformtocsv', m._meta.object_name)
+        self.stdout.write(
+            self.style.SUCCESS('Done.')
+        )
 
         # handle processed files
-        processed_files = [
-            f for f in listdir(settings.RMP_PROCESSED_DATA_DIR)
-            if isfile(join(settings.RMP_PROCESSED_DATA_DIR, f))
-        ]
-        load_header = self.style.MIGRATE_HEADING(
-            'Loading %s .tsv files:' % len(raw_files)
+        self.stdout.write(
+            self.style.MIGRATE_HEADING('Loading processed files. '), ending=""
         )
-        self.stdout.write(load_header)
-        for f in sorted(processed_files):
-            management.call_command('loadsourcefile', f, processed=True)
-        self.stdout.write(self.style.SUCCESS('Done.'))
+        self.load_from_dir(settings.RMP_PROCESSED_DATA_DIR)
+
+    def load_from_dir(self, path):
+        """
+        """
+        files = [ f for f in listdir(path) if isfile(join(path, f)) ]
+        file_count_header = self.style.MIGRATE_HEADING(
+            '%s files to load:' % len(files)
+        )
+        self.stdout.write(file_count_header)
+        for f in sorted(files):
+            model_name = f.split('.')[0]
+            management.call_command('loadfromcsv', model_name)
+        self.stdout.write(
+            self.style.SUCCESS('Done.')
+        )

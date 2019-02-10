@@ -34,8 +34,9 @@ class tblS8PreventionProgram2(BaseRMPModel):
     PreventionProgram2ID = CopyFromIntegerField(
         primary_key=True,
     )
-    Process_NAICS_ID = CopyFromForeignKey(
-        'tblS1ProcessNAICS',
+    process_naics_id = CopyFromForeignKey(
+        'tblS1Process_NAICS',
+        source_column='Process_NAICS_ID',
         on_delete=models.PROTECT,
     )
     SafetyReviewDate = CopyFromDateTimeField(

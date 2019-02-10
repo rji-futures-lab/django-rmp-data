@@ -8,7 +8,7 @@ from .tblS1 import (
     tblS1Facilities,
     tblS1FlammableMixtureChemicals,
     tblS1ProcessChemicals,
-    tblS1ProcessNAICS,
+    tblS1Process_NAICS,
     tblS1Processes,
 )
 from .tblS2 import tblS2ToxicsWorstCase
@@ -59,7 +59,7 @@ __all__ = (
     'tblS1Facilities',
     'tblS1FlammableMixtureChemicals',
     'tblS1ProcessChemicals',
-    'tblS1ProcessNAICS',
+    'tblS1Process_NAICS',
     'TblS1Processes',
     'tblS2ToxicsWorstCase',
     'tblS3ToxicsAltReleases',
