@@ -160,7 +160,6 @@ class tblRMPTrack(BaseRMPModel):
         'tblFacility',
         db_column='EPAFacilityID',
         on_delete=models.PROTECT,
-        db_column='epafacilityid',
         null=True,
         verbose_name='EPA Facility ID',
         help_text='Unique identifier for all RMPs submitted by a specific '
