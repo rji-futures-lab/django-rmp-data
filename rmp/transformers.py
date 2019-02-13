@@ -8,9 +8,9 @@ from rmp.models import tblFacility, tblS1Facilities, tblExecutiveSummaries
 def transform_executive_summaries():
     latest_exec_sums = Subquery(
         tblExecutiveSummaries.objects.filter(
-            facilityid=OuterRef('facilityid'),
-        ).values('facilityid').annotate(
-            max_seqnum=Max('esseqnum')
+            facilityid=OuterRef('FacilityID'),
+        ).values('FacilityID').annotate(
+            max_seqnum=Max('SequenceNumber')
         ).values('max_seqnum')[:1]
     )
 

@@ -41,9 +41,10 @@ class tblFacility(BaseRMPModel):
         verbose_name='Cameo Identifier',
         help_text='Future Link to CAMEO',
     )
-    RMPID = CopyFromOneToOneField(
+    FacilityID = CopyFromOneToOneField(
         'tblS1Facilities',
-        db_column='RMPID',
+        source_column='RMPID',
+        db_column='FacilityID',
         on_delete=models.PROTECT,
     )
     FacilityStr1 = CopyFromCharField(
@@ -100,7 +101,7 @@ class tblExecutiveSummaries(BaseRMPModel):
         help_text='Unique sequence number for the executive summary.',
     )
     FacilityID = CopyFromForeignKey(
-        'tblFacility',
+        'tblS1Facilities',
         db_column='FacilityID',
         on_delete=models.PROTECT,
         verbose_name='Facility ID',
@@ -125,7 +126,7 @@ class tblExecutiveSummaries(BaseRMPModel):
 
 class tblRMPError(BaseRMPModel):
     FacilityID = CopyFromForeignKey(
-        'tblFacility',
+        'tblS1Facilities',
         db_column='FacilityID',
         on_delete=models.PROTECT,
         verbose_name='Facility ID',
