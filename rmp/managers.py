@@ -1,7 +1,7 @@
 """
 Customized Django model manager subclasses.
 """
-import os
+import os, re, csv
 from django.conf import settings
 from postgres_copy import CopyManager
 
@@ -43,5 +43,5 @@ class BaseRMPManager(CopyManager):
 
         if len(null_fields):
             options['force_null'] = null_fields
-        
+
         return super().from_csv(file_path, **options)

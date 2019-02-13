@@ -8,9 +8,9 @@ from rmp.models import tblFacility, tblS1Facilities, tblExecutiveSummaries
 def transform_executive_summaries():
     latest_exec_sums = Subquery(
         tblExecutiveSummaries.objects.filter(
-            facilityid=OuterRef('facilityid'),
-        ).values('facilityid').annotate(
-            max_seqnum=Max('esseqnum')
+            facilityid=OuterRef('FacilityID'),
+        ).values('FacilityID').annotate(
+            max_seqnum=Max('SequenceNumber')
         ).values('max_seqnum')[:1]
     )
 
@@ -18,7 +18,7 @@ def transform_executive_summaries():
         rmp_id=F('facilityid_id'),
         execsum=F('summarytext')
     )
-    
+
     file_path = os.path.join(settings.RMP_PROCESSED_DATA_DIR, 'rmp_execsum.csv')
 
     return qs.to_csv(file_path, 'rmp_id', 'execsum', header=True)
@@ -36,6 +36,3 @@ def transform_executive_summaries():
 #     file_path = os.path.join(settings.RMP_PROCESSED_DATA_DIR, 'rmp_registration.csv')
 
 #     return qs.to_csv(file_path, header=True)
-
-
-

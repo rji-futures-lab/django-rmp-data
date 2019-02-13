@@ -15,9 +15,8 @@ from rmp.models import BaseRMPModel
 
 
 class tblS1Facilities(BaseRMPModel):
-    facilityid = CopyFromIntegerField(
+    FacilityID = CopyFromIntegerField(
         primary_key=True,
-        source_column='FacilityID',
         verbose_name='RMP Identifier',
         help_text='Unique identifier for all RMPs submitted by a specific '
                   'facility (assigned by Reporting Center for first-time '
@@ -25,96 +24,89 @@ class tblS1Facilities(BaseRMPModel):
                   'submission for a facility, subsequent submissions for the '
                   'same facility must include this identifier.',
     )
-    facilityname = CopyFromCharField(
+    FacilityName = CopyFromCharField(
         max_length=255,
         blank=True,
-        source_column='FacilityName',
         verbose_name='1.1.a Facility Name',
         help_text='Facility name specific to the site.',
     )
-    facilitystr1 = CopyFromCharField(
+    FacilityStr1 = CopyFromCharField(
         max_length=35,
         blank=True,
-        source_column='FacilityStr1',
         verbose_name='1.5.a Facility Street - Line 1',
         help_text='Facility Street - Line 1 using local street and road '
                   'designations. No post office box numbers or rural route '
                   'numbers. This is not the mailing address.',
     )
-    facilitystr2 = CopyFromCharField(
+    FacilityStr2 = CopyFromCharField(
         max_length=35,
         blank=True,
-        source_column='FacilityStr2',
         verbose_name='1.5.b Facility Street - Line 2',
         help_text='Facility Street Address - Line 2',
     )
-    facilitycity = CopyFromCharField(
+    FacilityCity = CopyFromCharField(
         max_length=19,
-        source_column='FacilityCity',
         verbose_name='1.5.c Facility City',
         help_text='The name of the city, town, or village where the '
                   'facility is located.',
     )
-    facilitystate = CopyFromForeignKey(
+    FacilityState = CopyFromForeignKey(
         'tlkpStateFIPSCodes',
+        to_field='STATE_ABBR',
+        db_column='FacilityState',
         on_delete=models.PROTECT,
         related_name='facilitystate',
-        source_column='FacilityState',
         verbose_name='1.5.d Facility State',
         help_text='The U.S. Postal Service abbreviation for the state in '
                   'which the facility is located.',
     )
-    facilityzipcode = CopyFromCharField(
+    FacilityZipCode = CopyFromCharField(
         max_length=5,
-        source_column='FacilityZipCode',
         verbose_name='1.5.e Facility ZIP Code',
         help_text='The Zoning Improvement Plan (ZIP) Code assigned to the '
                   'facility by the U.S. Postal Service which represents a '
                   'geographic area that facilitates mail delivery.',
     )
-    facility4digitzipext = CopyFromCharField(
+    Facility4DigitZipExt = CopyFromCharField(
         max_length=4,
         blank=True,
-        source_column='Facility4DigitZipExt',
         verbose_name='1.5.e Facility ZIP Extention',
         help_text='The four-digit extension code that represents the '
                   'geographic segment that is a sub-unit of the ZIP Code and '
                   'further refines the exact location of the facility.',
     )
-    facilitycountyfips = CopyFromForeignKey(
+    FacilityCountyFIPS = CopyFromForeignKey(
         'tlkpCountyFIPSCodes',
+        to_field='StateCounty_Code',
+        db_column='FacilityCountyFIPS',
         on_delete=models.PROTECT,
         blank=True,
-        source_column='FacilityCountyFIPS',
         verbose_name='1.5.f Facility County',
         help_text='Federal Information Processing Standard (FIPS) code for '
                   'county in which the facility is located.',
     )
-    lepc = CopyFromCharField(
+    LEPC = CopyFromCharField(
         max_length=30,
         blank=True,
-        source_column='LEPC',
         verbose_name='1.10 LEPC',
         help_text='Local Emergency Planning Committee (LEPC) associated with '
                   'the facility county. For LEPC information refer to the '
                   'LEPC/SERC Net Web site at http://www.RTK.NET:80/lepc. Must '
                   'cover all or part of the Facility County.',
     )
-    facilitylatdecdegs = CopyFromDecimalField(
+    FacilityLatDecDegs = CopyFromDecimalField(
         max_digits=9,
         decimal_places=7,
-        source_column='FacilityLatDecDegs',
         verbose_name='1.5.g Facility Latitude (Decimal Degrees)',
         help_text='Facility Latitude in decimal degrees.',
     )
-    facilitylongdecdegs = CopyFromDecimalField(
+    FacilityLongDecDegs = CopyFromDecimalField(
         max_digits=10,
         decimal_places=7,
-        source_column='FacilityLongDecDegs',
         verbose_name='1.5.h Facility Longitude (Decimal Degrees)',
         help_text='Facility Longitude in decimal degrees.',
     )
-    validlatlongflag = CopyFromCharField(
+    ValidLatLongFlag = CopyFromCharField(
         max_length=1,
         blank=True,
         source_column='ValidLatLongFlag',
@@ -122,9 +114,9 @@ class tblS1Facilities(BaseRMPModel):
         help_text='Flag used to indicate whether the Latitude/Longitude is '
                   'valid.',
     )
-    latlongmethod = CopyFromForeignKey(
+    LatLongMethod = CopyFromForeignKey(
         'tlkpLatLongMethods',
-        to_field='method_code',
+        to_field='Method_Code',
         on_delete=models.PROTECT,
         blank=True,
         source_column='LatLongMethod',
@@ -136,133 +128,117 @@ class tblS1Facilities(BaseRMPModel):
                   'Reference Tables (EF LRT). '
                   'http://www.epa.gov/enviro/html/lrt/lrt_over.html',
     )
-    latlongdescription = CopyFromCharField(
+    LatLongDescription = CopyFromCharField(
         max_length=2,
         blank=True,
-        source_column='LatLongDescription',
         verbose_name='1.5.j Lat/Long Description',
         help_text='Code for the physical place corresponding to the coordinate.'
                   ' Codes can be obtained from MAD Version 6.1 Standard as '
                   'implemented in Envirofacts Locational Reference Tables (EF '
                   'LRT). http://www.epa.gov/enviro/html/lrt/lrt_over.html',
     )
-    facilityurl = CopyFromURLField(
+    FacilityURL = CopyFromURLField(
         max_length=100,
         blank=True,
-        source_column='FacilityURL',
         verbose_name='1.9.c Facility or Parent Company WWW Homepage Address',
         help_text='Facility or Parent Company homepage web address.',
     )
-    facilityphonenumber = CopyFromCharField(
+    FacilityPhoneNumber = CopyFromCharField(
         max_length=10,
         blank=True,
-        source_column='FacilityPhoneNumber',
         verbose_name='1.9.b Facility Public Contact Phone Number',
         help_text='Facility phone number for public inquiries to contact '
                   'owner, 112(r) person responsible, etc.',
     )
-    facilityemailaddress = CopyFromEmailField(
+    FacilityEmailAddress = CopyFromEmailField(
         max_length=100,
         blank=True,
-        source_column='FacilityEmailAddress',
         verbose_name='1.9.a Facility or Parent Company E-mail Address',
         help_text='The text that represents the electronic mail (email) '
                   'address for the facility or parent company.',
     )
-    facilityduns = CopyFromCharField(
+    FacilityDUNS = CopyFromCharField(
         max_length=9,
-        source_column='FacilityDUNS',
         verbose_name='1.4.a Facility DUNS',
         help_text='The Data Universal Numbering System (DUNS) number assigned '
                   'by Dun & Bradstreet to the facility.',
     )
-    parentcompanyname = CopyFromCharField(
-        source_column='ParentCompanyName',
+    ParentCompanyName = CopyFromCharField(
         max_length=250,
         blank=True,
         verbose_name='1.1.b Parent Company #1 Name',
         help_text='First Parent Company Name.',
     )
-    company2name = CopyFromCharField(
-        source_column='Company2Name',
+    Company2Name = CopyFromCharField(
         max_length=50,
         blank=True,
         verbose_name='1.1.c Parent Company #2 Name',
         help_text='Second Parent Company name for joint ventures.',
     )
-    companyduns = CopyFromCharField(
-        source_column='CompanyDUNS',
+    CompanyDUNS = CopyFromCharField(
         max_length=9,
         verbose_name='1.4.b Parent Company #1 DUNS',
         help_text='The DUNS Number assigned by Dun & Bradstreet to the parent '
                   'of the company of interest.',
     )
-    company2duns = CopyFromCharField(
-        source_column='Company2DUNS',
+    Company2DUNS = CopyFromCharField(
         max_length=9,
         verbose_name='1.4.c Parent Company #2 DUNS',
         help_text='If your facility is owned by a joint venture, this is the '
                   'DUNS Number assigned by Dun & Bradstreet to the second '
                   'parent company.',
     )
-    operatorname = CopyFromCharField(
-        source_column='OperatorName',
+    OperatorName = CopyFromCharField(
         max_length=250,
         blank=True,
         verbose_name='1.6.a Owner/Operator Name',
         help_text='Name of the person or entity that owns or operates the '
                   'facility.',
     )
-    operatorphone = CopyFromCharField(
-        source_column='OperatorPhone',
+    OperatorPhone = CopyFromCharField(
         max_length=10,
         blank=True,
         verbose_name='1.6.b Owner/Operator Phone',
         help_text='Phone number for the Owner or Operator.',
     )
-    operatorstr1 = CopyFromCharField(
-        source_column='OperatorStr1',
+    OperatorStr1 = CopyFromCharField(
         max_length=35,
         blank=True,
         verbose_name='1.6.c Owner/Operator Street - Line 1',
         help_text='Line 1 of the business street mailing address for the '
                   'Owner or Operator.',
     )
-    operatorstr2 = CopyFromCharField(
-        source_column='OperatorStr2',
+    OperatorStr2 = CopyFromCharField(
         max_length=35,
         blank=True,
         verbose_name='1.6.d Owner/Operator Street - Line 2',
         help_text='Line 2 of the business street mailing address for the '
                   'Owner or Operator.',
     )
-    operatorcity = CopyFromCharField(
-        source_column='OperatorCity',
+    OperatorCity = CopyFromCharField(
         max_length=19,
         blank=True,
         verbose_name='1.6.e Owner/Operator City',
         help_text='City for the business mailing address for the Owner or '
                   'Operator.',
     )
-    operatorstatefips = CopyFromForeignKey(
+    OperatorStateFIPS = CopyFromForeignKey(
         'tlkpStateFIPSCodes',
+        db_column='OperatorStateFIPS',
         on_delete=models.PROTECT,
-        source_column='OperatorStateFIPS',
         blank=True,
         verbose_name='1.6.f Owner/Operator State',
         help_text='The U.S. Postal Service state abbreviation for the address '
                   'of the Owner or Operator.',
     )
-    operatorzipcode = CopyFromCharField(
-        source_column='OperatorZipCode',
+    OperatorZipCode = CopyFromCharField(
         max_length=5,
         blank=True,
         verbose_name='1.6.g Owner/Operator ZIP Code',
         help_text='ZIP Code for the business mailing address of the Owner or '
                   'Operator.',
     )
-    operatorzipcodeext = CopyFromCharField(
-        source_column='OperatorZipCodeExt',
+    OperatorZipCodeExt = CopyFromCharField(
         max_length=4,
         blank=True,
         verbose_name='1.6.g Owner/Operator ZIP four-digit extention code',
@@ -271,16 +247,14 @@ class tblS1Facilities(BaseRMPModel):
                   'further refines the business mailing address of the Owner '
                   'or Operator.',
     )
-    rmpcontact = CopyFromCharField(
-        source_column='RMPContact',
+    RMPContact = CopyFromCharField(
         max_length=35,
         blank=True,
         verbose_name='1.7.a Name of Person Responsible for RMP Implementaion',
         help_text='Person or position responsible for RMP implementation '
                   '(40 CFR Part 68).',
     )
-    rmptitle = CopyFromCharField(
-        source_column='RMPTitle',
+    RMPTitle = CopyFromCharField(
         max_length=250,
         blank=True,
         verbose_name='1.7.b Title/Position of Person Responsible for RMP '
@@ -288,52 +262,45 @@ class tblS1Facilities(BaseRMPModel):
         help_text='Title of person or position responsible for RMP '
                   'implementation (40 CFR Part 68).',
     )
-    emergencycontactname = CopyFromCharField(
-        source_column='EmergencyContactName',
+    EmergencyContactName = CopyFromCharField(
         max_length=250,
         blank=True,
         verbose_name='1.8.a Emergency Contact Name',
         help_text='Name of person designated as the emergency contact for the '
                   'facility.',
     )
-    emergencycontacttitle = CopyFromCharField(
-        source_column='EmergencyContactTitle',
+    EmergencyContactTitle = CopyFromCharField(
         max_length=35,
         blank=True,
         verbose_name='1.8.b Emergency Contact Title',
         help_text='Title or job classification of the emergency contact.',
     )
-    emergencycontactphone = CopyFromCharField(
-        source_column='EmergencyContactPhone',
+    EmergencyContactPhone = CopyFromCharField(
         max_length=10,
         blank=True,
         verbose_name='1.8.c Emergency Contact Phone',
         help_text='Phone number where the emergency contact can be reached '
                   'during normal working hours.',
     )
-    phone24 = CopyFromCharField(
-        source_column='Phone24',
+    Phone24 = CopyFromCharField(
         max_length=10,
         blank=True,
         verbose_name='1.8.d 24-Hour Phone',
         help_text='Number where emergency contact can be reached during '
                   'non-working hours, such as a beeper number.',
     )
-    emergencycontactext_pin = CopyFromCharField(
-        source_column='EmergencyContactExt_PIN',
+    EmergencyContactExt_PIN = CopyFromCharField(
         max_length=10,
         blank=True,
         verbose_name='1.8.e 24-Hour Phone Extention/PIN',
         help_text='Phone extension or pager number for the 24-Hour Phone.',
     )
-    fte = CopyFromIntegerField(
-        source_column='FTE',
+    FTE = CopyFromIntegerField(
         null=True,
         verbose_name='1.11 Number of Full Time Employees (FTEs)',
         help_text='Number of full-time equivalent employees.',
     )
-    otherepafacilityid = CopyFromCharField(
-        source_column='OtherEPAFacilityID',
+    OtherEPAFacilityID = CopyFromCharField(
         max_length=15,
         null=True,
         verbose_name='1.3 Other EPA Systems Program Facility Identifier',
@@ -343,15 +310,14 @@ class tblS1Facilities(BaseRMPModel):
                   'Planning and Community Right-to-Know Act (EPCRA), TRI, or '
                   'other EPA facility identifier).',
     )
-    epafacilityid = CopyFromForeignKey(
+    EPAFacilityID = CopyFromForeignKey(
         'tblFacility',
+        db_column='EPAFacilityID',
         on_delete=models.PROTECT,
-        source_column='EPAFacilityID',
         verbose_name='1.2 EPA Facility Identifier',
         help_text='1.2 EPA Facility Identifier',
     )
-    osha_psm = CopyFromBooleanField(
-        source_column='OSHA_PSM',
+    OSHA_PSM = CopyFromBooleanField(
         verbose_name='1.12.a Covered by: OSHA PSM',
         help_text='Occupational Safety and Health Act (OSHA) Process Safety '
                   'Management (PSM) Standard. Question covers all processes '
@@ -359,8 +325,7 @@ class tblS1Facilities(BaseRMPModel):
                   'subject to OSHA PSM, must answer “Y” even if the PSM '
                   'process is not covered by this Rule.',
         )
-    epcra_302 = CopyFromBooleanField(
-        source_column='EPCRA_302',
+    EPCRA_302 = CopyFromBooleanField(
         verbose_name='1.12.b Covered by: EPCRA 302',
         help_text='EPCRA Section 302 pertains to the Extremely Hazardous '
                   'Substances list. Any facility with a toxic regulated '
@@ -371,8 +336,7 @@ class tblS1Facilities(BaseRMPModel):
                   'facility may be for toxic substances not affected by this '
                   'Rule.',
     )
-    caa_titlev = CopyFromBooleanField(
-        source_column='CAA_TitleV',
+    CAA_TitleV = CopyFromBooleanField(
         verbose_name='1.12.c CAA Title V',
         help_text='Indicate if your facility has a CAA Title V Operating '
                   'Permit with “Y.” CAA Title V Air Operating Permit ID '
@@ -380,23 +344,20 @@ class tblS1Facilities(BaseRMPModel):
                   'requires major sources of air pollution to obtain '
                   'permits.',
     )
-    clearairoppermitid = CopyFromCharField(
-        source_column='ClearAirOpPermitID',
+    ClearAirOpPermitID = CopyFromCharField(
         max_length=15,
         null=True,
         verbose_name='1.12.d Air Operating Permit ID',
         help_text='Unique identifier for a CAA Title V Air Operating Permit '
                   'or state equivalent ID.',
     )
-    safetyinspectiondate = CopyFromDateTimeField(
-        source_column='SafetyInspectionDate',
+    SafetyInspectionDate = CopyFromDateTimeField(
         null=True,
         verbose_name='1.12.d Air Operating Permit ID',
         help_text='Unique identifier for a CAA Title V Air Operating Permit '
                   'or state equivalent ID.',
     )
-    safetyinspectionby = CopyFromCharField(
-        source_column='SafetyInspectionBy',
+    SafetyInspectionBy = CopyFromCharField(
         max_length=50,
         blank=True,
         verbose_name='1.15 Last Safety Inspection Performed by:',
@@ -405,30 +366,26 @@ class tblS1Facilities(BaseRMPModel):
                   'following is expected: OSHA State OSHA EPA State EPA Fire '
                   'Department Never had a safety inspection Other',
     )
-    osharanking = CopyFromBooleanField(
-        source_column='OSHARanking',
+    OSHARanking = CopyFromBooleanField(
         verbose_name='1.13 OSH Star or Merit Ranking',
         help_text="A stationary source with a Star or Merit ranking under "
                   "OSHA's voluntary protection program shall be exempt from "
                   "audits under paragraph (b)(2) and (b)(7) of [Section 68.220"
                   " - audits].",
     )
-    predictivefilingflag = CopyFromBooleanField(
-        source_column='PredictiveFilingFlag',
+    PredictiveFilingFlag = CopyFromBooleanField(
         verbose_name='Predictive Filing Flag',
         help_text="An indication that the submitter is using Predictive "
                   "Filing for the facility's RMP.",
     )
-    submissiontype = CopyFromCharField(
-        source_column='SubmissionType',
+    SubmissionType = CopyFromCharField(
         max_length=1,
         blank=True,
         verbose_name='Submission Type',
         help_text='Submission Type “F” - First-time submission “R” - '
                   'Resubmission “C” - Correction of existing RMP',
     )
-    rmpdescription = CopyFromCharField(
-        source_column='RMPDescription',
+    RMPDescription = CopyFromCharField(
         max_length=50,
         blank=True,
         verbose_name='RMP Description',
@@ -436,14 +393,12 @@ class tblS1Facilities(BaseRMPModel):
                   'RMP. RMP Description is not accessible to RMP*Info on the '
                   'Web.',
     )
-    noaccidents = CopyFromBooleanField(
-        source_column='NoAccidents',
+    NoAccidents = CopyFromBooleanField(
         verbose_name='No Accidents Flag',
         help_text='Optional Flag to Indicate whether there are any accidents '
                   'to report.',
     )
-    foreignstateprov = CopyFromCharField(
-        source_column='ForeignStateProv',
+    ForeignStateProv = CopyFromCharField(
         max_length=35,
         blank=True,
         verbose_name='1.6.f Foreign State or Province',
@@ -454,259 +409,223 @@ class tblS1Facilities(BaseRMPModel):
                   'state or province in the foreign mailing address, leave '
                   'this field blank.',
     )
-    foreignzipcode = CopyFromCharField(
-        source_column='ForeignZipCode',
+    ForeignZipCode = CopyFromCharField(
         max_length=14,
         blank=True,
         verbose_name='',
         help_text='',
     )
-    foreigncountry = CopyFromForeignKey(
+    ForeignCountry = CopyFromForeignKey(
         'tlkpForeignCountry',
+        db_column='ForeignCountry',
         on_delete=models.PROTECT,
         related_name='foreigncountry',
-        source_column='ForeignCountry',
         blank=True,
         verbose_name='',
         help_text='',
     )
-    cbi_flag = CopyFromBooleanField(
-        source_column='CBI_Flag',
+    CBI_Flag = CopyFromBooleanField(
         verbose_name='',
         help_text='',
     )
-    completioncheckdate = CopyFromDateTimeField(
-        source_column='CompletionCheckDate',
+    CompletionCheckDate = CopyFromDateTimeField(
         verbose_name='',
         help_text='',
     )
-    errorreportdate = CopyFromDateTimeField(
-        source_column='ErrorReportDate',
+    ErrorReportDate = CopyFromDateTimeField(
         null=True,
         verbose_name='',
         help_text='',
     )
-    receiptdate = CopyFromCharField(
-        source_column='ReceiptDate',
+    ReceiptDate = CopyFromCharField(
         max_length=25,
         verbose_name='',
         help_text='',
     )
-    graphicsindicator = CopyFromBooleanField(
-        source_column='GraphicsIndicator',
+    GraphicsIndicator = CopyFromBooleanField(
         verbose_name='',
         help_text='',
     )
-    attachmentsindicator = CopyFromBooleanField(
-        source_column='AttachmentsIndicator',
+    AttachmentsIndicator = CopyFromBooleanField(
         verbose_name='',
         help_text='',
     )
-    certificationreceivedflag = CopyFromBooleanField(
-        source_column='CertificationReceivedFlag',
+    CertificationReceivedFlag = CopyFromBooleanField(
         verbose_name='',
         help_text='',
     )
-    submissionmethod = CopyFromCharField(
-        source_column='SubmissionMethod',
+    SubmissionMethod = CopyFromCharField(
         max_length=50,
         blank=True,
         verbose_name='',
         help_text='',
     )
-    cbisubstantiationflag = CopyFromBooleanField(
-        source_column='CBISubstantiationFlag',
+    CBISubstantiationFlag = CopyFromBooleanField(
         verbose_name='',
         help_text='',
     )
-    electronicwaiverreceivedflag = CopyFromBooleanField(
-        source_column='ElectronicWaiverReceivedFlag',
+    ElectronicWaiverReceivedFlag = CopyFromBooleanField(
         verbose_name='',
         help_text='',
     )
-    postmarkdate = CopyFromDateTimeField(
-        source_column='PostmarkDate',
+    PostmarkDate = CopyFromDateTimeField(
         null=True,
         verbose_name='',
         help_text='',
     )
-    rmpcompleteflag = CopyFromBooleanField(
-        source_column='RMPCompleteFlag',
+    RMPCompleteFlag = CopyFromBooleanField(
         verbose_name='',
         help_text='',
     )
-    deregistrationdate = CopyFromDateTimeField(
-        source_column='DeRegistrationDate',
+    DeRegistrationDate = CopyFromDateTimeField(
         null=True,
         verbose_name='',
         help_text='',
     )
-    deregistrationeffectivedate = CopyFromDateTimeField(
-        source_column='DeRegistrationEffectiveDate',
+    DeRegistrationEffectiveDate = CopyFromDateTimeField(
         null=True,
         verbose_name='',
         help_text='',
     )
-    anniversarydate = CopyFromDateTimeField(
-        source_column='AnniversaryDate',
+    AnniversaryDate = CopyFromDateTimeField(
         verbose_name='',
         help_text='',
     )
-    cbiflag = CopyFromBooleanField(
-        source_column='CBIFlag',
+    CBIFlag = CopyFromBooleanField(
         verbose_name='',
         help_text='',
     )
-    cbiunsanitizedversionflag = CopyFromBooleanField(
-        source_column='CBIUnsanitizedVersionFlag',
+    CBIUnsanitizedVersionFlag = CopyFromBooleanField(
         verbose_name='',
         help_text='',
     )
-    versionnumber = CopyFromCharField(
-        source_column='VersionNumber',
+    VersionNumber = CopyFromCharField(
         max_length=200,
         blank=True,
         verbose_name='',
         help_text='',
     )
-    frs_lat = CopyFromDecimalField(
-        source_column='FRS_Lat',
+    FRS_Lat = CopyFromDecimalField(
         null=True,
         max_digits=17,
         decimal_places=15,
         verbose_name='',
         help_text='',
     )
-    frs_long = CopyFromDecimalField(
-        source_column='FRS_Long',
+    FRS_Long = CopyFromDecimalField(
         null=True,
         max_digits=17,
         decimal_places=14,
         verbose_name='',
         help_text='',
     )
-    frs_description = CopyFromCharField(
-        source_column='FRS_Description',
+    FRS_Description = CopyFromCharField(
         max_length=40,
         blank=True,
         verbose_name='',
         help_text='',
     )
-    frs_method = CopyFromCharField(
-        source_column='FRS_Method',
+    FRS_Method = CopyFromCharField(
         max_length=60,
         blank=True,
         verbose_name='',
         help_text='',
     )
-    horizontalaccmeasure = CopyFromCharField(
-        source_column='HorizontalAccMeasure',
+    HorizontalAccMeasure = CopyFromCharField(
         max_length=6,
         blank=True,
         verbose_name='',
         help_text='',
     )
-    horizontalrefdatumcode = CopyFromCharField(
-        source_column='HorizontalRefDatumCode',
+    HorizontalRefDatumCode = CopyFromCharField(
         max_length=3,
         blank=True,
     )
-    sourcemapscalenumber = CopyFromCharField(
-        source_column='SourceMapScaleNumber',
+    SourceMapScaleNumber = CopyFromCharField(
         max_length=10,
         blank=True,
         verbose_name='',
         help_text='',
     )
-    emergencycontactemail = CopyFromEmailField(
-        source_column='EmergencyContactEmail',
+    EmergencyContactEmail = CopyFromEmailField(
         max_length=100,
         blank=True,
         verbose_name='',
         help_text='',
     )
-    rmppreparername = CopyFromCharField(
-        source_column='RMPPreparerName',
+    RMPPreparerName = CopyFromCharField(
         max_length=70,
         blank=True,
         verbose_name='',
         help_text='',
     )
-    rmppreparerstreet1 = CopyFromCharField(
-        source_column='RMPPreparerStreet1',
+    RMPPreparerStreet1 = CopyFromCharField(
         max_length=35,
         blank=True,
         verbose_name='',
         help_text='',
     )
-    rmppreparerstreet2 = CopyFromCharField(
-        source_column='RMPPreparerStreet2',
+    RMPPreparerStreet2 = CopyFromCharField(
         max_length=35,
         blank=True,
         verbose_name='',
         help_text='',
     )
-    rmppreparercity = CopyFromCharField(
-        source_column='RMPPreparerCity',
+    RMPPreparerCity = CopyFromCharField(
         max_length=30,
         blank=True,
         verbose_name='',
         help_text='',
     )
-    rmppreparerstate = CopyFromForeignKey(
+    RMPPreparerState = CopyFromForeignKey(
         'tlkpStateFIPSCodes',
+        db_column='RMPPreparerState',
         on_delete=models.PROTECT,
         related_name='rmppreparerstate',
-        source_column='RMPPreparerState',
         blank=True,
         verbose_name='',
         help_text='',
     )
-    rmppreparerzip = CopyFromCharField(
-        source_column='RMPPreparerZIP',
+    RMPPreparerZIP = CopyFromCharField(
         max_length=5,
         blank=True,
         verbose_name='',
         help_text='',
     )
-    rmppreparerzip4ext = CopyFromCharField(
-        source_column='RMPPreparerZIP4Ext',
+    RMPPreparerZIP4Ext = CopyFromCharField(
         max_length=4,
         blank=True,
         verbose_name='',
         help_text='',
     )
-    rmppreparertelephone = CopyFromCharField(
-        source_column='RMPPreparerTelephone',
+    RMPPreparerTelephone = CopyFromCharField(
         max_length=10,
         blank=True,
         verbose_name='',
         help_text='',
     )
-    rmppreparerforeignstateorprovince = CopyFromCharField(
-        source_column='RMPPreparerForeignStateOrProvince',
+    RMPPreparerForeignStateOrProvince = CopyFromCharField(
         max_length=35,
         blank=True,
         verbose_name='',
         help_text='',
     )
-    rmppreparerforeigncountry = CopyFromForeignKey(
+    RMPPreparerForeignCountry = CopyFromForeignKey(
         'tlkpForeignCountry',
+        db_column='RMPPreparerForeignCountry',
         on_delete=models.PROTECT,
         related_name='rmppreparerforeigncountry',
-        source_column='RMPPreparerForeignCountry',
         blank=True,
         verbose_name='',
         help_text='',
     )
-    rmppreparerforeignpostalcode = CopyFromCharField(
-        source_column='RMPPreparerForeignPostalCode',
+    RMPPreparerForeignPostalCode = CopyFromCharField(
         max_length=14,
         blank=True,
         verbose_name='',
         help_text='',
     )
-    rmpsubmissionreasoncode = CopyFromForeignKey(
+    RMPSubmissionReasonCode = CopyFromForeignKey(
         'tlkpSubmissionReasonCodes',
         on_delete=models.PROTECT,
         source_column='RMPSubmissionReasonCode',
@@ -714,23 +633,21 @@ class tblS1Facilities(BaseRMPModel):
         verbose_name='',
         help_text='',
     )
-    rmpemail = CopyFromEmailField(
-        source_column='RMPEmail',
+    RMPEmail = CopyFromEmailField(
         max_length=100,
         blank=True,
         verbose_name='',
         help_text='',
     )
-    deregistrationreasoncode = CopyFromForeignKey(
+    DeregistrationReasonCode = CopyFromForeignKey(
         'tlkpDeregistrationReason',
+        db_column='DeregistrationReasonCode',
         on_delete=models.PROTECT,
-        source_column='DeregistrationReasonCode',
         blank=True,
         verbose_name='',
         help_text='',
     )
-    deregistrationreasonothertext = CopyFromCharField(
-        source_column='DeregistrationReasonOtherText',
+    DeregistrationReasonOtherText = CopyFromCharField(
         max_length=80,
         blank=True,
         verbose_name='',
@@ -745,27 +662,26 @@ class tblS1Facilities(BaseRMPModel):
 
 
 class tblS1FlammableMixtureChemicals(BaseRMPModel):
-    flammixchemid = CopyFromIntegerField(
+    FlamMixChemID = CopyFromIntegerField(
         primary_key=True,
-        source_column='FlamMixChemID',
         verbose_name='Flam Mix Chem ID',
         help_text='Unique identifier for the Section 1 Flammable Mixture '
                   'Chemicals record destination table. Generated by '
                   'RMP*Submit and 3rd-party programs.',
     )
-    processchemicalid = CopyFromForeignKey(
+    ProcessChemicalID = CopyFromForeignKey(
         'tbls1ProcessChemicals',
+        db_column='ProcessChemicalID',
         on_delete=models.PROTECT,
-        source_column='ProcessChemicalID',
         verbose_name='Process Chemical ID',
         help_text='Unique number used to identify each chemical within a '
                   'single RMP. Generated by RMP*Submit and 3rd-party '
                   'programs.',
     )
-    chemicalid = CopyFromForeignKey(
+    ChemicalID = CopyFromForeignKey(
         'tlkpChemicals',
+        db_column='ChemicalID',
         on_delete=models.PROTECT,
-        source_column='ChemicalID',
         verbose_name='Chemical ID',
         help_text='Chemical Abstract Service (CAS) registry number for the '
                   'flammable chemical.',
@@ -777,41 +693,38 @@ class tblS1FlammableMixtureChemicals(BaseRMPModel):
 
 
 class tblS1ProcessChemicals(BaseRMPModel):
-    processchemicalid = CopyFromIntegerField(
+    ProcessChemicalID = CopyFromIntegerField(
         primary_key=True,
-        source_column='ProcessChemicalID',
         verbose_name='Process Chemical ID',
         help_text='Unique number used to identify each chemical within a '
                   'single RMP. Generated by RMP*Submit and 3rd-party programs.'
     )
-    processid = CopyFromForeignKey(
+    ProcessID = CopyFromForeignKey(
         'tblS1Processes',
+        db_column='ProcessID',
         on_delete=models.PROTECT,
-        source_column='ProcessID',
         verbose_name='Process ID',
         help_text='Unique number used to identify each covered process within '
                   'an RMP from Section 1 Program Level for the Covered '
                   'Process. Generated by RMP*Submit and 3rd-party programs.',
     )
-    chemicalid = CopyFromForeignKey(
+    ChemicalID = CopyFromForeignKey(
         'tlkpChemicals',
+        db_column='ChemicalID',
         on_delete=models.PROTECT,
-        source_column='ChemicalID',
         verbose_name='Chemical ID',
         help_text='Chemical Abstract Service (CAS) registry number for the '
                   'chemical.',
     )
-    quantity = CopyFromDecimalField(
+    Quantity = CopyFromDecimalField(
         max_digits=28,
         decimal_places=16,
         null=True,
-        source_column='Quantity',
         verbose_name='1.17.c.3 Quantity',
         help_text='The maximum inventory quantity of the regulated substance '
                   'or mixture in the process in pounds.',
     )
-    cbi_flag = CopyFromBooleanField(
-        source_column='CBI_Flag',
+    CBI_Flag = CopyFromBooleanField(
         verbose_name='CBI Flag',
         help_text='An indication that the quantity was claimed as CBI.',
     )
@@ -822,27 +735,26 @@ class tblS1ProcessChemicals(BaseRMPModel):
 
 
 class tblS1Process_NAICS(BaseRMPModel):
-    process_naics_id = CopyFromIntegerField(
+    Process_NAICS_ID = CopyFromIntegerField(
         primary_key=True,
-        source_column='Process_NAICS_ID',
         verbose_name='Process NAICS ID',
         help_text='Unique number used to identify each NAICS code within a '
                   'covered process in an RMP. Generated by RMP*Submit and '
                   '3rd-party programs.',
     )
-    processid = CopyFromForeignKey(
+    ProcessID = CopyFromForeignKey(
         'tblS1Processes',
+        db_column='ProcessID',
         on_delete=models.PROTECT,
-        source_column='ProcessID',
         verbose_name='Process ID',
         help_text='Unique number used to identify each covered process in an '
                   'RMP reported in Section 1. Generated by RMP*Submit and 3rd-'
                   'party programs.',
     )
-    naicscode = CopyFromForeignKey(
+    NAICSCode = CopyFromForeignKey(
         'tlkpNAICS',
+        db_column='NAICSCode',
         on_delete=models.PROTECT,
-        source_column='NAICSCode',
         verbose_name='1.17.b NAICS Code',
         help_text='The 5- or 6-digit NAICS Code.',
     )
@@ -853,25 +765,23 @@ class tblS1Process_NAICS(BaseRMPModel):
 
 
 class tblS1Processes(BaseRMPModel):
-    processid = CopyFromIntegerField(
+    ProcessID = CopyFromIntegerField(
         primary_key=True,
-        source_column='ProcessID',
         verbose_name='Process ID',
         help_text='Unique number used to identify each process within the '
                   'RMP. The same number will not necessarily be assigned to '
                   'the same process for an RMP in a resubmission.',
     )
-    altid = CopyFromCharField(
+    AltID = CopyFromCharField(
         max_length=25,
-        source_column='AltID',
         blank=True,
         verbose_name='Process Description',
         help_text='Optional Process Description.',
     )
-    facilityid = CopyFromForeignKey(
+    FacilityID = CopyFromForeignKey(
         'tblFacility',
+        db_column='FacilityID',
         on_delete=models.PROTECT,
-        source_column='FacilityID',
         verbose_name='Facility ID',
         help_text='Unique identifier for all RMPs submitted by a specific '
                   'facility (assigned by Reporting Center for first-time '
@@ -879,15 +789,13 @@ class tblS1Processes(BaseRMPModel):
                   'submission for a facility, subsequent submissions for the '
                   'same facility must include this identifier.',
     )
-    programlevel = CopyFromCharField(
+    ProgramLevel = CopyFromCharField(
         max_length=1,
-        source_column='ProgramLevel',
         verbose_name='1.17.a Program Level',
         help_text='Program category, (e.g., Program Level 1, 2, or 3), to '
                   'identify with which program level the process complies.',
     )
-    cbi_flag = CopyFromBooleanField(
-        source_column='CBI_Flag',
+    CBI_Flag = CopyFromBooleanField(
         verbose_name='CBI Flag',
         help_text='If Process Record Contains CBI Data.',
     )

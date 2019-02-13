@@ -312,16 +312,16 @@ class ExecutiveSummary(BaseRMPModel):
     @classmethod
     def get_transform_queryset(self):
         qs = raw_models.tblExecutiveSummaries.objects.filter(
-            esseqnum=Subquery(
+            ESSeqNum=Subquery(
                 raw_models.tblExecutiveSummaries.objects.filter(
-                    facilityid=OuterRef('facilityid'),
-                ).values('facilityid').annotate(
-                    max_seqnum=Max('esseqnum')
+                    FacilityID=OuterRef('FacilityID'),
+                ).values('FacilityID_id').annotate(
+                    max_seqnum=Max('ESSeqNum')
                 ).values('max_seqnum')[:1]
             )
         ).annotate(
-            rmp_id=F('facilityid_id'),
-            execsum=F('summarytext')
+            rmp_id=F('FacilityID'),
+            execsum=F('SummaryText')
         )
         
         return qs

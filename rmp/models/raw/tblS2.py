@@ -12,131 +12,100 @@ from rmp.models.base import BaseRMPModel
 
 
 class tblS2ToxicsWorstCase(BaseRMPModel):
-    toxicid = CopyFromIntegerField(
+    ToxicID = CopyFromIntegerField(
         primary_key=True,
-        source_column='ToxicID',
     )
-    processchemicalid = CopyFromForeignKey(
+    ProcessChemicalID = CopyFromForeignKey(
         'tblS1ProcessChemicals',
         on_delete=models.PROTECT,
-        source_column='ProcessChemicalID',
     )
-    percentweight = CopyFromFloatField(
-        source_column='PercentWeight',
+    PercentWeight = CopyFromFloatField(
         null=True,
     )
-    physicalstate = CopyFromCharField(
+    PhysicalState = CopyFromCharField(
         source_column='PhysicalState',
         max_length=1,
         blank=True,
         )
-    analyticalbasis = CopyFromCharField(
-        source_column='AnalyticalBasis',
+    AnalyticalBasis = CopyFromCharField(
         max_length=255,
         blank=True,
     )
-    scenario = CopyFromBooleanField(
-        source_column='Scenario',
+    Scenario = CopyFromBooleanField(
         null=True,
     )
-    quantityreleased = CopyFromFloatField(
-        source_column='QuantityReleased',
+    QuantityReleased = CopyFromFloatField(
         null=True,
     )
-    releaseduration = CopyFromFloatField(
-        source_column='ReleaseDuration',
+    ReleaseDuration = CopyFromFloatField(
         null=True,
     )
-    releaserate = CopyFromFloatField(
-        source_column='ReleaseRate',
+    ReleaseRate = CopyFromFloatField(
         null=True,
     )
-    windspeed = CopyFromFloatField(
-        source_column='WindSpeed',
+    WindSpeed = CopyFromFloatField(
     )
-    stabilityclass = CopyFromCharField(
-        source_column='StabilityClass',
+    StabilityClass = CopyFromCharField(
         max_length=1,
         blank=True,
     )
-    topography = CopyFromForeignKey(
+    Topography = CopyFromForeignKey(
         'tlkpTopographyCode',
+        db_column='Topography',
         on_delete=models.PROTECT,
-        source_column='Topography',
         blank=True,
     )
-    endpoint_distance = CopyFromFloatField(
-        source_column='Distance2Endpoint',
+    Distance2Endpoint = CopyFromFloatField(
         null=True,
     )
-    residentialpopulation = CopyFromBigIntegerField(
-        source_column='ResidentialPopulation',
+    ResidentialPopulation = CopyFromBigIntegerField(
         null=True,
     )
-    pr_schools = CopyFromBooleanField(
-        source_column='PR_Schools',
+    PR_Schools = CopyFromBooleanField(
     )
-    pr_residences = CopyFromBooleanField(
-        source_column='PR_Residences',
+    PR_Residences = CopyFromBooleanField(
     )
-    pr_hospitals = CopyFromBooleanField(
-        source_column='PR_Hospitals',
+    PR_Hospitals = CopyFromBooleanField(
     )
-    pr_prisons = CopyFromBooleanField(
-        source_column='PR_Prisons',
+    PR_Prisons = CopyFromBooleanField(
     )
-    pr_publicrecreation = CopyFromBooleanField(
-        source_column='PR_PublicRecreation',
+    PR_PublicRecreation = CopyFromBooleanField(
     )
-    pr_comm_ind = CopyFromBooleanField(
-        source_column='PR_Comm_Ind',
+    PR_Comm_Ind = CopyFromBooleanField(
     )
-    pr_othertype = CopyFromCharField(
-        source_column='PR_OtherType',
+    PR_OtherType = CopyFromCharField(
         max_length=200,
         blank=True,
     )
-    er_natlstateparks = CopyFromBooleanField(
-        source_column='ER_NatlStateParks',
+    ER_NatlStateParks = CopyFromBooleanField(
     )
-    er_wildlifesactuary = CopyFromBooleanField(
-        source_column='ER_WildlifeSactuary',
+    ER_WildlifeSactuary = CopyFromBooleanField(
     )
-    er_fedwilderness = CopyFromBooleanField(
-        source_column='ER_FedWilderness',
+    ER_FedWilderness = CopyFromBooleanField(
     )
-    er_othertype = CopyFromCharField(
-        source_column='ER_OtherType',
+    ER_OtherType = CopyFromCharField(
         max_length=200,
         blank=True,
     )
-    pm_dikes = CopyFromBooleanField(
-        source_column='PM_Dikes',
+    PM_Dikes = CopyFromBooleanField(
     )
-    pm_enclosures = CopyFromBooleanField(
-        source_column='PM_Enclosures',
+    PM_Enclosures = CopyFromBooleanField(
     )
-    pm_berms = CopyFromBooleanField(
-        source_column='PM_Berms',
+    PM_Berms = CopyFromBooleanField(
     )
-    pm_drains = CopyFromBooleanField(
-        source_column='PM_Drains',
+    PM_Drains = CopyFromBooleanField(
     )
-    pm_sumps = CopyFromBooleanField(
-        source_column='PM_Sumps',
+    PM_Sumps = CopyFromBooleanField(
     )
-    pm_othertype = CopyFromCharField(
-        source_column='PM_OtherType',
+    PM_OtherType = CopyFromCharField(
         max_length=200,
         blank=True,
     )
-    ptrgraphic = CopyFromBooleanField(
-        source_column='ptrGraphic',
+    ptrGraphic = CopyFromBooleanField(
         max_length=12,
         null=True,
     )
-    cbi_flag = CopyFromBooleanField(
-        source_column='CBI_Flag',
+    CBI_Flag = CopyFromBooleanField(
     )
 
     class Meta:

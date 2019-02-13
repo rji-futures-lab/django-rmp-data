@@ -12,26 +12,23 @@ from rmp.models.base import BaseRMPModel
 
 
 class tblS6AccidentChemicals(BaseRMPModel):
-    accidentchemicalid = CopyFromIntegerField(
-        source_column='AccidentChemicalID',
+    AccidentChemicalID = CopyFromIntegerField(
         primary_key=True,
     )
-    accidenthistoryid = CopyFromForeignKey(
+    AccidentHistoryID = CopyFromForeignKey(
         'tblS6AccidentHistory',
-        source_column='AccidentHistoryID',
+        db_column='AccidentHistoryID',
         on_delete=models.PROTECT,
     )
-    chemicalid = CopyFromForeignKey(
+    ChemicalID = CopyFromForeignKey(
         'tlkpChemicals',
-        source_column='ChemicalID',
+        db_column='ChemicalID',
         on_delete=models.PROTECT,
     )
-    quantityreleased = CopyFromFloatField(
-        source_column='QuantityReleased',
+    QuantityReleased = CopyFromFloatField(
         null=True,
     )
-    percentweight = CopyFromFloatField(
-        source_column='PercentWeight',
+    PercentWeight = CopyFromFloatField(
         null=True,
     )
 
@@ -41,261 +38,194 @@ class tblS6AccidentChemicals(BaseRMPModel):
 
 
 class tblS6AccidentHistory(BaseRMPModel):
-    accidenthistoryid = CopyFromIntegerField(
-        source_column='AccidentHistoryID',
+    AccidentHistoryID = CopyFromIntegerField(
         primary_key=True,
     )
-    facilityid = CopyFromForeignKey(
+    FacilityID = CopyFromForeignKey(
         'Tbls1Facilities',
-        source_column='FacilityID',
+        db_column='FacilityID',
         on_delete=models.PROTECT,
     )
-    accidentdate = CopyFromDateTimeField(
-        source_column='AccidentDate',
+    AccidentDate = CopyFromDateTimeField(
         null=True,
     )
-    accidenttime = CopyFromCharField(
-        source_column='AccidentTime',
+    AccidentTime = CopyFromCharField(
         max_length=4,
         blank=True,
     )
-    naicscode = CopyFromForeignKey(
+    NAICSCode = CopyFromForeignKey(
         'tlkpNAICS',
-        source_column='NAICSCode',
+        db_column='NAICSCode',
         on_delete=models.PROTECT,
         blank=True,
     )
-    accidentreleaseduration = CopyFromCharField(
-        source_column='AccidentReleaseDuration',
+    AccidentReleaseDuration = CopyFromCharField(
         max_length=5,
         blank=True,
     )
-    re_gas = CopyFromBooleanField(
-        source_column='RE_Gas',
+    RE_Gas = CopyFromBooleanField(
     )
-    re_spill = CopyFromBooleanField(
-        source_column='RE_Spill',
+    RE_Spill = CopyFromBooleanField(
     )
-    re_fire = CopyFromBooleanField(
-        source_column='RE_Fire',
+    RE_Fire = CopyFromBooleanField(
     )
-    re_explosion = CopyFromBooleanField(
-        source_column='RE_Explosion',
+    RE_Explosion = CopyFromBooleanField(
     )
-    re_reactiveincident = CopyFromBooleanField(
-        source_column='RE_ReactiveIncident',
+    RE_ReactiveIncident = CopyFromBooleanField(
     )
-    rs_storagevessel = CopyFromBooleanField(
-        source_column='RS_StorageVessel',
+    RS_StorageVessel = CopyFromBooleanField(
     )
-    rs_piping = CopyFromBooleanField(
-        source_column='RS_Piping',
+    RS_Piping = CopyFromBooleanField(
     )
-    rs_processvessel = CopyFromBooleanField(
-        source_column='RS_ProcessVessel',
+    RS_ProcessVessel = CopyFromBooleanField(
     )
-    rs_transferhose = CopyFromBooleanField(
-        source_column='RS_TransferHose',
+    RS_TransferHose = CopyFromBooleanField(
     )
-    rs_valve = CopyFromBooleanField(
-        source_column='RS_Valve',
+    RS_Valve = CopyFromBooleanField(
     )
-    rs_pump = CopyFromBooleanField(
-        source_column='RS_Pump',
+    RS_Pump = CopyFromBooleanField(
     )
-    rs_joint = CopyFromBooleanField(
-        source_column='RS_Joint',
+    RS_Joint = CopyFromBooleanField(
     )
-    otherreleasesource = CopyFromCharField(
-        source_column='OtherReleaseSource',
+    OtherReleaseSource = CopyFromCharField(
         max_length=200,
         blank=True,
     )
-    windspeed = CopyFromFloatField(
-        source_column='WindSpeed',
+    WindSpeed = CopyFromFloatField(
         null=True,
     )
-    windspeedunitcode = CopyFromForeignKey(
+    WindSpeedUnitCode = CopyFromForeignKey(
         'tlkpWindSpeedUnitCodes',
-        source_column='WindSpeedUnitCode',
+        db_column='WindSpeedUnitCode',
         on_delete=models.PROTECT,
         blank=True,
     )
-    winddirection = CopyFromCharField(
-        source_column='WindDirection',
+    WindDirection = CopyFromCharField(
         max_length=3,
         blank=True,
     )
-    temperature = CopyFromFloatField(
-        source_column='Temperature',
+    Temperature = CopyFromFloatField(
         null=True,
     )
-    stabilityclass = CopyFromCharField(
-        source_column='StabilityClass',
+    StabilityClass = CopyFromCharField(
         max_length=1,
         blank=True,
     )
-    precipitation = CopyFromBooleanField(
-        source_column='Precipitation',
+    Precipitation = CopyFromBooleanField(
     )
-    weatherunknown = CopyFromBooleanField(
-        source_column='WeatherUnknown',
+    WeatherUnknown = CopyFromBooleanField(
     )
-    deathsworkers = CopyFromIntegerField(
-        source_column='DeathsWorkers',
+    DeathsWorkers = CopyFromIntegerField(
         null=True,
     )
-    deathspublicresponders = CopyFromIntegerField(
-        source_column='DeathsPublicResponders',
+    DeathsPublicResponders = CopyFromIntegerField(
         null=True,
     )
-    deathspublic = CopyFromIntegerField(
-        source_column='DeathsPublic',
+    DeathsPublic = CopyFromIntegerField(
         null=True,
     )
-    injuriesworkers = CopyFromIntegerField(
-        source_column='InjuriesWorkers',
+    InjuriesWorkers = CopyFromIntegerField(
         null=True,
     )
-    injuriespublicresponders = CopyFromIntegerField(
-        source_column='InjuriesPublicResponders',
+    InjuriesPublicResponders = CopyFromIntegerField(
         null=True,
     )
-    injuriespublic = CopyFromIntegerField(
-        source_column='InjuriesPublic',
+    InjuriesPublic = CopyFromIntegerField(
         null=True,
     )
-    onsitepropertydamage = CopyFromFloatField(
-        source_column='OnsitePropertyDamage',
+    OnsitePropertyDamage = CopyFromFloatField(
         null=True,
     )
-    offsitedeaths = CopyFromBooleanField(
-        source_column='OffsiteDeaths',
+    OffsiteDeaths = CopyFromBooleanField(
         null=True,
     )
-    hospitalization = CopyFromFloatField(
-        source_column='Hospitalization',
+    Hospitalization = CopyFromFloatField(
         null=True,
     )
-    medicaltreatment = CopyFromFloatField(
-        source_column='MedicalTreatment',
+    MedicalTreatment = CopyFromFloatField(
         null=True,
     )
-    evacuated = CopyFromFloatField(
-        source_column='Evacuated',
+    Evacuated = CopyFromFloatField(
         null=True,
     )
-    shelteredinplace = CopyFromFloatField(
-        source_column='ShelteredInPlace',
+    ShelteredInPlace = CopyFromFloatField(
         null=True,
     )
-    offsitepropertydamage = CopyFromFloatField(
-        source_column='OffsitePropertyDamage',
+    OffsitePropertyDamage = CopyFromFloatField(
         null=True,
     )
-    ed_kills = CopyFromBooleanField(
-        source_column='ED_Kills',
+    ED_Kills = CopyFromBooleanField(
     )
-    ed_minordefoliation = CopyFromBooleanField(
-        source_column='ED_MinorDefoliation',
+    ED_MinorDefoliation = CopyFromBooleanField(
     )
-    ed_watercontamination = CopyFromBooleanField(
-        source_column='ED_WaterContamination',
+    ED_WaterContamination = CopyFromBooleanField(
     )
-    ed_soilcontamination = CopyFromBooleanField(
-        source_column='ED_SoilContamination',
+    ED_SoilContamination = CopyFromBooleanField(
     )
-    ed_other = CopyFromCharField(
-        source_column='ED_Other',
+    ED_Other = CopyFromCharField(
         max_length=200,
         blank=True,
     )
-    initiatingevent = CopyFromForeignKey(
+    InitiatingEvent = CopyFromForeignKey(
         'tlkpS6InitiatingEvents',
-        source_column='InitiatingEvent',
         on_delete=models.PROTECT,
         blank=True,
     )
-    cf_equipmentfailure = CopyFromBooleanField(
-        source_column='CF_EquipmentFailure',
+    CF_EquipmentFailure = CopyFromBooleanField(
     )
-    cf_humanerror = CopyFromBooleanField(
-        source_column='CF_HumanError',
+    CF_HumanError = CopyFromBooleanField(
     )
-    cf_improperprocedure = CopyFromBooleanField(
-        source_column='CF_ImproperProcedure',
+    CF_ImproperProcedure = CopyFromBooleanField(
     )
-    cf_overpressurization = CopyFromBooleanField(
-        source_column='CF_Overpressurization',
+    CF_Overpressurization = CopyFromBooleanField(
     )
-    cf_upsetcondition = CopyFromBooleanField(
-        source_column='CF_UpsetCondition',
+    CF_UpsetCondition = CopyFromBooleanField(
     )
-    cf_bypasscondition = CopyFromBooleanField(
-        source_column='CF_BypassCondition',
+    CF_BypassCondition = CopyFromBooleanField(
     )
-    cf_maintenance = CopyFromBooleanField(
-        source_column='CF_Maintenance',
+    CF_Maintenance = CopyFromBooleanField(
     )
-    cf_processdesignfailure = CopyFromBooleanField(
-        source_column='CF_ProcessDesignFailure',
+    CF_ProcessDesignFailure = CopyFromBooleanField(
     )
-    cf_unsuitableequipment = CopyFromBooleanField(
-        source_column='CF_UnsuitableEquipment',
+    CF_UnsuitableEquipment = CopyFromBooleanField(
     )
-    cf_unusualweather = CopyFromBooleanField(
-        source_column='CF_UnusualWeather',
+    CF_UnusualWeather = CopyFromBooleanField(
     )
-    cf_managementerror = CopyFromBooleanField(
-        source_column='CF_ManagementError',
+    CF_ManagementError = CopyFromBooleanField(
     )
-    cf_other = CopyFromCharField(
-        source_column='CF_Other',
+    CF_Other = CopyFromCharField(
         max_length=200,
         blank=True,
     )
-    offsiterespondersnotify = CopyFromCharField(
-        source_column='OffsiteRespondersNotify',
+    OffsiteRespondersNotify = CopyFromCharField(
         max_length=25,
         blank=True,
     )
-    ci_improvedequipment = CopyFromBooleanField(
-        source_column='CI_ImprovedEquipment',
+    CI_ImprovedEquipment = CopyFromBooleanField(
     )
-    ci_revisedmaintenance = CopyFromBooleanField(
-        source_column='CI_RevisedMaintenance',
+    CI_RevisedMaintenance = CopyFromBooleanField(
     )
-    ci_revisedtraining = CopyFromBooleanField(
-        source_column='CI_RevisedTraining',
+    CI_RevisedTraining = CopyFromBooleanField(
     )
-    ci_revisedopprocedures = CopyFromBooleanField(
-        source_column='CI_RevisedOpProcedures',
+    CI_RevisedOpProcedures = CopyFromBooleanField(
     )
-    ci_newprocesscontrols = CopyFromBooleanField(
-        source_column='CI_NewProcessControls',
+    CI_NewProcessControls = CopyFromBooleanField(
     )
-    ci_newmitigationsystems = CopyFromBooleanField(
-        source_column='CI_NewMitigationSystems',
+    CI_NewMitigationSystems = CopyFromBooleanField(
     )
-    ci_revisederplan = CopyFromBooleanField(
-        source_column='CI_RevisedERPlan',
+    CI_RevisedERPlan = CopyFromBooleanField(
     )
-    ci_changedprocess = CopyFromBooleanField(
-        source_column='CI_ChangedProcess',
+    CI_ChangedProcess = CopyFromBooleanField(
     )
-    ci_reducedinventory = CopyFromBooleanField(
-        source_column='CI_ReducedInventory',
+    CI_ReducedInventory = CopyFromBooleanField(
     )
-    ci_none = CopyFromBooleanField(
-        source_column='CI_None',
+    CI_None = CopyFromBooleanField(
     )
-    ci_othertype = CopyFromCharField(
-        source_column='CI_OtherType',
+    CI_OtherType = CopyFromCharField(
         max_length=200,
         blank=True,
     )
-    cbi_flag = CopyFromBooleanField(
-        source_column='CBI_Flag',
+    CBI_Flag = CopyFromBooleanField(
     )
 
     class Meta:
@@ -304,18 +234,17 @@ class tblS6AccidentHistory(BaseRMPModel):
 
 
 class tblS6FlammableMixtureChemicals(BaseRMPModel):
-    flammixchemid = CopyFromIntegerField(
-        source_column='FlamMixChemID',
+    FlamMixChemID = CopyFromIntegerField(
         primary_key=True,
     )
-    accidentchemicalid = CopyFromForeignKey(
+    AccidentChemicalID = CopyFromForeignKey(
         'Tbls6Accidentchemicals',
-        source_column='AccidentChemicalID',
+        db_column='AccidentChemicalID',
         on_delete=models.PROTECT,
     )
-    chemicalid = CopyFromForeignKey(
+    ChemicalID = CopyFromForeignKey(
         'tlkpChemicals',
-        source_column='ChemicalID',
+        db_column='ChemicalID',
         on_delete=models.PROTECT
     )
 
