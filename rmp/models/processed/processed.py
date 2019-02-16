@@ -4,7 +4,7 @@ Models for processed RMP data.
 import os
 from django.conf import settings
 from django.db import models
-from django.db.models import F, Max, OuterRef, Subquery
+from django.db.models import F, Max, OuterRef, Subquery, Sum, Count
 from rmp.fields import (
     CopyFromBigIntegerField,
     CopyFromBooleanField,
@@ -74,6 +74,29 @@ class AccChem(BaseRMPModel):
         help_text='"The type of chemical.',
     )
 
+    @classmethod
+    def get_transform_queryset(self):
+        qs = raw_models.tblS6AccidentChemicals.objects.select_related('ChemicalID').annotate(
+            num_acc_flam=Subquery(
+                raw_models.tblS6FlammableMixtureChemicals.objects.filter(
+                    AccidentChemicalID=OuterRef('AccidentChemicalID')
+                ).values('AccidentChemicalID').annotate(
+                    num_acc_flam=Count('AccidentChemicalID')
+                ).values('num_acc_flam')
+            )
+        ).annotate(
+            accchem_id=F('AccidentChemicalID'),
+            accident_id=F('AccidentHistoryID'),
+            chemical_id=F('ChemicalID'),
+            quantity_lbs=F('QuantityReleased'),
+            percent_weight=F('PercentWeight'),
+            num_acc_flam=F('num_acc_flam'),
+            cas=F('ChemicalID__CASNumber'),
+            chemical_type=F('ChemicalID__ChemType'),
+        )
+
+        return qs
+
     source_file = 'rmp_acc_chem'
 
 
@@ -99,6 +122,23 @@ class AccFlam(BaseRMPModel):
         verbose_name='Chemical ID',
         help_text='The identifying ID for a particular flammable chemical released in an accident.',
     )
+
+    @classmethod
+    def get_transform_queryset(self):
+        qs = raw_models.tblS6AccidentChemicals.objects.annotate(
+            num_acc_flam=Subquery(
+                raw_models.tblS6FlammableMixtureChemicals.objects.filter(
+                    AccidentChemicalID=OuterRef('AccidentChemicalID')
+                ).annotate(
+                    Count('AccidentChemicalID')
+                )
+            )
+        ).annotate(
+            acc_chem_id=F('AccidentChemicalID'),
+            num_acc_flam=F('num_acc_flam'),
+        )
+
+        return qs
 
     source_file = 'rmp_acc_flam'
 
@@ -292,11 +332,22 @@ class Accident(BaseRMPModel):
     property_damage = CopyFromIntegerField()
     env_damage = CopyFromIntegerField()
 
-    # TODO SEE IF THIS WORKS
+    @classmethod
+    def get_transform_queryset(self):
+        qs = raw_models.tblExecutiveSummaries.objects.filter(
+            ESSeqNum=Subquery(
+                raw_models.tblExecutiveSummaries.objects.filter(
+                    FacilityID=OuterRef('FacilityID'),
+                ).values('FacilityID_id').annotate(
+                    max_seqnum=Max('ESSeqNum')
+                ).values('max_seqnum')[:1]
+            )
+        ).annotate(
+            rmp_id=F('FacilityID'),
+            execsum=F('SummaryText')
+        )
 
-    def save(self, *args, **kwargs):
-        self.quantity_tot = self.flam_tot + self.toxic_tot
-        super(Accident, self).save(*args, **kwargs)
+        return qs
 
 
 class ExecutiveSummary(BaseRMPModel):
@@ -323,7 +374,7 @@ class ExecutiveSummary(BaseRMPModel):
             rmp_id=F('FacilityID'),
             execsum=F('SummaryText')
         )
-        
+
         return qs
 
 
@@ -461,6 +512,23 @@ class Facility(BaseRMPModel):
     num_injuries = CopyFromIntegerField()
     num_evacuated = CopyFromIntegerField()
     property_damage = CopyFromIntegerField()
+
+    @classmethod
+    def get_transform_queryset(self):
+        qs = raw_models.tblExecutiveSummaries.objects.filter(
+            ESSeqNum=Subquery(
+                raw_models.tblExecutiveSummaries.objects.filter(
+                    FacilityID=OuterRef('FacilityID'),
+                ).values('FacilityID_id').annotate(
+                    max_seqnum=Max('ESSeqNum')
+                ).values('max_seqnum')[:1]
+            )
+        ).annotate(
+            rmp_id=F('FacilityID'),
+            execsum=F('SummaryText')
+        )
+
+        return qs
 
 
 class Registration(BaseRMPModel):
@@ -612,6 +680,23 @@ class Registration(BaseRMPModel):
     num_execsum = CopyFromIntegerField()
     num_exec_sum = CopyFromIntegerField()
 
+    @classmethod
+    def get_transform_queryset(self):
+        qs = raw_models.tblExecutiveSummaries.objects.filter(
+            ESSeqNum=Subquery(
+                raw_models.tblExecutiveSummaries.objects.filter(
+                    FacilityID=OuterRef('FacilityID'),
+                ).values('FacilityID_id').annotate(
+                    max_seqnum=Max('ESSeqNum')
+                ).values('max_seqnum')[:1]
+            )
+        ).annotate(
+            rmp_id=F('FacilityID'),
+            execsum=F('SummaryText')
+        )
+
+        return qs
+
 
 class FlammablesAltRelease(BaseRMPModel):
     flammable_id = CopyFromIntegerField(
@@ -639,7 +724,7 @@ class FlammablesAltRelease(BaseRMPModel):
         source_column="distance2_endpoint",
         max_digits=5,
         decimal_places=1,
-        null=True, 
+        null=True,
     )
     population = CopyFromCharField(
         source_column="residential_population",
@@ -1067,7 +1152,6 @@ class EmergencyResponse(BaseRMPModel):
 
     source_file = 'rmp_response'
 
-#problems with big integer field
 class ProcChem(BaseRMPModel):
     procchem_id = CopyFromBigIntegerField(
         primary_key=True,
@@ -1094,6 +1178,23 @@ class ProcChem(BaseRMPModel):
     chemical_type = CopyFromCharField(max_length=1)
 
     source_file = 'rmp_proc_chem'
+
+    @classmethod
+    def get_transform_queryset(self):
+        qs = raw_models.tblExecutiveSummaries.objects.filter(
+            ESSeqNum=Subquery(
+                raw_models.tblExecutiveSummaries.objects.filter(
+                    FacilityID=OuterRef('FacilityID'),
+                ).values('FacilityID_id').annotate(
+                    max_seqnum=Max('ESSeqNum')
+                ).values('max_seqnum')[:1]
+            )
+        ).annotate(
+            rmp_id=F('FacilityID'),
+            execsum=F('SummaryText')
+        )
+
+        return qs
 
 
 class ProcFlam(BaseRMPModel):
