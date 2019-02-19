@@ -168,6 +168,7 @@ class tblS6AccidentHistory(BaseRMPModel):
     )
     InitiatingEvent = CopyFromForeignKey(
         'tlkpS6InitiatingEvents',
+        db_column='InitiatingEvent',
         on_delete=models.PROTECT,
         blank=True,
     )

@@ -42,14 +42,6 @@ def accident(request):
     context = {'facility_list': facility_list, 'evacuated_list': evacuated_list, 'prop_damage_list': prop_damage_list}
     return render(request, 'rmp/accident_list.html', context)
 
-def test(request):
-    test = tblS1Facilities.objects.select_related('FacilityID')
-
-
-
-    context = {'test': test}
-    return render(request, 'rmp/test.html', context)
-
 def state_accidents(request):
     state_list = Facility.objects.values('state') \
                          .filter(deregistration_yn='n') \
