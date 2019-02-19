@@ -1,3 +1,28 @@
+"""
+Models for processed RMP data.
+"""
+import os
+from django.conf import settings
+from django.db import models
+from django.db.models import F, Max, OuterRef, Subquery, Sum, Count, Case, When, Value
+from rmp.fields import (
+    CopyFromBigIntegerField,
+    CopyFromBooleanField,
+    CopyFromCharField,
+    CopyFromDateField,
+    CopyFromDateTimeField,
+    CopyFromDecimalField,
+    CopyFromForeignKey,
+    CopyFromIntegerField,
+    CopyFromOneToOneField,
+    CopyFromTextField,
+    CopyFromFloatField,
+)
+from rmp.models import raw as raw_models
+from rmp.models import processed as processed_models
+from rmp.models.base import BaseRMPModel
+
+
 class FlammablesAltRelease(BaseRMPModel):
     flammable_id = CopyFromIntegerField(
         primary_key=True,

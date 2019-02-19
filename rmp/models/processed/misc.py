@@ -19,6 +19,7 @@ from rmp.fields import (
     CopyFromFloatField,
 )
 from rmp.models import raw as raw_models
+from rmp.models import processed as processed_models
 from rmp.models.base import BaseRMPModel
 
 class PreventionProgram2(BaseRMPModel): #rmp_prevent_2
