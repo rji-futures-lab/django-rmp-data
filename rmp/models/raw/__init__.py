@@ -21,8 +21,8 @@ from .tblS6 import (
     tblS6FlammableMixtureChemicals,
 )
 from .tblS7 import (
-    tblS7PreventionProgramChemicals,
-    tblS7PreventionProgramChemicalsChangeHistory,
+    tblS7_Prevention_Program_Chemicals,
+    tblS7_Prevention_Program_Chemicals_ChangeHistory,
     tblS7PreventionProgram3,
     tblS7PreventionProgram3Description_ChangeHistory,
 )
@@ -68,8 +68,8 @@ __all__ = (
     'tblS6AccidentChemicals',
     'tblS6AccidentHistory',
     'tblS6FlammableMixtureChemicals',
-    'tblS7PreventionProgramChemicals',
-    'tblS7PreventionProgramChemicalsChangeHistory',
+    'tblS7_Prevention_Program_Chemicals',
+    'tblS7_Prevention_Program_Chemicals_ChangeHistory',
     'tblS7PreventionProgram3',
     'tblS7PreventionProgram3Description_ChangeHistory',
     'tblS8_Prevention_Program_Chemicals',

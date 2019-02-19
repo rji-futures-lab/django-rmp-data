@@ -22,17 +22,20 @@ class tblS2ToxicsWorstCase(BaseRMPModel):
     PercentWeight = CopyFromFloatField(
         null=True,
     )
-    PhysicalState = CopyFromCharField(
-        source_column='PhysicalState',
+    PhysicalState = CopyFromForeignKey(
+        'tlkpPhysicalStateCodes',
         max_length=1,
         blank=True,
-        )
+        on_delete=models.PROTECT,
+    )
     AnalyticalBasis = CopyFromCharField(
         max_length=255,
         blank=True,
     )
-    Scenario = CopyFromBooleanField(
-        null=True,
+    Scenario = CopyFromForeignKey(
+        'tlkpS2ScenarioCodes',
+        blank=True,
+        on_delete=models.PROTECT,
     )
     QuantityReleased = CopyFromFloatField(
         null=True,
@@ -43,15 +46,15 @@ class tblS2ToxicsWorstCase(BaseRMPModel):
     ReleaseRate = CopyFromFloatField(
         null=True,
     )
-    WindSpeed = CopyFromFloatField(
-    )
+    WindSpeed = CopyFromFloatField()
     StabilityClass = CopyFromCharField(
+        # this prob should be CopyFromForeignKey, but I can't figure out which
+        # tlkp table it should reference. Values are A-F
         max_length=1,
         blank=True,
     )
     Topography = CopyFromForeignKey(
         'tlkpTopographyCode',
-        db_column='Topography',
         on_delete=models.PROTECT,
         blank=True,
     )
