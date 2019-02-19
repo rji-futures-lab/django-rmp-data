@@ -107,8 +107,6 @@ class AccFlam(BaseRMPModel):
         help_text='The identifying ID for a particular flammable chemical released in an accident.',
     )
 
-    source_file = 'rmp_acc_flam'
-
     @classmethod
     def get_transform_queryset(self):
         m = raw_models.tblS6FlammableMixtureChemicals
@@ -817,8 +815,6 @@ class ToxicsAltRelease(BaseRMPModel):
     )
     ptr_graphic = CopyFromCharField(max_length=12, blank=True)
     cbi_flag = CopyFromBooleanField()
-
-    source_file = 'rmp_alt_tox'
 
     @classmethod
     def get_transform_queryset(self):
@@ -1546,56 +1542,126 @@ class Prevent3Chem(BaseRMPModel):
 
 class ToxicsWorstCase(BaseRMPModel):
     id = CopyFromIntegerField(
-        primary_key=True,
         source_column='toxic_id',
+        primary_key=True,
     )
     procchem = CopyFromForeignKey(
         'ProcChem',
-        on_delete=models.CASCADE,
         source_column='ProcessChemicalID',
+        on_delete=models.CASCADE,
     )
     percent_weight = CopyFromDecimalField(
         max_digits=4,
         decimal_places=1,
         null=True,
     )
-    # percent_weight = CopyFromCharField(max_length=7)
-    physical_state = CopyFromCharField(max_length=1, blank=True)
-    analytical_basis = CopyFromCharField(max_length=255, blank=True)
-    scenario = CopyFromCharField(max_length=1, blank=True)
-    # quantity_lbs = CopyFromDecimalField(max_digits=6, decimal_places=2, blank=True)
-    quantity_lbs = CopyFromCharField(max_length=4, blank=True)
-    # release_duration = CopyFromDecimalField(max_digits=7, decimal_places=2, blank=True)
-    release_duration = CopyFromCharField(max_length=7, blank=True)
-    # release_rate = CopyFromDecimalField(max_digits=4, decimal_places=1, blank=True)
-    release_rate = CopyFromCharField(max_length=7, blank=True)
-    wind_speed = CopyFromDecimalField(max_digits=4, decimal_places=1, blank=True)
-    stability_class = CopyFromCharField(max_length=1, blank=True)
-    topography = CopyFromCharField(max_length=1, blank=True)
-    # endpoint_distance = CopyFromDecimalField(max_digits=5, decimal_places=1)
-    endpoint_distance = CopyFromCharField(max_length=4, blank=True)
-    population = CopyFromCharField(max_length=9, blank=True)
+    physical_state = CopyFromForeignKey(
+        'PhysCd',
+        source_column='PhysicalState',
+        max_length=1,
+        blank=True,
+        on_delete=models.PROTECT,
+    )
+    analytical_basis = CopyFromCharField(
+        max_length=255,
+        blank=True,
+    )
+    scenario = CopyFromForeignKey(
+        'ScenCd',
+        source_column='Scenario',
+        blank=True,
+        on_delete=models.PROTECT,
+    )
+    quantity_lbs = CopyFromDecimalField(
+        source_column='QuantityReleased',
+        max_digits=6,
+        decimal_places=2,
+        blank=True,
+    )
+    release_duration = CopyFromDecimalField(
+        max_digits=7,
+        decimal_places=2,
+        blank=True,
+    )
+    release_rate = CopyFromDecimalField(
+        max_digits=4,
+        decimal_places=1,
+        blank=True,
+    )
+    release_rate = CopyFromCharField(
+        max_length=7,
+        blank=True,
+    )
+    wind_speed = CopyFromDecimalField(
+        max_digits=4,
+        decimal_places=1,
+        blank=True,
+    )
+    stability_class = CopyFromCharField(
+        max_length=1, 
+        blank=True
+    )
+    topography = CopyFromCharField(
+        max_length=1,
+        blank=True,
+    )
+    endpoint_distance = CopyFromDecimalField(
+        max_digits=5,
+        decimal_places=1,
+    )
+    endpoint_distance = CopyFromCharField(
+        source_column='Distance2Endpoint',
+        max_length=4,
+        blank=True,
+    )
+    population = CopyFromCharField(
+        source_column='ResidentialPopulation',
+        max_length=9,
+        blank=True,
+    )
     pr_schools = CopyFromBooleanField()
     pr_residences = CopyFromBooleanField()
     pr_hospitals = CopyFromBooleanField()
     pr_prisons = CopyFromBooleanField()
-    pr_public_rec= CopyFromBooleanField()
+    pr_public_rec= CopyFromBooleanField(
+        source_column='PR_PublicRecreation',
+    )
     pr_comm_ind = CopyFromBooleanField()
-    pr_othertype = CopyFromCharField(max_length=200, blank=True)
-    er_natlstateparks = CopyFromBooleanField()
-    er_wildlifesanct = CopyFromBooleanField()
-    er_fedwilderness = CopyFromBooleanField()
-    er_othertype = CopyFromCharField(max_length=200, blank=True)
+    pr_othertype = CopyFromCharField(
+        source_column='PM_OtherType',
+        max_length=200,
+        blank=True,
+    )
+    er_natlstateparks = CopyFromBooleanField(
+        source_column='ER_NatlStateParks',
+    )
+    er_wildlifesanct = CopyFromBooleanField(
+        source_column='ER_WildlifeSactuary',
+    )
+    er_fedwilderness = CopyFromBooleanField(
+        source_column='ER_FedWilderness',
+    )
+    er_othertype = CopyFromCharField(
+        source_column='ER_OtherType',
+        max_length=200,
+        blank=True,
+    )
     pm_dikes = CopyFromBooleanField()
     pm_enclosures = CopyFromBooleanField()
     pm_berms = CopyFromBooleanField()
     pm_drains = CopyFromBooleanField()
     pm_sumps = CopyFromBooleanField()
-    pm_othertype = CopyFromCharField(max_length=200, blank=True)
-    ptrgraphic = CopyFromCharField(max_length=12, blank=True)
+    pm_othertype = CopyFromCharField(
+        source_column='PM_OtherType',
+        max_length=200,
+        blank=True,
+    )
+    ptrgraphic = CopyFromCharField(
+        source_column='ptrGraphic',
+        max_length=12,
+        blank=True,
+    )
     cbi_flag = CopyFromBooleanField()
-
-    source_file = 'rmp_worst_tox'
 
     @classmethod
     def get_transform_queryset(self):
@@ -1616,28 +1682,65 @@ class FlammablesWorstCase(BaseRMPModel):
         source_column='ProcessChemicalID',
     )
     analytical_basis = CopyFromCharField(max_length=255, blank=True)
-    # quantity_lbs = CopyFromDecimalField(max_digits=6, decimal_places=2, blank=True)
-    # endpoint_distance = CopyFromDecimalField(max_digits=5, decimal_places=1)
-    quantity_lbs = CopyFromCharField(max_length=20, blank=True)
-    endpoint_distance = CopyFromCharField(max_length=20, blank=True)
-    population = CopyFromCharField(max_length=9, blank=True)
+    quantity_lbs = CopyFromDecimalField(
+        source_column='QuantityReleased',
+        max_digits=6,
+        decimal_places=2,
+        null=True,
+    )
+    endpoint_distance = CopyFromDecimalField(
+        source_column='Distance2Endpoint',
+        max_digits=5,
+        decimal_places=1,
+    )
+    population = CopyFromCharField(
+        source_column='ResidentialPopulation',
+        max_length=9,
+        blank=True,
+    )
     pr_schools = CopyFromBooleanField()
     pr_residences = CopyFromBooleanField()
     pr_hospitals = CopyFromBooleanField()
     pr_prisons = CopyFromBooleanField()
-    pr_public_rec = CopyFromBooleanField()
+    pr_public_rec = CopyFromBooleanField(
+        source_column='PR_PublicRecreation',
+    )
     pr_comm_ind = CopyFromBooleanField()
-    pr_othertype = CopyFromCharField(max_length=200, blank=True)
-    er_natlstateparks = CopyFromBooleanField()
-    er_wildlife_sanct = CopyFromBooleanField()
-    er_fedwilderness = CopyFromBooleanField()
-    er_othertype = CopyFromCharField(max_length=200, blank=True)
-    pm_blastwalls = CopyFromBooleanField()
-    pm_othertype = CopyFromCharField(max_length=200, blank=True)
-    ptrgraphic = CopyFromCharField(max_length=12, blank=True)
-    cbi_flag = CopyFromBooleanField()
-
-    source_file = 'rmp_worst_flam'
+    pr_othertype = CopyFromCharField(
+        source_column='PR_OtherType',
+        max_length=200,
+        blank=True,
+    )
+    er_natlstateparks = CopyFromBooleanField(
+        source_column='ER_NatlStateParks',
+    )
+    er_wildlife_sanct = CopyFromBooleanField(
+        source_column='ER_WildlifeSactuary',
+    )
+    er_fedwilderness = CopyFromBooleanField(
+        source_column='ER_FedWilderness',
+    )
+    er_othertype = CopyFromCharField(
+        source_column='ER_OtherType',
+        max_length=200,
+        blank=True,
+    )
+    pm_blastwalls = CopyFromBooleanField(
+        source_column='PM_BlastWalls',
+    )
+    pm_othertype = CopyFromCharField(
+        source_column='PM_OtherType',
+        max_length=200,
+        blank=True,
+    )
+    ptrgraphic = CopyFromCharField(
+        source_column='ptrGraphic',
+        max_length=12,
+        blank=True,
+    )
+    cbi_flag = CopyFromBooleanField(
+        source_column='CBI_Flag',
+    )
 
     @classmethod
     def get_transform_queryset(self):
