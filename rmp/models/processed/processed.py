@@ -1510,21 +1510,6 @@ class EmergencyResponse(BaseRMPModel):
     )
     # erp_review_date = CopyFromDateTimeField(blank=True)
     # erp_training_date = CopyFromDateTimeField(blank=True)
-<<<<<<< HEAD
-    erp_review_date = CopyFromCharField(max_length=10, blank=True)
-    erp_training_date = CopyFromCharField(max_length=10, blank=True)
-    coord_agency= CopyFromCharField(max_length=250, blank=True)
-    coord_phone = CopyFromCharField(max_length=10, blank=True)
-    subto_osha191038 = CopyFromBooleanField()
-    subto_osha191020 = CopyFromBooleanField()
-    subto_cwa112 = CopyFromBooleanField()
-    subto_rcra264= CopyFromBooleanField()
-    subto_opa90 = CopyFromBooleanField()
-    subto_state_epcra = CopyFromBooleanField()
-    subto_other = CopyFromCharField(max_length=200, blank=True)
-
-    source_file = 'rmp_response'
-=======
     erp_review_date = CopyFromCharField(
         source_column='ER_ReviewDate',
         max_length=10,
@@ -1577,7 +1562,6 @@ class EmergencyResponse(BaseRMPModel):
 
         return m.objects.get_default_transform_queryset()
 
->>>>>>> master
 
 class ProcChem(BaseRMPModel):
     procchem_id = CopyFromBigIntegerField(
@@ -1607,7 +1591,6 @@ class ProcChem(BaseRMPModel):
 
     source_file = 'rmp_proc_chem'
 
-<<<<<<< HEAD
     @classmethod
     def get_transform_queryset(self):
         qs = raw_models.tblS1ProcessChemicals.objects.select_related('ChemicalID').annotate(
@@ -1678,13 +1661,6 @@ class ProcChem(BaseRMPModel):
         )
 
         return qs
-=======
-    # @classmethod
-    # def get_transform_queryset(self):
-    #     m = raw_models.tblS1ProcessChemicals
-
-    #     return m.objects.get_default_transform_queryset()
->>>>>>> master
 
 
 class ProcFlam(BaseRMPModel):
@@ -1717,12 +1693,6 @@ class ProcNaics(BaseRMPModel):
     # TODO: Aggregate fields
     num_prevent_2 = CopyFromIntegerField()
     num_prevent_3 = CopyFromIntegerField()
-
-    # @classmethod
-    # def get_transform_queryset(self):
-    #     m = raw_models.tblS1Process_NAICS
-
-    #     return m.objects.get_default_transform_queryset()
 
 
 class Prev2Text(BaseRMPModel):
@@ -1853,7 +1823,7 @@ class ToxicsWorstCase(BaseRMPModel):
         blank=True,
     )
     stability_class = CopyFromCharField(
-        max_length=1, 
+        max_length=1,
         blank=True
     )
     topography = CopyFromCharField(
