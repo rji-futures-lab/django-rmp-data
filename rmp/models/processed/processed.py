@@ -4,7 +4,7 @@ Models for processed RMP data.
 import os
 from django.conf import settings
 from django.db import models
-from django.db.models import F, Max, OuterRef, Subquery
+from django.db.models import F, Max, OuterRef, Subquery, Sum, Count, Case, When, Value
 from rmp.fields import (
     CopyFromBigIntegerField,
     CopyFromBooleanField,
@@ -16,10 +16,10 @@ from rmp.fields import (
     CopyFromIntegerField,
     CopyFromOneToOneField,
     CopyFromTextField,
+    CopyFromFloatField,
 )
 from rmp.models import raw as raw_models
 from rmp.models.base import BaseRMPModel
-
 
 class AccChem(BaseRMPModel):
     id = CopyFromIntegerField(
@@ -75,6 +75,29 @@ class AccChem(BaseRMPModel):
         choices=CHEMICAL_TYPE_CHOICES,
         help_text='"The type of chemical.',
     )
+
+    @classmethod
+    def get_transform_queryset(self):
+        qs = raw_models.tblS6AccidentChemicals.objects.select_related('ChemicalID').annotate(
+            num_acc_flam=Subquery(
+                raw_models.tblS6FlammableMixtureChemicals.objects.filter(
+                    AccidentChemicalID=OuterRef('AccidentChemicalID')
+                ).values('AccidentChemicalID').annotate(
+                    num_acc_flam=Count('AccidentChemicalID')
+                ).values('num_acc_flam')
+            )
+        ).annotate(
+            accchem_id=F('AccidentChemicalID'),
+            accident_id=F('AccidentHistoryID'),
+            chemical_id=F('ChemicalID'),
+            quantity_lbs=F('QuantityReleased'),
+            percent_weight=F('PercentWeight'),
+            num_acc_flam=F('num_acc_flam'),
+            cas=F('ChemicalID__CASNumber'),
+            chemical_type=F('ChemicalID__ChemType'),
+        )
+
+        return qs
 
     source_file = 'rmp_acc_chem'
 
@@ -306,11 +329,120 @@ class Accident(BaseRMPModel):
     property_damage = CopyFromIntegerField()
     env_damage = CopyFromIntegerField()
 
-    # TODO SEE IF THIS WORKS
-
-    def save(self, *args, **kwargs):
-        self.quantity_tot = self.flam_tot + self.toxic_tot
-        super(Accident, self).save(*args, **kwargs)
+    @classmethod
+    def get_transform_queryset(self):
+            qs = raw_models.tblS6AccidentHistory.objects.select_related('FacilityID').select_related('WindSpeedUnitCode').annotate(
+                num_acc_chem=Subquery(
+                    raw_models.tblS6AccidentChemicals.objects.filter(
+                        AccidentHistoryID=OuterRef('AccidentHistoryID')
+                    ).values('AccidentHistoryID').annotate(
+                        num_acc_chem=Count('AccidentHistoryID')
+                    ).values('num_acc_chem')
+                ),
+                flam_total=Subquery(
+                    AccChem.objects.filter(
+                        accident_id=OuterRef('AccidentHistoryID')
+                    ).filter(
+                        chemical_type='F',
+                    ).annotate(
+                        flam_total=Sum('quantity_lbs')
+                    ).values('flam_total')
+                ),
+                toxic_total=Subquery(
+                    AccChem.objects.filter(
+                        accident_id=OuterRef('AccidentHistoryID')
+                    ).filter(
+                        chemical_type='T',
+                    ).annotate(
+                        toxic_total=Sum('quantity_lbs')
+                    ).values('toxic_total')
+                ),
+            ).annotate(
+                num_deaths=F('DeathsWorkers') + F('DeathsPublicResponders') + F('DeathsPublic'),
+                num_injuries=F('InjuriesPublic') + F('InjuriesWorkers') + F('InjuriesPublicResponders'),
+                property_damage=F('OnsitePropertyDamage') + F('OffsitePropertyDamage'),
+                quantity_total=F('flam_total') + F('toxic_total'),
+            ).annotate(
+                accident_id=F('AccidentHistoryID'),
+                rmp_id=F('FacilityID'),
+                accident_date=F('AccidentDate'),
+                accident_time=F('AccidentTime'),
+                naics_code=F('NAICSCode'),
+                release_duration=F('AccidentReleaseDuration'),
+                re_gas=F('RE_Gas'),
+                re_spill=F('RE_Spill'),
+                re_fire=F('RE_Fire'),
+                re_explosion=F('RE_Explosion'),
+                re_reactive_incident=F('RE_ReactiveIncident'),
+                rs_storage_vessel=F('RS_StorageVessel'),
+                rs_piping=F('RS_Piping'),
+                rs_process_vessel=F('RS_ProcessVessel'),
+                rs_transfer_hose=F('RS_TransferHose'),
+                rs_valve=F('RS_Valve'),
+                rs_pump=F('RS_Pump'),
+                rs_joint=F('RS_Joint'),
+                other_release_source=F('OtherReleaseSource'),
+                wind_speed=F('WindSpeed'),
+                wind_speed_unit=F('WindSpeedUnitCode'),
+                wind_direction=F('WindDirection'),
+                temperature=F('Temperature'),
+                stability_class=F('StabilityClass'),
+                precipitation=F('Precipitation'),
+                unknown_weather=F('WeatherUnknown'),
+                deaths_workers=F('DeathsWorkers'),
+                deaths_responders=F('DeathsPublicResponders'),
+                deaths_public=F('DeathsPublic'),
+                injuries_workers=F('InjuriesWorkers'),
+                injuries_responders=F('InjuriesPublicResponders'),
+                injuries_public=F('InjuriesPublic'),
+                onsite_damage=F('OnsitePropertyDamage'),
+                offsite_deaths=F('OffsiteDeaths'),
+                hospitalization=F('Hospitalization'),
+                offsite_medical=F('MedicalTreatment'),
+                offsite_evacuated=F('Evacuated'),
+                offsite_shelter=F('ShelteredInPlace'),
+                offsite_damage=F('OffsitePropertyDamage'),
+                ed_kills=F('ED_Kills'),
+                ed_defoliation=F('ED_MinorDefoliation'),
+                ed_water_contamination=F('ED_WaterContamination'),
+                ed_soil_contamination=F('ED_SoilContamination'),
+                ed_other=F('ED_Other'),
+                initiating_event=F('InitiatingEvent'),
+                cf_equipment_failure=F('CF_EquipmentFailure'),
+                cf_human_error=F('CF_HumanError'),
+                cf_improper_procedure=F('CF_ImproperProcedure'),
+                cf_overpressure=F('CF_Overpressurization'),
+                cf_upset_condition=F('CF_UpsetCondition'),
+                cf_bypass_condition=F('CF_BypassCondition'),
+                cf_maintenance=F('CF_Maintenance'),
+                cf_process_design_failure=F('CF_ProcessDesignFailure'),
+                cf_unsuitable_equipment=F('CF_UnsuitableEquipment'),
+                cf_unusual_weather=F('CF_UnusualWeather'),
+                cf_management_error=F('CF_ManagementError'),
+                cf_other=F('CF_Other'),
+                offsite_responders_notify=F('OffsiteRespondersNotify'),
+                ci_improved_equipment=F('CI_ImprovedEquipment'),
+                ci_revised_maintenance=F('CI_RevisedMaintenance'),
+                ci_revised_training=F('CI_RevisedTraining'),
+                ci_revised_op_procedures=F('CI_RevisedOpProcedures'),
+                ci_new_process_controls=F('CI_NewProcessControls'),
+                ci_new_mitigation_systems=F('CI_NewMitigationSystems'),
+                ci_response_plan=F('CI_RevisedERPlan'),
+                ci_changed_process=F('CI_ChangedProcess'),
+                ci_reduced_inventory=F('CI_ReducedInventory'),
+                ci_none=F('CI_None'),
+                ci_other=F('CI_OtherType'),
+                cbi_flag=F('CBI_Flag'),
+                num_acc_chem=F('num_acc_chem'),
+                flam_total=F('flam_total'),
+                toxic_total=F('toxic_total'),
+                quantity_total=F('quantity_total'),
+                num_deaths=F('num_deaths'),
+                num_injuries=F('num_injuries'),
+                num_evacuated=F('Evacuated'),
+                property_damage=F('property_damage'),
+            )
+            return qs
 
 
 class ExecutiveSummary(BaseRMPModel):
@@ -337,7 +469,7 @@ class ExecutiveSummary(BaseRMPModel):
             rmp_id=F('FacilityID'),
             execsum=F('SummaryText')
         )
-        
+
         return qs
 
 
@@ -475,6 +607,23 @@ class Facility(BaseRMPModel):
     num_injuries = CopyFromIntegerField()
     num_evacuated = CopyFromIntegerField()
     property_damage = CopyFromIntegerField()
+
+    @classmethod
+    def get_transform_queryset(self):
+        qs = raw_models.tblExecutiveSummaries.objects.filter(
+            ESSeqNum=Subquery(
+                raw_models.tblExecutiveSummaries.objects.filter(
+                    FacilityID=OuterRef('FacilityID'),
+                ).values('FacilityID_id').annotate(
+                    max_seqnum=Max('ESSeqNum')
+                ).values('max_seqnum')[:1]
+            )
+        ).annotate(
+            rmp_id=F('FacilityID'),
+            execsum=F('SummaryText')
+        )
+
+        return qs
 
 
 class Registration(BaseRMPModel):
@@ -626,6 +775,23 @@ class Registration(BaseRMPModel):
     num_execsum = CopyFromIntegerField()
     num_exec_sum = CopyFromIntegerField()
 
+    @classmethod
+    def get_transform_queryset(self):
+        qs = raw_models.tblExecutiveSummaries.objects.filter(
+            ESSeqNum=Subquery(
+                raw_models.tblExecutiveSummaries.objects.filter(
+                    FacilityID=OuterRef('FacilityID'),
+                ).values('FacilityID_id').annotate(
+                    max_seqnum=Max('ESSeqNum')
+                ).values('max_seqnum')[:1]
+            )
+        ).annotate(
+            rmp_id=F('FacilityID'),
+            execsum=F('SummaryText')
+        )
+
+        return qs
+
 
 class FlammablesAltRelease(BaseRMPModel):
     flammable_id = CopyFromIntegerField(
@@ -653,7 +819,7 @@ class FlammablesAltRelease(BaseRMPModel):
         source_column="distance2_endpoint",
         max_digits=5,
         decimal_places=1,
-        null=True, 
+        null=True,
     )
     population = CopyFromCharField(
         source_column="residential_population",
@@ -1425,11 +1591,76 @@ class ProcChem(BaseRMPModel):
 
     source_file = 'rmp_proc_chem'
 
-    # @classmethod
-    # def get_transform_queryset(self):
-    #     m = raw_models.tblS1ProcessChemicals
+    @classmethod
+    def get_transform_queryset(self):
+        qs = raw_models.tblS1ProcessChemicals.objects.select_related('ChemicalID').annotate(
+            num_alt_flam=Subquery(
+                raw_models.tblS5FlammablesAltReleases.objects.filter(
+                    ProcessChemicalID=OuterRef('ProcessChemicalID')
+                ).values('ProcessChemicalID').annotate(
+                    num_alt_flam=Count('FlammableID')
+                ).values('num_alt_flam')
+            ),
+            num_alt_tox=Subquery(
+                raw_models.tblS3ToxicsAltReleases.objects.filter(
+                    ProcessChemicalID=OuterRef('ProcessChemicalID')
+                ).values('ProcessChemicalID').annotate(
+                    num_alt_tox=Count('ToxicID')
+                ).values('num_alt_tox')
+            ),
+            num_proc_flam=Subquery(
+                raw_models.tblS1FlammableMixtureChemicals.objects.filter(
+                    ProcessChemicalID=OuterRef('ProcessChemicalID')
+                ).values('ProcessChemicalID').annotate(
+                    num_proc_flam=Count('FlamMixChemID')
+                ).values('num_proc_flam')
+            ),
+            num_worst_flam=Subquery(
+                raw_models.tblS4FlammablesWorstCase.objects.filter(
+                    ProcessChemicalID=OuterRef('ProcessChemicalID')
+                ).values('ProcessChemicalID').annotate(
+                    num_worst_flam=Count('FlammableID')
+                ).values('num_worst_flam')
+            ),
+            num_worst_tox=Subquery(
+                raw_models.tblS2ToxicsWorstCase.objects.filter(
+                    ProcessChemicalID=OuterRef('ProcessChemicalID')
+                ).values('ProcessChemicalID').annotate(
+                    num_worst_tox=Count('ToxicID')
+                ).values('num_worst_tox')
+            ),
+            num_prevent_3_chem=Subquery(
+                raw_models.tblS7PreventionProgramChemicals.objects.filter(
+                    ProcessChemicalID=OuterRef('ProcessChemicalID')
+                ).values('ProcessChemicalID').annotate(
+                    num_prevent_3_chem=Count('PrimaryKey')
+                ).values('num_prevent_3_chem')
+            ),
+            num_prevent_2_chem=Subquery(
+                raw_models.tblS8_Prevention_Program_Chemicals.objects.filter(
+                    ProcessChemicalID=OuterRef('ProcessChemicalID')
+                ).values('ProcessChemicalID').annotate(
+                    num_prevent_2_chem=Count('PrimaryKey')
+                ).values('num_prevent_2_chem')
+            ),
+        ).annotate(
+            procchem_id=F('ProcessChemicalID'),
+            process_id=F('ProcessID'),
+            chemical_id=F('ChemicalID'),
+            quantity_lbs=F('Quantity'),
+            cbi_flag=F('CBI_Flag'),
+            num_alt_flam=F('num_alt_flam'),
+            num_alt_tox=F('num_alt_tox'),
+            num_prevent_2_chem=F('num_prevent_2_chem'),
+            num_prevent_3_chem=F('num_prevent_3_chem'),
+            num_proc_flam=F('num_proc_flam'),
+            num_worst_flam=F('num_worst_flam'),
+            num_worst_tox=F('num_worst_tox'),
+            cas=F('ChemicalID__CASNumber'),
+            chemical_type=F('ChemicalID__ChemType'),
+        )
 
-    #     return m.objects.get_default_transform_queryset()
+        return qs
 
 
 class ProcFlam(BaseRMPModel):
@@ -1462,12 +1693,6 @@ class ProcNaics(BaseRMPModel):
     # TODO: Aggregate fields
     num_prevent_2 = CopyFromIntegerField()
     num_prevent_3 = CopyFromIntegerField()
-
-    # @classmethod
-    # def get_transform_queryset(self):
-    #     m = raw_models.tblS1Process_NAICS
-
-    #     return m.objects.get_default_transform_queryset()
 
 
 class Prev2Text(BaseRMPModel):
@@ -1598,7 +1823,7 @@ class ToxicsWorstCase(BaseRMPModel):
         blank=True,
     )
     stability_class = CopyFromCharField(
-        max_length=1, 
+        max_length=1,
         blank=True
     )
     topography = CopyFromCharField(

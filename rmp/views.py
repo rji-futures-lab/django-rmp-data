@@ -2,8 +2,9 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.db.models import Count, Sum, F, Max, OuterRef, Subquery
 from rmp.models.processed.processed import Facility, ExecutiveSummary, Registration
-from rmp.models.raw.tbl import tblFacility
-from rmp.models.raw.tblS1 import tblS1Facilities
+from rmp.models.raw.tbl import tblFacility, tblExecutiveSummaries
+from rmp.models.raw.tblS1 import tblS1Facilities, tblS1FlammableMixtureChemicals, tblS1ProcessChemicals
+from rmp.models.raw.tblS6 import tblS6AccidentChemicals, tblS6AccidentHistory
 
 # from .forms import facility_search
 
@@ -40,23 +41,6 @@ def accident(request):
     prop_damage_list = Facility.objects.filter(deregistration_yn='n').order_by('-property_damage')[:20]
     context = {'facility_list': facility_list, 'evacuated_list': evacuated_list, 'prop_damage_list': prop_damage_list}
     return render(request, 'rmp/accident_list.html', context)
-
-def test(request):
-    # test = tblS1Facilities.objects.select_related('EPAFacilityID').values('EPAFacilityID').annotate(num_registrations=Count('EPAFacilityID'))[:5]
-    test = tblFacility.objects.select_related('FacilityID')[:5]
-
-    # sub = Subquery(
-    #     tblS1Facilities.objects.filter(
-    #         EPAFacilityID=OuterRef('EPAFacilityID'),
-    #     ).values('EPAFacilityID').annotate(
-    #         num_registrations=Count('EPAFacilityID')
-    #     )
-    # )
-
-    # tblS1Facilities.objects.select_related('EPAFacilityID').values('EPAFacilityID').annotate(num_registrations=Count('EPAFacilityID'))
-    # test = tblS1Facilities.objects.select_related('EPAFacilityID').annotate(num_registrations=sub)[:5]
-    context = {'test': test}
-    return render(request, 'rmp/test.html', context)
 
 def state_accidents(request):
     state_list = Facility.objects.values('state') \

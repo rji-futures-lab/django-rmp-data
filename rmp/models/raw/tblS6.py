@@ -42,7 +42,7 @@ class tblS6AccidentHistory(BaseRMPModel):
         primary_key=True,
     )
     FacilityID = CopyFromForeignKey(
-        'Tbls1Facilities',
+        'TblS1Facilities',
         db_column='FacilityID',
         on_delete=models.PROTECT,
     )
@@ -168,6 +168,7 @@ class tblS6AccidentHistory(BaseRMPModel):
     )
     InitiatingEvent = CopyFromForeignKey(
         'tlkpS6InitiatingEvents',
+        db_column='InitiatingEvent',
         on_delete=models.PROTECT,
         blank=True,
     )
