@@ -38,8 +38,8 @@ class tblS8PreventionProgram2(BaseRMPModel):
     )
     Process_NAICS_ID = CopyFromForeignKey(
         'tblS1Process_NAICS',
-        db_column='Process_NAICS_ID',
         on_delete=models.PROTECT,
+        db_column='Process_NAICS_ID',
     )
     SafetyReviewDate = CopyFromDateTimeField(
         null=True,
@@ -247,7 +247,7 @@ class tblS8PreventionProgram2(BaseRMPModel):
     IncidentInvestigationDate = CopyFromDateTimeField(
         null=True,
     )
-    investigationchangedate = CopyFromDateTimeField(
+    InvestigationChangeDate = CopyFromDateTimeField(
         null=True,
     )
     MostRecentChangeDate = CopyFromDateTimeField(

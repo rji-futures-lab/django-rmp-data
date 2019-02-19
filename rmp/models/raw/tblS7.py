@@ -13,7 +13,7 @@ from rmp.fields import (
 from rmp.models.base import BaseRMPModel
 
 
-class tblS7PreventionProgramChemicals(BaseRMPModel):
+class tblS7_Prevention_Program_Chemicals(BaseRMPModel):
     PrimaryKey = CopyFromIntegerField(
         primary_key=True,
         verbose_name='Primary Key',
@@ -40,14 +40,12 @@ class tblS7PreventionProgramChemicals(BaseRMPModel):
                   'RMP*Submit and 3rd-party programs.'
     )
 
-    source_file = 'tblS7_Prevention_Program_Chemicals'
-
     class Meta:
         verbose_name = 'Prevention Program: Program Level 3 Chemical'
         verbose_name_plural = 'Prevention Program: Program Level 3 Chemical'
 
 
-class tblS7PreventionProgramChemicalsChangeHistory(BaseRMPModel):
+class tblS7_Prevention_Program_Chemicals_ChangeHistory(BaseRMPModel):
     PP3ChemChangeHistoryID = CopyFromIntegerField(
         primary_key=True,
         verbose_name='PP3 Chemical Change History ID',
@@ -60,7 +58,7 @@ class tblS7PreventionProgramChemicalsChangeHistory(BaseRMPModel):
         verbose_name='CDX Correction Code',
     )
     PP3ChemID = CopyFromForeignKey(
-        'tblS7PreventionProgramChemicals',
+        'tblS7_Prevention_Program_Chemicals',
         db_column='PP3ChemID',
         on_delete=models.PROTECT,
         verbose_name='Prevention Program Chemical ID',
@@ -89,8 +87,6 @@ class tblS7PreventionProgramChemicalsChangeHistory(BaseRMPModel):
         on_delete=models.PROTECT,
         verbose_name='NAICS Code',
     )
-
-    source_file = 'tblS7_Prevention_Program_Chemicals_ChangeHistory'
 
 
 class tblS7PreventionProgram3(BaseRMPModel):
