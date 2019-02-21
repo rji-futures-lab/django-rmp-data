@@ -119,7 +119,7 @@ class ProcChem(BaseRMPModel):
                 ).values('num_worst_tox')
             ),
             num_prevent_3_chem=Subquery(
-                raw_models.tblS7PreventionProgramChemicals.objects.filter(
+                raw_models.tblS7_Prevention_Program_Chemicals.objects.filter(
                     ProcessChemicalID=OuterRef('ProcessChemicalID')
                 ).values('ProcessChemicalID').annotate(
                     num_prevent_3_chem=Count('PrimaryKey')

@@ -1,10 +1,18 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.db.models import Count, Sum, F, Max, OuterRef, Subquery
-from rmp.models.processed.processed import Facility, ExecutiveSummary, Registration
-from rmp.models.raw.tbl import tblFacility, tblExecutiveSummaries
-from rmp.models.raw.tblS1 import tblS1Facilities, tblS1FlammableMixtureChemicals, tblS1ProcessChemicals
-from rmp.models.raw.tblS6 import tblS6AccidentChemicals, tblS6AccidentHistory
+from rmp.models import (
+    ExecutiveSummary,
+    Facility,
+    Registration,
+    tblExecutiveSummaries,
+    tblFacility,
+    tblS1Facilities,
+    tblS1FlammableMixtureChemicals,
+    tblS1ProcessChemicals,
+    tblS6AccidentChemicals,
+    tblS6AccidentHistory,
+)
 
 # from .forms import facility_search
 

@@ -112,22 +112,22 @@ class Facility(BaseRMPModel):
     num_evacuated = CopyFromIntegerField()
     property_damage = CopyFromIntegerField()
 
-    @classmethod
-    def get_transform_queryset(self):
-        qs = raw_models.tblExecutiveSummaries.objects.filter(
-            ESSeqNum=Subquery(
-                raw_models.tblExecutiveSummaries.objects.filter(
-                    FacilityID=OuterRef('FacilityID'),
-                ).values('FacilityID_id').annotate(
-                    max_seqnum=Max('ESSeqNum')
-                ).values('max_seqnum')[:1]
-            )
-        ).annotate(
-            rmp_id=F('FacilityID'),
-            execsum=F('SummaryText')
-        )
+    # @classmethod
+    # def get_transform_queryset(self):
+    #     qs = raw_models.tblExecutiveSummaries.objects.filter(
+    #         ESSeqNum=Subquery(
+    #             raw_models.tblExecutiveSummaries.objects.filter(
+    #                 FacilityID=OuterRef('FacilityID'),
+    #             ).values('FacilityID_id').annotate(
+    #                 max_seqnum=Max('ESSeqNum')
+    #             ).values('max_seqnum')[:1]
+    #         )
+    #     ).annotate(
+    #         rmp_id=F('FacilityID'),
+    #         execsum=F('SummaryText')
+    #     )
 
-        return qs
+    #     return qs
 
 
 class Registration(BaseRMPModel):
@@ -280,19 +280,19 @@ class Registration(BaseRMPModel):
     num_execsum = CopyFromIntegerField()
     num_exec_sum = CopyFromIntegerField()
 
-    @classmethod
-    def get_transform_queryset(self):
-        qs = raw_models.tblExecutiveSummaries.objects.filter(
-            ESSeqNum=Subquery(
-                raw_models.tblExecutiveSummaries.objects.filter(
-                    FacilityID=OuterRef('FacilityID'),
-                ).values('FacilityID_id').annotate(
-                    max_seqnum=Max('ESSeqNum')
-                ).values('max_seqnum')[:1]
-            )
-        ).annotate(
-            rmp_id=F('FacilityID'),
-            execsum=F('SummaryText')
-        )
+    # @classmethod
+    # def get_transform_queryset(self):
+    #     qs = raw_models.tblExecutiveSummaries.objects.filter(
+    #         ESSeqNum=Subquery(
+    #             raw_models.tblExecutiveSummaries.objects.filter(
+    #                 FacilityID=OuterRef('FacilityID'),
+    #             ).values('FacilityID_id').annotate(
+    #                 max_seqnum=Max('ESSeqNum')
+    #             ).values('max_seqnum')[:1]
+    #         )
+    #     ).annotate(
+    #         rmp_id=F('FacilityID'),
+    #         execsum=F('SummaryText')
+    #     )
 
-        return qs
+    #     return qs
