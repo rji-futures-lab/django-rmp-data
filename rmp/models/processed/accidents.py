@@ -5,6 +5,7 @@ import os
 from django.conf import settings
 from django.db import models
 from django.db.models import F, Max, OuterRef, Subquery, Sum, Count, Case, When, Value
+from django.db.models.functions import Coalesce
 from rmp.fields import (
     CopyFromBigIntegerField,
     CopyFromBooleanField,
@@ -281,117 +282,125 @@ class Accident(BaseRMPModel):
     num_evacuated = CopyFromIntegerField()
     property_damage = CopyFromIntegerField()
 
-    # @classmethod
-    # def get_transform_queryset(self):
-    #     qs = raw_models.tblS6AccidentHistory.objects.select_related('FacilityID').select_related('WindSpeedUnitCode').annotate(
-    #         num_acc_chem=Subquery(
-    #             raw_models.tblS6AccidentChemicals.objects.filter(
-    #                 AccidentHistoryID=OuterRef('AccidentHistoryID')
-    #             ).values('AccidentHistoryID').annotate(
-    #                 num_acc_chem=Count('AccidentHistoryID')
-    #             ).values('num_acc_chem')
-    #         ),
-    #         flam_total=Subquery(
-    #             AccChem.objects.filter(
-    #                 accident_id=OuterRef('AccidentHistoryID')
-    #             ).filter(
-    #                 chemical_type='F',
-    #             ).annotate(
-    #                 flam_total=Sum('quantity_lbs')
-    #             ).values('flam_total')
-    #         ),
-    #         toxic_total=Subquery(
-    #             AccChem.objects.filter(
-    #                 accident_id=OuterRef('AccidentHistoryID')
-    #             ).filter(
-    #                 chemical_type='T',
-    #             ).annotate(
-    #                 toxic_total=Sum('quantity_lbs')
-    #             ).values('toxic_total')
-    #         ),
-    #     ).annotate(
-    #         num_deaths=F('DeathsWorkers') + F('DeathsPublicResponders') + F('DeathsPublic'),
-    #         num_injuries=F('InjuriesPublic') + F('InjuriesWorkers') + F('InjuriesPublicResponders'),
-    #         property_damage=F('OnsitePropertyDamage') + F('OffsitePropertyDamage'),
-    #         quantity_total=F('flam_total') + F('toxic_total'),
-    #     ).annotate(
-    #         accident_id=F('AccidentHistoryID'),
-    #         rmp_id=F('FacilityID'),
-    #         accident_date=F('AccidentDate'),
-    #         accident_time=F('AccidentTime'),
-    #         naics_code=F('NAICSCode'),
-    #         release_duration=F('AccidentReleaseDuration'),
-    #         re_gas=F('RE_Gas'),
-    #         re_spill=F('RE_Spill'),
-    #         re_fire=F('RE_Fire'),
-    #         re_explosion=F('RE_Explosion'),
-    #         re_reactive_incident=F('RE_ReactiveIncident'),
-    #         rs_storage_vessel=F('RS_StorageVessel'),
-    #         rs_piping=F('RS_Piping'),
-    #         rs_process_vessel=F('RS_ProcessVessel'),
-    #         rs_transfer_hose=F('RS_TransferHose'),
-    #         rs_valve=F('RS_Valve'),
-    #         rs_pump=F('RS_Pump'),
-    #         rs_joint=F('RS_Joint'),
-    #         other_release_source=F('OtherReleaseSource'),
-    #         wind_speed=F('WindSpeed'),
-    #         wind_speed_unit=F('WindSpeedUnitCode'),
-    #         wind_direction=F('WindDirection'),
-    #         temperature=F('Temperature'),
-    #         stability_class=F('StabilityClass'),
-    #         precipitation=F('Precipitation'),
-    #         unknown_weather=F('WeatherUnknown'),
-    #         deaths_workers=F('DeathsWorkers'),
-    #         deaths_responders=F('DeathsPublicResponders'),
-    #         deaths_public=F('DeathsPublic'),
-    #         injuries_workers=F('InjuriesWorkers'),
-    #         injuries_responders=F('InjuriesPublicResponders'),
-    #         injuries_public=F('InjuriesPublic'),
-    #         onsite_damage=F('OnsitePropertyDamage'),
-    #         offsite_deaths=F('OffsiteDeaths'),
-    #         hospitalization=F('Hospitalization'),
-    #         offsite_medical=F('MedicalTreatment'),
-    #         offsite_evacuated=F('Evacuated'),
-    #         offsite_shelter=F('ShelteredInPlace'),
-    #         offsite_damage=F('OffsitePropertyDamage'),
-    #         ed_kills=F('ED_Kills'),
-    #         ed_defoliation=F('ED_MinorDefoliation'),
-    #         ed_water_contamination=F('ED_WaterContamination'),
-    #         ed_soil_contamination=F('ED_SoilContamination'),
-    #         ed_other=F('ED_Other'),
-    #         initiating_event=F('InitiatingEvent'),
-    #         cf_equipment_failure=F('CF_EquipmentFailure'),
-    #         cf_human_error=F('CF_HumanError'),
-    #         cf_improper_procedure=F('CF_ImproperProcedure'),
-    #         cf_overpressure=F('CF_Overpressurization'),
-    #         cf_upset_condition=F('CF_UpsetCondition'),
-    #         cf_bypass_condition=F('CF_BypassCondition'),
-    #         cf_maintenance=F('CF_Maintenance'),
-    #         cf_process_design_failure=F('CF_ProcessDesignFailure'),
-    #         cf_unsuitable_equipment=F('CF_UnsuitableEquipment'),
-    #         cf_unusual_weather=F('CF_UnusualWeather'),
-    #         cf_management_error=F('CF_ManagementError'),
-    #         cf_other=F('CF_Other'),
-    #         offsite_responders_notify=F('OffsiteRespondersNotify'),
-    #         ci_improved_equipment=F('CI_ImprovedEquipment'),
-    #         ci_revised_maintenance=F('CI_RevisedMaintenance'),
-    #         ci_revised_training=F('CI_RevisedTraining'),
-    #         ci_revised_op_procedures=F('CI_RevisedOpProcedures'),
-    #         ci_new_process_controls=F('CI_NewProcessControls'),
-    #         ci_new_mitigation_systems=F('CI_NewMitigationSystems'),
-    #         ci_response_plan=F('CI_RevisedERPlan'),
-    #         ci_changed_process=F('CI_ChangedProcess'),
-    #         ci_reduced_inventory=F('CI_ReducedInventory'),
-    #         ci_none=F('CI_None'),
-    #         ci_other=F('CI_OtherType'),
-    #         cbi_flag=F('CBI_Flag'),
-    #         num_acc_chem=F('num_acc_chem'),
-    #         flam_total=F('flam_total'),
-    #         toxic_total=F('toxic_total'),
-    #         quantity_total=F('quantity_total'),
-    #         num_deaths=F('num_deaths'),
-    #         num_injuries=F('num_injuries'),
-    #         num_evacuated=F('Evacuated'),
-    #         property_damage=F('property_damage'),
-    #     )
-    #     return qs
+    @classmethod
+    def get_transform_queryset(self):
+        qs = raw_models.tblS6AccidentHistory.objects.select_related('FacilityID').select_related('WindSpeedUnitCode').annotate(
+            num_acc_chem=Subquery(
+                raw_models.tblS6AccidentChemicals.objects.filter(
+                    AccidentHistoryID=OuterRef('AccidentHistoryID')
+                ).values('AccidentHistoryID').annotate(
+                    num_acc_chem=Count('AccidentHistoryID')
+                ).values('num_acc_chem')
+            ),
+            flam_total=Subquery(
+                processed_models.AccChem.objects.filter(
+                    accident_id=OuterRef('AccidentHistoryID')
+                ).values('accident_id').filter(
+                    chemical_type='F',
+                ).exclude(
+                    quantity_lbs__isnull=True,
+                ).annotate(
+                    flam_total=Coalesce(Sum('quantity_lbs'), 0),
+                ).values('flam_total'),
+                output_field=CopyFromIntegerField(),
+                default=0,
+            ),
+            toxic_total=Subquery(
+                processed_models.AccChem.objects.filter(
+                    accident_id=OuterRef('AccidentHistoryID')
+                ).values('accident_id').exclude(
+                    quantity_lbs__isnull=True,
+                ).filter(
+                    chemical_type='T',
+                ).annotate(
+                    toxic_total=Coalesce(Sum('quantity_lbs'), 0),
+                ).values('toxic_total'),
+                output_field=CopyFromIntegerField(),
+                default=0,
+            ),
+        ).annotate(
+            num_deaths=F('DeathsWorkers') + F('DeathsPublicResponders') + F('DeathsPublic'),
+            num_injuries=F('InjuriesPublic') + F('InjuriesWorkers') + F('InjuriesPublicResponders'),
+            property_damage=F('OnsitePropertyDamage') + F('OffsitePropertyDamage'),
+            quantity_total=F('flam_total') + F('toxic_total'),
+        ).annotate(
+            accident_id=F('AccidentHistoryID'),
+            rmp_id=F('FacilityID'),
+            accident_date=F('AccidentDate'),
+            accident_time=F('AccidentTime'),
+            naics_code=F('NAICSCode'),
+            release_duration=F('AccidentReleaseDuration'),
+            re_gas=F('RE_Gas'),
+            re_spill=F('RE_Spill'),
+            re_fire=F('RE_Fire'),
+            re_explosion=F('RE_Explosion'),
+            re_reactive_incident=F('RE_ReactiveIncident'),
+            rs_storage_vessel=F('RS_StorageVessel'),
+            rs_piping=F('RS_Piping'),
+            rs_process_vessel=F('RS_ProcessVessel'),
+            rs_transfer_hose=F('RS_TransferHose'),
+            rs_valve=F('RS_Valve'),
+            rs_pump=F('RS_Pump'),
+            rs_joint=F('RS_Joint'),
+            other_release_source=F('OtherReleaseSource'),
+            wind_speed=F('WindSpeed'),
+            wind_speed_unit=F('WindSpeedUnitCode'),
+            wind_direction=F('WindDirection'),
+            temperature=F('Temperature'),
+            stability_class=F('StabilityClass'),
+            precipitation=F('Precipitation'),
+            unknown_weather=F('WeatherUnknown'),
+            deaths_workers=F('DeathsWorkers'),
+            deaths_responders=F('DeathsPublicResponders'),
+            deaths_public=F('DeathsPublic'),
+            injuries_workers=F('InjuriesWorkers'),
+            injuries_responders=F('InjuriesPublicResponders'),
+            injuries_public=F('InjuriesPublic'),
+            onsite_damage=F('OnsitePropertyDamage'),
+            offsite_deaths=F('OffsiteDeaths'),
+            hospitalization=F('Hospitalization'),
+            offsite_medical=F('MedicalTreatment'),
+            offsite_evacuated=F('Evacuated'),
+            offsite_shelter=F('ShelteredInPlace'),
+            offsite_damage=F('OffsitePropertyDamage'),
+            ed_kills=F('ED_Kills'),
+            ed_defoliation=F('ED_MinorDefoliation'),
+            ed_water_contamination=F('ED_WaterContamination'),
+            ed_soil_contamination=F('ED_SoilContamination'),
+            ed_other=F('ED_Other'),
+            initiating_event=F('InitiatingEvent'),
+            cf_equipment_failure=F('CF_EquipmentFailure'),
+            cf_human_error=F('CF_HumanError'),
+            cf_improper_procedure=F('CF_ImproperProcedure'),
+            cf_overpressure=F('CF_Overpressurization'),
+            cf_upset_condition=F('CF_UpsetCondition'),
+            cf_bypass_condition=F('CF_BypassCondition'),
+            cf_maintenance=F('CF_Maintenance'),
+            cf_process_design_failure=F('CF_ProcessDesignFailure'),
+            cf_unsuitable_equipment=F('CF_UnsuitableEquipment'),
+            cf_unusual_weather=F('CF_UnusualWeather'),
+            cf_management_error=F('CF_ManagementError'),
+            cf_other=F('CF_Other'),
+            offsite_responders_notify=F('OffsiteRespondersNotify'),
+            ci_improved_equipment=F('CI_ImprovedEquipment'),
+            ci_revised_maintenance=F('CI_RevisedMaintenance'),
+            ci_revised_training=F('CI_RevisedTraining'),
+            ci_revised_op_procedures=F('CI_RevisedOpProcedures'),
+            ci_new_process_controls=F('CI_NewProcessControls'),
+            ci_new_mitigation_systems=F('CI_NewMitigationSystems'),
+            ci_response_plan=F('CI_RevisedERPlan'),
+            ci_changed_process=F('CI_ChangedProcess'),
+            ci_reduced_inventory=F('CI_ReducedInventory'),
+            ci_none=F('CI_None'),
+            ci_other=F('CI_OtherType'),
+            cbi_flag=F('CBI_Flag'),
+            num_acc_chem=F('num_acc_chem'),
+            flam_total=F('flam_total'),
+            toxic_total=F('toxic_total'),
+            quantity_total=F('quantity_total'),
+            num_deaths=F('num_deaths'),
+            num_injuries=F('num_injuries'),
+            num_evacuated=F('Evacuated'),
+            property_damage=F('property_damage'),
+        )
+        return qs
