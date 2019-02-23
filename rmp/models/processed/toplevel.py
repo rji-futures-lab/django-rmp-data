@@ -100,7 +100,7 @@ class Facility(BaseRMPModel):
     sortid_1 = CopyFromCharField(max_length=5)
     sortid_2 = CopyFromCharField(max_length=5)
     sortid_3 = CopyFromCharField(max_length=5)
-    deregistration_yn = CopyFromCharField(max_length=1, blank=True)
+    registered = CopyFromBooleanField(default=True)
     num_fte = CopyFromIntegerField(null=True)
     # TODO AGGREGATE
     num_accident = CopyFromIntegerField()
@@ -128,6 +128,13 @@ class Facility(BaseRMPModel):
     #     )
 
     #     return qs
+
+    class Meta:
+        indexes = [
+            models.Index(fields=['registered', '-num_deaths']),
+            models.Index(fields=['registered', '-num_evacuated']),
+            models.Index(fields=['registered', '-property_damage']),
+        ]
 
 
 class Registration(BaseRMPModel):

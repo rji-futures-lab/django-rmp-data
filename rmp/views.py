@@ -44,15 +44,15 @@ def brs(request):
     return render(request, 'rmp/brs.html')
 
 def accident(request):
-    facility_list = Facility.objects.filter(deregistration_yn='n').order_by('-num_deaths')[:20]
-    evacuated_list = Facility.objects.filter(deregistration_yn='n').order_by('-num_evacuated')[:20]
-    prop_damage_list = Facility.objects.filter(deregistration_yn='n').order_by('-property_damage')[:20]
+    facility_list = Facility.objects.filter(registered=True).order_by('-num_deaths')[:20]
+    evacuated_list = Facility.objects.filter(registered=True).order_by('-num_evacuated')[:20]
+    prop_damage_list = Facility.objects.filter(registered=True).order_by('-property_damage')[:20]
     context = {'facility_list': facility_list, 'evacuated_list': evacuated_list, 'prop_damage_list': prop_damage_list}
     return render(request, 'rmp/accident_list.html', context)
 
 def state_accidents(request):
     state_list = Facility.objects.values('state') \
-                         .filter(deregistration_yn='n') \
+                         .filter(registered=True) \
                          .annotate(count=Count('id')) \
                          .annotate(num_accidents=Sum('num_accident')) \
                          .annotate(num_deaths=Sum('num_deaths')) \
