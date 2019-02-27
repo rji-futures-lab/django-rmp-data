@@ -301,8 +301,6 @@ class EmergencyResponse(BaseRMPModel):
     source_file = 'rmp_response'
 
 
-
-
 class ProcNaics(BaseRMPModel):
     id = CopyFromIntegerField(
         primary_key=True,

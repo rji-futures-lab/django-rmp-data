@@ -22,6 +22,7 @@ from rmp.models import raw as raw_models
 from rmp.models import processed as processed_models
 from rmp.models.base import BaseRMPModel
 
+
 class Facility(BaseRMPModel):
     id = CopyFromBigIntegerField(
         primary_key=True,
@@ -303,3 +304,32 @@ class Registration(BaseRMPModel):
     #     )
 
     #     return qs
+
+
+class State(BaseRMPModel):
+    code = CopyFromCharField(
+        max_length=2,
+        unique=True,
+    )
+    total_facilities = CopyFromIntegerField() 
+    total_accidents = CopyFromIntegerField() 
+    total_deaths = CopyFromIntegerField() 
+    total_injuries = CopyFromIntegerField() 
+    total_evacuated = CopyFromIntegerField() 
+    total_property_damage = CopyFromIntegerField() 
+
+    @classmethod
+    def get_transform_queryset(self):
+        qs = Facility.objects.filter(registered=True).values(
+                'state'
+            ).annotate(
+            code=F('state'),
+            total_facilities=Count('id'),
+            total_accidents=Sum('num_accident'),
+            total_deaths=Sum('num_deaths'),
+            total_injuries=Sum('num_injuries'),
+            total_evacuated=Sum('num_evacuated'),
+            total_property_damage=Sum('property_damage'),
+        ).order_by('state')
+
+        return qs

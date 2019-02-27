@@ -22,6 +22,7 @@ from rmp.models import raw as raw_models
 from rmp.models import processed as processed_models
 from rmp.models.base import BaseRMPModel
 
+
 class ExecutiveSummary(BaseRMPModel):
     id = CopyFromIntegerField(
         primary_key=True,
