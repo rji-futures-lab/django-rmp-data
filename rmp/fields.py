@@ -3,6 +3,7 @@ Customized Django model field subclasses
 """
 from django.db import models
 from django.db.models import fields
+from django.db.models.fields.related import ManyToManyField
 
 
 class CopyFromFieldMixin(fields.Field):
@@ -107,5 +108,11 @@ class CopyFromTextField(fields.TextField, CopyFromFieldMixin):
 class CopyFromURLField(fields.URLField, CopyFromFieldMixin):
     """
     URLField subclass with attrs related to COPY FROM command.
+    """
+    pass
+
+class CopyFromManyToManyField(ManyToManyField, CopyFromFieldMixin):
+    """
+    ManyToManyField subclass with attrs related to COPY FROM command.
     """
     pass

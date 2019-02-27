@@ -18,6 +18,7 @@ from rmp.fields import (
     CopyFromOneToOneField,
     CopyFromTextField,
     CopyFromFloatField,
+    CopyFromManyToManyField,
 )
 from rmp.models import raw as raw_models
 from rmp.models import processed as processed_models
@@ -78,14 +79,23 @@ class AccChem(BaseRMPModel):
 
     @classmethod
     def get_transform_queryset(self):
+
         qs = raw_models.tblS6AccidentChemicals.objects.select_related('ChemicalID').annotate(
+            # num_acc_flam=Subquery(
+            #     # raw_models.tblS6FlammableMixtureChemicals.objects.select_related('AccidentChemicalID').values('AccidentChemicalID').annotate(
+            #     #     num_acc_flam=Count('AccidentChemicalID')
+            #     # ),
+            #     # # .values('AccidentChemicalID').annotate(
+            #     # #     num_acc_flam=Count('AccidentChemicalID'),
+            #     # # ).values('num_acc_flam'),
+            #     # output_field=CopyFromIntegerField(),
+            # ),
             num_acc_flam=Subquery(
-                raw_models.tblS6FlammableMixtureChemicals.objects.filter(
-                    AccidentChemicalID=OuterRef('AccidentChemicalID')
-                ).values('AccidentChemicalID').annotate(
-                    num_acc_flam=Count('AccidentChemicalID')
-                ).values('num_acc_flam')
-            )
+                raw_models.tblS6FlammableMixtureChemicals.objects.filter(AccidentChemicalID=OuterRef('AccidentChemicalID')).values('AccidentChemicalID').annotate(
+                    num_acc_flam=Count('FlamMixChemID'),
+                ).values('FlamMixChemID'),
+                output_field=CopyFromIntegerField(null=False),
+            ),
         ).annotate(
             accchem_id=F('AccidentChemicalID'),
             accident_id=F('AccidentHistoryID'),
@@ -96,7 +106,7 @@ class AccChem(BaseRMPModel):
             cas=F('ChemicalID__CASNumber'),
             chemical_type=F('ChemicalID__ChemType'),
         )
-
+        print(qs.query)
         return qs
 
     source_file = 'rmp_acc_chem'
@@ -189,21 +199,22 @@ class Accident(BaseRMPModel):
     precipitation = CopyFromBooleanField(
     )
     unknown_weather = CopyFromBooleanField()
-    deaths_workers = CopyFromIntegerField()
-    deaths_responders = CopyFromIntegerField()
-    deaths_public = CopyFromIntegerField()
-    injuries_workers = CopyFromIntegerField()
-    injuries_responders = CopyFromIntegerField(
+    deaths_workers = CopyFromIntegerField(null=True)
+    deaths_responders = CopyFromIntegerField(null=True)
+    deaths_public = CopyFromIntegerField(null=True)
+    injuries_workers = CopyFromIntegerField(null=True)
+    injuries_responders = CopyFromIntegerField(null=True
     )
-    injuries_public = CopyFromIntegerField()
-    onsite_damage = CopyFromIntegerField()
-    offsite_deaths = CopyFromBooleanField()
+    injuries_public = CopyFromIntegerField(null=True)
+    onsite_damage = CopyFromIntegerField(null=True)
+    offsite_deaths = CopyFromBooleanField(null=True)
     hospitalization = CopyFromIntegerField(
+        null=True,
     )
-    offsite_medical = CopyFromIntegerField()
-    offsite_evacuated = CopyFromIntegerField()
-    offsite_shelter = CopyFromIntegerField()
-    offsite_damage = CopyFromIntegerField()
+    offsite_medical = CopyFromIntegerField(null=True,)
+    offsite_evacuated = CopyFromIntegerField(null=True)
+    offsite_shelter = CopyFromIntegerField(null=True)
+    offsite_damage = CopyFromIntegerField(null=True)
     ed_kills = CopyFromBooleanField()
     ed_defoliation = CopyFromBooleanField()
     ed_water_contamination = CopyFromBooleanField(
@@ -270,17 +281,14 @@ class Accident(BaseRMPModel):
 
     #TODO TURN BELOW INTO AGGREGATE
 
-    num_acc_chem = CopyFromIntegerField()
-    flam_total = CopyFromIntegerField(
-    )
-    toxic_total = CopyFromIntegerField(
-    )
-    quantity_total = CopyFromIntegerField(
-    )
-    num_deaths = CopyFromIntegerField()
-    num_injuries = CopyFromIntegerField()
-    num_evacuated = CopyFromIntegerField()
-    property_damage = CopyFromIntegerField()
+    num_acc_chem = CopyFromIntegerField(null=True)
+    flam_total = CopyFromIntegerField(null=True,)
+    toxic_total = CopyFromIntegerField(null=True)
+    quantity_total = CopyFromIntegerField(null=True)
+    num_deaths = CopyFromIntegerField(null=True)
+    num_injuries = CopyFromIntegerField(null=True)
+    num_evacuated = CopyFromIntegerField(null=True)
+    property_damage = CopyFromIntegerField(null=True)
 
     @classmethod
     def get_transform_queryset(self):
@@ -297,26 +305,22 @@ class Accident(BaseRMPModel):
                     accident_id=OuterRef('AccidentHistoryID')
                 ).values('accident_id').filter(
                     chemical_type='F',
-                ).exclude(
-                    quantity_lbs__isnull=True,
                 ).annotate(
-                    flam_total=Coalesce(Sum('quantity_lbs'), 0),
+                    flam_total=Coalesce(Sum('quantity_lbs'), Value(0)),
                 ).values('flam_total'),
                 output_field=CopyFromIntegerField(),
-                default=0,
+                default=Value(0),
             ),
             toxic_total=Subquery(
                 processed_models.AccChem.objects.filter(
                     accident_id=OuterRef('AccidentHistoryID')
-                ).values('accident_id').exclude(
-                    quantity_lbs__isnull=True,
-                ).filter(
+                ).values('accident_id').filter(
                     chemical_type='T',
                 ).annotate(
-                    toxic_total=Coalesce(Sum('quantity_lbs'), 0),
+                    toxic_total=Coalesce(Sum('quantity_lbs'), Value(0)),
                 ).values('toxic_total'),
                 output_field=CopyFromIntegerField(),
-                default=0,
+                default=Value(0),
             ),
         ).annotate(
             num_deaths=F('DeathsWorkers') + F('DeathsPublicResponders') + F('DeathsPublic'),

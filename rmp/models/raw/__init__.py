@@ -60,7 +60,7 @@ __all__ = (
     'tblS1FlammableMixtureChemicals',
     'tblS1ProcessChemicals',
     'tblS1Process_NAICS',
-    'TblS1Processes',
+    'tblS1Processes',
     'tblS2ToxicsWorstCase',
     'tblS3ToxicsAltReleases',
     'tblS4FlammablesWorstCase',

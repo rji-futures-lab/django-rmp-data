@@ -103,14 +103,14 @@ class Facility(BaseRMPModel):
     registered = CopyFromBooleanField(default=True)
     num_fte = CopyFromIntegerField(null=True)
     # TODO AGGREGATE
-    num_accident = CopyFromIntegerField()
-    acc_flam_tot = CopyFromIntegerField()
-    acc_toxic_tot = CopyFromIntegerField()
-    acc_quantity_tot = CopyFromIntegerField()
-    num_deaths = CopyFromIntegerField()
-    num_injuries = CopyFromIntegerField()
-    num_evacuated = CopyFromIntegerField()
-    property_damage = CopyFromIntegerField()
+    num_accident = CopyFromIntegerField(null=True)
+    acc_flam_tot = CopyFromIntegerField(null=True)
+    acc_toxic_tot = CopyFromIntegerField(null=True)
+    acc_quantity_tot = CopyFromIntegerField(null=True)
+    num_deaths = CopyFromIntegerField(null=True)
+    num_injuries = CopyFromIntegerField(null=True)
+    num_evacuated = CopyFromIntegerField(null=True)
+    property_damage = CopyFromIntegerField(null=True)
 
     # @classmethod
     # def get_transform_queryset(self):
@@ -123,10 +123,58 @@ class Facility(BaseRMPModel):
     #             ).values('max_seqnum')[:1]
     #         )
     #     ).annotate(
+    #         facility_id=F('EPAFacilityID'),
+    #         facility_name=F('FacilityName'),
     #         rmp_id=F('FacilityID'),
-    #         execsum=F('SummaryText')
+    #         street_1=F('FacilityStr1'),
+    #         street_2=F('FacilityStr2'),
+    #         city=F('FacilityCity'),
+    #         state=F('FacilityState'),
+    #         zip_code=F('FacilityZipCode'),
+    #         zip_ext=F('Facility4DigitZipExt'),
+    #         county_fips=F('FacilityCountyFIPS'),
+    #         num_registrations=F('CountOfFacilityID'),
+    #         latitude=F('latitude'),
+    #         longitude=F('longitude'),
+    #         num_registration=F('num_registration'),
+    #         sub_type=F('sub_type'),
+    #         sub_date=F('sub_date'),
+    #         exec_type=F('exec_type'),
+    #         execsum_rmp=F('execsum_rmp'),
+    #         exec_sub_type=F('exec_sub_type'),
+    #         exec_sub_date=F('exec_sub_date'),
+    #         deregistration_date=F('deregistration_date'),
+    #         dereg_effect_date=F('dereg_effect_date'),
+    #         parent=F('parent'),
+    #         parent_2=F('parent_2'),
+    #         operator_name=F('operator_name'),
+    #         operator_city=F('operator_city'),
+    #         operator_state=F('operator_state'),
+    #         operator_zip=F('operator_zip'),
+    #         province=F('province'),
+    #         county=F('county'),
+    #         country=F('country'),
+    #         sub_reason=F('sub_reason'),
+    #         dereg_reason=F('dereg_reason'),
+    #         dereg_other=F('dereg_other'),
+    #         toxic_tot=F('toxic_tot'),
+    #         flam_tot=F('flam_tot'),
+    #         quantity_tot=F('quantity_tot'),
+    #         num_proc_23=F('num_proc_23'),
+    #         toxic_tot_23=F('toxic_tot_23'),
+    #         flam_tot_23=F('flam_tot_23'),
+    #         quantity_tot_23=F('quantity_tot_23'),
+    #         all_naics=F('all_naics'),
+    #         num_accident=F('num_accident'),
+    #         acc_flam_tot=F('acc_flam_tot'),
+    #         acc_toxic_tot=F('acc_toxic_tot'),
+    #         acc_quantity_tot=F('acc_quantity_tot'),
+    #         num_deaths=F('num_deaths'),
+    #         num_injuries=F('num_injuries'),
+    #         num_evacuated=F('num_evacuated'),
+    #         property_damage=F('property_damage'),
     #     )
-
+    #
     #     return qs
 
     class Meta:
@@ -256,36 +304,36 @@ class Registration(BaseRMPModel):
     dereg_other = CopyFromCharField(max_length=80, blank=True)
 
     # TODO AGGREGATE
-    num_accident = CopyFromIntegerField()
-    num_facility = CopyFromIntegerField()
-    num_process = CopyFromIntegerField()
-    num_response = CopyFromIntegerField()
-    num_chem_real = CopyFromIntegerField()
-    num_worst_tox = CopyFromIntegerField()
-    num_alt_tox = CopyFromIntegerField()
-    num_worst_flam = CopyFromIntegerField()
-    num_alt_flam = CopyFromIntegerField()
-    num_prev_2 = CopyFromIntegerField()
-    num_prev_3 = CopyFromIntegerField()
-    toxic_tot = CopyFromBigIntegerField()
-    flam_tot = CopyFromBigIntegerField()
-    acc_flam_tot = CopyFromIntegerField()
-    acc_toxic_tot = CopyFromIntegerField()
-    acc_quantity_tot = CopyFromIntegerField()
-    num_deaths = CopyFromIntegerField()
-    num_injuries = CopyFromIntegerField()
-    num_evacuated = CopyFromIntegerField()
-    property_damage = CopyFromIntegerField()
-    county = CopyFromCharField(max_length=60, blank=True)
-    foreign_country_tr = CopyFromCharField(max_length=60, blank=True)
-    num_proc_23 = CopyFromBigIntegerField()
-    toxic_tot_23 = CopyFromBigIntegerField()
-    flam_tot_23 = CopyFromBigIntegerField()
-    quantity_tot_23 = CopyFromBigIntegerField()
-    num_execsum_mod = CopyFromIntegerField()
-    execsum_type = CopyFromCharField(max_length=1, blank=True)
-    num_execsum = CopyFromIntegerField()
-    num_exec_sum = CopyFromIntegerField()
+    num_accident = CopyFromIntegerField(null=True)
+    num_facility = CopyFromIntegerField(null=True)
+    num_process = CopyFromIntegerField(null=True)
+    num_response = CopyFromIntegerField(null=True)
+    num_chem_real = CopyFromIntegerField(null=True)
+    num_worst_tox = CopyFromIntegerField(null=True)
+    num_alt_tox = CopyFromIntegerField(null=True)
+    num_worst_flam = CopyFromIntegerField(null=True)
+    num_alt_flam = CopyFromIntegerField(null=True)
+    num_prev_2 = CopyFromIntegerField(null=True)
+    num_prev_3 = CopyFromIntegerField(null=True)
+    toxic_tot = CopyFromBigIntegerField(null=True)
+    flam_tot = CopyFromBigIntegerField(null=True)
+    acc_flam_tot = CopyFromIntegerField(null=True)
+    acc_toxic_tot = CopyFromIntegerField(null=True)
+    acc_quantity_tot = CopyFromIntegerField(null=True)
+    num_deaths = CopyFromIntegerField(null=True)
+    num_injuries = CopyFromIntegerField(null=True)
+    num_evacuated = CopyFromIntegerField(null=True)
+    property_damage = CopyFromIntegerField(null=True)
+    county = CopyFromCharField(max_length=60, blank=True, null=True)
+    foreign_country_tr = CopyFromCharField(max_length=60, blank=True, null=True)
+    num_proc_23 = CopyFromBigIntegerField(null=True)
+    toxic_tot_23 = CopyFromBigIntegerField(null=True)
+    flam_tot_23 = CopyFromBigIntegerField(null=True)
+    quantity_tot_23 = CopyFromBigIntegerField(null=True)
+    num_execsum_mod = CopyFromIntegerField(null=True)
+    execsum_type = CopyFromCharField(max_length=1, blank=True, null=True)
+    num_execsum = CopyFromIntegerField(null=True)
+    num_exec_sum = CopyFromIntegerField(null=True)
 
     # @classmethod
     # def get_transform_queryset(self):
@@ -299,7 +347,129 @@ class Registration(BaseRMPModel):
     #         )
     #     ).annotate(
     #         rmp_id=F('FacilityID'),
-    #         execsum=F('SummaryText')
+    #         facility_name=F('FacilityName'),
+    #         street_1=F('FacilityStr1'),
+    #         street_2=F('FacilityStr2'),
+    #         city=F('FacilityCity'),
+    #         state=F('FacilityState'),
+    #         zip_code=F('FacilityZipCode'),
+    #         zip_ext=F('Facility4DigitZipExt'),
+    #         county_fips=F('FacilityCountyFIPS'),
+    #         lepc=F('LEPC'),
+    #         latitude_dec=F('FacilityLatDecDegs'),
+    #         longitude_dec=F('FacilityLongDecDegs'),
+    #         valid_latlong=F('ValidLatLongFlag'),
+    #         latlong_meth=F('LatLongMethod'),
+    #         latlong_desc=F('LatLongDescription'),
+    #         facility_url=F('FacilityURL'),
+    #         facility_phone=F('FacilityPhoneNumber'),
+    #         facility_email=F('FacilityEmailAddress'),
+    #         facility_duns=F('FacilityDUNS'),
+    #         parent=F('ParentCompanyName'),
+    #         parent_2=F('Company2Name'),
+    #         parent_duns=F('CompanyDUNS'),
+    #         parent2_duns=F('Company2DUNS'),
+    #         operator_name=F('OperatorName'),
+    #         operator_phone=F('OperatorPhone'),
+    #         op_street_1=F('OperatorStr1'),
+    #         op_street_2=F('OperatorStr2'),
+    #         operator_city=F('OperatorCity'),
+    #         operator_state=F('OperatorStateFIPS'),
+    #         operator_zip=F('OperatorZipCode'),
+    #         operator_zip_ext=F('OperatorZipCodeExt'),
+    #         rmp_contact=F('RMPContact'),
+    #         rmp_contact_title=F('RMPTitle'),
+    #         em_contact_name=F('EmergencyContactName'),
+    #         em_contact_title=F('EmergencyContactTitle'),
+    #         em_contact_phone=F('EmergencyContactPhone'),
+    #         phone_24hour=F('Phone24'),
+    #         phone_24hour_ext=F('EmergencyContactExt_PIN'),
+    #         num_fte=F('FTE'),
+    #         other_facility_id=F('OtherEPAFacilityID'),
+    #         facility_id=F('EPAFacilityID'),
+    #         osha_psm_yn=F('OSHA_PSM'),
+    #         epcra_302_yn=F('EPCRA_302'),
+    #         caa_title_v_yn=F('CAA_TitleV'),
+    #         caa_permit_id=F('ClearAirOpPermitID'),
+    #         safety_inspect_dt=F('SafetyInspectionDate'),
+    #         safety_inspect_by=F('SafetyInspectionBy'),
+    #         osha_ranking=F('OSHARanking'),
+    #         predictive_file_yn=F('PredictiveFilingFlag'),
+    #         submission_type=F('SubmissionType'),
+    #         rmp_desc=F('RMPDescription'),
+    #         no_accidents_yn=F('NoAccidents'),
+    #         foreign_province=F('ForeignStateProv'),
+    #         foreign_zip=F('ForeignZipCode'),
+    #         foreign_country=F('ForeignCountry'),
+    #         num_fte_cbi_flag=F('CBI_Flag'),
+    #         complete_check_dt=F('CompletionCheckDate'),
+    #         error_report_dt=F('ErrorReportDate'),
+    #         receipt_date=F('ReceiptDate'),
+    #         graphics_ind=F('GraphicsIndicator'),
+    #         attachment_ind=F('AttachmentsIndicator'),
+    #         cert_rec_flag=F('CertificationReceivedFlag'),
+    #         submit_method=F('SubmissionMethod'),
+    #         cbi_substant_flag=F('CBISubstantiationFlag'),
+    #         elect_waiver_flag=F('ElectronicWaiverReceivedFlag'),
+    #         postmark_date=F('PostmarkDate'),
+    #         rmp_complete_flag=F('RMPCompleteFlag'),
+    #         deregistration_dt=F('DeRegistrationDate'),
+    #         dereg_effect_dt=F('DeRegistrationEffectiveDate'),
+    #         anniversary_date=F('AnniversaryDate'),
+    #         cbi_flag=F('CBIFlag'),
+    #         unsanitized_vers=F('CBIUnsanitizedVersionFlag'),
+    #         version_number=F('VersionNumber'),
+    #         frs_lat_dec=F('FRS_Lat'),
+    #         frs_long_dec=F('FRS_Long'),
+    #         frs_ll_desc=F('FRS_Description'),
+    #         hor_measure=F('HorizontalAccMeasure'),
+    #         hor_ref=F('HorizontalRefDatumCode'),
+    #         source_scale=F('SourceMapScaleNumber'),
+    #         em_email=F('EmergencyContactEmail'),
+    #         prep_name=F('RMPPreparerName'),
+    #         prep_street_1=F('RMPPreparerStreet1'),
+    #         prep_street_2=F('RMPPreparerStreet2'),
+    #         prep_city=F('RMPPreparerCity'),
+    #         prep_state=F('RMPPreparerState'),
+    #         prep_zip=F('RMPPreparerZIP'),
+    #         prep_zip_ext=F('RMPPreparerZIP4Ext'),
+    #         prep_phone=F('RMPPreparerTelephone'),
+    #         prep_country=F('RMPPreparerForeignCountry'),
+    #         prep_foreign_zip=F('RMPPreparerForeignPostalCode'),
+    #         sub_reason=F('RMPSubmissionReasonCode'),
+    #         rmp_email=F('RMPEmail'),
+    #         dereg_reason=F('DeregistrationReasonCode'),
+    #         dereg_other=F('DeregistrationReasonOtherText'),
+    #         num_accident=F('num_accident'),
+    #         num_facility=F('num_facility'),
+    #         num_process=F('num_process'),
+    #         num_response=F('num_response'),
+    #         num_chem_real=F('num_chem_real'),
+    #         num_worst_tox=F('num_worst_tox'),
+    #         num_alt_tox=F('num_alt_tox'),
+    #         num_worst_flam=F('num_worst_flam'),
+    #         num_alt_flam=F('num_alt_flam'),
+    #         num_prev_2=F('num_prev_2'),
+    #         num_prev_3=F('num_prev_3'),
+    #         toxic_tot=F('toxic_tot'),
+    #         flam_tot=F('flam_tot'),
+    #         acc_flam_tot=F('acc_flam_tot'),
+    #         acc_toxic_tot=F('acc_toxic_tot'),
+    #         acc_quantity_tot=F('acc_quantity_tot'),
+    #         num_deaths=F('num_deaths'),
+    #         num_injuries=F('num_injuries'),
+    #         num_evacuated=F('num_evacuated'),
+    #         property_damage=F('property_damage'),
+    #         county=F('county'),
+    #         foreign_country_tr=F('foreign_country_tr'),
+    #         num_proc_23=F('num_proc_23'),
+    #         toxic_tot_23=F('toxic_tot_23'),
+    #         flam_tot_23=F('flam_tot_23'),
+    #         quantity_tot_23=F('quantity_tot_23'),
+    #         num_execsum_mod=F('num_execsum_mod'),
+    #         execsum_type=F('execsum_type'),
+    #         num_execsum=F('num_execsum'),
+    #         num_exec_sum=F('num_exec_sum'),
     #     )
-
+    #
     #     return qs

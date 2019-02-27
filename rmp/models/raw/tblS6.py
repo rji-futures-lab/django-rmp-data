@@ -7,35 +7,9 @@ from rmp.fields import (
     CopyFromFloatField,
     CopyFromIntegerField,
     CopyFromForeignKey,
+    CopyFromManyToManyField,
 )
 from rmp.models.base import BaseRMPModel
-
-
-class tblS6AccidentChemicals(BaseRMPModel):
-    AccidentChemicalID = CopyFromIntegerField(
-        primary_key=True,
-    )
-    AccidentHistoryID = CopyFromForeignKey(
-        'tblS6AccidentHistory',
-        db_column='AccidentHistoryID',
-        on_delete=models.PROTECT,
-    )
-    ChemicalID = CopyFromForeignKey(
-        'tlkpChemicals',
-        db_column='ChemicalID',
-        on_delete=models.PROTECT,
-    )
-    QuantityReleased = CopyFromFloatField(
-        null=True,
-    )
-    PercentWeight = CopyFromFloatField(
-        null=True,
-    )
-
-    class Meta:
-        verbose_name = 'Accident History: Chemicals'
-        verbose_name_plural = 'Accident History: Chemicals'
-
 
 class tblS6AccidentHistory(BaseRMPModel):
     AccidentHistoryID = CopyFromIntegerField(
@@ -233,13 +207,38 @@ class tblS6AccidentHistory(BaseRMPModel):
         verbose_name = 'Accident History'
         verbose_name_plural = 'Accident History'
 
+class tblS6AccidentChemicals(BaseRMPModel):
+    AccidentChemicalID = CopyFromIntegerField(
+        primary_key=True,
+    )
+    AccidentHistoryID = CopyFromForeignKey(
+        'tblS6AccidentHistory',
+        db_column='AccidentHistoryID',
+        on_delete=models.PROTECT,
+    )
+    ChemicalID = CopyFromForeignKey(
+        'tlkpChemicals',
+        db_column='ChemicalID',
+        on_delete=models.PROTECT,
+    )
+    QuantityReleased = CopyFromFloatField(
+        null=True,
+    )
+    PercentWeight = CopyFromFloatField(
+        null=True,
+    )
+
+    class Meta:
+        verbose_name = 'Accident History: Chemicals'
+        verbose_name_plural = 'Accident History: Chemicals'
+
 
 class tblS6FlammableMixtureChemicals(BaseRMPModel):
     FlamMixChemID = CopyFromIntegerField(
         primary_key=True,
     )
     AccidentChemicalID = CopyFromForeignKey(
-        'Tbls6Accidentchemicals',
+        'tblS6AccidentChemicals',
         db_column='AccidentChemicalID',
         on_delete=models.PROTECT,
     )
