@@ -198,6 +198,7 @@ class ToxicsAltRelease(BaseRMPModel):
 
     source_file = 'rmp_alt_tox'
 
+
 class ToxicsWorstCase(BaseRMPModel):
     id = CopyFromIntegerField(
         primary_key=True,
