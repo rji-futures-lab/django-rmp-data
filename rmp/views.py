@@ -5,6 +5,7 @@ from rmp.models import (
     ExecutiveSummary,
     Facility,
     Registration,
+    State,
     tblExecutiveSummaries,
     tblFacility,
     tblS1Facilities,
@@ -51,15 +52,7 @@ def accident(request):
     return render(request, 'rmp/accident_list.html', context)
 
 def state_accidents(request):
-    state_list = Facility.objects.values('state') \
-                         .filter(registered=True) \
-                         .annotate(count=Count('id')) \
-                         .annotate(num_accidents=Sum('num_accident')) \
-                         .annotate(num_deaths=Sum('num_deaths')) \
-                         .annotate(num_injuries=Sum('num_injuries')) \
-                         .annotate(num_evacuated=Sum('num_evacuated')) \
-                         .annotate(property_damage=Sum('property_damage')) \
-                         .order_by('state')
+    state_list = State.objects.all()
     context = {'state_list': state_list}
     return render(request, 'rmp/state_accidents.html', context)
 

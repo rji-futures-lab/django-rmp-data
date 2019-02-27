@@ -22,6 +22,7 @@ from rmp.models import raw as raw_models
 from rmp.models import processed as processed_models
 from rmp.models.base import BaseRMPModel
 
+
 class Process(BaseRMPModel):
     id = CopyFromIntegerField(
         primary_key=True,
@@ -52,6 +53,7 @@ class Process(BaseRMPModel):
     # chem_flam_yn = CopyFromBooleanField()
 
     source_file = 'rmp_process'
+
 
 class ProcChem(BaseRMPModel):
     procchem_id = CopyFromBigIntegerField(

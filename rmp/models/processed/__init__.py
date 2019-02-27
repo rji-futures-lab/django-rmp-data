@@ -56,6 +56,7 @@ from .process import (
 from .toplevel import (
     Facility,
     Registration,
+    State,
 )
 
 
@@ -83,6 +84,7 @@ __all__ = (
     'ExecutiveSummary',
     'ExecutiveSummaryLength',
     'Facility',
+    'State',
     'FlammablesAltRelease',
     'FlammablesWorstCase',
     'PreventionProgram2',
