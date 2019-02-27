@@ -22,6 +22,7 @@ from rmp.models import raw as raw_models
 from rmp.models import processed as processed_models
 from rmp.models.base import BaseRMPModel
 
+
 class AccChem(BaseRMPModel):
     id = CopyFromIntegerField(
         primary_key=True,
@@ -77,28 +78,18 @@ class AccChem(BaseRMPModel):
 
     @classmethod
     def get_transform_queryset(self):
-        qs = raw_models.tblS6AccidentChemicals.objects.select_related('ChemicalID').annotate(
-            num_acc_flam=Subquery(
-                raw_models.tblS6FlammableMixtureChemicals.objects.filter(
-                    AccidentChemicalID=OuterRef('AccidentChemicalID')
-                ).values('AccidentChemicalID').annotate(
-                    num_acc_flam=Count('AccidentChemicalID')
-                ).values('num_acc_flam')
-            )
-        ).annotate(
+        qs = raw_models.tblS6AccidentChemicals.objects.annotate(
             accchem_id=F('AccidentChemicalID'),
             accident_id=F('AccidentHistoryID'),
             chemical_id=F('ChemicalID'),
             quantity_lbs=F('QuantityReleased'),
             percent_weight=F('PercentWeight'),
-            num_acc_flam=F('num_acc_flam'),
+            num_acc_flam=Count('tbls6flammablemixturechemicals'),
             cas=F('ChemicalID__CASNumber'),
             chemical_type=F('ChemicalID__ChemType'),
-        )
+        ).order_by('accchem_id')
 
         return qs
-
-    source_file = 'rmp_acc_chem'
 
 
 class AccFlam(BaseRMPModel):
@@ -124,7 +115,11 @@ class AccFlam(BaseRMPModel):
         help_text='The identifying ID for a particular flammable chemical released in an accident.',
     )
 
-    source_file = 'rmp_acc_flam'
+    @classmethod
+    def get_transform_queryset(self):
+        m = raw_models.tblS6FlammableMixtureChemicals
+
+        return m.objects.get_default_transform_queryset()
 
 
 class Accident(BaseRMPModel):
