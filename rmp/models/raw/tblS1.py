@@ -779,7 +779,7 @@ class tblS1Processes(BaseRMPModel):
         help_text='Optional Process Description.',
     )
     FacilityID = CopyFromForeignKey(
-        'tblFacility',
+        'tblS1Facilities',
         db_column='FacilityID',
         on_delete=models.PROTECT,
         verbose_name='Facility ID',

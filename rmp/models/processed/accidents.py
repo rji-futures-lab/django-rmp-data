@@ -98,7 +98,7 @@ class AccFlam(BaseRMPModel):
     id = CopyFromIntegerField(
         primary_key=True,
         # source_column='FlamMixChemID',
-        source_column='flammixchem_id',
+        source_column='flam_mix_chem_id',
         verbose_name='Flammable Chemical ID',
         help_text='A unique ID for each flammable chemical record.',
     )
@@ -106,13 +106,14 @@ class AccFlam(BaseRMPModel):
         'AccChem',
         on_delete=models.PROTECT,
         # source_column='AccidentChemicalID',
+        source_column='accident_chemical_id',
         verbose_name='Accident Chemical Record ID',
         help_text='A unique ID for each accident chemical record.'
     )
     chemical = CopyFromForeignKey(
         'ChemCd',
         on_delete=models.PROTECT,
-        # source_column='ChemicalID',
+        source_column='chemical_id',
         verbose_name='Chemical ID',
         help_text='The identifying ID for a particular flammable chemical released in an accident.',
     )
