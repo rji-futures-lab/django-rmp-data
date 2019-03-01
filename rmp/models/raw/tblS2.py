@@ -18,12 +18,14 @@ class tblS2ToxicsWorstCase(BaseRMPModel):
     ProcessChemicalID = CopyFromForeignKey(
         'tblS1ProcessChemicals',
         on_delete=models.PROTECT,
+        db_column='ProcessChemicalID',
     )
     PercentWeight = CopyFromFloatField(
         null=True,
     )
     PhysicalState = CopyFromForeignKey(
         'tlkpPhysicalStateCodes',
+        db_column='PhysicalState',
         max_length=1,
         blank=True,
         on_delete=models.PROTECT,
@@ -34,6 +36,7 @@ class tblS2ToxicsWorstCase(BaseRMPModel):
     )
     Scenario = CopyFromForeignKey(
         'tlkpS2ScenarioCodes',
+        db_column='Scenario',
         blank=True,
         on_delete=models.PROTECT,
     )
@@ -56,6 +59,7 @@ class tblS2ToxicsWorstCase(BaseRMPModel):
     Topography = CopyFromForeignKey(
         'tlkpTopographyCode',
         on_delete=models.PROTECT,
+        db_column='Topography',
         blank=True,
     )
     Distance2Endpoint = CopyFromFloatField(

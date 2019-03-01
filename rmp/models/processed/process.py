@@ -29,30 +29,121 @@ class Process(BaseRMPModel):
         source_column='process_id',
     )
     process_desc = CopyFromCharField(max_length=25, blank=True)
-    rmp_id = CopyFromIntegerField()
+    rmp = CopyFromForeignKey(
+        'Registration',
+        on_delete=models.PROTECT,
+    )
     program_level = CopyFromIntegerField()
     cbi_flag = CopyFromBooleanField()
+    num_proc_chem = CopyFromIntegerField(null=True)
+    num_proc_naics = CopyFromIntegerField(null=True)
+    num_worst_tox = CopyFromIntegerField(null=True)
+    num_worst_flam = CopyFromIntegerField(null=True)
+    num_alt_tox = CopyFromIntegerField(null=True)
+    num_alt_flam = CopyFromIntegerField(null=True)
+    # num_prev_2 = CopyFromIntegerField()
+    # num_prev_3 = CopyFromIntegerField()
+    toxic_tot = CopyFromBigIntegerField(null=True)
+    flam_tot = CopyFromBigIntegerField(null=True)
+    quantity_tot = CopyFromBigIntegerField(null=True)
 
-    # TODO AGGREGATE
-    num_proc_chem = CopyFromIntegerField()
-    num_proc_naics = CopyFromIntegerField()
-    num_chem_real = CopyFromIntegerField()
-    num_chem_fake = CopyFromIntegerField()
-    num_worst_tox = CopyFromIntegerField()
-    num_worst_flam = CopyFromIntegerField()
-    num_alt_tox = CopyFromIntegerField()
-    num_alt_flam = CopyFromIntegerField()
-    num_prev_2 = CopyFromIntegerField()
-    num_prev_3 = CopyFromIntegerField()
-    toxic_tot = CopyFromBigIntegerField()
-    flam_tot = CopyFromBigIntegerField()
-    quantity_tot = CopyFromBigIntegerField()
-    # while these fields are listed in rmp_fields.csv, they do not appear in
-    # rmp_process.tsv ¯\_(ツ)_/¯
-    # chem_tox_yn = CopyFromBooleanField()
-    # chem_flam_yn = CopyFromBooleanField()
+    @classmethod
+    def get_transform_queryset(self):
 
-    source_file = 'rmp_process'
+        qs = raw_models.tblS1Processes.objects.annotate(
+            process_id=F('ProcessID'),
+            process_desc=F('AltID'),
+            rmp_id=F('FacilityID'),
+            program_level=F('ProgramLevel'),
+            cbi_flag=F('CBI_Flag'),
+            num_proc_chem=Count('tbls1processchemicals'),
+            num_proc_naics=Count('tbls1process_naics'),
+            num_worst_tox=Count('tbls1processchemicals__tbls2toxicsworstcase__ProcessChemicalID'),
+            num_worst_flam=Count('tbls1processchemicals__tbls4flammablesworstcase'),
+            num_alt_tox=Count('tbls1processchemicals__tbls3toxicsaltreleases__ProcessChemicalID'),
+            num_alt_flam=Count('tbls1processchemicals__tbls5flammablesaltreleases'),
+            flam_tot=Sum(Case(When(tbls1processchemicals__ChemicalID__ChemType='F', then=('tbls1processchemicals__Quantity')), default=Value(0))),
+            toxic_tot=Sum(Case(When(tbls1processchemicals__ChemicalID__ChemType='T', then=('tbls1processchemicals__Quantity')), default=Value(0))),
+            quantity_tot=F('flam_tot') + F('toxic_tot'),
+        )
+        print(qs.query)
+        return qs
+                # num_proc_chem=Subquery(
+                #     raw_models.tblS1ProcessChemicals.objects.filter(
+                #         ProcessID=OuterRef('ProcessID')
+                #     ).values('ProcessID').annotate(
+                #         num_proc_chem=Count('ProcessID')
+                #     ).values('num_proc_chem')
+                # ),
+                # num_proc_naics=Subquery(
+                #     raw_models.tblS1Process_NAICS.objects.filter(
+                #         ProcessID=OuterRef('ProcessID')
+                #     ).values('ProcessID').annotate(
+                #         num_proc_naics=Count('ProcessID')
+                #     ).values('num_proc_naics')
+                # ),
+                # num_worst_tox = processed_models.ProcChem.objects.process_set.all()
+
+                # num_worst_tox=Subquery(
+                #     processed_models.ProcChem.objects.filter(
+                #         process_id=OuterRef('ProcessID')
+                #     ).values('process_id').annotate(
+                #         num_worst_tox=num_worst_tox
+                #     ).values('num_worst_tox')
+                # ),
+
+                # num_worst_flam=Subquery(
+                #     processed_models.ProcChem.objects.filter(
+                #         process_id=OuterRef('ProcessID')
+                #     ).values('process_id').annotate(
+                #         num_worst_flam=F('num_worst_flam')
+                #     ).values('num_worst_flam')
+                # ),
+                # num_alt_tox=Subquery(
+                #     processed_models.ProcChem.objects.filter(
+                #         process_id=OuterRef('ProcessID')
+                #     ).values('process_id').annotate(
+                #         num_alt_tox=F('num_alt_tox')
+                #     ).values('num_alt_tox')
+                # ),
+                # num_alt_flam=Subquery(
+                #     processed_models.ProcChem.objects.filter(
+                #         process_id=OuterRef('ProcessID')
+                #     ).values('process_id').annotate(
+                #         num_alt_flam=F('num_alt_flam')
+                #     ).values('num_alt_flam')
+                # ),
+                # flam_tot=Subquery(
+                #     processed_models.ProcChem.objects.filter(
+                #         process_id=OuterRef('ProcessID')
+                #     ).values('process_id').filter(
+                #         chemical_type='F',
+                #     ).annotate(
+                #         flam_tot=Sum('quantity_lbs')
+                #     ).values('flam_tot'),
+                #     output_field=CopyFromIntegerField(),
+                # ),
+                # toxic_tot=Subquery(
+                #     processed_models.ProcChem.objects.filter(
+                #         process_id=OuterRef('ProcessID')
+                #     ).values('process_id').filter(
+                #         chemical_type='T',
+                #     ).annotate(
+                #         toxic_tot=Sum('quantity_lbs')
+                #     ).values('toxic_tot'),
+                #     output_field=CopyFromIntegerField(),
+                # ),
+                # chemical_type=Subquery(
+                #     processed_models.ProcChem.objects.filter(
+                #         process_id=OuterRef('ProcessID')
+                #     ).values('process_id').annotate(
+                #         chemical_type=F('chemical_type')
+                #     ).values('chemical_type')
+                # ),
+
+
+
+
 
 
 class ProcChem(BaseRMPModel):
@@ -62,22 +153,33 @@ class ProcChem(BaseRMPModel):
     )
     process = CopyFromForeignKey(
         'Process',
-        on_delete=models.CASCADE
+        on_delete=models.PROTECT,
     )
     chemical = CopyFromForeignKey(
         'ChemCd',
-        on_delete=models.CASCADE
+        on_delete=models.PROTECT,
     )
-    quantity_lbs = CopyFromBigIntegerField()
+    quantity_lbs = CopyFromDecimalField(
+        max_digits=28,
+        decimal_places=16,
+        null=True,
+        verbose_name='1.17.c.3 Quantity',
+        help_text='The maximum inventory quantity of the regulated substance '
+                  'or mixture in the process in pounds.',
+    )
     cbi_flag = CopyFromBooleanField()
-    num_alt_flam = CopyFromBigIntegerField()
-    num_alt_tox = CopyFromBigIntegerField()
-    num_prevent_2_chem = CopyFromBigIntegerField()
-    num_prevent_3_chem = CopyFromBigIntegerField()
-    num_proc_flam = CopyFromBigIntegerField()
-    num_worst_flam = CopyFromBigIntegerField()
-    num_worst_tox = CopyFromBigIntegerField()
-    cas = CopyFromBigIntegerField()
+    num_alt_flam = CopyFromBigIntegerField(null=True)
+    num_alt_tox = CopyFromBigIntegerField(null=True)
+    num_prevent_2_chem = CopyFromBigIntegerField(null=True)
+    num_prevent_3_chem = CopyFromBigIntegerField(null=True)
+    num_proc_flam = CopyFromBigIntegerField(null=True)
+    num_worst_flam = CopyFromBigIntegerField(null=True)
+    num_worst_tox = CopyFromBigIntegerField(null=True)
+    cas = CopyFromCharField(
+        max_length=9,
+        verbose_name='CAS number',
+        help_text='The identifying CAS number for a chemical.',
+    )
     chemical_type = CopyFromCharField(max_length=1)
 
     source_file = 'rmp_proc_chem'
@@ -85,71 +187,73 @@ class ProcChem(BaseRMPModel):
     @classmethod
     def get_transform_queryset(self):
         qs = raw_models.tblS1ProcessChemicals.objects.select_related('ChemicalID').annotate(
-            num_alt_flam=Subquery(
-                raw_models.tblS5FlammablesAltReleases.objects.filter(
-                    ProcessChemicalID=OuterRef('ProcessChemicalID')
-                ).values('ProcessChemicalID').annotate(
-                    num_alt_flam=Count('FlammableID')
-                ).values('num_alt_flam')
-            ),
-            num_alt_tox=Subquery(
-                raw_models.tblS3ToxicsAltReleases.objects.filter(
-                    ProcessChemicalID=OuterRef('ProcessChemicalID')
-                ).values('ProcessChemicalID').annotate(
-                    num_alt_tox=Count('ToxicID')
-                ).values('num_alt_tox')
-            ),
-            num_proc_flam=Subquery(
-                raw_models.tblS1FlammableMixtureChemicals.objects.filter(
-                    ProcessChemicalID=OuterRef('ProcessChemicalID')
-                ).values('ProcessChemicalID').annotate(
-                    num_proc_flam=Count('FlamMixChemID')
-                ).values('num_proc_flam')
-            ),
-            num_worst_flam=Subquery(
-                raw_models.tblS4FlammablesWorstCase.objects.filter(
-                    ProcessChemicalID=OuterRef('ProcessChemicalID')
-                ).values('ProcessChemicalID').annotate(
-                    num_worst_flam=Count('FlammableID')
-                ).values('num_worst_flam')
-            ),
-            num_worst_tox=Subquery(
-                raw_models.tblS2ToxicsWorstCase.objects.filter(
-                    ProcessChemicalID=OuterRef('ProcessChemicalID')
-                ).values('ProcessChemicalID').annotate(
-                    num_worst_tox=Count('ToxicID')
-                ).values('num_worst_tox')
-            ),
-            num_prevent_3_chem=Subquery(
-                raw_models.tblS7_Prevention_Program_Chemicals.objects.filter(
-                    ProcessChemicalID=OuterRef('ProcessChemicalID')
-                ).values('ProcessChemicalID').annotate(
-                    num_prevent_3_chem=Count('PrimaryKey')
-                ).values('num_prevent_3_chem')
-            ),
-            num_prevent_2_chem=Subquery(
-                raw_models.tblS8_Prevention_Program_Chemicals.objects.filter(
-                    ProcessChemicalID=OuterRef('ProcessChemicalID')
-                ).values('ProcessChemicalID').annotate(
-                    num_prevent_2_chem=Count('PrimaryKey')
-                ).values('num_prevent_2_chem')
-            ),
-        ).annotate(
             procchem_id=F('ProcessChemicalID'),
             process_id=F('ProcessID'),
             chemical_id=F('ChemicalID'),
             quantity_lbs=F('Quantity'),
             cbi_flag=F('CBI_Flag'),
-            num_alt_flam=F('num_alt_flam'),
-            num_alt_tox=F('num_alt_tox'),
-            num_prevent_2_chem=F('num_prevent_2_chem'),
-            num_prevent_3_chem=F('num_prevent_3_chem'),
-            num_proc_flam=F('num_proc_flam'),
-            num_worst_flam=F('num_worst_flam'),
-            num_worst_tox=F('num_worst_tox'),
+            num_alt_flam=Count('tbls5flammablesaltreleases'),
+            num_alt_tox=Count('tbls3toxicsaltreleases'),
+            num_prevent_2_chem=Count('tbls8_prevention_program_chemicals'),
+            num_prevent_3_chem=Count('tbls7_prevention_program_chemicals'),
+            num_proc_flam=Count('tbls1flammablemixturechemicals'),
+            num_worst_flam=Count('tbls4flammablesworstcase'),
+            num_worst_tox=Count('tbls2toxicsworstcase'),
             cas=F('ChemicalID__CASNumber'),
             chemical_type=F('ChemicalID__ChemType'),
         )
+
+        # .annotate(
+        #     num_alt_flam=Subquery(
+        #         raw_models.tblS5FlammablesAltReleases.objects.filter(
+        #             ProcessChemicalID=OuterRef('ProcessChemicalID')
+        #         ).values('ProcessChemicalID').annotate(
+        #             num_alt_flam=Count('FlammableID')
+        #         ).values('num_alt_flam')
+        #     ),
+        #     num_alt_tox=Subquery(
+        #         raw_models.tblS3ToxicsAltReleases.objects.filter(
+        #             ProcessChemicalID=OuterRef('ProcessChemicalID')
+        #         ).values('ProcessChemicalID').annotate(
+        #             num_alt_tox=Count('ToxicID')
+        #         ).values('num_alt_tox')
+        #     ),
+        #     num_proc_flam=Subquery(
+        #         raw_models.tblS1FlammableMixtureChemicals.objects.filter(
+        #             ProcessChemicalID=OuterRef('ProcessChemicalID')
+        #         ).values('ProcessChemicalID').annotate(
+        #             num_proc_flam=Count('FlamMixChemID')
+        #         ).values('num_proc_flam')
+        #     ),
+        #     num_worst_flam=Subquery(
+        #         raw_models.tblS4FlammablesWorstCase.objects.filter(
+        #             ProcessChemicalID=OuterRef('ProcessChemicalID')
+        #         ).values('ProcessChemicalID').annotate(
+        #             num_worst_flam=Count('FlammableID')
+        #         ).values('num_worst_flam')
+        #     ),
+        #     num_worst_tox=Subquery(
+        #         raw_models.tblS2ToxicsWorstCase.objects.filter(
+        #             ProcessChemicalID=OuterRef('ProcessChemicalID')
+        #         ).values('ProcessChemicalID').annotate(
+        #             num_worst_tox=Count('ToxicID')
+        #         ).values('num_worst_tox')
+        #     ),
+        #     num_prevent_3_chem=Subquery(
+        #         raw_models.tblS7_Prevention_Program_Chemicals.objects.filter(
+        #             ProcessChemicalID=OuterRef('ProcessChemicalID')
+        #         ).values('ProcessChemicalID').annotate(
+        #             num_prevent_3_chem=Count('PrimaryKey')
+        #         ).values('num_prevent_3_chem')
+        #     ),
+        #     num_prevent_2_chem=Subquery(
+        #         raw_models.tblS8_Prevention_Program_Chemicals.objects.filter(
+        #             ProcessChemicalID=OuterRef('ProcessChemicalID')
+        #         ).values('ProcessChemicalID').annotate(
+        #             num_prevent_2_chem=Count('PrimaryKey')
+        #         ).values('num_prevent_2_chem')
+        #     ),
+        # )
 
         return qs
 
@@ -161,11 +265,11 @@ class ProcFlam(BaseRMPModel):
     )
     procchem = CopyFromForeignKey(
         'ProcChem',
-        on_delete=models.CASCADE
+        on_delete=models.PROTECT,
     )
     chemical = CopyFromForeignKey(
         'ChemCd',
-        on_delete=models.CASCADE
+        on_delete=models.PROTECT,
     )
 
     source_file = 'rmp_proc_flam'

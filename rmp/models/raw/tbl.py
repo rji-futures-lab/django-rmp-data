@@ -209,6 +209,7 @@ class tblRMPTrack(BaseRMPModel):
     )
     FacilityState = CopyFromForeignKey(
         'tlkpStateFIPSCodes',
+        db_column='FacilityState',
         on_delete=models.PROTECT,
         verbose_name='Facility State',
         help_text='The two-character FIPS abbreviation for the state in which '
@@ -229,6 +230,7 @@ class tblRMPTrack(BaseRMPModel):
     )
     DocumentHandle = CopyFromForeignKey(
         'tlkpDocHandle',
+        db_column='DocumentHandle',
         on_delete=models.PROTECT,
         blank=True,
         verbose_name='Document Handle',
@@ -242,6 +244,7 @@ class tblRMPTrack(BaseRMPModel):
     )
     DocumentType = CopyFromForeignKey(
         'tlkpDocType',
+        db_column='DocumentType',
         on_delete=models.PROTECT,
         blank=True,
         verbose_name='Document Type',
@@ -250,6 +253,7 @@ class tblRMPTrack(BaseRMPModel):
     )
     RejectionReason = CopyFromForeignKey(
         'tlkpRejectReason',
+        db_column='RejectionReason',
         on_delete=models.PROTECT,
         verbose_name='Rejection Reason',
         help_text='The code which represents the reason the RMP submission '

@@ -134,9 +134,9 @@ class PreventionProgram2(BaseRMPModel): #rmp_prevent_2
     most_recent_date = CopyFromCharField(blank=True, max_length=8)
     # most_recent_date = CopyFromDateField(blank=True)
     cbi_flag = CopyFromBooleanField()
-    num_prevent_2_chem = CopyFromIntegerField()
-    num_prev2text = CopyFromIntegerField()
-    num_prev2_text = CopyFromIntegerField()
+    # num_prevent_2_chem = CopyFromIntegerField()
+    # num_prev2text = CopyFromIntegerField()
+    # num_prev2_text = CopyFromIntegerField()
 
     source_file = 'rmp_prevent_2'
 
@@ -267,9 +267,9 @@ class PreventionProgram3(BaseRMPModel):
 
     # TODO AGGREGATE
 
-    num_prevent_3_chem = CopyFromIntegerField()
-    num_prev3text = CopyFromIntegerField()
-    num_prev3_text = CopyFromIntegerField()
+    # num_prevent_3_chem = CopyFromIntegerField()
+    # num_prev3text = CopyFromIntegerField()
+    # num_prev3_text = CopyFromIntegerField()
 
     source_file = 'rmp_prevent_3'
 
@@ -311,8 +311,8 @@ class ProcNaics(BaseRMPModel):
         on_delete=models.CASCADE
     )
     naics = CopyFromIntegerField()
-    num_prevent_2 = CopyFromIntegerField()
-    num_prevent_3 = CopyFromIntegerField()
+    # num_prevent_2 = CopyFromIntegerField()
+    # num_prevent_3 = CopyFromIntegerField()
 
     source_file = 'rmp_proc_naics'
 
