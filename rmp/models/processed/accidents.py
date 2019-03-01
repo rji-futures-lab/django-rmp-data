@@ -4,7 +4,7 @@ Models for processed RMP data.
 import os
 from django.conf import settings
 from django.db import models
-from django.db.models import F, Max, OuterRef, Subquery, Sum, Count, Case, When, Value
+from django.db.models import F, Max, OuterRef, Subquery, Sum, Count, Case, When, Value, Q
 from django.db.models.functions import Coalesce
 from rmp.fields import (
     CopyFromBigIntegerField,
@@ -278,41 +278,85 @@ class Accident(BaseRMPModel):
 
     @classmethod
     def get_transform_queryset(self):
-        qs = raw_models.tblS6AccidentHistory.objects.select_related('FacilityID').select_related('WindSpeedUnitCode').annotate(
-            num_acc_chem=Subquery(
-                raw_models.tblS6AccidentChemicals.objects.filter(
-                    AccidentHistoryID=OuterRef('AccidentHistoryID')
-                ).values('AccidentHistoryID').annotate(
-                    num_acc_chem=Count('AccidentHistoryID')
-                ).values('num_acc_chem')
-            ),
-            flam_total=Subquery(
-                processed_models.AccChem.objects.filter(
-                    accident_id=OuterRef('AccidentHistoryID')
-                ).values('accident_id').filter(
-                    chemical_type='F',
-                ).annotate(
-                    flam_total=Coalesce(Sum('quantity_lbs'), Value(0)),
-                ).values('flam_total'),
-                output_field=CopyFromIntegerField(),
-                default=Value(0),
-            ),
-            toxic_total=Subquery(
-                processed_models.AccChem.objects.filter(
-                    accident_id=OuterRef('AccidentHistoryID')
-                ).values('accident_id').filter(
-                    chemical_type='T',
-                ).annotate(
-                    toxic_total=Coalesce(Sum('quantity_lbs'), Value(0)),
-                ).values('toxic_total'),
-                output_field=CopyFromIntegerField(),
-                default=Value(0),
-            ),
-        ).annotate(
-            num_deaths=F('DeathsWorkers') + F('DeathsPublicResponders') + F('DeathsPublic'),
-            num_injuries=F('InjuriesPublic') + F('InjuriesWorkers') + F('InjuriesPublicResponders'),
-            property_damage=F('OnsitePropertyDamage') + F('OffsitePropertyDamage'),
-            quantity_total=F('flam_total') + F('toxic_total'),
+
+        # flam = raw_models.tblS6AccidentChemicals.objects.filter(
+        #     Q(AccidentHistoryID = tbls6accidenthistory__AccidentHistoryID) & Q(ChemicalID__ChemType__startswith='F'),
+        # )
+        # tox = raw_models.tblS6AccidentChemicals.objects.filter(
+        #     Q(ChemicalID__ChemType__startswith='T'),
+        # )
+        #
+        qs = raw_models.tblS6AccidentHistory.objects.values(
+            'AccidentHistoryID',
+            'FacilityID',
+            'AccidentDate',
+            'AccidentTime',
+            'NAICSCode',
+            'AccidentReleaseDuration',
+            'RE_Gas',
+            'RE_Spill',
+            'RE_Fire',
+            'RE_Explosion',
+            'RE_ReactiveIncident',
+            'RS_StorageVessel',
+            'RS_Piping',
+            'RS_ProcessVessel',
+            'RS_TransferHose',
+            'RS_Valve',
+            'RS_Pump',
+            'RS_Joint',
+            'OtherReleaseSource',
+            'WindSpeed',
+            'WindSpeedUnitCode',
+            'WindDirection',
+            'Temperature',
+            'StabilityClass',
+            'Precipitation',
+            'WeatherUnknown',
+            'DeathsWorkers',
+            'DeathsPublicResponders',
+            'DeathsPublic',
+            'InjuriesWorkers',
+            'InjuriesPublicResponders',
+            'InjuriesPublic',
+            'OnsitePropertyDamage',
+            'OffsiteDeaths',
+            'Hospitalization',
+            'MedicalTreatment',
+            'Evacuated',
+            'ShelteredInPlace',
+            'OffsitePropertyDamage',
+            'ED_Kills',
+            'ED_MinorDefoliation',
+            'ED_WaterContamination',
+            'ED_SoilContamination',
+            'ED_Other',
+            'InitiatingEvent',
+            'CF_EquipmentFailure',
+            'CF_HumanError',
+            'CF_ImproperProcedure',
+            'CF_Overpressurization',
+            'CF_UpsetCondition',
+            'CF_BypassCondition',
+            'CF_Maintenance',
+            'CF_ProcessDesignFailure',
+            'CF_UnsuitableEquipment',
+            'CF_UnusualWeather',
+            'CF_ManagementError',
+            'CF_Other',
+            'OffsiteRespondersNotify',
+            'CI_ImprovedEquipment',
+            'CI_RevisedMaintenance',
+            'CI_RevisedTraining',
+            'CI_RevisedOpProcedures',
+            'CI_NewProcessControls',
+            'CI_NewMitigationSystems',
+            'CI_RevisedERPlan',
+            'CI_ChangedProcess',
+            'CI_ReducedInventory',
+            'CI_None',
+            'CI_OtherType',
+            'CBI_Flag',
         ).annotate(
             accident_id=F('AccidentHistoryID'),
             rmp_id=F('FacilityID'),
@@ -384,13 +428,17 @@ class Accident(BaseRMPModel):
             ci_none=F('CI_None'),
             ci_other=F('CI_OtherType'),
             cbi_flag=F('CBI_Flag'),
-            num_acc_chem=F('num_acc_chem'),
-            flam_total=F('flam_total'),
-            toxic_total=F('toxic_total'),
-            quantity_total=F('quantity_total'),
-            num_deaths=F('num_deaths'),
-            num_injuries=F('num_injuries'),
+            num_acc_chem=Count('tbls6accidentchemicals'),
+            flam_total=Sum(Case(When(tbls6accidentchemicals__ChemicalID__ChemType='F', then=('tbls6accidentchemicals__QuantityReleased')), default=Value(0))),
+            toxic_total=Sum(Case(When(tbls6accidentchemicals__ChemicalID__ChemType='T', then=('tbls6accidentchemicals__QuantityReleased')), default=Value(0))),
+            quantity_total=F('flam_total') + F('toxic_total'),
+            num_deaths=F('DeathsWorkers') + F('DeathsPublicResponders') + F('DeathsPublic'),
+            num_injuries=F('InjuriesPublic') + F('InjuriesWorkers') + F('InjuriesPublicResponders'),
             num_evacuated=F('Evacuated'),
-            property_damage=F('property_damage'),
-        )
+            property_damage=F('OnsitePropertyDamage') + F('OffsitePropertyDamage'),
+        ).order_by('accident_id')
+        print(qs.query)
         return qs
+
+
+# Subquery(processed_models.AccChem.objects.filter(accident_id=OuterRef('AccidentHistoryID')).filter(chemical_type='T').aggregate(Sum('quantity_lbs'))),
