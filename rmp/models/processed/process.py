@@ -36,37 +36,51 @@ class Process(BaseRMPModel):
     cbi_flag = CopyFromBooleanField()
     num_proc_chem = CopyFromIntegerField(null=True)
     num_proc_naics = CopyFromIntegerField(null=True)
-    # num_worst_tox = CopyFromIntegerField(null=True)
-    # num_worst_flam = CopyFromIntegerField(null=True)
-    # num_alt_tox = CopyFromIntegerField(null=True)
-    # num_alt_flam = CopyFromIntegerField(null=True)
-    # # num_prev_2 = CopyFromIntegerField()
-    # # num_prev_3 = CopyFromIntegerField()
-    # toxic_tot = CopyFromBigIntegerField(null=True)
-    # flam_tot = CopyFromBigIntegerField(null=True)
-    # quantity_tot = CopyFromBigIntegerField(null=True)
-    # chemical_type = CopyFromCharField(max_length=1, null=True)
+    num_worst_tox = CopyFromIntegerField(null=True)
+    num_worst_flam = CopyFromIntegerField(null=True)
+    num_alt_tox = CopyFromIntegerField(null=True)
+    num_alt_flam = CopyFromIntegerField(null=True)
+    # num_prev_2 = CopyFromIntegerField()
+    # num_prev_3 = CopyFromIntegerField()
+    toxic_tot = CopyFromBigIntegerField(null=True)
+    flam_tot = CopyFromBigIntegerField(null=True)
+    quantity_tot = CopyFromBigIntegerField(null=True)
 
     @classmethod
     def get_transform_queryset(self):
 
-        procchem_id = raw_models.tblS1Processes.objects.values('ProcessID')
-
         qs = raw_models.tblS1Processes.objects.annotate(
-                num_proc_chem=Subquery(
-                    raw_models.tblS1ProcessChemicals.objects.filter(
-                        ProcessID=OuterRef('ProcessID')
-                    ).values('ProcessID').annotate(
-                        num_proc_chem=Count('ProcessID')
-                    ).values('num_proc_chem')
-                ),
-                num_proc_naics=Subquery(
-                    raw_models.tblS1Process_NAICS.objects.filter(
-                        ProcessID=OuterRef('ProcessID')
-                    ).values('ProcessID').annotate(
-                        num_proc_naics=Count('ProcessID')
-                    ).values('num_proc_naics')
-                ),
+            process_id=F('ProcessID'),
+            process_desc=F('AltID'),
+            rmp_id=F('FacilityID'),
+            program_level=F('ProgramLevel'),
+            cbi_flag=F('CBI_Flag'),
+            num_proc_chem=Count('tbls1processchemicals'),
+            num_proc_naics=Count('tbls1process_naics'),
+            num_worst_tox=Count('tbls1processchemicals__tbls2toxicsworstcase'),
+            num_worst_flam=Count('tbls1processchemicals__tbls4flammablesworstcase'),
+            num_alt_tox=Count('tbls1processchemicals__tbls3toxicsaltreleases'),
+            num_alt_flam=Count('tbls1processchemicals__tbls5flammablesaltreleases'),
+            flam_tot=Sum(Case(When(tbls1processchemicals__ChemicalID__ChemType='F', then=('tbls1processchemicals__Quantity')), default=Value(0))),
+            toxic_tot=Sum(Case(When(tbls1processchemicals__ChemicalID__ChemType='T', then=('tbls1processchemicals__Quantity')), default=Value(0))),
+            quantity_tot=F('flam_tot') + F('toxic_tot'),
+        )
+        print(qs.query)
+        return qs
+                # num_proc_chem=Subquery(
+                #     raw_models.tblS1ProcessChemicals.objects.filter(
+                #         ProcessID=OuterRef('ProcessID')
+                #     ).values('ProcessID').annotate(
+                #         num_proc_chem=Count('ProcessID')
+                #     ).values('num_proc_chem')
+                # ),
+                # num_proc_naics=Subquery(
+                #     raw_models.tblS1Process_NAICS.objects.filter(
+                #         ProcessID=OuterRef('ProcessID')
+                #     ).values('ProcessID').annotate(
+                #         num_proc_naics=Count('ProcessID')
+                #     ).values('num_proc_naics')
+                # ),
                 # num_worst_tox = processed_models.ProcChem.objects.process_set.all()
 
                 # num_worst_tox=Subquery(
@@ -125,25 +139,8 @@ class Process(BaseRMPModel):
                 #         chemical_type=F('chemical_type')
                 #     ).values('chemical_type')
                 # ),
-            ).annotate(
-            process_id=F('ProcessID'),
-            process_desc=F('AltID'),
-            rmp_id=F('FacilityID'),
-            program_level=F('ProgramLevel'),
-            cbi_flag=F('CBI_Flag'),
-            num_proc_chem=F('num_proc_chem'),
-            num_proc_naics=F('num_proc_naics'),
-            # num_worst_tox=F('num_worst_tox'),
-            # num_worst_flam=F('num_worst_flam'),
-            # num_alt_tox=F('num_alt_tox'),
-            # num_alt_flam=F('num_alt_flam'),
-            # flam_tot=F('flam_tot'),
-            # toxic_tot=F('toxic_tot'),
-            # quantity_tot=F('flam_tot') + F('toxic_tot'),
-            # chemical_type=F('chemical_type'),
-        )
-        print(qs.query)
-        return qs
+
+
 
 
 
