@@ -4,7 +4,10 @@ Models for processed RMP data.
 import os
 from django.conf import settings
 from django.db import models
-from django.db.models import F, Max, OuterRef, Subquery, Sum, Count, Case, When, Value
+from django.db.models import (
+    F, Max, OuterRef, Subquery, Sum, Count, Case, When, Value
+)
+from django.db.models.functions import Cast
 from rmp.fields import (
     CopyFromBigIntegerField,
     CopyFromBooleanField,
@@ -22,6 +25,7 @@ from rmp.models import raw as raw_models
 from rmp.models import processed as processed_models
 from rmp.models.base import BaseRMPModel
 
+
 class PreventionProgram2(BaseRMPModel): #rmp_prevent_2
     id = CopyFromIntegerField(
         primary_key=True,
@@ -29,10 +33,9 @@ class PreventionProgram2(BaseRMPModel): #rmp_prevent_2
     )
     procnaics = CopyFromForeignKey(
         'ProcNaics',
-        on_delete=models.CASCADE
+        on_delete=models.PROTECT,
     )
-    safety_info_date = CopyFromCharField(blank=True, max_length=8)
-    # safety_info_date = CopyFromDateField(blank=True)
+    safety_info_date = CopyFromDateField(blank=True)
     fr_nfpa58 = CopyFromBooleanField()
     fr_osha = CopyFromBooleanField()
     fr_astm = CopyFromBooleanField()
@@ -41,10 +44,8 @@ class PreventionProgram2(BaseRMPModel): #rmp_prevent_2
     fr_none = CopyFromBooleanField()
     fr_other = CopyFromCharField(max_length=200, blank=True)
     fr_comments = CopyFromCharField(max_length=200, blank=True)
-    haz_review_date = CopyFromCharField(blank=True, max_length=8)
-    # haz_review_date = CopyFromDateField(blank=True)
-    change_comp_date = CopyFromCharField(blank=True, max_length=8)
-    # change_comp_date = CopyFromDateField(blank=True)
+    haz_review_date = CopyFromDateField(blank=True)
+    change_comp_date = CopyFromDateField(blank=True)
     mh_toxicrelease = CopyFromBooleanField()
     mh_fire = CopyFromBooleanField()
     mh_explosion = CopyFromBooleanField()
@@ -106,10 +107,8 @@ class PreventionProgram2(BaseRMPModel): #rmp_prevent_2
     ch_nonerequired = CopyFromBooleanField()
     ch_none = CopyFromBooleanField()
     ch_other = CopyFromCharField(max_length=200, blank=True)
-    proc_review_date = CopyFromCharField(blank=True, max_length=8)
-    # proc_review_date = CopyFromDateField(blank=True)
-    train_review_date = CopyFromCharField(blank=True, max_length=8)
-    # train_review_date = CopyFromDateField(blank=True)
+    proc_review_date = CopyFromDateField(blank=True)
+    train_review_date = CopyFromDateField(blank=True)
     tr_classroom = CopyFromBooleanField()
     tr_onthejob = CopyFromBooleanField()
     tr_other = CopyFromCharField(max_length=200, blank=True)
@@ -118,27 +117,18 @@ class PreventionProgram2(BaseRMPModel): #rmp_prevent_2
     ct_demonstration = CopyFromBooleanField()
     ct_observation = CopyFromBooleanField()
     ct_other = CopyFromCharField(max_length=200, blank=True)
-    maint_review_date = CopyFromCharField(blank=True, max_length=8)
-    # maint_review_date = CopyFromDateField(blank=True)
-    maint_inspect_date = CopyFromCharField(blank=True, max_length=8)
-    # maint_inspect_date = CopyFromDateField(blank=True)
+    maint_review_date = CopyFromDateField(blank=True)
+    maint_inspect_date = CopyFromDateField(blank=True)
     equip_tested = CopyFromCharField(max_length=200, blank=True)
-    comp_audit_date = CopyFromCharField(blank=True, max_length=8)
-    # comp_audit_date = CopyFromDateField(blank=True)
-    audit_comp_date = CopyFromCharField(blank=True, max_length=8)
-    # audit_comp_date = CopyFromDateField(blank=True)
-    inc_invest_date = CopyFromCharField(blank=True, max_length=8)
-    # inc_invest_date = CopyFromDateField(blank=True)
-    inc_change_date = CopyFromCharField(blank=True, max_length=8)
-    # inc_change_date = CopyFromDateField(blank=True)
-    most_recent_date = CopyFromCharField(blank=True, max_length=8)
-    # most_recent_date = CopyFromDateField(blank=True)
+    comp_audit_date = CopyFromDateField(blank=True)
+    audit_comp_date = CopyFromDateField(blank=True)
+    inc_invest_date = CopyFromDateField(blank=True)
+    inc_change_date = CopyFromDateField(blank=True)
+    most_recent_date = CopyFromDateField(blank=True)
     cbi_flag = CopyFromBooleanField()
     # num_prevent_2_chem = CopyFromIntegerField()
     # num_prev2text = CopyFromIntegerField()
     # num_prev2_text = CopyFromIntegerField()
-
-    source_file = 'rmp_prevent_2'
 
 
 class PreventionProgram3(BaseRMPModel):
@@ -148,12 +138,10 @@ class PreventionProgram3(BaseRMPModel):
     )
     procnaics = CopyFromForeignKey(
         'ProcNaics',
-        on_delete=models.CASCADE
+        on_delete=models.PROTECT,
     )
-    safety_info_date = CopyFromCharField(blank=True, max_length=8)
-    # safety_info_date = CopyFromDateField(null=True)
-    last_pha_date = CopyFromCharField(blank=True, max_length=8)
-    # last_pha_date = CopyFromDateField(null=True)
+    safety_info_date = CopyFromDateField(null=True)
+    last_pha_date = CopyFromDateField(null=True)
     pha_whatif = CopyFromBooleanField()
     pha_checklist = CopyFromBooleanField()
     pha_whatifcheck = CopyFromBooleanField()
@@ -161,8 +149,7 @@ class PreventionProgram3(BaseRMPModel):
     pha_fmea = CopyFromBooleanField()
     pha_fta = CopyFromBooleanField()
     pha_other = CopyFromCharField(max_length=200, blank=True)
-    change_comp_date = CopyFromCharField(blank=True, max_length=8)
-    # change_comp_date = CopyFromDateField(null=True)
+    change_comp_date = CopyFromDateField(null=True)
     mh_toxicrelease = CopyFromBooleanField()
     mh_fire = CopyFromBooleanField()
     mh_explosion = CopyFromBooleanField()
@@ -224,10 +211,8 @@ class PreventionProgram3(BaseRMPModel):
     ch_nonerequired = CopyFromBooleanField()
     ch_none = CopyFromBooleanField()
     ch_other = CopyFromCharField(max_length=200, blank=True)
-    proc_review_date = CopyFromCharField(blank=True, max_length=8)
-    # proc_review_date = CopyFromDateField(null=True)
-    train_review_date = CopyFromCharField(blank=True, max_length=8)
-    # train_review_date = CopyFromDateField(null=True)
+    proc_review_date = CopyFromDateField(null=True)
+    train_review_date = CopyFromDateField(null=True)
     tr_classroom = CopyFromBooleanField()
     tr_onthejob = CopyFromBooleanField()
     tr_other = CopyFromCharField(max_length=200, blank=True)
@@ -236,33 +221,20 @@ class PreventionProgram3(BaseRMPModel):
     ct_demonstration = CopyFromBooleanField()
     ct_observation = CopyFromBooleanField()
     ct_other = CopyFromCharField(max_length=200, blank=True)
-    maint_review_date = CopyFromCharField(blank=True, max_length=8)
-    # maint_review_date = CopyFromDateField(null=True)
-    maint_inspect_date = CopyFromCharField(blank=True, max_length=8)
-    # maint_inspect_date = CopyFromDateField(null=True)
+    maint_review_date = CopyFromDateField(null=True)
+    maint_inspect_date = CopyFromDateField(null=True)
     equip_tested = CopyFromCharField(max_length=200, blank=True)
-    change_manage_date = CopyFromCharField(blank=True, max_length=8)
-    # change_manage_date = CopyFromDateField(null=True)
-    change_review_date = CopyFromCharField(blank=True, max_length=8)
-    # change_review_date = CopyFromDateField(null=True)
-    prestart_rev_date = CopyFromCharField(blank=True, max_length=8)
-    # prestart_rev_date = CopyFromDateField(null=True)
-    comp_audit_date = CopyFromCharField(blank=True, max_length=8)
-    # comp_audit_date = CopyFromDateField(null=True)
-    audit_comp_date = CopyFromCharField(blank=True, max_length=8)
-    # audit_comp_date = CopyFromDateField(null=True)
-    inc_invest_date = CopyFromCharField(blank=True, max_length=8)
-    # inc_invest_date = CopyFromDateField(null=True)
-    inc_change_date = CopyFromCharField(blank=True, max_length=8)
-    # inc_change_date = CopyFromDateField(null=True)
-    part_review_date = CopyFromCharField(blank=True, max_length=8)
-    # part_review_date = CopyFromDateField(null=True)
-    hotwork_rev_date = CopyFromCharField(blank=True, max_length=8)
-    # hotwork_rev_date = CopyFromDateField(null=True)
-    con_safety_date = CopyFromCharField(blank=True, max_length=8)
-    # con_safety_date = CopyFromDateField(null=True)
-    con_eval_date = CopyFromCharField(blank=True, max_length=8)
-    # con_eval_date = CopyFromDateField(null=True)
+    change_manage_date = CopyFromDateField(null=True)
+    change_review_date = CopyFromDateField(null=True)
+    prestart_rev_date = CopyFromDateField(null=True)
+    comp_audit_date = CopyFromDateField(null=True)
+    audit_comp_date = CopyFromDateField(null=True)
+    inc_invest_date = CopyFromDateField(null=True)
+    inc_change_date = CopyFromDateField(null=True)
+    part_review_date = CopyFromDateField(null=True)
+    hotwork_rev_date = CopyFromDateField(null=True)
+    con_safety_date = CopyFromDateField(null=True)
+    con_eval_date = CopyFromDateField(null=True)
     cbi_flag = CopyFromBooleanField()
 
     # TODO AGGREGATE
@@ -271,34 +243,85 @@ class PreventionProgram3(BaseRMPModel):
     # num_prev3text = CopyFromIntegerField()
     # num_prev3_text = CopyFromIntegerField()
 
-    source_file = 'rmp_prevent_3'
-
 
 class EmergencyResponse(BaseRMPModel):
-    id = CopyFromIntegerField(
+    facility = CopyFromOneToOneField(
+        'Facility',
         primary_key=True,
-        source_column='rmp_id',
+        on_delete=models.PROTECT,
     )
-    community_erp_yn = CopyFromBooleanField()
-    facility_erp_yn = CopyFromBooleanField()
-    erp_specific_yn = CopyFromBooleanField()
-    erp_inform_yn = CopyFromBooleanField()
-    erp_inform_hth_yn = CopyFromBooleanField()
-    # erp_review_date = CopyFromDateTimeField(blank=True)
-    # erp_training_date = CopyFromDateTimeField(blank=True)
-    erp_review_date = CopyFromCharField(max_length=10, blank=True)
-    erp_training_date = CopyFromCharField(max_length=10, blank=True)
-    coord_agency= CopyFromCharField(max_length=250, blank=True)
-    coord_phone = CopyFromCharField(max_length=10, blank=True)
-    subto_osha191038 = CopyFromBooleanField()
-    subto_osha191020 = CopyFromBooleanField()
-    subto_cwa112 = CopyFromBooleanField()
-    subto_rcra264= CopyFromBooleanField()
-    subto_opa90 = CopyFromBooleanField()
-    subto_state_epcra = CopyFromBooleanField()
-    subto_other = CopyFromCharField(max_length=200, blank=True)
+    community_erp_yn = CopyFromBooleanField(
+        source_column='ER_CommunityPlan',
+    )
+    facility_erp_yn = CopyFromBooleanField(
+        source_column='ER_FacilityPlan',
+    )
+    erp_specific_yn = CopyFromBooleanField(
+        source_column='ER_ResponseActions',
+    )
+    erp_inform_yn = CopyFromBooleanField(
+        source_column='ER_PublicInfoProcedures',
+    )
+    erp_inform_hth_yn = CopyFromBooleanField(
+        source_column='ER_EmergencyHealthCare',
+    )
+    erp_review_date = CopyFromDateField(
+        source_column='ER_ReviewDate',
+        blank=True,
+        null=True,
+    )
+    erp_training_date = CopyFromDateField(
+        source_column='ERTrainingDate',
+        blank=True,
+        null=True,
+    )
+    coord_agency= CopyFromCharField(
+        source_column='CoordinatingAgencyName',
+        max_length=250,
+        blank=True,
+    )
+    coord_phone = CopyFromCharField(
+        source_column='CoordinatingAgencyPhone',
+        max_length=10,
+        blank=True,
+    )
+    subto_osha191038 = CopyFromBooleanField(
+        source_column='FR_OSHA1910_38',
+    )
+    subto_osha191020 = CopyFromBooleanField(
+        source_column='FR_OSHA1910_120',
+    )
+    subto_cwa112 = CopyFromBooleanField(
+        source_column='FR_SPCC',
+    )
+    subto_rcra264= CopyFromBooleanField(
+        source_column='FR_RCRA',
+    )
+    subto_opa90 = CopyFromBooleanField(
+        source_column='FR_OPA90',
+    )
+    subto_state_epcra = CopyFromBooleanField(
+        source_column='FR_EPCRA',
+    )
+    subto_other = CopyFromCharField(
+        source_column='FR_OtherRegulation',
+        max_length=200,
+        blank=True,
+    )
 
-    source_file = 'rmp_response'
+    @classmethod
+    def get_transform_queryset(self):
+        m = raw_models.tblS9EmergencyResponses
+
+        annotations = m.get_renamed_fields()
+        annotations['erp_review_date'] = Cast(
+            'ER_ReviewDate', CopyFromDateField()
+        )
+        annotations['erp_training_date'] = Cast(
+            'ERTrainingDate', CopyFromDateField()
+        )
+
+        return m.objects.annotate(**annotations)
 
 
 class ProcNaics(BaseRMPModel):
@@ -308,70 +331,74 @@ class ProcNaics(BaseRMPModel):
     )
     process = CopyFromForeignKey(
         'Process',
-        on_delete=models.CASCADE
+        on_delete=models.PROTECT,
     )
     naics = CopyFromIntegerField()
     # num_prevent_2 = CopyFromIntegerField()
     # num_prevent_3 = CopyFromIntegerField()
-
-    source_file = 'rmp_proc_naics'
 
 
 class Prev2Text(BaseRMPModel):
     prevent_2 = CopyFromOneToOneField(
         'PreventionProgram2',
         primary_key=True,
-        on_delete=models.CASCADE,
+        on_delete=models.PROTECT,
         source_column='prevent_2_id',
     )
     desctext = CopyFromTextField()
-
-    source_file = 'rmp_prev2text'
 
 
 class Prev3Text(BaseRMPModel):
     prevent_3 = CopyFromOneToOneField(
         'PreventionProgram3',
         primary_key=True,
-        on_delete=models.CASCADE,
+        on_delete=models.PROTECT,
         source_column='prevent_3_id',
     )
     desctext = CopyFromTextField()
-
-    source_file = 'rmp_prev3text'
 
 
 class Prevent2Chem(BaseRMPModel):
     id = CopyFromIntegerField(
         primary_key=True,
-        source_column='primary_key',
+        source_column='PrimaryKey',
     )
     prevent_2 = CopyFromForeignKey(
         'PreventionProgram2',
-        on_delete=models.CASCADE,
-        source_column='prevent_2_id',
+        on_delete=models.PROTECT,
+        source_column='PreventionProgram2ID',
     )
     procchem = CopyFromForeignKey(
         'ProcChem',
-        on_delete=models.CASCADE
+        on_delete=models.PROTECT,
+        source_column='ProcessChemicalID',
     )
 
-    source_file = 'rmp_prevent_2_chem'
+    @classmethod
+    def get_transform_queryset(self):
+        m = raw_models.tblS8_Prevention_Program_Chemicals
+
+        return m.objects.get_default_transform_queryset()
 
 
 class Prevent3Chem(BaseRMPModel):
     id = CopyFromIntegerField(
         primary_key=True,
-        source_column='primary_key',
+        source_column='PrimaryKey',
     )
     prevent_3 = CopyFromForeignKey(
         'PreventionProgram3',
-        on_delete=models.CASCADE,
-        source_column='prevent_3_id',
+        on_delete=models.PROTECT,
+        source_column='PreventionProgram3ID',
     )
     procchem = CopyFromForeignKey(
         'ProcChem',
-        on_delete=models.CASCADE
+        on_delete=models.PROTECT,
+        source_column='ProcessChemicalID',
     )
 
-    source_file = 'rmp_prevent_3_chem'
+    @classmethod
+    def get_transform_queryset(self):
+        m = raw_models.tblS7_Prevention_Program_Chemicals
+
+        return m.objects.get_default_transform_queryset()
