@@ -103,7 +103,6 @@ class Facility(BaseRMPModel):
     sortid_3 = CopyFromCharField(max_length=5)
     registered = CopyFromBooleanField(default=True)
     num_fte = CopyFromIntegerField(null=True)
-    # TODO AGGREGATE
     num_accident = CopyFromIntegerField(null=True)
     acc_flam_tot = CopyFromIntegerField(null=True)
     acc_toxic_tot = CopyFromIntegerField(null=True)
@@ -187,8 +186,9 @@ class Facility(BaseRMPModel):
 
 
 class Registration(BaseRMPModel):
-    rmp = CopyFromIntegerField(
-        primary_key=True
+    rmp_id = CopyFromIntegerField(
+        primary_key=True,
+        db_column='rmp_id',
     )
     facility_name = CopyFromCharField(max_length=255, blank=True)
     street_1 = CopyFromCharField(max_length=35, blank=True)
@@ -305,9 +305,15 @@ class Registration(BaseRMPModel):
     dereg_other = CopyFromCharField(max_length=80, blank=True)
 
     # TODO AGGREGATE
-    num_accident = CopyFromIntegerField(null=True)
+    num_accident_records = CopyFromIntegerField(null=True)
+    num_accident_actual = CopyFromIntegerField(null=True)
+    num_accident_divider = CopyFromIntegerField(null=True)
     num_facility = CopyFromIntegerField(null=True)
     num_process = CopyFromIntegerField(null=True)
+    num_proc_chem = CopyFromIntegerField(null=True)
+    num_acc_chem = CopyFromIntegerField(null=True)
+    num_proc_chem_tox = CopyFromIntegerField(null=True)
+    num_proc_chem_flam = CopyFromIntegerField(null=True)
     num_response = CopyFromIntegerField(null=True)
     num_chem_real = CopyFromIntegerField(null=True)
     num_worst_tox = CopyFromIntegerField(null=True)
@@ -318,6 +324,7 @@ class Registration(BaseRMPModel):
     num_prev_3 = CopyFromIntegerField(null=True)
     toxic_tot = CopyFromBigIntegerField(null=True)
     flam_tot = CopyFromBigIntegerField(null=True)
+    quantity_tot=CopyFromBigIntegerField(null=True)
     acc_flam_tot = CopyFromIntegerField(null=True)
     acc_toxic_tot = CopyFromIntegerField(null=True)
     acc_quantity_tot = CopyFromIntegerField(null=True)
@@ -327,113 +334,113 @@ class Registration(BaseRMPModel):
     property_damage = CopyFromIntegerField(null=True)
     county = CopyFromCharField(max_length=60, blank=True, null=True)
     foreign_country_tr = CopyFromCharField(max_length=60, blank=True, null=True)
-    num_proc_23 = CopyFromBigIntegerField(null=True)
-    toxic_tot_23 = CopyFromBigIntegerField(null=True)
-    flam_tot_23 = CopyFromBigIntegerField(null=True)
-    quantity_tot_23 = CopyFromBigIntegerField(null=True)
+    # num_proc_23 = CopyFromBigIntegerField(null=True)
+    # toxic_tot_23 = CopyFromBigIntegerField(null=True)
+    # flam_tot_23 = CopyFromBigIntegerField(null=True)
+    # quantity_tot_23 = CopyFromBigIntegerField(null=True)
     num_execsum = CopyFromIntegerField(null=True)
 
     @classmethod
     def get_transform_queryset(self):
-        qs = raw_models.tblS1Facilities.objects.values(
+        qs = raw_models.tblS1Facilities.objects.select_related('FacilityCountyFIPS_id').values(
             'FacilityID',
-            'FacilityName',
-            'FacilityStr1',
-            'FacilityStr2',
-            'FacilityCity',
-            'FacilityState',
-            'FacilityZipCode',
-            'Facility4DigitZipExt',
-            'FacilityCountyFIPS',
-            'LEPC',
-            'FacilityLatDecDegs',
-            'FacilityLongDecDegs',
-            'ValidLatLongFlag',
-            'LatLongMethod',
-            'LatLongDescription',
-            'FacilityURL',
-            'FacilityPhoneNumber',
-            'FacilityEmailAddress',
-            'FacilityDUNS',
-            'ParentCompanyName',
-            'Company2Name',
-            'CompanyDUNS',
-            'Company2DUNS',
-            'OperatorName',
-            'OperatorPhone',
-            'OperatorStr1',
-            'OperatorStr2',
-            'OperatorCity',
-            'OperatorStateFIPS',
-            'OperatorZipCode',
-            'OperatorZipCodeExt',
-            'RMPContact',
-            'RMPTitle',
-            'EmergencyContactName',
-            'EmergencyContactTitle',
-            'EmergencyContactPhone',
-            'Phone24',
-            'EmergencyContactExt_PIN',
-            'FTE',
-            'OtherEPAFacilityID',
-            'EPAFacilityID',
-            'OSHA_PSM',
-            'EPCRA_302',
-            'CAA_TitleV',
-            'ClearAirOpPermitID',
-            'SafetyInspectionDate',
-            'SafetyInspectionBy',
-            'OSHARanking',
-            'PredictiveFilingFlag',
-            'SubmissionType',
-            'RMPDescription',
-            'NoAccidents',
-            'ForeignStateProv',
-            'ForeignZipCode',
-            'ForeignCountry',
-            'CBI_Flag',
-            'CompletionCheckDate',
-            'ErrorReportDate',
-            'ReceiptDate',
-            'GraphicsIndicator',
-            'AttachmentsIndicator',
-            'CertificationReceivedFlag',
-            'SubmissionMethod',
-            'CBISubstantiationFlag',
-            'ElectronicWaiverReceivedFlag',
-            'PostmarkDate',
-            'RMPCompleteFlag',
-            'DeRegistrationDate',
-            'DeRegistrationEffectiveDate',
-            'AnniversaryDate',
-            'CBIFlag',
-            'CBIUnsanitizedVersionFlag',
-            'VersionNumber',
-            'FRS_Lat',
-            'FRS_Long',
-            'FRS_Description',
-            'FRS_Method',
-            'HorizontalAccMeasure',
-            'HorizontalRefDatumCode',
-            'SourceMapScaleNumber',
-            'EmergencyContactEmail',
-            'RMPPreparerName',
-            'RMPPreparerStreet1',
-            'RMPPreparerStreet2',
-            'RMPPreparerCity',
-            'RMPPreparerState',
-            'RMPPreparerZIP',
-            'RMPPreparerZIP4Ext',
-            'RMPPreparerTelephone',
-            'RMPPreparerForeignStateOrProvince',
-            'RMPPreparerForeignCountry',
-            'RMPPreparerForeignPostalCode',
-            'RMPSubmissionReasonCode',
-            'RMPEmail',
-            'DeregistrationReasonCode',
-            'DeregistrationReasonOtherText',
+            # 'FacilityName',
+            # 'FacilityStr1',
+            # 'FacilityStr2',
+            # 'FacilityCity',
+            # 'FacilityState',
+            # 'FacilityZipCode',
+            # 'Facility4DigitZipExt',
+            # 'FacilityCountyFIPS',
+            # 'LEPC',
+            # 'FacilityLatDecDegs',
+            # 'FacilityLongDecDegs',
+            # 'ValidLatLongFlag',
+            # 'LatLongMethod',
+            # 'LatLongDescription',
+            # 'FacilityURL',
+            # 'FacilityPhoneNumber',
+            # 'FacilityEmailAddress',
+            # 'FacilityDUNS',
+            # 'ParentCompanyName',
+            # 'Company2Name',
+            # 'CompanyDUNS',
+            # 'Company2DUNS',
+            # 'OperatorName',
+            # 'OperatorPhone',
+            # 'OperatorStr1',
+            # 'OperatorStr2',
+            # 'OperatorCity',
+            # 'OperatorStateFIPS',
+            # 'OperatorZipCode',
+            # 'OperatorZipCodeExt',
+            # 'RMPContact',
+            # 'RMPTitle',
+            # 'EmergencyContactName',
+            # 'EmergencyContactTitle',
+            # 'EmergencyContactPhone',
+            # 'Phone24',
+            # 'EmergencyContactExt_PIN',
+            # 'FTE',
+            # 'OtherEPAFacilityID',
+            # 'EPAFacilityID',
+            # 'OSHA_PSM',
+            # 'EPCRA_302',
+            # 'CAA_TitleV',
+            # 'ClearAirOpPermitID',
+            # 'SafetyInspectionDate',
+            # 'SafetyInspectionBy',
+            # 'OSHARanking',
+            # 'PredictiveFilingFlag',
+            # 'SubmissionType',
+            # 'RMPDescription',
+            # 'NoAccidents',
+            # 'ForeignStateProv',
+            # 'ForeignZipCode',
+            # 'ForeignCountry',
+            # 'CBI_Flag',
+            # 'CompletionCheckDate',
+            # 'ErrorReportDate',
+            # 'ReceiptDate',
+            # 'GraphicsIndicator',
+            # 'AttachmentsIndicator',
+            # 'CertificationReceivedFlag',
+            # 'SubmissionMethod',
+            # 'CBISubstantiationFlag',
+            # 'ElectronicWaiverReceivedFlag',
+            # 'PostmarkDate',
+            # 'RMPCompleteFlag',
+            # 'DeRegistrationDate',
+            # 'DeRegistrationEffectiveDate',
+            # 'AnniversaryDate',
+            # 'CBIFlag',
+            # 'CBIUnsanitizedVersionFlag',
+            # 'VersionNumber',
+            # 'FRS_Lat',
+            # 'FRS_Long',
+            # 'FRS_Description',
+            # 'FRS_Method',
+            # 'HorizontalAccMeasure',
+            # 'HorizontalRefDatumCode',
+            # 'SourceMapScaleNumber',
+            # 'EmergencyContactEmail',
+            # 'RMPPreparerName',
+            # 'RMPPreparerStreet1',
+            # 'RMPPreparerStreet2',
+            # 'RMPPreparerCity',
+            # 'RMPPreparerState',
+            # 'RMPPreparerZIP',
+            # 'RMPPreparerZIP4Ext',
+            # 'RMPPreparerTelephone',
+            # 'RMPPreparerForeignStateOrProvince',
+            # 'RMPPreparerForeignCountry',
+            # 'RMPPreparerForeignPostalCode',
+            # 'RMPSubmissionReasonCode',
+            # 'RMPEmail',
+            # 'DeregistrationReasonCode',
+            # 'DeregistrationReasonOtherText',
         ).annotate(
-            rmp=F('FacilityID'),
+            rmp_id=F('FacilityID'),
             facility_name=F('FacilityName'),
             street_1=F('FacilityStr1'),
             street_2=F('FacilityStr2'),
@@ -529,60 +536,77 @@ class Registration(BaseRMPModel):
             rmp_email=F('RMPEmail'),
             dereg_reason=F('DeregistrationReasonCode'),
             dereg_other=F('DeregistrationReasonOtherText'),
-            num_accident=Count('tbls6accidenthistory__FacilityID'),
-            num_facility=Count('tblfacility__FacilityID'),
-            num_process=Count('tbls1processes__FacilityID'),
-            num_response=Count('tbls9emergencyresponses__FacilityID'),
-            num_chem_real=Count(Case(When(tbls1processes__tbls1processchemicals__ChemicalID__gt=0, then=('tbls1processes__tbls1processchemicals')))),
-            num_worst_tox=Count('tbls1processes__tbls1processchemicals__tbls2toxicsworstcase__ProcessChemicalID'),
-            num_alt_tox=Count('tbls1processes__tbls1processchemicals__tbls3toxicsaltreleases__ProcessChemicalID'),
-            num_worst_flam=Count('tbls1processes__tbls1processchemicals__tbls4flammablesworstcase'),
-            num_alt_flam=Count('tbls1processes__tbls1processchemicals__tbls5flammablesaltreleases'),
-            num_prev_2=Count('tbls1processes__tbls1process_naics__tbls8preventionprogram2'),
-            num_prev_3=Count('tbls1processes__tbls1process_naics__tbls7preventionprogram3'),
-            toxic_tot=Sum(Case(When(tbls1processes__tbls1processchemicals__ChemicalID__ChemType='F', then=('tbls1processes__tbls1processchemicals__Quantity')), default=Value(0))),
-            flam_tot=Sum(Case(When(tbls1processes__tbls1processchemicals__ChemicalID__ChemType='T', then=('tbls1processes__tbls1processchemicals__Quantity')), default=Value(0))),
-            acc_flam_tot=Sum(Case(When(tbls6accidenthistory__tbls6accidentchemicals__ChemicalID__ChemType='F', then=('tbls6accidenthistory__tbls6accidentchemicals__QuantityReleased')), default=Value(0))),
-            acc_toxic_tot=Sum(Case(When(tbls6accidenthistory__tbls6accidentchemicals__ChemicalID__ChemType='T', then=('tbls6accidenthistory__tbls6accidentchemicals__QuantityReleased')), default=Value(0))),
+            num_accident_records=Count('tbls6accidenthistory',),
+            num_accident_actual=Count('tbls6accidenthistory', distinct=True,),
+            num_accident_divider=Case(When(num_accident_actual=0, then=1), default=F('num_accident_records') / F('num_accident_actual')),
+            num_facility=Count('tblfacility', distinct=True,),
+            num_process=Count('tbls1processes', distinct=True,),
+            num_proc_chem=Count('tbls1processes__tbls1processchemicals'),
+            num_acc_chem=Count('tbls6accidenthistory__tbls6accidentchemicals'),
+            num_response=Count('tbls9emergencyresponses', distinct=True),
+            num_chem_real=Count(Case(When(tbls1processes__tbls1processchemicals__ChemicalID__gt=Value(0), then=('tbls1processes__tbls1processchemicals'))), distinct=True),
+            num_proc_chem_tox=(F('num_proc_chem') / F('num_chem_real'))/2,
+            num_proc_chem_flam=(F('num_proc_chem') / F('num_chem_real'))/2,
+            num_worst_tox=Count('tbls1processes__tbls1processchemicals__tbls2toxicsworstcase__ProcessChemicalID', distinct=True),
+            num_alt_tox=Count('tbls1processes__tbls1processchemicals__tbls3toxicsaltreleases__ProcessChemicalID', distinct=True),
+            num_worst_flam=Count('tbls1processes__tbls1processchemicals__tbls4flammablesworstcase', distinct=True),
+            num_alt_flam=Count('tbls1processes__tbls1processchemicals__tbls5flammablesaltreleases', distinct=True),
+            num_prev_2=Count('tbls1processes__tbls1process_naics__tbls8preventionprogram2', distinct=True),
+            num_prev_3=Count('tbls1processes__tbls1process_naics__tbls7preventionprogram3', distinct=True),
+            toxic_tot=Sum(Case(When(tbls1processes__tbls1processchemicals__ChemicalID__ChemType='T', then=F('tbls1processes__tbls1processchemicals__Quantity')), default=Value(0), output_field=CopyFromIntegerField())) / F('num_proc_chem_tox'),
+            flam_tot=Sum(Case(When(tbls1processes__tbls1processchemicals__ChemicalID__ChemType='F', then=F('tbls1processes__tbls1processchemicals__Quantity')), default=Value(0), output_field=CopyFromIntegerField())) / F('num_proc_chem_flam'),
+            quantity_tot=F('toxic_tot') + F('flam_tot'),
+            acc_flam_tot=Sum(Case(When(tbls6accidenthistory__tbls6accidentchemicals__ChemicalID__ChemType='F', then=('tbls6accidenthistory__tbls6accidentchemicals__QuantityReleased')), default=Value(0), output_field=CopyFromIntegerField())) / F('num_accident_divider'),
+            acc_toxic_tot=Sum(Case(When(tbls6accidenthistory__tbls6accidentchemicals__ChemicalID__ChemType='T', then=('tbls6accidenthistory__tbls6accidentchemicals__QuantityReleased')), default=Value(0), output_field=CopyFromIntegerField())) / F('num_accident_divider'),
             acc_quantity_tot=F('acc_flam_tot') + F('acc_toxic_tot'),
-            num_deaths=F('tbls6accidenthistory__DeathsWorkers') + F('tbls6accidenthistory__DeathsPublicResponders') + F('tbls6accidenthistory__DeathsPublic'),
-            num_injuries=F('tbls6accidenthistory__InjuriesPublic') + F('tbls6accidenthistory__InjuriesWorkers') + F('tbls6accidenthistory__InjuriesPublicResponders'),
-            num_evacuated=F('tbls6accidenthistory__Evacuated'),
-            property_damage=F('tbls6accidenthistory__OnsitePropertyDamage') + F('tbls6accidenthistory__OffsitePropertyDamage'),
+            num_deaths=Sum(F('tbls6accidenthistory__DeathsWorkers') + F('tbls6accidenthistory__DeathsPublicResponders') + F('tbls6accidenthistory__DeathsPublic'), default=Value(0), output_field=CopyFromIntegerField()) / F('num_accident_divider'),
+            num_injuries=Sum(F('tbls6accidenthistory__InjuriesPublic') + F('tbls6accidenthistory__InjuriesWorkers') + F('tbls6accidenthistory__InjuriesPublicResponders'), default=Value(0), output_field=CopyFromIntegerField()) / F('num_accident_divider'),
+            num_evacuated=Sum(F('tbls6accidenthistory__Evacuated'), output_field=CopyFromIntegerField()) / F('num_accident_divider'),
+            property_damage=Sum(F('tbls6accidenthistory__OnsitePropertyDamage') + F('tbls6accidenthistory__OffsitePropertyDamage'), output_field=CopyFromIntegerField()) / F('num_accident_divider'),
             county=F('FacilityCountyFIPS'),
             foreign_country_tr=F('ForeignCountry'),
-            num_proc_23=Count(Case(When(Q(tbls1processes__ProgramLevel='2') | Q(tbls1processes__ProgramLevel='3'), then=('tbls1processes__tbls1processchemicals')))),
-            toxic_tot_23=Sum(Case(When((Q(tbls1processes__ProgramLevel='2') | Q(tbls1processes__ProgramLevel='3')) & Q(tbls1processes__tbls1processchemicals__ChemicalID__ChemType='T'), then=('tbls1processes__tbls1processchemicals__Quantity')))),
-            flam_tot_23=Sum(Case(When((Q(tbls1processes__ProgramLevel='2') | Q(tbls1processes__ProgramLevel='3')) & Q(tbls1processes__tbls1processchemicals__ChemicalID__ChemType='F'), then=('tbls1processes__tbls1processchemicals__Quantity')))),
-            quantity_tot_23=F('toxic_tot_23') + F('flam_tot_23'),
+            # num_proc_23=Count(Case(When(Q(tbls1processes__ProgramLevel='2') | Q(tbls1processes__ProgramLevel='3'), then=('tbls1processes__tbls1processchemicals')))),
+            # toxic_tot_23=Sum(Case(When((Q(tbls1processes__ProgramLevel='2') | Q(tbls1processes__ProgramLevel='3')) & Q(tbls1processes__tbls1processchemicals__ChemicalID__ChemType='T'), then=('tbls1processes__tbls1processchemicals__Quantity')))),
+            # flam_tot_23=Sum(Case(When((Q(tbls1processes__ProgramLevel='2') | Q(tbls1processes__ProgramLevel='3')) & Q(tbls1processes__tbls1processchemicals__ChemicalID__ChemType='F'), then=('tbls1processes__tbls1processchemicals__Quantity')))),
+            # quantity_tot_23=F('toxic_tot_23') + F('flam_tot_23'),
             num_execsum=Count('tblexecutivesummaries'),
+
+            # annotate(
+            #     county=Subquery(
+            #         raw_models.tlkpCountyFIPSCodes.objects.filter(
+            #             StateCounty_Code=OuterRef('FacilityCountyFIPS')
+            #         ).values('StateCounty_Code').annotate(
+            #             county=F('County_Name'),
+            #         ).values('county')
+            #     )
+            # )
+
         )
-        print(qs.query)
         return qs
 
-        class State(BaseRMPModel):
-            code = CopyFromCharField(
-                max_length=2,
-                unique=True,
-            )
-            total_facilities = CopyFromIntegerField()
-            total_accidents = CopyFromIntegerField()
-            total_deaths = CopyFromIntegerField()
-            total_injuries = CopyFromIntegerField()
-            total_evacuated = CopyFromIntegerField()
-            total_property_damage = CopyFromIntegerField()
+class State(BaseRMPModel):
+    code = CopyFromCharField(
+        max_length=2,
+        unique=True,
+    )
+    total_facilities = CopyFromIntegerField()
+    total_accidents = CopyFromIntegerField()
+    total_deaths = CopyFromIntegerField()
+    total_injuries = CopyFromIntegerField()
+    total_evacuated = CopyFromIntegerField()
+    total_property_damage = CopyFromIntegerField()
 
-            @classmethod
-            def get_transform_queryset(self):
-                qs = Facility.objects.filter(registered=True).values(
-                        'state'
-                    ).annotate(
-                    code=F('state'),
-                    total_facilities=Count('id'),
-                    total_accidents=Sum('num_accident'),
-                    total_deaths=Sum('num_deaths'),
-                    total_injuries=Sum('num_injuries'),
-                    total_evacuated=Sum('num_evacuated'),
-                    total_property_damage=Sum('property_damage'),
-                ).order_by('state')
-            return qs
+    @classmethod
+    def get_transform_queryset(self):
+        qs = Facility.objects.filter(registered=True).values(
+                'state'
+            ).annotate(
+            code=F('state'),
+            total_facilities=Count('id'),
+            total_accidents=Sum('num_accident'),
+            total_deaths=Sum('num_deaths'),
+            total_injuries=Sum('num_injuries'),
+            total_evacuated=Sum('num_evacuated'),
+            total_property_damage=Sum('property_damage'),
+        ).order_by('state')
+        return qs

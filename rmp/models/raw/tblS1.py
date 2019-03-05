@@ -729,6 +729,8 @@ class tblS1ProcessChemicals(BaseRMPModel):
         help_text='An indication that the quantity was claimed as CBI.',
     )
 
+    source_file = "tblS1ProcessChemicals"
+
     class Meta:
         verbose_name = 'Process: Chemical'
         verbose_name_plural = 'Process: Chemicals'
