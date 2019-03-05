@@ -113,26 +113,14 @@ class Facility(BaseRMPModel):
     @classmethod
     def get_transform_queryset(self):
         qs = raw_models.tblFacility.objects.filter(
-            tbls1facilities__ReceiptDate=Subquery(
+            tbls1facilities__FacilityID=Subquery(
                 raw_models.tblS1Facilities.objects.filter(
                     EPAFacilityID=OuterRef('EPAFacilityID'),
-                ).values('ReceiptDate').annotate(
-                    max_sub_date=Max('ReceiptDate')
+                ).values('FacilityID').annotate(
+                    max_sub_date=Max('FacilityID')
                 ).values('max_sub_date').order_by('-max_sub_date')[:1]
             )
-        ).values(
-            'EPAFacilityID',
-            # 'FacilityName',
-            'FacilityID',
-            # 'FacilityStr1',
-            # 'FacilityStr2',
-            # 'FacilityCity',
-            # 'FacilityState',
-            # 'FacilityZipCode',
-            # 'Facility4DigitZipExt',
-            # 'FacilityCountyFIPS',
-            # 'CountOfFacilityID',
-        ).distinct().annotate(
+        ).annotate(
             id=F('EPAFacilityID'),
             facility_name=F('FacilityName'),
             rmp_id=F('FacilityID'),
@@ -616,7 +604,7 @@ class State(BaseRMPModel):
             ).annotate(
             code=F('state'),
             total_facilities=Count('id'),
-            total_accidents=Sum('num_accident'),
+            total_accidents=Sum('num_accident_actual'),
             total_deaths=Sum('num_deaths'),
             total_injuries=Sum('num_injuries'),
             total_evacuated=Sum('num_evacuated'),
