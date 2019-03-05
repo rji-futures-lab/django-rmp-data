@@ -49,25 +49,21 @@ class Facility(BaseRMPModel):
     state = CopyFromCharField(max_length=2)
     zip_code = CopyFromCharField(
         max_length=5,
-        source_column='zip',
     )
     zip_ext = CopyFromCharField(max_length=4)
     county_fips = CopyFromIntegerField()
     num_registrations = CopyFromIntegerField()
     latitude = CopyFromDecimalField(
-        source_column='latitude_dec',
         max_digits=6,
         decimal_places=3,
     )
     longitude = CopyFromDecimalField(
-        source_column='longitude_dec',
         max_digits=6,
         decimal_places=3,
     )
-    num_registration = CopyFromIntegerField()
     sub_type = CopyFromCharField(max_length=1, blank=True)
     sub_date = CopyFromDateTimeField()
-    exec_type = CopyFromCharField(max_length=1, blank=True)
+    # exec_type = CopyFromCharField(max_length=1, blank=True) **** This field is nowhere to be found in codes or in tblS1Facilities
     execsum_rmp = CopyFromForeignKey(
         'ExecutiveSummary',
         on_delete=models.PROTECT,
@@ -93,17 +89,19 @@ class Facility(BaseRMPModel):
     toxic_tot = CopyFromIntegerField()
     flam_tot = CopyFromBigIntegerField()
     quantity_tot = CopyFromBigIntegerField() # toxic_tot + flam_tot
-    num_proc_23 = CopyFromBigIntegerField()
-    toxic_tot_23 = CopyFromIntegerField()
-    flam_tot_23 = CopyFromBigIntegerField()
-    quantity_tot_23 = CopyFromBigIntegerField() # toxic_tot + flam_tot
-    all_naics = CopyFromCharField(max_length=20, blank=True)
-    sortid_1 = CopyFromCharField(max_length=5)
-    sortid_2 = CopyFromCharField(max_length=5)
-    sortid_3 = CopyFromCharField(max_length=5)
+    # num_proc_23 = CopyFromBigIntegerField()
+    # toxic_tot_23 = CopyFromIntegerField()
+    # flam_tot_23 = CopyFromBigIntegerField()
+    # quantity_tot_23 = CopyFromBigIntegerField() # toxic_tot + flam_tot
+    # all_naics = CopyFromCharField(max_length=20, blank=True)
+    # sortid_1 = CopyFromCharField(max_length=5)
+    # sortid_2 = CopyFromCharField(max_length=5)
+    # sortid_3 = CopyFromCharField(max_length=5)
     registered = CopyFromBooleanField(default=True)
     num_fte = CopyFromIntegerField(null=True)
-    num_accident = CopyFromIntegerField(null=True)
+    num_accident_actual = CopyFromIntegerField(null=True)
+    num_accident_records = CopyFromIntegerField(null=True)
+    num_accident_divider = CopyFromIntegerField(null=True)
     acc_flam_tot = CopyFromIntegerField(null=True)
     acc_toxic_tot = CopyFromIntegerField(null=True)
     acc_quantity_tot = CopyFromIntegerField(null=True)
@@ -112,70 +110,85 @@ class Facility(BaseRMPModel):
     num_evacuated = CopyFromIntegerField(null=True)
     property_damage = CopyFromIntegerField(null=True)
 
-    # @classmethod
-    # def get_transform_queryset(self):
-    #     qs = raw_models.tblExecutiveSummaries.objects.filter(
-    #         ESSeqNum=Subquery(
-    #             raw_models.tblExecutiveSummaries.objects.filter(
-    #                 FacilityID=OuterRef('FacilityID'),
-    #             ).values('FacilityID_id').annotate(
-    #                 max_seqnum=Max('ESSeqNum')
-    #             ).values('max_seqnum')[:1]
-    #         )
-    #     ).annotate(
-    #         facility_id=F('EPAFacilityID'),
-    #         facility_name=F('FacilityName'),
-    #         rmp_id=F('FacilityID'),
-    #         street_1=F('FacilityStr1'),
-    #         street_2=F('FacilityStr2'),
-    #         city=F('FacilityCity'),
-    #         state=F('FacilityState'),
-    #         zip_code=F('FacilityZipCode'),
-    #         zip_ext=F('Facility4DigitZipExt'),
-    #         county_fips=F('FacilityCountyFIPS'),
-    #         num_registrations=F('CountOfFacilityID'),
-    #         latitude=F('latitude'),
-    #         longitude=F('longitude'),
-    #         num_registration=F('num_registration'),
-    #         sub_type=F('sub_type'),
-    #         sub_date=F('sub_date'),
-    #         exec_type=F('exec_type'),
-    #         execsum_rmp=F('execsum_rmp'),
-    #         exec_sub_type=F('exec_sub_type'),
-    #         exec_sub_date=F('exec_sub_date'),
-    #         deregistration_date=F('deregistration_date'),
-    #         dereg_effect_date=F('dereg_effect_date'),
-    #         parent=F('parent'),
-    #         parent_2=F('parent_2'),
-    #         operator_name=F('operator_name'),
-    #         operator_city=F('operator_city'),
-    #         operator_state=F('operator_state'),
-    #         operator_zip=F('operator_zip'),
-    #         province=F('province'),
-    #         county=F('county'),
-    #         country=F('country'),
-    #         sub_reason=F('sub_reason'),
-    #         dereg_reason=F('dereg_reason'),
-    #         dereg_other=F('dereg_other'),
-    #         toxic_tot=F('toxic_tot'),
-    #         flam_tot=F('flam_tot'),
-    #         quantity_tot=F('quantity_tot'),
-    #         num_proc_23=F('num_proc_23'),
-    #         toxic_tot_23=F('toxic_tot_23'),
-    #         flam_tot_23=F('flam_tot_23'),
-    #         quantity_tot_23=F('quantity_tot_23'),
-    #         all_naics=F('all_naics'),
-    #         num_accident=F('num_accident'),
-    #         acc_flam_tot=F('acc_flam_tot'),
-    #         acc_toxic_tot=F('acc_toxic_tot'),
-    #         acc_quantity_tot=F('acc_quantity_tot'),
-    #         num_deaths=F('num_deaths'),
-    #         num_injuries=F('num_injuries'),
-    #         num_evacuated=F('num_evacuated'),
-    #         property_damage=F('property_damage'),
-    #     )
-    #
-    #     return qs
+    @classmethod
+    def get_transform_queryset(self):
+        qs = raw_models.tblFacility.objects.filter(
+            tbls1facilities__ReceiptDate=Subquery(
+                raw_models.tblS1Facilities.objects.filter(
+                    EPAFacilityID=OuterRef('EPAFacilityID'),
+                ).values('ReceiptDate').annotate(
+                    max_sub_date=Max('ReceiptDate')
+                ).values('max_sub_date').order_by('-max_sub_date')[:1]
+            )
+        ).values(
+            'EPAFacilityID',
+            # 'FacilityName',
+            'FacilityID',
+            # 'FacilityStr1',
+            # 'FacilityStr2',
+            # 'FacilityCity',
+            # 'FacilityState',
+            # 'FacilityZipCode',
+            # 'Facility4DigitZipExt',
+            # 'FacilityCountyFIPS',
+            # 'CountOfFacilityID',
+        ).distinct().annotate(
+            id=F('EPAFacilityID'),
+            facility_name=F('FacilityName'),
+            rmp_id=F('FacilityID'),
+            street_1=F('FacilityStr1'),
+            street_2=F('FacilityStr2'),
+            city=F('FacilityCity'),
+            state=F('FacilityState'),
+            zip_code=F('FacilityZipCode'),
+            zip_ext=F('Facility4DigitZipExt'),
+            county_fips=F('FacilityCountyFIPS'),
+            num_registrations=F('CountOfFacilityID'),
+            latitude=F('tbls1facilities__FacilityLatDecDegs'),
+            longitude=F('tbls1facilities__FacilityLongDecDegs'),
+            sub_type=F('tbls1facilities__SubmissionType'),
+            sub_date=F('tbls1facilities__ReceiptDate'),
+            # exec_type=F('exec_type'),
+            execsum_rmp_id=F('FacilityID'),
+            exec_sub_type=F('tbls1facilities__SubmissionType'),
+            exec_sub_date=F('tbls1facilities__ReceiptDate'),
+            deregistration_date=F('tbls1facilities__DeRegistrationDate'),
+            dereg_effect_date=F('tbls1facilities__DeRegistrationEffectiveDate'),
+            parent=F('tbls1facilities__ParentCompanyName'),
+            parent_2=F('tbls1facilities__Company2Name'),
+            operator_name=F('tbls1facilities__OperatorName'),
+            operator_city=F('tbls1facilities__OperatorCity'),
+            operator_state=F('tbls1facilities__OperatorStateFIPS'),
+            operator_zip=F('tbls1facilities__OperatorZipCode'),
+            province=F('tbls1facilities__ForeignStateProv'),
+            county=F('tbls1facilities__FacilityCountyFIPS'),
+            country=F('tbls1facilities__ForeignCountry'),
+            sub_reason=F('tbls1facilities__RMPSubmissionReasonCode'),
+            dereg_reason=F('tbls1facilities__DeregistrationReasonCode'),
+            dereg_other=F('tbls1facilities__DeregistrationReasonOtherText'),
+            toxic_tot=Sum(Case(When(tbls1facilities__tbls1processes__tbls1processchemicals__ChemicalID__ChemType='T', then=F('tbls1facilities__tbls1processes__tbls1processchemicals__Quantity')), default=Value(0), output_field=CopyFromIntegerField())),
+            flam_tot=Sum(Case(When(tbls1facilities__tbls1processes__tbls1processchemicals__ChemicalID__ChemType='F', then=F('tbls1facilities__tbls1processes__tbls1processchemicals__Quantity')), default=Value(0), output_field=CopyFromIntegerField())),
+            quantity_tot=F('toxic_tot') + F('flam_tot'),
+            registered=Case(When(dereg_reason__gt=0, then=0), default=Value(1), output_field=CopyFromBooleanField()),
+            num_fte=F('tbls1facilities__FTE'),
+            # num_proc_23=F('num_proc_23'),
+            # toxic_tot_23=F('toxic_tot_23'),
+            # flam_tot_23=F('flam_tot_23'),
+            # quantity_tot_23=F('quantity_tot_23'),
+            all_naics=F('tbls1facilities__tbls1processes__tbls1process_naics__NAICSCode'),
+            num_accident_records=Count('tbls1facilities__tbls6accidenthistory',),
+            num_accident_actual=Count('tbls1facilities__tbls6accidenthistory', distinct=True,),
+            num_accident_divider=Case(When(num_accident_actual=0, then=1), default=F('num_accident_records') / F('num_accident_actual')),
+            acc_flam_tot=Sum(Case(When(tbls1facilities__tbls6accidenthistory__tbls6accidentchemicals__ChemicalID__ChemType='F', then=('tbls1facilities__tbls6accidenthistory__tbls6accidentchemicals__QuantityReleased')), default=Value(0), output_field=CopyFromIntegerField())) / F('num_accident_divider'),
+            acc_toxic_tot=Sum(Case(When(tbls1facilities__tbls6accidenthistory__tbls6accidentchemicals__ChemicalID__ChemType='T', then=('tbls1facilities__tbls6accidenthistory__tbls6accidentchemicals__QuantityReleased')), default=Value(0), output_field=CopyFromIntegerField())) / F('num_accident_divider'),
+            acc_quantity_tot=F('acc_flam_tot') + F('acc_toxic_tot'),
+            num_deaths=Sum(F('tbls1facilities__tbls6accidenthistory__DeathsWorkers') + F('tbls1facilities__tbls6accidenthistory__DeathsPublicResponders') + F('tbls1facilities__tbls6accidenthistory__DeathsPublic'), default=Value(0), output_field=CopyFromIntegerField()) / F('num_accident_divider'),
+            num_injuries=Sum(F('tbls1facilities__tbls6accidenthistory__InjuriesPublic') + F('tbls1facilities__tbls6accidenthistory__InjuriesWorkers') + F('tbls1facilities__tbls6accidenthistory__InjuriesPublicResponders'), default=Value(0), output_field=CopyFromIntegerField()) / F('num_accident_divider'),
+            num_evacuated=Sum(F('tbls1facilities__tbls6accidenthistory__Evacuated'), output_field=CopyFromIntegerField()) / F('num_accident_divider'),
+            property_damage=Sum(F('tbls1facilities__tbls6accidenthistory__OnsitePropertyDamage') + F('tbls1facilities__tbls6accidenthistory__OffsitePropertyDamage'), output_field=CopyFromIntegerField()) / F('num_accident_divider'),
+        )
+        print(qs.query)
+        return qs
 
     class Meta:
         indexes = [
