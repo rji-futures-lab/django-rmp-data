@@ -207,6 +207,7 @@ class tblS6AccidentHistory(BaseRMPModel):
         verbose_name = 'Accident History'
         verbose_name_plural = 'Accident History'
 
+
 class tblS6AccidentChemicals(BaseRMPModel):
     AccidentChemicalID = CopyFromIntegerField(
         primary_key=True,
