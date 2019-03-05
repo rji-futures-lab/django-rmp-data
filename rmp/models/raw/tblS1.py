@@ -729,6 +729,8 @@ class tblS1ProcessChemicals(BaseRMPModel):
         help_text='An indication that the quantity was claimed as CBI.',
     )
 
+    source_file = "tblS1ProcessChemicals"
+
     class Meta:
         verbose_name = 'Process: Chemical'
         verbose_name_plural = 'Process: Chemicals'
@@ -779,7 +781,7 @@ class tblS1Processes(BaseRMPModel):
         help_text='Optional Process Description.',
     )
     FacilityID = CopyFromForeignKey(
-        'tblFacility',
+        'tblS1Facilities',
         db_column='FacilityID',
         on_delete=models.PROTECT,
         verbose_name='Facility ID',

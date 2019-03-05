@@ -84,9 +84,7 @@ class Process(BaseRMPModel):
             ),
             quantity_tot=F('flam_tot') + F('toxic_tot'),
         )
-
         return qs
-
 
 class ProcChem(BaseRMPModel):
     procchem_id = CopyFromBigIntegerField(
@@ -131,6 +129,7 @@ class ProcChem(BaseRMPModel):
             process_id=F('ProcessID'),
             chemical_id=F('ChemicalID'),
             quantity_lbs=Cast('Quantity', CopyFromBigIntegerField()),
+            # quantity_lbs=F('Quantity'),
             cbi_flag=F('CBI_Flag'),
             num_alt_flam=Count('tbls5flammablesaltreleases'),
             num_alt_tox=Count('tbls3toxicsaltreleases'),
@@ -142,7 +141,7 @@ class ProcChem(BaseRMPModel):
             cas=F('ChemicalID__CASNumber'),
             chemical_type=F('ChemicalID__ChemType'),
         )
-
+        print(qs.query)
         return qs
 
 

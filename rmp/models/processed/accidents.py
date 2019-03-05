@@ -435,7 +435,7 @@ class Accident(BaseRMPModel):
             num_injuries=F('InjuriesPublic') + F('InjuriesWorkers') + F('InjuriesPublicResponders'),
             num_evacuated=F('Evacuated'),
             property_damage=F('OnsitePropertyDamage') + F('OffsitePropertyDamage'),
-        ).order_by('accident_id')
+        )
         return qs
 
 
