@@ -52,6 +52,12 @@ class Process(BaseRMPModel):
 
     @classmethod
     def get_transform_queryset(self):
+        """
+        Top level table for Process. Aggregated fields are calculated similar to other tables. Fields with num_ are calculated by getting the count of
+        ProcessChemicalIDs from each table.
+
+        flam_tot and toxic_tot are calculated by generating the sum of process chemicals grouping by ProcessID. 
+        """
         qs = raw_models.tblS1Processes.objects.annotate(
             process_id=F('ProcessID'),
             process_desc=F('AltID'),
@@ -122,6 +128,10 @@ class ProcChem(BaseRMPModel):
 
     @classmethod
     def get_transform_queryset(self):
+        """
+        Process Chemicals contians 8 aggregated fields and a foreign key join to the tlkpChemicals table. All aggregated fields are getting counts of
+        ProcessChemicalID from alt_flam, alt_tox, preventionprogram2, preventionprogram3, process flam, worst case flammable and worst case toxic.
+        """
         qs = raw_models.tblS1ProcessChemicals.objects.select_related(
             'ChemicalID'
         ).annotate(
@@ -144,6 +154,9 @@ class ProcChem(BaseRMPModel):
 
 
 class ProcFlam(BaseRMPModel):
+    """
+    Bottom level table for process data tables.
+    """
     id = CopyFromIntegerField(
         primary_key=True,
         source_column='FlamMixChemID',

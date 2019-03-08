@@ -52,7 +52,7 @@ class Facility(BaseRMPModel):
         max_length=5,
     )
     zip_ext = CopyFromCharField(max_length=4)
-    county_fips = CopyFromIntegerField()
+    county_fips = CopyFromIntegerField(null=True, blank=True)
     num_registrations = CopyFromIntegerField()
     latitude = CopyFromDecimalField(
         max_digits=6,
@@ -99,10 +99,10 @@ class Facility(BaseRMPModel):
     # sortid_2 = CopyFromCharField(max_length=5)
     # sortid_3 = CopyFromCharField(max_length=5)
     registered = CopyFromBooleanField(default=True)
-    num_fte = CopyFromIntegerField(null=True)
-    num_accident_actual = CopyFromIntegerField(null=True)
-    num_accident_records = CopyFromIntegerField(null=True)
-    num_accident_divider = CopyFromIntegerField(null=True)
+    num_fte = CopyFromIntegerField(null=True, blank=True)
+    num_accident_actual = CopyFromIntegerField()
+    num_accident_records = CopyFromIntegerField()
+    num_accident_divider = CopyFromIntegerField()
     acc_flam_tot = CopyFromIntegerField(null=True, blank=True)
     acc_toxic_tot = CopyFromIntegerField(null=True, blank=True)
     acc_quantity_tot = CopyFromIntegerField(null=True, blank=True)
@@ -113,6 +113,15 @@ class Facility(BaseRMPModel):
 
     @classmethod
     def get_transform_queryset(self):
+        """
+        Facility takes all of the raw data up to the num_registrations field. After that, the aggregated fields come from the facility's most recent
+        registration (the field is called sub_date in the processed model and ReceiptDate in the raw model).
+
+        Due to the nature of the foreign key relationships, I had to do the same calculations I did on Regisration as I did on Facility, calculating a
+        divider using the count of accidents on the accident table.
+
+        Again, problem fields on this model include all of the aggregated chemical quantity fields (anything with the _tot flag).
+        """
         qs = raw_models.tblFacility.objects.filter(
             tbls1facilities__FacilityID=Subquery(
                 raw_models.tblS1Facilities.objects.filter(
@@ -339,7 +348,21 @@ class Registration(BaseRMPModel):
 
     @classmethod
     def get_transform_queryset(self):
-        qs = raw_models.tblS1Facilities.objects.select_related('FacilityCountyFIPS_id').values(
+        """
+        This table is mapped to tblS1Facilities. All fields preceding num_accident_records are taken directly from the raw models.
+
+        Starting here is where the math gets wonky. I had to calculate two separate accident fields. One field is called num_accident_records which is the pure count of
+        records from the Accident table grouped by rmp_id. I then had to count the distinct amount of the same records, which is the actual amount of accidents.
+
+        I figured out that num_accident_records / num_accident_actual lead to a factor that gave me correct chemical totals. As we talked about at NICAR, this divider leads to correct calculations
+        about 70-75 percent of the time.
+
+        I had to do the same thing with the Process chemicals: Calculating the total number of process chemicals and then dividing that by the number of real chemicals.
+        Apparently there's a significant amount of Chemicals with the ID 0 - which acts as a flag. 
+
+        I had to use the num_accident_divider field to also calculate num_deaths, num_injuries, num_evacuated and property_damage. The group by in our ORM query multiplies those results fields also.
+        """
+        qs = raw_models.tblS1Facilities.objects.values(
             'FacilityID',
         ).annotate(
             rmp_id=F('FacilityID'),

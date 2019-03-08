@@ -80,6 +80,9 @@ class AccChem(BaseRMPModel):
 
     @classmethod
     def get_transform_queryset(self):
+        """
+        num_acc_fhem is calculated by getting the count of AccidentChemicalID from tblS6FlammableMixtureChemicals
+        """
         qs = raw_models.tblS6AccidentChemicals.objects.annotate(
             accchem_id=F('AccidentChemicalID'),
             accident_id=F('AccidentHistoryID'),
@@ -119,7 +122,9 @@ class AccFlam(BaseRMPModel):
     @classmethod
     def get_transform_queryset(self):
         m = raw_models.tblS6FlammableMixtureChemicals
-
+        """
+        Baseline table for accidents
+        """
         return m.objects.get_default_transform_queryset()
 
 
@@ -277,14 +282,16 @@ class Accident(BaseRMPModel):
 
     @classmethod
     def get_transform_queryset(self):
-
-        # flam = raw_models.tblS6AccidentChemicals.objects.filter(
-        #     Q(AccidentHistoryID = tbls6accidenthistory__AccidentHistoryID) & Q(ChemicalID__ChemType__startswith='F'),
-        # )
-        # tox = raw_models.tblS6AccidentChemicals.objects.filter(
-        #     Q(ChemicalID__ChemType__startswith='T'),
-        # )
-        #
+        """
+        This is the top level containing information about accidents at different facilities.
+        Aggregated fields:
+        num_acc_chem = Counts AccidentIDs in tblS6AccidentChemicals
+        flam_total, tox_total = Sums QuantityReleased column in accident chemicals depending on whether the ChemicalType flag is 'T' or 'F'
+        quantity_total = Sum of flam_total and tox_total for each accident
+        num_deaths = Sum of worker, public responder, and citizen deaths
+        num_injuries = Sum of worker, public responder, and citizen injuries. These fields already exist on the raw models.
+        property_damage = Sum of onsite and offsite property damage. Again, these fields already exist on the raw models.
+        """
         qs = raw_models.tblS6AccidentHistory.objects.values(
             'AccidentHistoryID',
             'FacilityID',
