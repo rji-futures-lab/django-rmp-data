@@ -141,7 +141,7 @@ class ProcChem(BaseRMPModel):
             cas=F('ChemicalID__CASNumber'),
             chemical_type=F('ChemicalID__ChemType'),
         )
-        print(qs.query)
+
         return qs
 
 
