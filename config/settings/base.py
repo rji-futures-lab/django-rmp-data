@@ -2,14 +2,28 @@
 Settings for the Django project that apply in any environment.
 """
 import os
-import environ
-env = environ.Env(DEBUG=(bool, False),) # set default values and casting
-environ.Env.read_env()
 
-ROOT_DIR = environ.Path(__file__) - 3
-APPS_DIR = ROOT_DIR.path('rmp')
+DEBUG = False
 
-SECRET_KEY = env('DJANGO_SECRET_KEY')
+ROOT_DIR = os.path.dirname(
+    os.path.dirname(
+        os.path.dirname(
+            os.path.abspath(__file__)
+        )
+    )
+)
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'rmp',
+        'USER': os.getenv('DB_USER', 'postgres'),
+        'PASSWORD': os.getenv('DB_PASSWORD', ''),
+        'HOST': os.getenv('DB_HOST', 'localhost'),
+        'PORT': os.getenv('DB_PORT', '5432'),
+    }
+}
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -39,7 +53,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(APPS_DIR, 'templates/rmp')
+            os.path.join(ROOT_DIR, 'rmp', 'templates/rmp')
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -87,12 +101,12 @@ LOGIN_URL = '/admin/login/'
 # STATIC
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#static-root
-STATIC_ROOT = str(ROOT_DIR('staticfiles'))
+STATIC_ROOT = os.path.join(ROOT_DIR, 'static')
 # https://docs.djangoproject.com/en/dev/ref/settings/#static-url
 STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#std:setting-STATICFILES_DIRS
 STATICFILES_DIRS = [
-    str(APPS_DIR.path('static')),
+    os.path.join(ROOT_DIR, 'rmp', 'static'),
 ]
 # https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#staticfiles-finders
 STATICFILES_FINDERS = [
@@ -103,6 +117,6 @@ STATICFILES_FINDERS = [
 # MEDIA
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#media-root
-MEDIA_ROOT = str(APPS_DIR('media'))
+MEDIA_ROOT = os.path.join(ROOT_DIR, 'media')
 # https://docs.djangoproject.com/en/dev/ref/settings/#media-url
 MEDIA_URL = '/media/'

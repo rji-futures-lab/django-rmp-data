@@ -4,15 +4,19 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-django-rmp-data = {editable = true, path = "."}
-django-debug-toolbar = "*"
+django = "*"
+django-environ = "*"
+django-postgres-copy = "*"
+zappa = "*"
+django-storages = "*"
 
 [dev-packages]
-ipython = "*"
-zappa = "*"
+django-debug-toolbar = "*"
 "flake8" = "*"
 "flake8-docstrings" = "*"
 python-coveralls = "*"
+ipython = "*"
+ipdb = "*"
 
 [requires]
 python_version = "3.6"
