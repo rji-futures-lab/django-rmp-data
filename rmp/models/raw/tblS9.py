@@ -3,7 +3,6 @@ from django.db import models
 from rmp.fields import (
     CopyFromBooleanField,
     CopyFromCharField,
-    CopyFromDateTimeField,
     CopyFromDecimalField,
     CopyFromForeignKey,
     CopyFromIntegerField,
@@ -17,6 +16,7 @@ class tblS9EmergencyResponses(BaseRMPModel):
         'tblS1Facilities',
         db_column='FacilityID',
         on_delete=models.PROTECT,
+        primary_key=True,
     )
     ER_CommunityPlan = CopyFromBooleanField(
     )
@@ -28,11 +28,13 @@ class tblS9EmergencyResponses(BaseRMPModel):
     )
     ER_EmergencyHealthCare = CopyFromBooleanField(
     )
-    ER_ReviewDate = CopyFromDateTimeField(
-        null=True,
+    ER_ReviewDate = CopyFromCharField(
+        blank=True,
+        max_length=17,
     )
-    ERTrainingDate = CopyFromDateTimeField(
-        null=True,
+    ERTrainingDate = CopyFromCharField(
+        blank=True,
+        max_length=17,
     )
     CoordinatingAgencyName = CopyFromCharField(
         max_length=250,

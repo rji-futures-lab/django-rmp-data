@@ -17,17 +17,17 @@ class tblS3ToxicsAltReleases(BaseRMPModel):
     )
     ProcessChemicalID = CopyFromForeignKey(
         'tblS1ProcessChemicals',
-        db_column='ProcessChemicalID',
         on_delete=models.PROTECT,
+        db_column='ProcessChemicalID',
     )
     PercentWeight = CopyFromFloatField(
         null=True,
     )
     PhysicalState = CopyFromForeignKey(
         'tlkpPhysicalStateCodes',
-        db_column='PhysicalState',
         on_delete=models.PROTECT,
         blank=True,
+        db_column='PhysicalState',
     )
     AnalyticalBasis = CopyFromCharField(
         max_length=255,
@@ -55,16 +55,14 @@ class tblS3ToxicsAltReleases(BaseRMPModel):
     )
     Topography = CopyFromForeignKey(
         'tlkpTopographyCode',
-        db_column='Topography',
         on_delete=models.PROTECT,
         blank=True,
+        db_column='Topography',
     )
     Distance2Endpoint = CopyFromFloatField(
-        source_column='Distance2Endpoint',
         null=True,
     )
     ResidentialPopulation = CopyFromBigIntegerField(
-        source_column='ResidentialPopulation',
         null=True,
     )
     PR_Schools = CopyFromBooleanField(

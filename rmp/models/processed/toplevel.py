@@ -4,8 +4,10 @@ Models for processed RMP data.
 import os
 from django.conf import settings
 from django.db import models
-from django.db.models import F, Max, OuterRef, Subquery, Sum, Count, Case, When, Value, Q
-from django.db.models.functions import Cast
+from django.db.models import (
+    F, Func, Max, OuterRef, Subquery, Sum, Count, Case, When, Value, Q
+)
+from django.db.models.functions import Cast, Coalesce
 from rmp.fields import (
     CopyFromBigIntegerField,
     CopyFromBooleanField,
@@ -22,6 +24,10 @@ from rmp.fields import (
 from rmp.models import raw as raw_models
 from rmp.models import processed as processed_models
 from rmp.models.base import BaseRMPModel
+
+
+class Round(Func):
+    function = 'ROUND'
 
 
 class Facility(BaseRMPModel):
@@ -52,7 +58,10 @@ class Facility(BaseRMPModel):
         max_length=5,
     )
     zip_ext = CopyFromCharField(max_length=4)
-    county_fips = CopyFromIntegerField(null=True, blank=True)
+    county_fips = CopyFromCharField(
+        max_length=5,
+        blank=True,
+    )
     num_registrations = CopyFromIntegerField()
     latitude = CopyFromDecimalField(
         max_digits=6,
@@ -72,8 +81,16 @@ class Facility(BaseRMPModel):
     exec_sub_type = CopyFromCharField(max_length=1, blank=True)
     exec_sub_date = CopyFromDateTimeField()
     # these fields could be converted to DateTime once we replace "0000-00-00" with NULL
-    deregistration_date = CopyFromCharField(max_length=10, null=True)
-    dereg_effect_date = CopyFromCharField(max_length=10, null=True)
+    deregistration_date = CopyFromCharField(
+        max_length=10,
+        blank=True,
+        null=True,
+    )
+    dereg_effect_date = CopyFromCharField(
+        max_length=10,
+        blank=True,
+        null=True,
+    )
     parent = CopyFromCharField(max_length=200, blank=True)
     parent_2 = CopyFromCharField(max_length=200, blank=True)
     operator_name = CopyFromCharField(max_length=200, blank=True)
@@ -99,17 +116,17 @@ class Facility(BaseRMPModel):
     # sortid_2 = CopyFromCharField(max_length=5)
     # sortid_3 = CopyFromCharField(max_length=5)
     registered = CopyFromBooleanField(default=True)
-    num_fte = CopyFromIntegerField(null=True, blank=True)
-    num_accident_actual = CopyFromIntegerField()
-    num_accident_records = CopyFromIntegerField()
-    num_accident_divider = CopyFromIntegerField()
-    acc_flam_tot = CopyFromIntegerField(null=True, blank=True)
-    acc_toxic_tot = CopyFromIntegerField(null=True, blank=True)
-    acc_quantity_tot = CopyFromIntegerField(null=True, blank=True)
-    num_deaths = CopyFromIntegerField(null=True, blank=True)
-    num_injuries = CopyFromIntegerField(null=True, blank=True)
-    num_evacuated = CopyFromIntegerField(null=True, blank=True)
-    property_damage = CopyFromIntegerField(null=True, blank=True)
+    num_fte = CopyFromIntegerField(null=True)
+    num_accident_actual = CopyFromIntegerField(null=True)
+    num_accident_records = CopyFromIntegerField(null=True)
+    num_accident_divider = CopyFromIntegerField(null=True)
+    acc_flam_tot = CopyFromIntegerField(null=True)
+    acc_toxic_tot = CopyFromIntegerField(null=True)
+    acc_quantity_tot = CopyFromIntegerField(null=True)
+    num_deaths = CopyFromIntegerField()
+    num_injuries = CopyFromIntegerField()
+    num_evacuated = CopyFromIntegerField()
+    property_damage = CopyFromIntegerField()
 
     @classmethod
     def get_transform_queryset(self):
@@ -164,10 +181,36 @@ class Facility(BaseRMPModel):
             sub_reason=F('tbls1facilities__RMPSubmissionReasonCode'),
             dereg_reason=F('tbls1facilities__DeregistrationReasonCode'),
             dereg_other=F('tbls1facilities__DeregistrationReasonOtherText'),
-            toxic_tot=Sum(Case(When(tbls1facilities__tbls1processes__tbls1processchemicals__ChemicalID__ChemType='T', then=Cast('tbls1facilities__tbls1processes__tbls1processchemicals__Quantity', CopyFromBigIntegerField())), default=Value(0),)),
-            flam_tot=Sum(Case(When(tbls1facilities__tbls1processes__tbls1processchemicals__ChemicalID__ChemType='F', then=Cast('tbls1facilities__tbls1processes__tbls1processchemicals__Quantity', CopyFromBigIntegerField())), default=Value(0),)),
+            toxic_tot=Round(
+                Sum(
+                    Case(
+                        When(
+                            tbls1facilities__tbls1processes__tbls1processchemicals__ChemicalID__ChemType='T',
+                            then=F('tbls1facilities__tbls1processes__tbls1processchemicals__Quantity')
+                        ),
+                        default=Value(0),
+                        output_field=CopyFromIntegerField()
+                    )
+                ),
+            ),
+            flam_tot=Round(
+                Sum(
+                    Case(
+                        When(
+                            tbls1facilities__tbls1processes__tbls1processchemicals__ChemicalID__ChemType='F',
+                            then=F('tbls1facilities__tbls1processes__tbls1processchemicals__Quantity')
+                        ),
+                        default=Value(0),
+                        output_field=CopyFromIntegerField()
+                    )
+                ),
+            ),
             quantity_tot=F('toxic_tot') + F('flam_tot'),
-            registered=Case(When(dereg_reason__gt=0, then=0), default=Value(1), output_field=CopyFromBooleanField()),
+            registered=Case(
+                When(dereg_reason__gt=0, then=0),
+                default=Value(1),
+                output_field=CopyFromBooleanField()
+            ),
             num_fte=F('tbls1facilities__FTE'),
             # num_proc_23=F('num_proc_23'),
             # toxic_tot_23=F('toxic_tot_23'),
@@ -176,15 +219,78 @@ class Facility(BaseRMPModel):
             all_naics=F('tbls1facilities__tbls1processes__tbls1process_naics__NAICSCode'),
             num_accident_records=Count('tbls1facilities__tbls6accidenthistory',),
             num_accident_actual=Count('tbls1facilities__tbls6accidenthistory', distinct=True,),
-            num_accident_divider=Case(When(num_accident_actual=0, then=1), default=F('num_accident_records') / F('num_accident_actual')),
-            acc_flam_tot=Cast(Sum(Case(When(tbls1facilities__tbls6accidenthistory__tbls6accidentchemicals__ChemicalID__ChemType='F', then=Cast('tbls1facilities__tbls6accidenthistory__tbls6accidentchemicals__QuantityReleased', CopyFromBigIntegerField())), default=0)) / F('num_accident_divider'), CopyFromBigIntegerField()),
-            acc_toxic_tot=Cast(Sum(Case(When(tbls1facilities__tbls6accidenthistory__tbls6accidentchemicals__ChemicalID__ChemType='T', then=Cast('tbls1facilities__tbls6accidenthistory__tbls6accidentchemicals__QuantityReleased', CopyFromBigIntegerField())), default=0)) / F('num_accident_divider'), CopyFromBigIntegerField()),
+            num_accident_divider=Case(
+                When(
+                    num_accident_actual=0, then=1
+                ),
+                default=F('num_accident_records') / F('num_accident_actual')
+            ),
+            acc_flam_tot=Round(
+                Sum(
+                    Case(
+                        When(
+                            tbls1facilities__tbls6accidenthistory__tbls6accidentchemicals__ChemicalID__ChemType='F',
+                            then=(
+                                'tbls1facilities__tbls6accidenthistory__tbls6accidentchemicals__QuantityReleased')
+                        ),
+                        default=Value(0),
+                        output_field=CopyFromIntegerField()
+                    )
+                ) / F('num_accident_divider'),
+            ),
+            acc_toxic_tot=Round(
+                Sum(
+                    Case(
+                        When(
+                            tbls1facilities__tbls6accidenthistory__tbls6accidentchemicals__ChemicalID__ChemType='T',
+                            then=(
+                                'tbls1facilities__tbls6accidenthistory__tbls6accidentchemicals__QuantityReleased')
+                            ),
+                        default=Value(0),
+                        output_field=CopyFromIntegerField()
+                    )
+                ) / F('num_accident_divider'),
+            ),
             acc_quantity_tot=F('acc_flam_tot') + F('acc_toxic_tot'),
-            num_deaths=Cast(Sum(F('tbls1facilities__tbls6accidenthistory__DeathsWorkers') + F('tbls1facilities__tbls6accidenthistory__DeathsPublicResponders') + F('tbls1facilities__tbls6accidenthistory__DeathsPublic'), default=Value(0), output_field=CopyFromIntegerField()) / F('num_accident_divider'), CopyFromIntegerField()),
-            num_injuries=Cast(Sum(F('tbls1facilities__tbls6accidenthistory__InjuriesPublic') + F('tbls1facilities__tbls6accidenthistory__InjuriesWorkers') + F('tbls1facilities__tbls6accidenthistory__InjuriesPublicResponders'), default=Value(0), output_field=CopyFromIntegerField()) / F('num_accident_divider'), CopyFromIntegerField()),
-            num_evacuated=Cast(Sum(F('tbls1facilities__tbls6accidenthistory__Evacuated'), output_field=CopyFromIntegerField()) / F('num_accident_divider'), CopyFromIntegerField()),
-            property_damage=Cast(Sum(F('tbls1facilities__tbls6accidenthistory__OnsitePropertyDamage') + F('tbls1facilities__tbls6accidenthistory__OffsitePropertyDamage'), output_field=CopyFromIntegerField()) / F('num_accident_divider'), CopyFromIntegerField()),
+            num_deaths=Coalesce(
+                Round(
+                    Sum(
+                        F('tbls1facilities__tbls6accidenthistory__DeathsWorkers') + F('tbls1facilities__tbls6accidenthistory__DeathsPublicResponders') + F('tbls1facilities__tbls6accidenthistory__DeathsPublic'), default=Value(0),
+                        output_field=CopyFromIntegerField()
+                    ) / F('num_accident_divider'),
+                ),
+                Value(0),
+            ),
+            num_injuries=Coalesce(
+                Round(
+                    Sum(
+                        F('tbls1facilities__tbls6accidenthistory__InjuriesPublic') + F('tbls1facilities__tbls6accidenthistory__InjuriesWorkers') + F('tbls1facilities__tbls6accidenthistory__InjuriesPublicResponders'),
+                        default=Value(0),
+                        output_field=CopyFromIntegerField()
+                    ) / F('num_accident_divider')
+                ),
+                Value(0),
+            ),
+            num_evacuated=Coalesce(
+                Round(
+                    Sum(
+                        F('tbls1facilities__tbls6accidenthistory__Evacuated'),
+                        output_field=CopyFromIntegerField()
+                    ) / F('num_accident_divider')
+                ),
+                Value(0),
+            ),
+            property_damage=Coalesce(
+                Round(
+                    Sum(
+                        F('tbls1facilities__tbls6accidenthistory__OnsitePropertyDamage') + F('tbls1facilities__tbls6accidenthistory__OffsitePropertyDamage'),
+                        output_field=CopyFromIntegerField()
+                    ) / F('num_accident_divider')
+                ),
+                Value(0),
+            ),
         )
+
         return qs
 
     class Meta:
@@ -338,9 +444,9 @@ class Registration(BaseRMPModel):
     acc_flam_tot = CopyFromBigIntegerField(null=True)
     acc_toxic_tot = CopyFromBigIntegerField(null=True)
     acc_quantity_tot = CopyFromBigIntegerField(null=True)
-    num_deaths = CopyFromBigIntegerField(null=True)
-    num_injuries = CopyFromBigIntegerField(null=True)
-    num_evacuated = CopyFromBigIntegerField(null=True)
+    num_deaths = CopyFromIntegerField(null=True)
+    num_injuries = CopyFromIntegerField(null=True)
+    num_evacuated = CopyFromIntegerField(null=True)
     property_damage = CopyFromBigIntegerField(null=True)
     county = CopyFromCharField(max_length=60, blank=True, null=True)
     foreign_country_tr = CopyFromCharField(max_length=60, blank=True, null=True)
@@ -358,7 +464,7 @@ class Registration(BaseRMPModel):
         about 70-75 percent of the time.
 
         I had to do the same thing with the Process chemicals: Calculating the total number of process chemicals and then dividing that by the number of real chemicals.
-        Apparently there's a significant amount of Chemicals with the ID 0 - which acts as a flag. 
+        Apparently there's a significant amount of Chemicals with the ID 0 - which acts as a flag.
 
         I had to use the num_accident_divider field to also calculate num_deaths, num_injuries, num_evacuated and property_damage. The group by in our ORM query multiplies those results fields also.
         """
@@ -470,24 +576,48 @@ class Registration(BaseRMPModel):
             num_acc_chem=Count('tbls6accidenthistory__tbls6accidentchemicals'),
             num_response=Count('tbls9emergencyresponses', distinct=True),
             num_chem_real=Count(Case(When(tbls1processes__tbls1processchemicals__ChemicalID__gt=Value(0), then=('tbls1processes__tbls1processchemicals'))), distinct=True),
-            num_proc_chem_tox=(F('num_proc_chem') / F('num_chem_real'))/2,
-            num_proc_chem_flam=(F('num_proc_chem') / F('num_chem_real'))/2,
+            num_proc_chem_tox=Round(
+                (
+                    F('num_proc_chem') / F('num_chem_real')
+                ) / 2
+            ),
+            num_proc_chem_flam=Round(
+                (
+                    F('num_proc_chem') / F('num_chem_real')
+                ) / 2
+            ),
             num_worst_tox=Count('tbls1processes__tbls1processchemicals__tbls2toxicsworstcase__ProcessChemicalID', distinct=True),
             num_alt_tox=Count('tbls1processes__tbls1processchemicals__tbls3toxicsaltreleases__ProcessChemicalID', distinct=True),
             num_worst_flam=Count('tbls1processes__tbls1processchemicals__tbls4flammablesworstcase', distinct=True),
             num_alt_flam=Count('tbls1processes__tbls1processchemicals__tbls5flammablesaltreleases', distinct=True),
             num_prev_2=Count('tbls1processes__tbls1process_naics__tbls8preventionprogram2', distinct=True),
             num_prev_3=Count('tbls1processes__tbls1process_naics__tbls7preventionprogram3', distinct=True),
-            toxic_tot=Cast(Sum(Case(When(tbls1processes__tbls1processchemicals__ChemicalID__ChemType='T', then=Cast('tbls1processes__tbls1processchemicals__Quantity', CopyFromBigIntegerField())), default=Value(0), output_field=CopyFromIntegerField())) / F('num_proc_chem_tox'), CopyFromBigIntegerField()),
-            flam_tot=Cast(Sum(Case(When(tbls1processes__tbls1processchemicals__ChemicalID__ChemType='F', then=Cast('tbls1processes__tbls1processchemicals__Quantity', CopyFromBigIntegerField())), default=Value(0), output_field=CopyFromIntegerField())) / F('num_proc_chem_flam'), CopyFromBigIntegerField()),
+            toxic_tot=Round(
+                Sum(Case(When(tbls1processes__tbls1processchemicals__ChemicalID__ChemType='T', then=F('tbls1processes__tbls1processchemicals__Quantity')), default=Value(0), output_field=CopyFromIntegerField())) / F('num_proc_chem_tox')
+            ),
+            flam_tot=Round(
+                Sum(Case(When(tbls1processes__tbls1processchemicals__ChemicalID__ChemType='F', then=F('tbls1processes__tbls1processchemicals__Quantity')), default=Value(0), output_field=CopyFromIntegerField())) / F('num_proc_chem_flam')
+            ),
             quantity_tot=F('toxic_tot') + F('flam_tot'),
-            acc_flam_tot=Cast(Sum(Case(When(tbls6accidenthistory__tbls6accidentchemicals__ChemicalID__ChemType='F', then=Cast('tbls6accidenthistory__tbls6accidentchemicals__QuantityReleased', CopyFromBigIntegerField())), default=Value(0), output_field=CopyFromIntegerField())) / F('num_accident_divider'), CopyFromBigIntegerField()),
-            acc_toxic_tot=Cast(Sum(Case(When(tbls6accidenthistory__tbls6accidentchemicals__ChemicalID__ChemType='T', then=Cast('tbls6accidenthistory__tbls6accidentchemicals__QuantityReleased', CopyFromBigIntegerField())), default=Value(0), output_field=CopyFromIntegerField())) / F('num_accident_divider'), CopyFromBigIntegerField()),
+            acc_flam_tot=Round(
+                Sum(Case(When(tbls6accidenthistory__tbls6accidentchemicals__ChemicalID__ChemType='F', then=('tbls6accidenthistory__tbls6accidentchemicals__QuantityReleased')), default=Value(0), output_field=CopyFromIntegerField())) / F('num_accident_divider')
+            ),
+            acc_toxic_tot=Round(
+                Sum(Case(When(tbls6accidenthistory__tbls6accidentchemicals__ChemicalID__ChemType='T', then=('tbls6accidenthistory__tbls6accidentchemicals__QuantityReleased')), default=Value(0), output_field=CopyFromIntegerField())) / F('num_accident_divider')
+            ),
             acc_quantity_tot=F('acc_flam_tot') + F('acc_toxic_tot'),
-            num_deaths=Cast(Sum(F('tbls6accidenthistory__DeathsWorkers') + F('tbls6accidenthistory__DeathsPublicResponders') + F('tbls6accidenthistory__DeathsPublic'), default=Value(0), output_field=CopyFromBigIntegerField()) / F('num_accident_divider'), CopyFromIntegerField()),
-            num_injuries=Cast(Sum(F('tbls6accidenthistory__InjuriesPublic') + F('tbls6accidenthistory__InjuriesWorkers') + F('tbls6accidenthistory__InjuriesPublicResponders'), default=Value(0), output_field=CopyFromBigIntegerField()) / F('num_accident_divider'), CopyFromIntegerField()),
-            num_evacuated=Cast(Sum(F('tbls6accidenthistory__Evacuated'), output_field=CopyFromIntegerField()) / F('num_accident_divider'), CopyFromBigIntegerField()),
-            property_damage=Cast(Sum(F('tbls6accidenthistory__OnsitePropertyDamage') + F('tbls6accidenthistory__OffsitePropertyDamage'), output_field=CopyFromIntegerField()) / F('num_accident_divider'), CopyFromBigIntegerField()),
+            num_deaths=Round(
+                Sum(F('tbls6accidenthistory__DeathsWorkers') + F('tbls6accidenthistory__DeathsPublicResponders') + F('tbls6accidenthistory__DeathsPublic'), default=Value(0), output_field=CopyFromIntegerField()) / F('num_accident_divider')
+            ),
+            num_injuries=Round(
+                Sum(F('tbls6accidenthistory__InjuriesPublic') + F('tbls6accidenthistory__InjuriesWorkers') + F('tbls6accidenthistory__InjuriesPublicResponders'), default=Value(0), output_field=CopyFromIntegerField()) / F('num_accident_divider')
+            ),
+            num_evacuated=Round(
+                Sum(F('tbls6accidenthistory__Evacuated'), output_field=CopyFromIntegerField()) / F('num_accident_divider')
+            ),
+            property_damage=Round(
+                Sum(F('tbls6accidenthistory__OnsitePropertyDamage') + F('tbls6accidenthistory__OffsitePropertyDamage'), output_field=CopyFromIntegerField()) / F('num_accident_divider')
+            ),
             county=F('FacilityCountyFIPS'),
             foreign_country_tr=F('ForeignCountry'),
             # num_proc_23=Count(Case(When(Q(tbls1processes__ProgramLevel='2') | Q(tbls1processes__ProgramLevel='3'), then=('tbls1processes__tbls1processchemicals')))),

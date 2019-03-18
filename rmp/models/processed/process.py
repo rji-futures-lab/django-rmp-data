@@ -28,7 +28,7 @@ from rmp.models.base import BaseRMPModel
 
 class Process(BaseRMPModel):
     """
-    Possible additions from Registration: Facility_name, city, county, parent_1? This would turn Process, Accident and Registration into the top level tables. 
+    Possible additions from Registration: Facility_name, city, county, parent_1? This would turn Process, Accident and Registration into the top level tables.
     """
     id = CopyFromIntegerField(
         primary_key=True,
@@ -153,6 +153,7 @@ class ProcChem(BaseRMPModel):
             cas=F('ChemicalID__CASNumber'),
             chemical_type=F('ChemicalID__ChemType'),
         )
+
         return qs
 
 

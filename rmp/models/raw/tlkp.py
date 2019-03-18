@@ -14,7 +14,6 @@ from rmp.models.choices import (
 from rmp.models.base import BaseRMPModel
 
 
-
 class tlkpChemicals(BaseRMPModel):
     ChemicalID = CopyFromIntegerField(
         primary_key=True,
@@ -54,8 +53,6 @@ class tlkpChemicals(BaseRMPModel):
         help_text="FED or State Abreviation"
     )
 
-    source_file = 'tlkpChemicals'
-
     class Meta:
         verbose_name='Lookup: Process Chemical'
 
@@ -66,6 +63,7 @@ class tlkpCountyFIPSCodes(BaseRMPModel):
         on_delete=models.PROTECT,
         help_text='The U.S. Postal Service abbreviation for the state in which'
                   ' the facility is located.',
+        db_column='State_Code',
     )
     County_Code = CopyFromCharField(
         max_length=2,
@@ -82,8 +80,6 @@ class tlkpCountyFIPSCodes(BaseRMPModel):
         max_length=5,
     )
 
-    source_file = 'tlkpCountyFIPSCodes'
-
     class Meta:
         verbose_name='Lookup: County FIPS codes'
 
@@ -98,8 +94,6 @@ class tlkpDeregistrationReason(BaseRMPModel):
         max_length=62,
         help_text='Deregulation Reason descriptions.'
     )
-
-    source_file = 'tlkpDeregistrationReason'
 
     class Meta:
         verbose_name='Lookup: Deregistration Reason'
@@ -116,8 +110,6 @@ class tlkpDocHandle(BaseRMPModel):
         help_text='A description of how the document was handled',
     )
 
-    source_file = 'tlkpDocHandle'
-
     class Meta:
         verbose_name='Lookup: Deregistration Reason'
 
@@ -132,8 +124,6 @@ class tlkpDocType(BaseRMPModel):
         max_length=30,
         help_text='Full description of the document type.'
     )
-
-    source_file = 'tlkpDocType'
 
     class Meta:
         verbose_name='Lookup: Doc Type'
@@ -164,8 +154,6 @@ class tlkpLatLongDescriptions(BaseRMPModel):
         help_text='Latitude and longitude description.',
     )
 
-    source_file = 'tlkpLatLongDescriptions'
-
     class Meta:
         verbose_name='Lookup: Lat/Long Description'
 
@@ -181,8 +169,6 @@ class tlkpLatLongMethods(BaseRMPModel):
     Method_Desc = CopyFromCharField(
         max_length=83
     )
-
-    source_file = 'tlkpLatLongMethods'
 
     class Meta:
         verbose_name='Lookup: Lat/Long Method'
@@ -216,8 +202,6 @@ class tlkpPhysicalStateCodes(BaseRMPModel):
         help_text='System generated Unique Primary key.',
     )
 
-    source_file = 'tlkpPhysicalStateCodes'
-
     class Meta:
         verbose_name='Lookup: Physical State Code'
 
@@ -232,8 +216,6 @@ class tlkpRejectReason(BaseRMPModel):
         max_length=59,
         help_text='Rejection Reason descriptions.',
     )
-
-    source_file = 'tlkpRejectReason'
 
     class Meta:
         verbose_name='Lookup: Reject Reason'
@@ -250,8 +232,6 @@ class tlkpS2ScenarioCodes(BaseRMPModel):
         help_text='Pick-list text.',
     )
 
-    source_file = 'tlkpS2ScenarioCodes'
-
     class Meta:
         verbose_name='Lookup: Toxics Scenario Code'
 
@@ -266,8 +246,6 @@ class tlkpS6InitiatingEvents(BaseRMPModel):
         max_length=40,
         help_text='Pick-list text.',
     )
-
-    source_file = 'tlkpS6InitiatingEvents'
 
     class Meta:
         verbose_name='Lookup: Initiating Events'
@@ -298,8 +276,6 @@ class tlkpStateFIPSCodes(BaseRMPModel):
         max_length=2,
     )
 
-    source_file = 'tlkpStateFIPSCodes'
-
     class Meta:
         verbose_name='Lookup: State FIPS codes'
 
@@ -314,8 +290,6 @@ class tlkpSubmissionReasonCodes(BaseRMPModel):
         max_length=101,
         help_text='Submission Reason descriptions.',
     )
-
-    source_file = 'tlkpSubmissionReasonCodes'
 
     class Meta:
         verbose_name='Lookup: Submission Reason Code'
@@ -332,8 +306,6 @@ class tlkpTopographyCode(BaseRMPModel):
         help_text='A code representing whether the local topography is urban or rural.',
     )
 
-    source_file = 'tlkpTopographyCode'
-
     class Meta:
         verbose_name='Lookup: Topography Code'
 
@@ -348,8 +320,6 @@ class tlkpWindSpeedUnitCodes(BaseRMPModel):
         max_length=13,
         help_text='Wind Speed Unit Descriptions.',
     )
-
-    source_file = 'tlkpWindSpeedUnitCodes'
 
     class Meta:
         verbose_name='Lookup: Wind Speed Unit Codes'
