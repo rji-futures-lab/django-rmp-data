@@ -25,110 +25,10 @@ from rmp.models import processed as processed_models
 from rmp.models.base import BaseRMPModel
 
 
-class AccChem(BaseRMPModel):
-    id = CopyFromIntegerField(
-        primary_key=True,
-        source_column='accchem_id',
-        verbose_name='Accident Chemical Record ID',
-        help_text='A unique ID for each accident chemical record.',
-    )
-    accident = CopyFromForeignKey(
-        'Accident',
-        on_delete=models.PROTECT,
-        help_text='The unique ID for each accident record',
-    )
-    chemical = CopyFromForeignKey(
-        'ChemCd',
-        on_delete=models.PROTECT,
-        help_text='The identifying ID for a particular chemical released in an '
-                  'accident.',
-    )
-    quantity_lbs = CopyFromIntegerField(
-        null=True,
-        verbose_name='Amount Released (lbs)',
-        help_text='The amount of the substance released in the accident, in '
-                  'pounds, to two significant digits.',
-    )
-    percent_weight = CopyFromDecimalField(
-        decimal_places=2,
-        null=True,
-        max_digits=5,
-        verbose_name='Percent Weight (Within Mixture)',
-        help_text='The percent weight of a chemical within a mixture released '
-                  'in an accident.',
-    )
-    num_acc_flam = CopyFromIntegerField(
-        null=True,
-        verbose_name='Number of Flammable Components',
-        help_text='The number of listed flammable component chemicals for this'
-                  ' chemical record.',
-    )
-    cas = CopyFromCharField(
-        max_length=9,
-        verbose_name='CAS number',
-        help_text='The identifying CAS number for a chemical.',
-    )
-    CHEMICAL_TYPE_CHOICES = (
-        ('T', 'toxic'),
-        ('F', 'flammable'),
-    )
-    chemical_type = CopyFromCharField(
-        max_length=1,
-        choices=CHEMICAL_TYPE_CHOICES,
-        help_text='"The type of chemical.',
-    )
-
-    @classmethod
-    def get_transform_queryset(self):
-        """
-        num_acc_fhem is calculated by getting the count of AccidentChemicalID from tblS6FlammableMixtureChemicals
-        """
-        qs = raw_models.tblS6AccidentChemicals.objects.annotate(
-            accchem_id=F('AccidentChemicalID'),
-            accident_id=F('AccidentHistoryID'),
-            chemical_id=F('ChemicalID'),
-            quantity_lbs=F('QuantityReleased'),
-            percent_weight=F('PercentWeight'),
-            num_acc_flam=Count('tbls6flammablemixturechemicals'),
-            cas=F('ChemicalID__CASNumber'),
-            chemical_type=F('ChemicalID__ChemType'),
-        ).order_by('accchem_id')
-
-        return qs
-
-
-class AccFlam(BaseRMPModel):
-    id = CopyFromIntegerField(
-        primary_key=True,
-        source_column='FlamMixChemID',
-        verbose_name='Flammable Chemical ID',
-        help_text='A unique ID for each flammable chemical record.',
-    )
-    accchem = CopyFromForeignKey(
-        'AccChem',
-        on_delete=models.PROTECT,
-        source_column='AccidentChemicalID',
-        verbose_name='Accident Chemical Record ID',
-        help_text='A unique ID for each accident chemical record.'
-    )
-    chemical = CopyFromForeignKey(
-        'ChemCd',
-        on_delete=models.PROTECT,
-        source_column='ChemicalID',
-        verbose_name='Chemical ID',
-        help_text='The identifying ID for a particular flammable chemical released in an accident.',
-    )
-
-    @classmethod
-    def get_transform_queryset(self):
-        m = raw_models.tblS6FlammableMixtureChemicals
-        """
-        Baseline table for accidents
-        """
-        return m.objects.get_default_transform_queryset()
-
-
 class Accident(BaseRMPModel):
+    """
+    Possible additions from Registration: Facility_name, city, county, parent_1? This would turn Process, Accident and Registration into the top level tables.
+    """
     id = CopyFromIntegerField(
         primary_key=True,
         source_column='accident_id',
@@ -445,5 +345,104 @@ class Accident(BaseRMPModel):
         )
         return qs
 
+class AccChem(BaseRMPModel):
+    id = CopyFromIntegerField(
+        primary_key=True,
+        source_column='accchem_id',
+        verbose_name='Accident Chemical Record ID',
+        help_text='A unique ID for each accident chemical record.',
+    )
+    accident = CopyFromForeignKey(
+        'Accident',
+        on_delete=models.PROTECT,
+        help_text='The unique ID for each accident record',
+    )
+    chemical = CopyFromForeignKey(
+        'ChemCd',
+        on_delete=models.PROTECT,
+        help_text='The identifying ID for a particular chemical released in an '
+                  'accident.',
+    )
+    quantity_lbs = CopyFromIntegerField(
+        null=True,
+        verbose_name='Amount Released (lbs)',
+        help_text='The amount of the substance released in the accident, in '
+                  'pounds, to two significant digits.',
+    )
+    percent_weight = CopyFromDecimalField(
+        decimal_places=2,
+        null=True,
+        max_digits=5,
+        verbose_name='Percent Weight (Within Mixture)',
+        help_text='The percent weight of a chemical within a mixture released '
+                  'in an accident.',
+    )
+    num_acc_flam = CopyFromIntegerField(
+        null=True,
+        verbose_name='Number of Flammable Components',
+        help_text='The number of listed flammable component chemicals for this'
+                  ' chemical record.',
+    )
+    cas = CopyFromCharField(
+        max_length=9,
+        verbose_name='CAS number',
+        help_text='The identifying CAS number for a chemical.',
+    )
+    CHEMICAL_TYPE_CHOICES = (
+        ('T', 'toxic'),
+        ('F', 'flammable'),
+    )
+    chemical_type = CopyFromCharField(
+        max_length=1,
+        choices=CHEMICAL_TYPE_CHOICES,
+        help_text='"The type of chemical.',
+    )
 
-# Subquery(processed_models.AccChem.objects.filter(accident_id=OuterRef('AccidentHistoryID')).filter(chemical_type='T').aggregate(Sum('quantity_lbs'))),
+    @classmethod
+    def get_transform_queryset(self):
+        """
+        num_acc_fhem is calculated by getting the count of AccidentChemicalID from tblS6FlammableMixtureChemicals
+        """
+        qs = raw_models.tblS6AccidentChemicals.objects.annotate(
+            accchem_id=F('AccidentChemicalID'),
+            accident_id=F('AccidentHistoryID'),
+            chemical_id=F('ChemicalID'),
+            quantity_lbs=F('QuantityReleased'),
+            percent_weight=F('PercentWeight'),
+            num_acc_flam=Count('tbls6flammablemixturechemicals'),
+            cas=F('ChemicalID__CASNumber'),
+            chemical_type=F('ChemicalID__ChemType'),
+        ).order_by('accchem_id')
+
+        return qs
+
+
+class AccFlam(BaseRMPModel):
+    id = CopyFromIntegerField(
+        primary_key=True,
+        source_column='FlamMixChemID',
+        verbose_name='Flammable Chemical ID',
+        help_text='A unique ID for each flammable chemical record.',
+    )
+    accchem = CopyFromForeignKey(
+        'AccChem',
+        on_delete=models.PROTECT,
+        source_column='AccidentChemicalID',
+        verbose_name='Accident Chemical Record ID',
+        help_text='A unique ID for each accident chemical record.'
+    )
+    chemical = CopyFromForeignKey(
+        'ChemCd',
+        on_delete=models.PROTECT,
+        source_column='ChemicalID',
+        verbose_name='Chemical ID',
+        help_text='The identifying ID for a particular flammable chemical released in an accident.',
+    )
+
+    @classmethod
+    def get_transform_queryset(self):
+        m = raw_models.tblS6FlammableMixtureChemicals
+        """
+        Baseline table for accidents
+        """
+        return m.objects.get_default_transform_queryset()

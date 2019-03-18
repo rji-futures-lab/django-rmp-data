@@ -1,4 +1,6 @@
 .DS_Store
+zappa_settings.json
+RMPData.mdb
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

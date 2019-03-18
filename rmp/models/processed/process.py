@@ -27,6 +27,9 @@ from rmp.models.base import BaseRMPModel
 
 
 class Process(BaseRMPModel):
+    """
+    Possible additions from Registration: Facility_name, city, county, parent_1? This would turn Process, Accident and Registration into the top level tables. 
+    """
     id = CopyFromIntegerField(
         primary_key=True,
         source_column='process_id',
@@ -56,7 +59,7 @@ class Process(BaseRMPModel):
         Top level table for Process. Aggregated fields are calculated similar to other tables. Fields with num_ are calculated by getting the count of
         ProcessChemicalIDs from each table.
 
-        flam_tot and toxic_tot are calculated by generating the sum of process chemicals grouping by ProcessID. 
+        flam_tot and toxic_tot are calculated by generating the sum of process chemicals grouping by ProcessID.
         """
         qs = raw_models.tblS1Processes.objects.annotate(
             process_id=F('ProcessID'),

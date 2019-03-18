@@ -6,13 +6,8 @@ from rmp.models import (
     Facility,
     Registration,
     State,
-    tblExecutiveSummaries,
-    tblFacility,
-    tblS1Facilities,
-    tblS1FlammableMixtureChemicals,
-    tblS1ProcessChemicals,
-    tblS6AccidentChemicals,
-    tblS6AccidentHistory,
+    Accident,
+    Process,
 )
 
 # from .forms import facility_search
