@@ -4,11 +4,11 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-django = "*"
+django = ">=2.1.6"
 django-environ = "*"
 django-postgres-copy = "*"
-zappa = "*"
 django-storages = "*"
+zappa = {editable = true, ref = "master", git = "https://github.com/Miserlou/Zappa.git"}
 
 [dev-packages]
 django-debug-toolbar = "*"
