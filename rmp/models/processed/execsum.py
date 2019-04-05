@@ -3,8 +3,11 @@ Models for processed RMP data.
 """
 import os
 from django.conf import settings
+from django.contrib.postgres.aggregates import StringAgg
 from django.db import models
-from django.db.models import F, Max, OuterRef, Subquery, Sum, Count, Case, When, Value
+from django.db.models import (
+    F, Max, OuterRef, Subquery, Sum, Count, Case, When, Value
+)
 from rmp.fields import (
     CopyFromBigIntegerField,
     CopyFromBooleanField,
@@ -35,17 +38,13 @@ class ExecutiveSummary(BaseRMPModel):
 
     @classmethod
     def get_transform_queryset(self):
-        qs = raw_models.tblExecutiveSummaries.objects.filter(
-            ESSeqNum=Subquery(
-                raw_models.tblExecutiveSummaries.objects.filter(
-                    FacilityID=OuterRef('FacilityID'),
-                ).values('FacilityID_id').annotate(
-                    max_seqnum=Max('ESSeqNum')
-                ).values('max_seqnum')[:1]
-            )
+        qs = raw_models.tblExecutiveSummaries.objects.values(
+            'FacilityID',
         ).annotate(
-            rmp_id=F('FacilityID'),
-            execsum=F('SummaryText')
+            rmp_id=F("FacilityID"),
+            execsum=StringAgg(
+                'SummaryText', '\n', ordering=('ESSeqNum',)
+            )
         )
 
         return qs
