@@ -81,13 +81,23 @@ def search_by_city(request):
 
 def search_by_facility(request):
     error=False
-    if 'facility' in request.GET and 'parent_company' in request.GET:
+    if 'facility' in request.GET and 'parent_company' in request.GET and 'city' in request.GET and 'state' in request.GET:
         facility_query = request.GET['facility']
         pc_query = request.GET['parent_company']
-        if not facility_query and not pc_query:
+        state_query = request.GET['state']
+        city_query = request.GET['city']
+        if not facility_query and not pc_query and not state_query and not city_query:
             error=True
-        elif facility_query and pc_query:
-            facility_list = Facility.objects.filter(facility_name__search=facility_query).filter(parent__search=pc_query).select_related('execsum_rmp').select_related('rmp')
+        elif facility_query and pc_query and state_query and city_query:
+            facility_list = Facility.objects.filter(
+                facility_name__search=facility_query
+            ).filter(
+                parent__search=pc_query
+            ).filter(
+                city__search=city_query
+            ).filter(
+                state__search=state_query
+            ).select_related('execsum_rmp').select_related('rmp')
             # registration = Registration.objects.filter(facility_name__search=facility_query).filter(parent__search=pc_query).order_by('-complete_check_dt')[:1] , 'execsum': execsum, 'registration': registration
             # execsum = Facility.objects.filter(facility_name__search=facility_query).filter(parent__search=pc_query).select_related('execsum_rmp')
             context = {'facility_list': facility_list, 'facility_query': facility_query, 'pc_query': pc_query}
@@ -99,13 +109,15 @@ def search_by_facility(request):
             # execsum = Facility.objects.filter(facility_name__search=facility_query).select_related('execsum_rmp')
             # facility_id = Facility.objects.filter(facility_name__search=facility_query).values_list('rmp', flat=True) , 'facility_id': facility_id})
             # registration = Registration.objects.filter(facility_name__search=facility_query).order_by('-complete_check_dt')[:1] , 'execsum': execsum, 'registration': registration
-            return render(request, 'rmp/facility_results.html', {'facility_list': facility_list, 'facility_query': facility_query})
+            context = {'facility_list': facility_list, 'facility_query': facility_query}
+            return render(request, 'rmp/facility_results.html', context)
 
         elif len(pc_query) != 0:
             pc_query = request.GET['parent_company']
             facility_list = Facility.objects.filter(parent__search=pc_query).select_related('execsum_rmp').select_related('rmp')
             # registration = Registration.objects.filter(parent__search=pc_query).order_by('-complete_check_dt')[:1] , 'execsum': execsum, 'registration': registration
             # execsum = Facility.objects.filter(parent__search=pc_query).select_related('execsum_rmp')
-            return render(request, 'rmp/facility_results.html', {'facility_list': facility_list, 'pc_query': pc_query})
+            context = {'facility_list': facility_list, 'pc_query': pc_query}
+            return render(request, 'rmp/facility_results.html', context)
 
     return render(request, 'rmp/facility_search.html', {'error': error})
