@@ -8,7 +8,7 @@ django = ">=2.2.0"
 django-environ = "*"
 django-postgres-copy = "*"
 django-storages = "*"
-zappa = {editable = true, ref = "master", git = "https://github.com/Miserlou/Zappa.git"}
+zappa = {editable = true,ref = "master",git = "https://github.com/Miserlou/Zappa.git"}
 
 [dev-packages]
 django-debug-toolbar = "*"
