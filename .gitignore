@@ -108,3 +108,4 @@ venv.bak/
 data/
 migrations/
 zappa_settings.json
+static/

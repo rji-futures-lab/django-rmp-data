@@ -5,7 +5,7 @@ from .base import * # noqa
 
 
 ALLOWED_HOSTS = [
-    'ek4a6i88v6.execute-api.us-east-2.amazonaws.com',
+    '.execute-api.us-east-2.amazonaws.com',
     'rmp.rjifuture.org',
 ]
 

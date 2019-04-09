@@ -5,10 +5,10 @@ name = "pypi"
 
 [packages]
 django = ">=2.2.0"
-django-environ = "*"
 django-postgres-copy = "*"
 django-storages = "*"
-zappa = {editable = true, ref = "master", git = "https://github.com/Miserlou/Zappa.git"}
+psycopg2 = "<2.8.0"
+zappa = "*"
 
 [dev-packages]
 django-debug-toolbar = "*"
@@ -19,4 +19,4 @@ ipython = "*"
 ipdb = "*"
 
 [requires]
-python_version = "3.6"
+python_version = "3.7.1"
