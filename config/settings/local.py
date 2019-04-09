@@ -17,7 +17,7 @@ INSTALLED_APPS = INSTALLED_APPS + ['debug_toolbar',]
 
 MIDDLEWARE = MIDDLEWARE + [
     'debug_toolbar.middleware.DebugToolbarMiddleware',
-]   
+]
 
 RMP_DATA_DIR = os.path.join(ROOT_DIR, 'data', 'rmp')
 RMP_RAW_DATA_DIR = os.path.join(RMP_DATA_DIR, 'raw')
