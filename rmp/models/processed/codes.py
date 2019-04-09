@@ -304,18 +304,6 @@ class TopoCd(BaseRMPModel):
         return m.objects.get_default_transform_queryset()
 
 
-class City(BaseRMPModel):
-    city = CopyFromCharField(max_length=30, blank=True)
-    state = CopyFromCharField(max_length=2, blank=True)
-    num_fac = CopyFromIntegerField()
-
-    # @classmethod
-    # def get_transform_queryset(self):
-    #     m = raw_models.
-
-    #     return m.objects.get_default_transform_queryset()
-
-
 class WindCd(BaseRMPModel):
     """
     Wind speed measurement unit.

@@ -3,7 +3,6 @@ Processed Risk Management Plan (RMP) data models.
 """
 from .codes import (
     ChemCd,
-    City,
     DeregCd,
     DochanCd,
     DoctypCd,
