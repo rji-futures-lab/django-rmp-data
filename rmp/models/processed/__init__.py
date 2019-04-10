@@ -30,10 +30,7 @@ from .chemicals import (
     FlammablesWorstCase,
 )
 
-from .execsum import (
-    ExecutiveSummary,
-    ExecutiveSummaryLength,
-)
+from .execsum import ExecutiveSummary
 
 from .misc import (
     PreventionProgram2,
