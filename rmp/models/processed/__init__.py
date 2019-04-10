@@ -59,7 +59,6 @@ from .toplevel import (
 __all__ = (
     # codes
     'ChemCd',
-    'City',
     'DeregCd',
     'DochanCd',
     'DoctypCd',
@@ -78,7 +77,6 @@ __all__ = (
     'Accident',
     'EmergencyResponse',
     'ExecutiveSummary',
-    'ExecutiveSummaryLength',
     'Facility',
     'State',
     'FlammablesAltRelease',

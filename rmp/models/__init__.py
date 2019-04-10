@@ -5,7 +5,6 @@ from .base import BaseRMPModel
 from .processed import (
     # codes
     ChemCd,
-    City,
     DeregCd,
     DochanCd,
     DoctypCd,
@@ -24,7 +23,6 @@ from .processed import (
     Accident,
     EmergencyResponse,
     ExecutiveSummary,
-    ExecutiveSummaryLength,
     State,
     Facility,
     FlammablesAltRelease,
@@ -90,7 +88,6 @@ __all__ = (
     'BaseRMPModel',
     # codes
     'ChemCd',
-    'City',
     'DeregCd',
     'DochanCd',
     'DoctypCd',
@@ -109,7 +106,6 @@ __all__ = (
     'Accident',
     'EmergencyResponse',
     'ExecutiveSummary',
-    'ExecutiveSummaryLength',
     'State',
     'Facility',
     'FlammablesAltRelease',
