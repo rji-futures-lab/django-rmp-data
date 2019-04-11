@@ -37,8 +37,6 @@ from .misc import (
     PreventionProgram3,
     EmergencyResponse,
     ProcNaics,
-    Prev2Text,
-    Prev3Text,
     Prevent2Chem,
     Prevent3Chem,
 )
@@ -82,8 +80,6 @@ __all__ = (
     'FlammablesAltRelease',
     'FlammablesWorstCase',
     'PreventionProgram2',
-    'Prev2Text',
-    'Prev3Text',
     'PreventionProgram3',
     'Prevent2Chem',
     'Prevent3Chem',

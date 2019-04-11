@@ -360,26 +360,6 @@ class ProcNaics(BaseRMPModel):
     # num_prevent_3 = CopyFromIntegerField()
 
 
-class Prev2Text(BaseRMPModel):
-    prevent_2 = CopyFromOneToOneField(
-        'PreventionProgram2',
-        primary_key=True,
-        on_delete=models.PROTECT,
-        source_column='prevent_2_id',
-    )
-    desctext = CopyFromTextField()
-
-
-class Prev3Text(BaseRMPModel):
-    prevent_3 = CopyFromOneToOneField(
-        'PreventionProgram3',
-        primary_key=True,
-        on_delete=models.PROTECT,
-        source_column='prevent_3_id',
-    )
-    desctext = CopyFromTextField()
-
-
 class Prevent2Chem(BaseRMPModel):
     id = CopyFromIntegerField(
         primary_key=True,
