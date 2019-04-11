@@ -20,13 +20,11 @@ class tblS8_Prevention_Program_Chemicals(BaseRMPModel):
         'tblS8PreventionProgram2',
         db_column='PreventionProgram2ID',
         on_delete=models.PROTECT,
-        related_name='program_2_chemicals',
     )
     ProcessChemicalID = CopyFromForeignKey(
         'tblS1ProcessChemicals',
         db_column='ProcessChemicalID',
         on_delete=models.PROTECT,
-        related_name='program_2_process_chemicals',
     )
 
     class Meta:
