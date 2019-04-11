@@ -349,15 +349,28 @@ class EmergencyResponse(BaseRMPModel):
 class ProcNaics(BaseRMPModel):
     id = CopyFromIntegerField(
         primary_key=True,
-        source_column='procnaics_id',
     )
     process = CopyFromForeignKey(
         'Process',
         on_delete=models.PROTECT,
     )
-    naics = CopyFromIntegerField()
-    # num_prevent_2 = CopyFromIntegerField()
-    # num_prevent_3 = CopyFromIntegerField()
+    naics_code = CopyFromIntegerField()
+    num_prevent_2 = CopyFromIntegerField()
+    num_prevent_3 = CopyFromIntegerField()
+
+    @classmethod
+    def get_transform_queryset(self):
+        m = raw_models.tblS1Process_NAICS
+
+        annotations = m.get_renamed_fields()
+
+        annotations['id'] = F('Process_NAICS_ID')
+        annotations['num_prevent_2'] = Count('tbls8preventionprogram2')
+        annotations['num_prevent_3'] = Count('tbls7preventionprogram3')
+
+        qs = m.objects.annotate(**annotations)
+
+        return qs
 
 
 class Prevent2Chem(BaseRMPModel):
