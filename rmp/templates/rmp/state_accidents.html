@@ -30,7 +30,7 @@ RMP Accidents by State
     {% load humanize %}
     {% for state in state_list %}
     <tr>
-      <td>{{ state.code }}</td>
+      <td>{{ state.state.name }} ({{ state.state.abbr }})</td>
       <td>{{ state.total_facilities }}</td>
       <td>{{ state.total_accidents|intcomma }}</td>
       <td>{{ state.total_deaths|intcomma }}</td>

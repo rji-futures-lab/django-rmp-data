@@ -3,7 +3,6 @@ Processed Risk Management Plan (RMP) data models.
 """
 from .codes import (
     ChemCd,
-    City,
     DeregCd,
     DochanCd,
     DoctypCd,
@@ -13,6 +12,7 @@ from .codes import (
     PhysCd,
     RejectCd,
     ScenCd,
+    StateCd,
     SubmitCd,
     TopoCd,
     WindCd,
@@ -31,18 +31,13 @@ from .chemicals import (
     FlammablesWorstCase,
 )
 
-from .execsum import (
-    ExecutiveSummary,
-    ExecutiveSummaryLength,
-)
+from .execsum import ExecutiveSummary
 
 from .misc import (
     PreventionProgram2,
     PreventionProgram3,
     EmergencyResponse,
     ProcNaics,
-    Prev2Text,
-    Prev3Text,
     Prevent2Chem,
     Prevent3Chem,
 )
@@ -56,14 +51,13 @@ from .process import (
 from .toplevel import (
     Facility,
     Registration,
-    State,
+    StateCounts,
 )
 
 
 __all__ = (
     # codes
     'ChemCd',
-    'City',
     'DeregCd',
     'DochanCd',
     'DoctypCd',
@@ -73,6 +67,7 @@ __all__ = (
     'PhysCd',
     'RejectCd',
     'ScenCd',
+    'StateCd',
     'SubmitCd',
     'TopoCd',
     'WindCd',
@@ -82,14 +77,11 @@ __all__ = (
     'Accident',
     'EmergencyResponse',
     'ExecutiveSummary',
-    'ExecutiveSummaryLength',
     'Facility',
-    'State',
+    'StateCounts',
     'FlammablesAltRelease',
     'FlammablesWorstCase',
     'PreventionProgram2',
-    'Prev2Text',
-    'Prev3Text',
     'PreventionProgram3',
     'Prevent2Chem',
     'Prevent3Chem',

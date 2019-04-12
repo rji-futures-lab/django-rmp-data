@@ -281,6 +281,43 @@ class SubmitCd(BaseRMPModel):
         return m.objects.get_default_transform_queryset()
 
 
+class StateCd(BaseRMPModel):
+    code = CopyFromCharField(
+        max_length=2,
+        unique=True,
+        help_text='Federal Information Processing Standard (FIPS) code for the'
+                  ' county in which the facility is located.'
+    )
+    abbr = CopyFromCharField(
+        primary_key=True,
+        unique=True,
+        max_length=2,
+        help_text='The U.S. Postal Service abbreviation for the state in which'
+                  ' the facility is located.',
+    )
+    name = CopyFromCharField(
+        max_length=30,
+        help_text='The state in which the facility is located.',
+    )
+    region = CopyFromCharField(
+        help_text='The code which represents the EPA Region in which the state'
+                  ' resides.',
+        max_length=2,
+    )
+
+    @classmethod
+    def get_transform_queryset(self):
+
+        qs = raw_models.tlkpStateFIPSCodes.objects.annotate(
+            code=models.F('STATE_CODE'),
+            abbr=models.F('STATE_ABBR'),
+            name=models.F('STATE_NAME'),
+            region=models.F('REGION'),
+        )
+
+        return qs
+
+
 class TopoCd(BaseRMPModel):
     """
     Type of topography(?).
@@ -302,18 +339,6 @@ class TopoCd(BaseRMPModel):
         m = raw_models.tlkpTopographyCode
 
         return m.objects.get_default_transform_queryset()
-
-
-class City(BaseRMPModel):
-    city = CopyFromCharField(max_length=30, blank=True)
-    state = CopyFromCharField(max_length=2, blank=True)
-    num_fac = CopyFromIntegerField()
-
-    # @classmethod
-    # def get_transform_queryset(self):
-    #     m = raw_models.
-
-    #     return m.objects.get_default_transform_queryset()
 
 
 class WindCd(BaseRMPModel):

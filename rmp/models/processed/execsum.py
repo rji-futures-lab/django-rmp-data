@@ -48,15 +48,3 @@ class ExecutiveSummary(BaseRMPModel):
         )
 
         return qs
-
-
-class ExecutiveSummaryLength(BaseRMPModel):
-    rmp_id = CopyFromIntegerField(
-        primary_key=True,
-    )
-    byte_count = CopyFromIntegerField()
-    suspect_count = CopyFromIntegerField()
-    line_count = CopyFromIntegerField()
-    edited_yn = CopyFromCharField(max_length=1)
-
-    source_file = 'rmp_exec_sum_len'
