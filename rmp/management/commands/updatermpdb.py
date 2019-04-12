@@ -35,6 +35,7 @@ class Command(BaseCommand):
         # handle transformations
         processed_models = [
             m for m in get_models('processed').values()
+            if m._meta.object_name != 'StateCounts'
         ]
         transform_header = self.style.MIGRATE_HEADING(
             'Writing %s transformed .csv files:' % len(processed_models)
@@ -51,6 +52,9 @@ class Command(BaseCommand):
             self.style.MIGRATE_HEADING('Loading processed files. '), ending=""
         )
         self.load_from_dir(settings.RMP_PROCESSED_DATA_DIR)
+
+        management.call_command('transformtocsv', 'StateCounts')
+        management.call_command('loadfromcsv', 'StateCounts')
 
     def load_from_dir(self, path):
         """

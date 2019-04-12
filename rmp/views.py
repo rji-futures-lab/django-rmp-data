@@ -5,7 +5,8 @@ from rmp.models import (
     ExecutiveSummary,
     Facility,
     Registration,
-    State,
+    StateCd,
+    StateCounts,
     tblExecutiveSummaries,
     tblFacility,
     tblS1Facilities,
@@ -45,44 +46,100 @@ def brs(request):
     return render(request, 'rmp/brs.html')
 
 def accident(request):
-    facility_list = Facility.objects.filter(registered=True).order_by('-num_deaths')[:20]
-    evacuated_list = Facility.objects.filter(registered=True).order_by('-num_evacuated')[:20]
-    prop_damage_list = Facility.objects.filter(registered=True).order_by('-property_damage')[:20]
-    context = {'facility_list': facility_list, 'evacuated_list': evacuated_list, 'prop_damage_list': prop_damage_list}
+    facility_list = Facility.objects.filter(
+        registered=True
+    ).order_by('-num_deaths')[:20]
+
+    evacuated_list = Facility.objects.filter(
+        registered=True
+    ).order_by('-num_evacuated')[:20]
+
+    prop_damage_list = Facility.objects.filter(
+        registered=True
+    ).order_by('-property_damage')[:20]
+
+    context = dict(
+        facility_list=facility_list,
+        evacuated_list=evacuated_list,
+        prop_damage_list=prop_damage_list,
+    )
+
     return render(request, 'rmp/accident_list.html', context)
 
 def state_accidents(request):
-    state_list = State.objects.all()
-    context = {'state_list': state_list}
+    state_list = StateCounts.objects.all()
+    context = dict(state_list=state_list)
+
     return render(request, 'rmp/state_accidents.html', context)
 
 def facility_search(request):
     return render(request, 'rmp/facility_search.html')
 
 def location_search(request):
-    state_list = Facility.objects.order_by('state').values('state').distinct()
-    context = {'state_list': state_list}
+    state_list = StateCd.objects.all()
+    context = dict(state_list=state_list)
+
     return render(request, 'rmp/location_search.html', context)
 
 def search_by_state(request):
-    error=False
     if 'state' in request.GET:
         state_query = request.GET['state']
-        facility_list = Facility.objects.filter(state__search=state_query)
-        return render(request, 'rmp/location_results.html', {'facility_list': facility_list, 'state_query': state_query})
-    return render(request, 'rmp/location_search.html', {'error': error})
+        facility_list = Facility.objects.filter(
+            state=state_query
+        )
+        response = render(
+            request,
+            'rmp/location_results.html',
+            dict(
+                facility_list=facility_list,
+                state_query=state_query,
+            )
+        )
+    else:
+        response = render(
+            request,
+            'rmp/location_search.html',
+            dict(error=True),
+        )
+
+    return response
 
 def search_by_city(request):
-    error=False
-    if 'state' in request.GET and 'city' in request.GET and 'zip' in request.GET:
+    if (
+        'state' in request.GET and 
+        'city' in request.GET and 
+        'zip' in request.GET
+    ):
         state_query = request.GET['state']
         city_query = request.GET['city']
         if not state_query and not city_query:
-            error=True
-        elif state_query and  city_query:
-            facility_list = Facility.objects.filter(state__search=state_query).filter(city__search=city_query)
-            return render(request, 'rmp/location_results.html', {'facility_list': facility_list, 'state_query': state_query, 'city_query': city_query})
-    return render(request, 'rmp/location_search.html', {'error': error})
+            response = render(
+                request,
+                'rmp/location_search.html',
+                dict(error=True),
+            )
+        elif state_query and city_query:
+            facility_list = Facility.objects.filter(
+                state=state_query
+            ).filter(
+                city=city_query
+            )
+            response = render(
+                request,
+                'rmp/location_results.html',
+                context=dict(
+                    facility_list=facility_list,
+                    state_query=state_query,
+                    city_query=city_query
+                ),
+            )
+    else:
+        response = render(
+            request,
+            'rmp/location_search.html',
+            dict(error=True),
+        )
+    return response
 
 def search_by_facility(request):
     error=False

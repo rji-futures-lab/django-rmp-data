@@ -12,6 +12,7 @@ from .codes import (
     PhysCd,
     RejectCd,
     ScenCd,
+    StateCd,
     SubmitCd,
     TopoCd,
     WindCd,
@@ -50,7 +51,7 @@ from .process import (
 from .toplevel import (
     Facility,
     Registration,
-    State,
+    StateCounts,
 )
 
 
@@ -66,6 +67,7 @@ __all__ = (
     'PhysCd',
     'RejectCd',
     'ScenCd',
+    'StateCd',
     'SubmitCd',
     'TopoCd',
     'WindCd',
@@ -76,7 +78,7 @@ __all__ = (
     'EmergencyResponse',
     'ExecutiveSummary',
     'Facility',
-    'State',
+    'StateCounts',
     'FlammablesAltRelease',
     'FlammablesWorstCase',
     'PreventionProgram2',

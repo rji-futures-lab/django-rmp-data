@@ -53,7 +53,11 @@ class Facility(BaseRMPModel):
     city = CopyFromCharField(
         max_length=19,
     )
-    state = CopyFromCharField(max_length=2)
+    state = CopyFromForeignKey(
+        'StateCd',
+        on_delete=models.PROTECT,
+        db_column='state',
+    )
     zip_code = CopyFromCharField(
         max_length=5,
     )
@@ -95,7 +99,13 @@ class Facility(BaseRMPModel):
     parent_2 = CopyFromCharField(max_length=200, blank=True)
     operator_name = CopyFromCharField(max_length=200, blank=True)
     operator_city = CopyFromCharField(max_length=20, blank=True)
-    operator_state = CopyFromCharField(max_length=2, blank=True)
+    operator_state = CopyFromForeignKey(
+        'StateCd',
+        on_delete=models.PROTECT,
+        blank=True,
+        db_column='operator_state',
+        related_name='+',
+    )
     operator_zip = CopyFromCharField(max_length=5, blank=True)
     province = CopyFromCharField(max_length=20, blank=True)
     county = CopyFromCharField(max_length=200, blank=True)
@@ -301,7 +311,12 @@ class Registration(BaseRMPModel):
     street_1 = CopyFromCharField(max_length=35, blank=True)
     street_2 = CopyFromCharField(max_length=35, blank=True)
     city = CopyFromCharField(max_length=19, blank=True)
-    state = CopyFromCharField(max_length=2, blank=True)
+    state = CopyFromForeignKey(
+        'StateCd',
+        on_delete=models.PROTECT,
+        blank=True,
+        db_column='state',
+    )
     zip = CopyFromCharField(max_length=5, blank=True)
     zip_ext = CopyFromCharField(max_length=4, blank=True)
     county_fips = CopyFromCharField(max_length=5, blank=True)
@@ -325,7 +340,13 @@ class Registration(BaseRMPModel):
     op_street_1 = CopyFromCharField(max_length=35, blank=True)
     op_street_2 = CopyFromCharField(max_length=35, blank=True)
     operator_city = CopyFromCharField(max_length=19, blank=True)
-    operator_state = CopyFromCharField(max_length=2, blank=True)
+    operator_state = CopyFromForeignKey(
+        'StateCd',
+        on_delete=models.PROTECT,
+        blank=True,
+        related_name='+',
+        db_column='operator_state',
+    )
     operator_zip = CopyFromCharField(max_length=5, blank=True)
     operator_zip_ext = CopyFromCharField(max_length=4, blank=True)
     rmp_contact = CopyFromCharField(max_length=35, blank=True)
@@ -399,7 +420,13 @@ class Registration(BaseRMPModel):
     prep_street_1 = CopyFromCharField(max_length=35, blank=True)
     prep_street_2 = CopyFromCharField(max_length=35, blank=True)
     prep_city = CopyFromCharField(max_length=19, blank=True)
-    prep_state = CopyFromCharField(max_length=2, blank=True)
+    prep_state = CopyFromForeignKey(
+        'StateCd',
+        on_delete=models.PROTECT,
+        blank=True,
+        related_name='+',
+        db_column='prep_state',
+    )
     prep_zip = CopyFromCharField(max_length=5, blank=True)
     prep_zip_ext = CopyFromCharField(max_length=4, blank=True)
     prep_phone = CopyFromCharField(max_length=10, blank=True)
@@ -410,8 +437,6 @@ class Registration(BaseRMPModel):
     rmp_email = CopyFromCharField(max_length=100, blank=True)
     dereg_reason = CopyFromCharField(max_length=2, blank=True)
     dereg_other = CopyFromCharField(max_length=80, blank=True)
-
-    # TODO AGGREGATE
     num_accident_records = CopyFromIntegerField(null=True)
     num_accident_actual = CopyFromIntegerField(null=True)
     num_accident_divider = CopyFromIntegerField(null=True)
@@ -449,7 +474,9 @@ class Registration(BaseRMPModel):
 
     @classmethod
     def get_transform_queryset(self):
-        qs = raw_models.tblS1Facilities.objects.select_related('FacilityCountyFIPS_id').values(
+        qs = raw_models.tblS1Facilities.objects.select_related(
+            'FacilityCountyFIPS_id'
+        ).values(
             'FacilityID',
         ).annotate(
             rmp_id=F('FacilityID'),
@@ -620,10 +647,15 @@ class Registration(BaseRMPModel):
         )
         return qs
 
-class State(BaseRMPModel):
-    code = CopyFromCharField(
-        max_length=2,
-        unique=True,
+
+class StateCounts(BaseRMPModel):
+    state = CopyFromOneToOneField(
+        'StateCd',
+        primary_key=True,
+        on_delete=models.PROTECT,
+        db_column='state',
+        help_text='Federal Information Processing Standard (FIPS) code for the'
+                  ' county in which the facility is located.'
     )
     total_facilities = CopyFromIntegerField()
     total_accidents = CopyFromIntegerField()
@@ -634,9 +666,10 @@ class State(BaseRMPModel):
 
     @classmethod
     def get_transform_queryset(self):
+
         qs = Facility.objects.filter(registered=True).values(
-                'state'
-            ).annotate(
+            'state'
+        ).annotate(
             code=F('state'),
             total_facilities=Count('id'),
             total_accidents=Sum('num_accident_actual'),
@@ -645,4 +678,5 @@ class State(BaseRMPModel):
             total_evacuated=Sum('num_evacuated'),
             total_property_damage=Sum('property_damage'),
         ).order_by('state')
+
         return qs
