@@ -127,7 +127,9 @@ class ProcChem(BaseRMPModel):
         verbose_name='CAS number',
         help_text='The identifying CAS number for a chemical.',
     )
-    chemical_type = CopyFromCharField(max_length=1)
+    chemical_type = CopyFromCharField(max_length=1, blank=True)
+    chemical_name = CopyFromCharField(max_length=92)
+
 
     @classmethod
     def get_transform_queryset(self):
@@ -136,7 +138,7 @@ class ProcChem(BaseRMPModel):
         ProcessChemicalID from alt_flam, alt_tox, preventionprogram2, preventionprogram3, process flam, worst case flammable and worst case toxic.
         """
         qs = raw_models.tblS1ProcessChemicals.objects.select_related(
-            'ChemicalID'
+            'ChemicalID',
         ).annotate(
             procchem_id=F('ProcessChemicalID'),
             process_id=F('ProcessID'),
@@ -152,8 +154,9 @@ class ProcChem(BaseRMPModel):
             num_worst_tox=Count('tbls2toxicsworstcase'),
             cas=F('ChemicalID__CASNumber'),
             chemical_type=F('ChemicalID__ChemType'),
+            chemical_name=F('ChemicalID__ChemicalName'),
         )
-
+        print(qs.query)
         return qs
 
 

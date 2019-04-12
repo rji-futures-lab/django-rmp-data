@@ -18,9 +18,10 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         # DATABASE = options['database']
         DATABASE = kwargs['database']
+        databasePath = os.path.join(settings.RMP_DATA_DIR, DATABASE)
 
         # Get the list of table names with "mdb-tables"
-        table_names = subprocess.Popen(["mdb-tables", "-1", DATABASE],
+        table_names = subprocess.Popen(["mdb-tables", "-1", databasePath],
                                        stdout=subprocess.PIPE,
                                        encoding='utf8').communicate()[0]
         tables = table_names.split('\n')
@@ -33,7 +34,7 @@ class Command(BaseCommand):
                 completeFileName = os.path.join(settings.RMP_RAW_DATA_DIR, filename)
                 file = open(completeFileName, 'w')
                 print("Dumping " + table)
-                contents = subprocess.Popen(["mdb-export", DATABASE, table],
+                contents = subprocess.Popen(["mdb-export", databasePath, table],
                                             stdout=subprocess.PIPE,
                                             encoding='utf8').communicate()[0]
                 file.write(contents)

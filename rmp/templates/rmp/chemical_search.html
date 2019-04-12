@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 
 {% block title %}
-RMP Facility Search
+Search by chemical
 {% endblock %}
 
 {% block content %}
 
-<h2 class="searchhead">Search By Facility</h2>
+<h2 class="searchhead">Search By Chemical</h2>
 
 {% if error %}
 
@@ -26,7 +26,7 @@ RMP Facility Search
     </form>
 
 {% else %}
- 
+
     <form class="search" action="search_by_facility" method="get">
       <input type="text" name="facility" placeholder="Facility Name" required/>
       <input type="text" name="parent_company" placeholder="Parent Company Name"/>

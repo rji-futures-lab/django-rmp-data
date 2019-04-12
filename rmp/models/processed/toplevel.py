@@ -290,7 +290,7 @@ class Facility(BaseRMPModel):
                 Value(0),
             ),
         )
-
+        print(qs.query)
         return qs
 
     class Meta:

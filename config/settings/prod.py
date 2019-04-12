@@ -9,7 +9,7 @@ ALLOWED_HOSTS = [
     'rmp.rjifuture.org',
 ]
 
-INSTALLED_APPS = INSTALLED_APPS + ['storages', ]
+INSTALLED_APPS = INSTALLED_APPS + ['storages',]
 
 AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')

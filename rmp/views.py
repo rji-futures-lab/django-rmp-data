@@ -52,7 +52,9 @@ def state_accidents(request):
     return render(request, 'rmp/state_accidents.html', context)
 
 def facility_search(request):
-    return render(request, 'rmp/facility_search.html')
+    state_list = Facility.objects.order_by('state').values('state').distinct()
+    context = {'state_list': state_list}
+    return render(request, 'rmp/facility_search.html', context)
 
 def location_search(request):
     state_list = Facility.objects.order_by('state').values('state').distinct()

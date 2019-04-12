@@ -419,6 +419,7 @@ input::placeholder{
 select {
 	display: block;
 	margin: 0 auto;
+	margin-bottom: 15px;
 }
 
 input[type=submit] {
