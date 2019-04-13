@@ -11,6 +11,7 @@ from rmp.fields import (
 )
 from rmp.models.base import BaseRMPModel
 
+
 class tblS6AccidentHistory(BaseRMPModel):
     AccidentHistoryID = CopyFromIntegerField(
         primary_key=True,

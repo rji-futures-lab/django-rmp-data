@@ -37,16 +37,9 @@ class Accident(BaseRMPModel):
         'Registration',
         on_delete=models.PROTECT,
     )
-    # accident_date = CopyFromDateField(
-    #     max_length=19,
-    #     null=True,
-    #     blank=True,
-    # )
-    # ^^^^^^^ This is the proper config for this field, once we
-    # clean up "null" vs "NULL" values
-    accident_date = CopyFromCharField(blank=True, max_length=10)
-    # can we combine these two? do we know the time zone?
-    # accident_date = CopyFromDateTimeField(blank=True, null=True)
+    accident_date = CopyFromDateField(
+        null=True,
+    )
     accident_time = CopyFromCharField(max_length=4)
     naics_code = CopyFromCharField(
         db_column='naics_code',
@@ -78,16 +71,13 @@ class Accident(BaseRMPModel):
     )
     wind_speed_unit = CopyFromCharField(max_length=1, blank=True)
     wind_direction = CopyFromCharField(max_length=3, blank=True)
-    temperature = CopyFromIntegerField(
-        # Data type of source column is decimal, but all distinct values
-        # are whole numbers NONETHELESS, should prob convert to decimal field
-        # in case the source data includes decimal values
-        # means outputtin as such in processed file
+    temperature = CopyFromDecimalField(
+        max_digits=5,
+        decimal_places=2,
         null=True,
     )
     stability_class = CopyFromCharField(max_length=1, blank=True)
-    precipitation = CopyFromBooleanField(
-    )
+    precipitation = CopyFromBooleanField()
     unknown_weather = CopyFromBooleanField()
     deaths_workers = CopyFromIntegerField(null=True)
     deaths_responders = CopyFromIntegerField(null=True)
@@ -168,11 +158,8 @@ class Accident(BaseRMPModel):
     ci_none = CopyFromBooleanField()
     ci_other = CopyFromCharField(max_length=200, blank=True)
     cbi_flag = CopyFromBooleanField()
-
-    #TODO TURN BELOW INTO AGGREGATE
-
     num_acc_chem = CopyFromIntegerField(null=True)
-    flam_total = CopyFromIntegerField(null=True,)
+    flam_total = CopyFromIntegerField(null=True)
     toxic_total = CopyFromIntegerField(null=True)
     quantity_total = CopyFromIntegerField(null=True)
     num_deaths = CopyFromIntegerField(null=True)

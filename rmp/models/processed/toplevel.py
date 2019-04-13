@@ -53,7 +53,11 @@ class Facility(BaseRMPModel):
     city = CopyFromCharField(
         max_length=19,
     )
-    state = CopyFromCharField(max_length=2)
+    state = CopyFromForeignKey(
+        'StateCd',
+        on_delete=models.PROTECT,
+        db_column='state',
+    )
     zip_code = CopyFromCharField(
         max_length=5,
     )
@@ -95,7 +99,13 @@ class Facility(BaseRMPModel):
     parent_2 = CopyFromCharField(max_length=200, blank=True)
     operator_name = CopyFromCharField(max_length=200, blank=True)
     operator_city = CopyFromCharField(max_length=20, blank=True)
-    operator_state = CopyFromCharField(max_length=2, blank=True)
+    operator_state = CopyFromForeignKey(
+        'StateCd',
+        on_delete=models.PROTECT,
+        blank=True,
+        db_column='operator_state',
+        related_name='+',
+    )
     operator_zip = CopyFromCharField(max_length=5, blank=True)
     province = CopyFromCharField(max_length=20, blank=True)
     county = CopyFromCharField(max_length=200, blank=True)
@@ -310,7 +320,12 @@ class Registration(BaseRMPModel):
     street_1 = CopyFromCharField(max_length=35, blank=True)
     street_2 = CopyFromCharField(max_length=35, blank=True)
     city = CopyFromCharField(max_length=19, blank=True)
-    state = CopyFromCharField(max_length=2, blank=True)
+    state = CopyFromForeignKey(
+        'StateCd',
+        on_delete=models.PROTECT,
+        blank=True,
+        db_column='state',
+    )
     zip = CopyFromCharField(max_length=5, blank=True)
     zip_ext = CopyFromCharField(max_length=4, blank=True)
     county_fips = CopyFromCharField(max_length=5, blank=True)
@@ -334,7 +349,13 @@ class Registration(BaseRMPModel):
     op_street_1 = CopyFromCharField(max_length=35, blank=True)
     op_street_2 = CopyFromCharField(max_length=35, blank=True)
     operator_city = CopyFromCharField(max_length=19, blank=True)
-    operator_state = CopyFromCharField(max_length=2, blank=True)
+    operator_state = CopyFromForeignKey(
+        'StateCd',
+        on_delete=models.PROTECT,
+        blank=True,
+        related_name='+',
+        db_column='operator_state',
+    )
     operator_zip = CopyFromCharField(max_length=5, blank=True)
     operator_zip_ext = CopyFromCharField(max_length=4, blank=True)
     rmp_contact = CopyFromCharField(max_length=35, blank=True)
@@ -408,7 +429,13 @@ class Registration(BaseRMPModel):
     prep_street_1 = CopyFromCharField(max_length=35, blank=True)
     prep_street_2 = CopyFromCharField(max_length=35, blank=True)
     prep_city = CopyFromCharField(max_length=19, blank=True)
-    prep_state = CopyFromCharField(max_length=2, blank=True)
+    prep_state = CopyFromForeignKey(
+        'StateCd',
+        on_delete=models.PROTECT,
+        blank=True,
+        related_name='+',
+        db_column='prep_state',
+    )
     prep_zip = CopyFromCharField(max_length=5, blank=True)
     prep_zip_ext = CopyFromCharField(max_length=4, blank=True)
     prep_phone = CopyFromCharField(max_length=10, blank=True)
@@ -419,8 +446,6 @@ class Registration(BaseRMPModel):
     rmp_email = CopyFromCharField(max_length=100, blank=True)
     dereg_reason = CopyFromCharField(max_length=2, blank=True)
     dereg_other = CopyFromCharField(max_length=80, blank=True)
-
-    # TODO AGGREGATE
     num_accident_records = CopyFromIntegerField(null=True)
     num_accident_actual = CopyFromIntegerField(null=True)
     num_accident_divider = CopyFromIntegerField(null=True)
@@ -454,21 +479,9 @@ class Registration(BaseRMPModel):
 
     @classmethod
     def get_transform_queryset(self):
-        """
-        This table is mapped to tblS1Facilities. All fields preceding num_accident_records are taken directly from the raw models.
-
-        Starting here is where the math gets wonky. I had to calculate two separate accident fields. One field is called num_accident_records which is the pure count of
-        records from the Accident table grouped by rmp_id. I then had to count the distinct amount of the same records, which is the actual amount of accidents.
-
-        I figured out that num_accident_records / num_accident_actual lead to a factor that gave me correct chemical totals. As we talked about at NICAR, this divider leads to correct calculations
-        about 70-75 percent of the time.
-
-        I had to do the same thing with the Process chemicals: Calculating the total number of process chemicals and then dividing that by the number of real chemicals.
-        Apparently there's a significant amount of Chemicals with the ID 0 - which acts as a flag.
-
-        I had to use the num_accident_divider field to also calculate num_deaths, num_injuries, num_evacuated and property_damage. The group by in our ORM query multiplies those results fields also.
-        """
-        qs = raw_models.tblS1Facilities.objects.values(
+        qs = raw_models.tblS1Facilities.objects.select_related(
+            'FacilityCountyFIPS_id'
+        ).values(
             'FacilityID',
         ).annotate(
             rmp_id=F('FacilityID'),
@@ -629,10 +642,15 @@ class Registration(BaseRMPModel):
         )
         return qs
 
-class State(BaseRMPModel):
-    code = CopyFromCharField(
-        max_length=2,
-        unique=True,
+
+class StateCounts(BaseRMPModel):
+    state = CopyFromOneToOneField(
+        'StateCd',
+        primary_key=True,
+        on_delete=models.PROTECT,
+        db_column='state',
+        help_text='Federal Information Processing Standard (FIPS) code for the'
+                  ' county in which the facility is located.'
     )
     total_facilities = CopyFromIntegerField()
     total_accidents = CopyFromIntegerField()
@@ -643,9 +661,10 @@ class State(BaseRMPModel):
 
     @classmethod
     def get_transform_queryset(self):
+
         qs = Facility.objects.filter(registered=True).values(
-                'state'
-            ).annotate(
+            'state'
+        ).annotate(
             code=F('state'),
             total_facilities=Count('id'),
             total_accidents=Sum('num_accident_actual'),
@@ -654,4 +673,5 @@ class State(BaseRMPModel):
             total_evacuated=Sum('num_evacuated'),
             total_property_damage=Sum('property_damage'),
         ).order_by('state')
+
         return qs
