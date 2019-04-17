@@ -3,8 +3,6 @@ Settings for the Django project that apply in any environment.
 """
 import os
 
-DEBUG = True
-
 ROOT_DIR = os.path.dirname(
     os.path.dirname(
         os.path.dirname(
@@ -12,26 +10,16 @@ ROOT_DIR = os.path.dirname(
         )
     )
 )
-SECRET_KEY = "v9o$jj1e8_5_4blqdr8=242fv0xep_3u21au0d3nmfq899==7"
-
-# os.getenv('DJANGO_SECRET_KEY')
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    #     'NAME': 'rmp',
-    #     'USER': os.getenv('DB_USER', 'postgres'),
-    #     'PASSWORD': os.getenv('DB_PASSWORD', ''),
-    #     'HOST': os.getenv('DB_HOST', 'localhost'),
-    #     'PORT': os.getenv('DB_PORT', '5432'),
-    # }
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'rmp',
-        'USER': 'thomasoide',
-        'PASSWORD': 'G0DUCKS15t!',
-        'HOST': 'localhost',
-        'PORT': '',
+        'USER': os.getenv('DB_USER', 'postgres'),
+        'PASSWORD': os.getenv('DB_PASSWORD', ''),
+        'HOST': os.getenv('DB_HOST', 'localhost'),
+        'PORT': os.getenv('DB_PORT', '5432'),
     }
 }
 

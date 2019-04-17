@@ -80,7 +80,7 @@ class tblS1Facilities(BaseRMPModel):
         to_field='StateCounty_Code',
         db_column='FacilityCountyFIPS',
         on_delete=models.PROTECT,
-        blank=True,
+        null=True,
         verbose_name='1.5.f Facility County',
         help_text='Federal Information Processing Standard (FIPS) code for '
                   'county in which the facility is located.',

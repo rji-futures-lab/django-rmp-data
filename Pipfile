@@ -5,10 +5,12 @@ name = "pypi"
 
 [packages]
 django = ">=2.2.0"
-django-postgres-copy = "*"
+django-postgres-copy = "<2.4.0"
 django-storages = "*"
-psycopg2 = "<2.8.0"
+"psycopg2" = "<2.8.0"
 zappa = "*"
+django-environ = "*"
+django-debug-toolbar = "*"
 
 [dev-packages]
 django-debug-toolbar = "*"

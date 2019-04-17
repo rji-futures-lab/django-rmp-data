@@ -74,10 +74,9 @@ class tlkpCountyFIPSCodes(BaseRMPModel):
         max_length=30,
         help_text='The name of the county.',
     )
-    StateCounty_Code = CopyFromCharField(
+    StateCounty_Code = CopyFromIntegerField(
         primary_key=True,
         help_text='Concatenation of state_code and county_code(?)',
-        max_length=5,
     )
 
     class Meta:
