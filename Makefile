@@ -1,9 +1,4 @@
-.PHONY: env syncdbschema createrds deleterds recreaterds
-
-env:
-	echo 'DJANGO_SECRET_KEY=dev123' >> .env
-	echo 'DATABASE_URL=psql://'`whoami`':@127.0.0.1:5432/rmp' >> .env
-	echo 'DEBUG=True' >> .env
+.PHONY: syncdbschema createrds deleterds recreaterds deploy
 
 syncdbschema:
 	dropdb rmp
@@ -11,6 +6,7 @@ syncdbschema:
 	rm -f -r rmp/migrations
 	python manage.py makemigrations rmp
 	python manage.py migrate
+
 
 createrds:
 	aws --profile rji-futures-lab rds create-db-instance \
@@ -25,6 +21,7 @@ createrds:
 	
 	zappa manage dev migrate
 
+
 deleterds:
 	aws --profile rji-futures-lab rds delete-db-instance \
 	--db-instance-identifier "rtk-dev" --skip-final-snapshot \
@@ -33,7 +30,17 @@ deleterds:
 	aws --profile rji-futures-lab rds wait db-instance-deleted \
 	--db-instance-identifier "rtk-dev"
 
+
 recreaterds:
 	make deleterds
 	
 	make createrds
+
+
+deploy:
+	zappa deploy dev
+
+	zappa certify dev
+
+	python manage.py collectstatic --noinput \
+	--settings "config.settings.prod"
