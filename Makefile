@@ -18,8 +18,8 @@ createrds:
 	
 	aws --profile rji-futures-lab rds wait db-instance-available \
 	--db-instance-identifier "rtk-dev"
-	
-	zappa manage dev migrate
+
+	python manage.py migrate --noinput --settings "config.settings.prod"
 
 
 deleterds:
