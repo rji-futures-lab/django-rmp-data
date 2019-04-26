@@ -9,21 +9,24 @@ ALLOWED_HOSTS = [
     'rmp.rjifuture.org',
 ]
 
-INSTALLED_APPS = INSTALLED_APPS + ['storages', ]
+INSTALLED_APPS = INSTALLED_APPS + ['storages',]
 
+# default django-storages settings
 AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
-AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME')
-AWS_DEFAULT_ACL = None
-AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
-STATIC_URL = "https://%s/static/" % AWS_S3_CUSTOM_DOMAIN
-AWS_S3_OBJECT_PARAMETERS = {
-    'CacheControl': 'max-age=86400',
-}
+AWS_S3_REGION_NAME = os.getenv('AWS_REGION_NAME')
+AWS_AUTO_CREATE_BUCKET = True
+
+
+AWS_STATIC_BUCKET_NAME = 'rtk-static'
+AWS_STATIC_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STATIC_BUCKET_NAME
+STATIC_URL = "https://%s/" % AWS_STATIC_CUSTOM_DOMAIN
+STATICFILES_STORAGE = 'config.settings.storage_backends.StaticStorage'
+
+# django-storages settings for all other files (including data files)
+AWS_STORAGE_BUCKET_NAME = 'rtk-data'
+AWS_DEFAULT_ACL = 'private'
+AWS_BUCKET_ACL = 'private'
+RMP_DATA_LOCATION = 'rmp'
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-
-# RMP_DATA_DIR = os.path.join(ROOT_DIR, 'data', 'rmp')
-# RMP_RAW_DATA_DIR = os.path.join(RMP_DATA_DIR, 'raw')
-# RMP_PROCESSED_DATA_DIR = os.path.join(RMP_DATA_DIR, 'processed')

@@ -5,12 +5,11 @@ name = "pypi"
 
 [packages]
 django = ">=2.2.0"
-django-postgres-copy = "<2.4.0"
 django-storages = "*"
-"psycopg2" = "<2.8.0"
 zappa = "*"
-django-environ = "*"
-django-debug-toolbar = "*"
+postgres-copy = {editable = true,git = "https://github.com/rji-futures-lab/django-postgres-copy",ref = "no-reqs"}
+psycopg2-binary = "*"
+urllib3 = ">=1.24.2"
 
 [dev-packages]
 django-debug-toolbar = "*"
