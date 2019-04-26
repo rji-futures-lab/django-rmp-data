@@ -5,10 +5,10 @@ name = "pypi"
 
 [packages]
 django = ">=2.2.0"
-django-postgres-copy = "*"
 django-storages = "*"
-psycopg2 = "<2.8.0"
 zappa = "*"
+postgres-copy = {editable = true,git = "https://github.com/california-civic-data-coalition/django-postgres-copy",ref = "105"}
+psycopg2 = "<2.8.0"
 
 [dev-packages]
 django-debug-toolbar = "*"
@@ -19,4 +19,4 @@ ipython = "*"
 ipdb = "*"
 
 [requires]
-python_version = "3.7.1"
+python_version = "3.7.3"
