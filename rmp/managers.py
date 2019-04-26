@@ -3,6 +3,7 @@ Customized Django model manager subclasses.
 """
 import os, re, csv
 from django.conf import settings
+from django.core.files.storage import get_storage_class
 from postgres_copy import CopyManager
 
 
@@ -25,7 +26,9 @@ class BaseRMPManager(CopyManager):
         model = self.model
         stage = model.__module__.split('.')[2]
         file_name = '%s.csv' % model._meta.object_name
-        file_path = os.path.join(settings.RMP_DATA_DIR, stage, file_name)
+        storage = get_storage_class()()
+
+        file_path = os.path.join(settings.RMP_DATA_LOCATION, stage, file_name)
 
         options = dict(mapping=model.get_source_column_mapping())
 
@@ -44,4 +47,7 @@ class BaseRMPManager(CopyManager):
         if len(null_fields):
             options['force_null'] = null_fields
 
-        return super().from_csv(file_path, **options)
+        with storage.open(file_path) as f:
+            result = super().from_csv(f, **options)
+
+        return result

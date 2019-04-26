@@ -52,7 +52,7 @@ class Command(BaseCommand):
         """
         self.stdout.write("  Flushing %s..." % self.model_name, ending="")
         try:
-            delete_count = self.model.objects.all().delete()
+            delete_count = self.model.objects.all().delete()[0]
         except ProtectedError:
             msg = "%s currently has instances referenced \
 through a protected foreign key." % self.model_name
@@ -60,7 +60,10 @@ through a protected foreign key." % self.model_name
                 self.style.ERROR('\n  %s' % msg)
             )
         else:
-            print(delete_count)
+            self.stdout.write(
+                self.style.SUCCESS("%s records deleted" % delete_count)
+            )
+
 
     def load(self):
         """
