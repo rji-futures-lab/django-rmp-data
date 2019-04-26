@@ -3,6 +3,7 @@ Customized Django model subclasses
 """
 import os
 from django.conf import settings
+from django.core.files.storage import get_storage_class
 from django.db import models
 from django.db.models import F
 from rmp.managers import BaseRMPManager
@@ -86,12 +87,18 @@ class BaseRMPModel(models.Model):
             getattr(f, 'copy_from_name', f.name) 
             for f in cls.get_copyable_fields()
         ]
-
         file_name = '%s.csv' % cls._meta.object_name
 
-        path = os.path.join(settings.RMP_PROCESSED_DATA_DIR, file_name)
+        storage = get_storage_class()()
+        file_path = os.path.join(
+            settings.RMP_DATA_LOCATION, 'processed', file_name
+        )
 
-        return cls.get_transform_queryset().to_csv(path, *fields)
+        with storage.open(file_path, mode='wb') as f:
+            # not providing headers here...duh
+            result = cls.get_transform_queryset().to_csv(f, *fields)
+
+        return result
 
     objects = BaseRMPManager()
 

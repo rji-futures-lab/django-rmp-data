@@ -16,7 +16,7 @@ urlpatterns = [
     path('brs/', views.brs, name='brs'),
     path('rmp/', include('rmp.urls')),
 ] + static(
-    settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
+    settings.STATIC_URL, document_root=settings.STATIC_ROOT
 )
 
 if settings.DEBUG:

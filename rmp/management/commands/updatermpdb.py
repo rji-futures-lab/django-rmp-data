@@ -1,8 +1,8 @@
 """Update the RMP database."""
-from os import listdir
 from os.path import isfile, join
 from django.conf import settings
 from django.core import management
+from django.core.files.storage import get_storage_class
 from django.core.management.base import BaseCommand, CommandError
 from django.db.utils import DataError
 from rmp.models.helpers import get_models
@@ -30,7 +30,8 @@ class Command(BaseCommand):
         self.stdout.write(
             self.style.MIGRATE_HEADING('Loading raw files. '), ending=""
         )
-        self.load_from_dir(settings.RMP_RAW_DATA_DIR)
+        raw_files_path = join(settings.RMP_DATA_LOCATION, 'raw')
+        self.load_from_storage(raw_files_path)
 
         # handle transformations
         processed_models = [
@@ -51,15 +52,17 @@ class Command(BaseCommand):
         self.stdout.write(
             self.style.MIGRATE_HEADING('Loading processed files. '), ending=""
         )
-        self.load_from_dir(settings.RMP_PROCESSED_DATA_DIR)
+        processed_files_path = join(settings.RMP_DATA_LOCATION, 'processed')
+        self.load_from_storage(processed_files_path)
 
         management.call_command('transformtocsv', 'StateCounts')
         management.call_command('loadfromcsv', 'StateCounts')
 
-    def load_from_dir(self, path):
+    def load_from_storage(self, path):
         """
+        Iterate over files in path.
         """
-        files = [ f for f in listdir(path) if isfile(join(path, f)) ]
+        files = self.storage.listdir(path)[1]
         file_count_header = self.style.MIGRATE_HEADING(
             '%s files to load:' % len(files)
         )
@@ -70,3 +73,10 @@ class Command(BaseCommand):
         self.stdout.write(
             self.style.SUCCESS('Done.')
         )
+
+    @property
+    def storage(self):
+        self._storage = getattr(
+            self, '_storage', get_storage_class()()
+        )
+        return self._storage

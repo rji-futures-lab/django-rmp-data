@@ -96,11 +96,3 @@ USE_TZ = True
 
 
 LOGIN_URL = '/admin/login/'
-
-
-# MEDIA
-# ------------------------------------------------------------------------------
-# https://docs.djangoproject.com/en/dev/ref/settings/#media-root
-MEDIA_ROOT = os.path.join(ROOT_DIR, 'media')
-# https://docs.djangoproject.com/en/dev/ref/settings/#media-url
-MEDIA_URL = '/media/'

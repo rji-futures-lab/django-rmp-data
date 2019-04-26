@@ -1,4 +1,4 @@
-.PHONY: syncdbschema createrds deleterds recreaterds deploy
+.PHONY: syncdbschema createrds deleterds recreaterds deploy syncrawdatatos3
 
 syncdbschema:
 	dropdb rmp
@@ -44,3 +44,7 @@ deploy:
 
 	python manage.py collectstatic --noinput \
 	--settings "config.settings.prod"
+
+syncrawdatatos3:
+	aws --profile rji-futures-lab s3 sync data/rmp/raw s3://rtk-data/rmp/raw --acl private
+

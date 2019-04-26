@@ -19,10 +19,6 @@ MIDDLEWARE = MIDDLEWARE + [
     'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
-RMP_DATA_DIR = os.path.join(ROOT_DIR, 'data', 'rmp')
-RMP_RAW_DATA_DIR = os.path.join(RMP_DATA_DIR, 'raw')
-RMP_PROCESSED_DATA_DIR = os.path.join(RMP_DATA_DIR, 'processed')
-
 
 LOGGING = {
     'version': 1,
@@ -45,21 +41,19 @@ LOGGING = {
     },
 }
 
-DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
-STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
-# STATIC
-# ------------------------------------------------------------------------------
-# https://docs.djangoproject.com/en/dev/ref/settings/#static-root
-STATIC_ROOT = os.path.join(ROOT_DIR, 'static')
-# https://docs.djangoproject.com/en/dev/ref/settings/#static-url
+STATIC_ROOT = 'static/'
 STATIC_URL = '/static/'
-# https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#std:setting-STATICFILES_DIRS
 STATICFILES_DIRS = [
     os.path.join(ROOT_DIR, 'rmp', 'static'),
 ]
-# https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#staticfiles-finders
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 ]
+
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+
+DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
+RMP_DATA_LOCATION = 'data/rmp'
+

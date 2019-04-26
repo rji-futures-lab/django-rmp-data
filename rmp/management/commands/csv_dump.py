@@ -30,7 +30,9 @@ class Command(BaseCommand):
         for table in tables:
             if table != '':
                 filename = table.replace(" ","_") + ".csv"
-                completeFileName = os.path.join(settings.RMP_RAW_DATA_DIR, filename)
+                completeFileName = os.path.join(
+                    settings.RMP_DATA_LOCATION, 'raw', filename
+                )
                 file = open(completeFileName, 'w')
                 print("Dumping " + table)
                 contents = subprocess.Popen(["mdb-export", DATABASE, table],
