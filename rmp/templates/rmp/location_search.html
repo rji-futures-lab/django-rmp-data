@@ -12,61 +12,39 @@ Search RMP Facilities by Location
 
 {% if error %}
 
+<div class="dbheader">
+  <h3>Search for RMP Facilities by location</h3>
+</div>
+
 <p class="error">Please submit a search term.</p>
-
-<h3 class="dbheader">Search by State</h3>
-
-<form action="" method="get">
-  <select name="state" onchange="this.form.submit()">
-    <option value="" name="default">Select a state</option>
-    {% for state in state_list %}
-    <option value="{{ state.abbr }}">{{ state.abbr }}</option>
-    {% endfor %}
-  </select>
-</form>
-
-<h3 class="dbheader">Or search by city</h3>
 
 <form class="search" action="" method="get">
   <input type="text" name="city" placeholder="City"/>
-  <select name="state">
-    <option value="" name="default">Select a state</option>
-    {% for state in state_list %}
-    <option value="{{ state.abbr }}">{{ state.abbr }}</option>
-    {% endfor %}
-  </select>
-  <input type="text" name="zip" placeholder="Zip Code"/>
-  <input type="submit" value="Search" />
-</form>
-
-{% else %}
-<div class="dbheader">
-  <h3>Search for RMP Facilities by State</h3>
-</div>
-
-
-<form class="search" action="search_by_state" method="get">
-  <select name="state" onchange="this.form.submit()">
-    <option value="" name="default">Select a state</option>
-    {% for state in state_list %}
-    <option value="{{ state.abbr }}">{{ state.abbr }}</option>
-    {% endfor %}
-  </select>
-</form>
-<div class="dbheader">
-  <h3>Or search by city</h3>
-</div>
-
-
-<form class="search" action="search_by_city" method="get">
-  <input type="text" name="city" placeholder="City" />
+  <!-- <input type="text" name="county" placeholder="County"/> -->
   <select name="state" required>
     <option value="" name="default">Select a state</option>
     {% for state in state_list %}
     <option value="{{ state.abbr }}">{{ state.abbr }}</option>
     {% endfor %}
   </select>
-  <input type="text" name="zip" placeholder="Zip Code"/>
+  <input type="submit" value="Search" />
+</form>
+
+{% else %}
+
+<div class="dbheader">
+  <h3>Search for RMP Facilities by location</h3>
+</div>
+
+<form class="search" action="search_by_location" method="get">
+  <input type="text" name="city" placeholder="City" />
+  <!-- <input type="text" name="county" placeholder="County"/> -->
+  <select name="state" required>
+    <option value="" name="default">Select a state</option>
+    {% for state in state_list %}
+    <option value="{{ state.abbr }}">{{ state.abbr }}</option>
+    {% endfor %}
+  </select>
   <input type="submit" value="Search" />
 </form>
 

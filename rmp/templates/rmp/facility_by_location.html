@@ -6,17 +6,15 @@ RMP Facilities
 
 {% block content %}
 
+<a class="back" href="{% url 'location_search' %}">Back to search</a>
+
 {% if state_query and not city_query %}
 <h1>RMP Facilities in {{ state_query }}</h1>
 
 {% elif state_query and city_query %}
-<h1>RMP Facility Results: {{ city_query }}, {{ state_query }}</h1>
+<h1>RMP Facilities in {{ city_query }}, {{ state_query }}</h1>
 
 {% endif %}
-
-<a href="{% url 'location_search' %}">Back to search</a>
-
-{% if facility_list %}
 
 <table>
   <tr>
@@ -35,7 +33,7 @@ RMP Facilities
   {% load humanize %}
   {% for facility in facility_list %}
   <tr>
-    <td>{{ facility.facility_name }}</td>
+    <td><a href="{% url 'rmp:facility_detail' facility.id %}">{{ facility.facility_name }}</a></td>
     <td>{{ facility.city }}</td>
     <td>{{ facility.state.abbr }}</td>
     <td>{{ facility.zip_code }}</td>
@@ -51,7 +49,28 @@ RMP Facilities
 
 </table>
 
-{% endif %}
+
+<!-- {% if is_paginated %}
+  <ul class="pagination">
+    {% if page_obj.has_previous %}
+      <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in paginator.page_range %}
+      {% if page_obj.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if page_obj.has_next %}
+      <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+{% endif %} -->
 
 
 

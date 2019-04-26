@@ -21,14 +21,17 @@
       <h1>The Right-to-Know Network</h1>
     </div>
     <div id="nav">
-      <ul class="flex-container">
+      <ul class="navbar flex-container">
         <li><a href="{% url 'index' %}">Home</a></li>
 		    <li><a href="https://www.houstonchronicle.com/local/texas/chemical-breakdown/" target="_blank">Press</a></li>
 		    <li><a href="{% url 'databases' %}">Databases</a></li>
 		    <li><a href="{% url 'contact' %}">Contact</a> </li>
       </ul>
     </div>
-    {% block content %}{% endblock %} <!-- All page content will go here. Any client-side Javascript will go at the bottom -->
+    <div class="content">
+      {% block content %}{% endblock %}
+    </div>
+
     <div id="footer">
       <p>The Right To Know Network &copy; 2018</p>
     </div>

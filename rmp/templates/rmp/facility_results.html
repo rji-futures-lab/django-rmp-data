@@ -6,7 +6,7 @@ Facility Search Results
 
 {% block content %}
 
-<a href="{% url 'facility_search' %}">Back to search</a>
+<a href="{% url 'rmp:facility_search' %}">Back to search</a>
 
 {% if facility_query %}
 <h1>RMP Facility Results: {{ facility_query }}</h1>
@@ -25,7 +25,7 @@ Facility Search Results
 
   <h4>Basic Facility Info</h4>
 
-  <ul>
+  <ul class="facility-info">
     <li>Facility ID: {{ facility.id }}</li>
     <li>Deregistered: {{ facility.deregistration_yn }}</li>
     <li>Facility Name: {{ facility.facility_name }}</li>
@@ -35,25 +35,45 @@ Facility Search Results
     <li>Zip Code: {{ facility.zip_code }}</li>
     <li>Parent Company 1: {{ facility.parent }}</li>
     <li>Parent Company 2: {{ facility.parent_2 }}</li>
-    <li>Number of RMP Registrations: {{ facility.num_registration }}</li>
+    <li>Number of RMP Registrations: {{ facility.num_registrations }}</li>
   </ul>
 
   <h4>Most Recent RMP Submission Info</h4>
 
-  <ul>
+  <ul class="facility-info">
     <li>RMP ID: {{ facility.rmp.rmp_id }}</li>
     <li>Submission Type: {{ facility.rmp.submission_type }}</li>
     <li>Submission Date: {{ facility.rmp.complete_check_dt }}</li>
-    <li>Deregistration Date: {{ facility.rmp.deregistration_dt }}</li>
-    <li>Deregistration Effective Date : {{ facility.rmp.dereg_effect_dt }}</li>
-    <li>Deregistration Reason: {{ facility.rmp.dereg_reason }}</li>
+    <li>Deregistration Date: {{ facility.deregistration_date }}</li>
+    <li>Deregistration Effective Date : {{ facility.dereg_effect_date }}</li>
+    <li>Deregistration Reason: {{ facility.dereg_reason }}</li>
   </ul>
-
-  {% endfor %}
 
   <h4>Executive Summary Information</h4>
 
-  {{ facility.execsum_rmp.summary_text | linebreaksbr }}
+  <p>
+    {{ facility.execsum_rmp.summary_text | linebreaksbr }}
+  </p>
+
+  <h4>RMP Contact Information</h4>
+
+  <ul class="facility-info">
+    <li>Operator Phone: {{ facility.rmp.operator_phone }}</li>
+    <li>Facility URL: {{ facility.rmp.facility_url }}</li>
+    <li>Facility Phone: {{ facility.rmp.facility_phone }}</li>
+    <li>Facility DUN and Bradstreet Number:{{ facility.rmp.facility_duns }}</li>
+    <li>RMP Contact: {{ facility.rmp.rmp_contact}}</li>
+    <li>RMP Contact Title: {{ facility.rmp.rmp_contact_title }}</li>
+    <li>RMP Contact Email: {{ facility.rmp.em_email }}</li>
+    <li>RMP Preparer Name: {{ facility.rmp.prep_name }}</li>
+    <li>RMP Preparer Address: {{ facility.rmp.prep_street_1 }}</li>
+    <li>RMP Preparer City: {{ facility.rmp.prep_city }}</li>
+    <li>RMP Preparer State: {{ facility.rmp.prep_state }}</li>
+    <li>RMP Preparer Zip: {{ facility.rmp.prep_zip }}</li>
+    <li>RMP Preparer Phone: {{ facility.rmp.prep_phone }}</li>
+  </ul>
+
+  {% endfor %}
 
 {% endif %}
 

@@ -13,13 +13,10 @@ Search by chemical
     <p class="error">Please submit a search term.</p>
 
     <form class="search" action="" method="get">
-      <input type="text" name="facility" placeholder="Facility Name" required/>
-      <input type="text" name="parent_company" placeholder="Parent Company Name"/>
-      <input type="text" name="city" placeholder="City"/>
-      <select name="state" required>
-        <option value="" name="default">Select a state</option>
-        {% for state in state_list %}
-        <option value="{{ state.state }}">{{ state.state }}</option>
+      <select name="chemical" required>
+        <option value="" name="default">Select a chemical</option>
+        {% for chemical in chemical_list %}
+        <option value="{{ chemical.chemical_name }}">{{ chemical.chemical_name }}</option>
         {% endfor %}
       </select>
       <input type="submit" value="Search" required/>
@@ -27,14 +24,11 @@ Search by chemical
 
 {% else %}
 
-    <form class="search" action="search_by_facility" method="get">
-      <input type="text" name="facility" placeholder="Facility Name" required/>
-      <input type="text" name="parent_company" placeholder="Parent Company Name"/>
-      <input type="text" name="city" placeholder="City"/>
-      <select name="state" required>
-        <option value="" name="default">Select a state</option>
-        {% for state in state_list %}
-        <option value="{{ state.state }}">{{ state.state }}</option>
+    <form class="search" action="{% url 'search_by_chemical' chemical.chemical_name %}" method="get">
+      <select name="chemical" required>
+        <option value="" name="default">Select a chemical</option>
+        {% for chemical in chemical_list %}
+        <option value="{{ chemical.chemical_name }}">{{ chemical.chemical_name }}</option>
         {% endfor %}
       </select>
       <input type="submit" value="Search" required/>

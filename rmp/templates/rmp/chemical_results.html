@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}
+Search by chemical
+{% endblock %}
+
+{% block content %}
+
+<h1>Search Results: {{ chemical_query }}</h1>
+
+<table>
+  <tr>
+    <th>Facility ID</th>
+    <th>Facility Name</th>
+    <th>Chemical Name</th>
+    <th>quantity_lbs</th>
+  </tr>
+  {% for facility in facility_list %}
+  <tr>
+    <td><a href="{% 'search_by_facility' %}">{{ facility.id }}</a></td>
+    <td></td>
+    <td>{{ facility.chemical_name }}</td>
+    <td>{{ facility.quantity_total }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+{% endblock %}

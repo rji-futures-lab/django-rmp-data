@@ -56,6 +56,7 @@ class Process(BaseRMPModel):
         max_length=255,
         blank=True,
     )
+    facility_id = CopyFromBigIntegerField()
 
     @classmethod
     def get_transform_queryset(self):
@@ -99,6 +100,7 @@ class Process(BaseRMPModel):
             ),
             quantity_tot=F('flam_tot') + F('toxic_tot'),
             facility_name=F('FacilityID__FacilityName'),
+            facility_id=F('FacilityID__EPAFacilityID')
         )
         return qs
 

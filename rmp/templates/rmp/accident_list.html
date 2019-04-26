@@ -29,7 +29,7 @@
       {% load humanize %}
       {% for facility in facility_list %}
       <tr>
-        <td>{{ facility.facility_name }}</td>
+        <td><a href="{% url 'rmp:facility_detail' facility.id %}">{{ facility.facility_name }}</a></td>
         <td>{{ facility.city|title }}</td>
         <td>{{ facility.state.abbr }}</td>
         <td>{{ facility.num_accident|intcomma }}</td>
@@ -42,7 +42,7 @@
 
       {% for facility in evacuated_list %}
       <tr>
-        <td>{{ facility.facility_name }}</td>
+        <td><a href="{% url 'rmp:facility_detail' facility.id %}">{{ facility.facility_name }}</a></td>
         <td>{{ facility.city|title }}</td>
         <td>{{ facility.state.abbr }}</td>
         <td>{{ facility.num_accident|intcomma }}</td>
@@ -55,7 +55,7 @@
 
       {% for facility in prop_damage_list %}
       <tr>
-        <td>{{ facility.facility_name }}</td>
+        <td><a href="{% url 'rmp:facility_detail' facility.id %}">{{ facility.facility_name }}</a></td>
         <td>{{ facility.city|title }}</td>
         <td>{{ facility.state.abbr }}</td>
         <td>{{ facility.num_accident|intcomma }}</td>
