@@ -138,6 +138,8 @@ class ProcChem(BaseRMPModel):
     )
     chemical_type = CopyFromCharField(max_length=1, blank=True)
     chemical_name = CopyFromCharField(max_length=92)
+    # worst_tox_flag = CopyFromBooleanField()
+    # worst_flam_flag = CopyFromBooleanField()
 
     @classmethod
     def get_transform_queryset(self):
@@ -163,6 +165,22 @@ class ProcChem(BaseRMPModel):
             num_worst_tox=Count('tbls2toxicsworstcase'),
             cas=F('ChemicalID__CASNumber'),
             chemical_type=F('ChemicalID__ChemType'),
+            # worst_tox_flag=Case(
+            #     When(
+            #         ProcessChemicalID=F('tbls2toxicsworstcase__ProcessChemicalID'),
+            #         # then=(Cast(Value(1), CopyFromBooleanField())),
+            #         then=(Cast(True, CopyFromBooleanField())),
+            #     ),
+            #     default=False,
+            # ),
+            # worst_flam_flag=Case(
+            #     When(
+            #         ProcessChemicalID=F('tbls4flammablesworstcase__ProcessChemicalID'),
+            #         # then=(Cast(Value(1), CopyFromBooleanField())),
+            #         then=(Cast(True, CopyFromBooleanField())),
+            #     ),
+            #     default=False,
+            # ),
         )
         return qs
 

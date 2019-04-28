@@ -24,7 +24,7 @@ Search by chemical
 
 {% else %}
 
-    <form class="search" action="{% url 'search_by_chemical' chemical.chemical_name %}" method="get">
+    <form class="search" action="{% url 'rmp:search_by_chemical' %}" method="get">
       <select name="chemical" required>
         <option value="" name="default">Select a chemical</option>
         {% for chemical in chemical_list %}
@@ -35,26 +35,5 @@ Search by chemical
     </form>
 
 {% endif %}
-
-<!-- <form method="post" novalidate>
-  {% csrf_token %}
-
-  {{ form.non_field_errors }}
-
-  <table border="1">
-    {% for field in form.visible_fields %}
-      <tr>
-        <th>{{ field.label_tag }}</th>
-        <td>
-          {{ field.errors }}
-          {{ field }}
-          {{ field.help_text }}
-        </td>
-      </tr>
-    {% endfor %}
-  </table>
-
-  <button type="submit">Submit</button>
-</form> -->
 
 {% endblock %}

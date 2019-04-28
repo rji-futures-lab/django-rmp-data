@@ -6,7 +6,7 @@ RMP Facilities
 
 {% block content %}
 
-<a class="back" href="{% url 'location_search' %}">Back to search</a>
+<a class="back" href="{% url 'rmp:location_search' %}">Back to search</a>
 
 {% if state_query and not city_query %}
 <h1>RMP Facilities in {{ state_query }}</h1>
@@ -33,7 +33,7 @@ RMP Facilities
   {% load humanize %}
   {% for facility in facility_list %}
   <tr>
-    <td><a href="{% url 'rmp:facility_detail' facility.id %}">{{ facility.facility_name }}</a></td>
+    <td><a href="{% url 'rmp:facility_detail' facility.id %}" class="facilityList">{{ facility.facility_name }}</a></td>
     <td>{{ facility.city }}</td>
     <td>{{ facility.state.abbr }}</td>
     <td>{{ facility.zip_code }}</td>

@@ -94,7 +94,7 @@ def chemical_search(request):
     context = dict(chemical_list=chemical_list)
     return render(request, 'rmp/chemical_search.html', context)
 
-def search_by_chemical(request, chemical):
+def search_by_chemical(request):
     if 'chemical' in request.GET:
         chemical = request.GET['chemical']
         facility_list = ProcChem.objects.filter(chemical_name__search=chemical).select_related('process').values(
@@ -165,13 +165,16 @@ class locationListView(ListView):
     def get_queryset(self):
         state_query = self.request.GET.get('state')
         city_query = self.request.GET.get('city')
+        county_query = self.request.GET.get('county')
         queryset = super(locationListView, self).get_queryset()
-        if state_query and not city_query:
+        if state_query and not city_query and not county_query:
             queryset = queryset.filter(state=state_query)
-            print(queryset)
-        elif state_query and city_query:
+        elif state_query and city_query and not county_query:
             queryset = queryset.filter(state=state_query).filter(city=city_query)
-            print(queryset)
+        elif state_query and county_query and not city_query:
+            queryset = queryset.filter(state=state_query).filter(county_name__search=county_query)
+        elif state_query and county_query and city_query:
+            queryset = queryset.filter(state=state_query).filter(county_name__search=county_query).filter(city=city_query)
         return queryset
 
 
