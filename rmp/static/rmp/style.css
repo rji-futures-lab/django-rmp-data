@@ -15,6 +15,29 @@ h3 {
 	color: Black;
 }
 
+.content {
+	padding: 25px 25px;
+}
+
+.content .back {
+	color: black;
+	font-family: 'Muli', Helvetica, sans-serif;
+	text-decoration: none;
+}
+
+.content .back:hover {
+	text-decoration: underline;
+}
+
+td a {
+	color: black;
+}
+
+td a:hover {
+	opacity: 0.7;
+}
+
+
 /* NAVBAR */
 
 .container {
@@ -48,7 +71,7 @@ h1 {
 
 }
 
-#nav a:link, a:visited {
+#nav a {
 	display:block;
   color: #ffffff;
   background-color: #E8AD0C;
@@ -172,6 +195,11 @@ h2 {
 	margin-top: 5px;
 	color: black;
 	margin-right: 5%;
+}
+
+.facility-info {
+	font-family: 'Muli', Helvetica, sans-serif;
+
 }
 
 /* #email p {
@@ -315,10 +343,9 @@ image{
 }
 
 h4{
-	font-size: 0.8em;
+	font-size: 1.2em;
 	font-family: 'Muli', Helvetica, sans-serif;
 	text-align: center;
-	color: #ffffff;
 }
 
 
@@ -371,13 +398,13 @@ margin-left: 30px;
 }
 
 
-ul {
+.navbar {
 	display: flex;
 	flex-direction: column;
 	text-decoration-color:
 }
 
-li{
+.navbar li{
 	flex: 1 1 auto;
 	text-decoration-color: black;
 }
@@ -398,7 +425,7 @@ li{
 
 input[type=text]{
 	display: block;
-	width: 50%;
+	max-width: 600px;
 	padding: 12px 20px;
   margin: 15px auto;
   box-sizing: border-box;
@@ -419,6 +446,7 @@ input::placeholder{
 select {
 	display: block;
 	margin: 0 auto;
+	margin-bottom: 15px;
 }
 
 input[type=submit] {
@@ -622,7 +650,7 @@ article img {
 	justify-content: space-between;
 }
 
-ul {
+.navbar {
 	flex-direction: row;
 	justify-content: space-between;
 }

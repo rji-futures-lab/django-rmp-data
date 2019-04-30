@@ -27,6 +27,9 @@ from rmp.models.base import BaseRMPModel
 
 
 class Process(BaseRMPModel):
+    """
+    Possible additions from Registration: Facility_name, city, county, parent_1? This would turn Process, Accident and Registration into the top level tables.
+    """
     id = CopyFromIntegerField(
         primary_key=True,
         source_column='process_id',
@@ -49,10 +52,23 @@ class Process(BaseRMPModel):
     toxic_tot = CopyFromBigIntegerField()
     flam_tot = CopyFromBigIntegerField()
     quantity_tot = CopyFromBigIntegerField()
+    facility_name = CopyFromCharField(
+        max_length=255,
+        blank=True,
+    )
+    facility_id = CopyFromBigIntegerField()
 
     @classmethod
     def get_transform_queryset(self):
-        qs = raw_models.tblS1Processes.objects.annotate(
+        """
+        Top level table for Process. Aggregated fields are calculated similar to other tables. Fields with num_ are calculated by getting the count of
+        ProcessChemicalIDs from each table.
+
+        flam_tot and toxic_tot are calculated by generating the sum of process chemicals grouping by ProcessID.
+        """
+        qs = raw_models.tblS1Processes.objects.select_related(
+            'FacilityID',
+        ).annotate(
             process_id=F('ProcessID'),
             process_desc=F('AltID'),
             rmp_id=F('FacilityID'),
@@ -83,6 +99,8 @@ class Process(BaseRMPModel):
                 )
             ),
             quantity_tot=F('flam_tot') + F('toxic_tot'),
+            facility_name=F('FacilityID__FacilityName'),
+            facility_id=F('FacilityID__EPAFacilityID')
         )
         return qs
 
@@ -118,16 +136,24 @@ class ProcChem(BaseRMPModel):
         verbose_name='CAS number',
         help_text='The identifying CAS number for a chemical.',
     )
-    chemical_type = CopyFromCharField(max_length=1)
+    chemical_type = CopyFromCharField(max_length=1, blank=True)
+    chemical_name = CopyFromCharField(max_length=92)
+    # worst_tox_flag = CopyFromCharField(max_length=1)
+    # worst_flam_flag = CopyFromCharField(max_length=1)
 
     @classmethod
     def get_transform_queryset(self):
+        """
+        Process Chemicals contians 8 aggregated fields and a foreign key join to the tlkpChemicals table. All aggregated fields are getting counts of
+        ProcessChemicalID from alt_flam, alt_tox, preventionprogram2, preventionprogram3, process flam, worst case flammable and worst case toxic.
+        """
         qs = raw_models.tblS1ProcessChemicals.objects.select_related(
-            'ChemicalID'
+            'ChemicalID',
         ).annotate(
             procchem_id=F('ProcessChemicalID'),
             process_id=F('ProcessID'),
             chemical_id=F('ChemicalID'),
+            chemical_name=F('ChemicalID__ChemicalName'),
             quantity_lbs=Cast('Quantity', CopyFromBigIntegerField()),
             cbi_flag=F('CBI_Flag'),
             num_alt_flam=Count('tbls5flammablesaltreleases'),
@@ -139,12 +165,31 @@ class ProcChem(BaseRMPModel):
             num_worst_tox=Count('tbls2toxicsworstcase'),
             cas=F('ChemicalID__CASNumber'),
             chemical_type=F('ChemicalID__ChemType'),
+            # worst_tox_flag=Case(
+            #     When(
+            #         ProcessChemicalID=F('tbls2toxicsworstcase__ProcessChemicalID'),
+            #         # then=(Cast(Value(1), CopyFromBooleanField())),
+            #         then=(Cast('1', CopyFromCharField())),
+            #     ),
+            #     default='0',
+            # ),
+            # worst_flam_flag=Case(
+            #     When(
+            #         ProcessChemicalID=F('tbls4flammablesworstcase__ProcessChemicalID'),
+            #         # then=(Cast(Value(1), CopyFromBooleanField())),
+            #         then=(Cast('1', CopyFromCharField())),
+            #     ),
+            #     default='0',
+            # ),
         )
-
+        print(qs.query)
         return qs
 
 
 class ProcFlam(BaseRMPModel):
+    """
+    Bottom level table for process data tables.
+    """
     id = CopyFromIntegerField(
         primary_key=True,
         source_column='FlamMixChemID',

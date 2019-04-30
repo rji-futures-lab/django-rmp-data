@@ -75,7 +75,7 @@ class tblFacility(BaseRMPModel):
         'TlkpCountyFIPSCodes',
         db_column='FacilityCountyFIPS',
         on_delete=models.PROTECT,
-        blank=True,
+        null=True,
     )
     CountOfFacilityID = CopyFromIntegerField(
     )

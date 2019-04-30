@@ -14,7 +14,7 @@ urlpatterns = [
     path('nrc/', views.nrc, name='nrc'),
     path('rcris/', views.rcris, name='rcris'),
     path('brs/', views.brs, name='brs'),
-    path('rmp/', include('rmp.urls')),
+    path('rmp/', include('rmp.urls', namespace='rmp')),
 ] + static(
     settings.STATIC_URL, document_root=settings.STATIC_ROOT
 )

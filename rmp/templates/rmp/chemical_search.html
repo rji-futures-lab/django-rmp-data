@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}
+Search by chemical
+{% endblock %}
+
+{% block content %}
+
+<h2 class="searchhead">Search By Chemical</h2>
+
+{% if error %}
+
+    <p class="error">Please submit a search term.</p>
+
+    <form class="search" action="" method="get">
+      <select name="chemical" required>
+        <option value="" name="default">Select a chemical</option>
+        {% for chemical in chemical_list %}
+        <option value="{{ chemical.chemical_name }}">{{ chemical.chemical_name }}</option>
+        {% endfor %}
+      </select>
+      <input type="submit" value="Search" required/>
+    </form>
+
+{% else %}
+
+    <form class="search" action="{% url 'rmp:search_by_chemical' %}" method="get">
+      <select name="chemical" required>
+        <option value="" name="default">Select a chemical</option>
+        {% for chemical in chemical_list %}
+        <option value="{{ chemical.chemical_name }}">{{ chemical.chemical_name }}</option>
+        {% endfor %}
+      </select>
+      <input type="submit" value="Search" required/>
+    </form>
+
+{% endif %}
+
+{% endblock %}

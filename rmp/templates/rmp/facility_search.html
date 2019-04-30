@@ -13,17 +13,31 @@ RMP Facility Search
     <p class="error">Please submit a search term.</p>
 
     <form class="search" action="" method="get">
-      <input type="text" name="facility" placeholder="Facility Name"/>
+      <input type="text" name="facility" placeholder="Facility Name" required/>
       <input type="text" name="parent_company" placeholder="Parent Company Name"/>
-      <input type="submit" value="Search" />
+      <input type="text" name="city" placeholder="City"/>
+      <select name="state" required>
+        <option value="" name="default">Select a state</option>
+        {% for state in state_list %}
+        <option value="{{ state.state }}">{{ state.state }}</option>
+        {% endfor %}
+      </select>
+      <input type="submit" value="Search" required/>
     </form>
 
 {% else %}
 
-    <form class="search" action="search_by_facility" method="get">
-      <input type="text" name="facility" placeholder="Facility Name"/>
+    <form class="search" action="{% url 'rmp:search_by_facility' %}" method="get">
+      <input type="text" name="facility" placeholder="Facility Name" required/>
       <input type="text" name="parent_company" placeholder="Parent Company Name"/>
-      <input type="submit" value="Search" />
+      <input type="text" name="city" placeholder="City"/>
+      <select name="state" required>
+        <option value="" name="default">Select a state</option>
+        {% for state in state_list %}
+        <option value="{{ state.state }}">{{ state.state }}</option>
+        {% endfor %}
+      </select>
+      <input type="submit" value="Search" required/>
     </form>
 
 {% endif %}

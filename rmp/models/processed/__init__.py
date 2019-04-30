@@ -3,6 +3,7 @@ Processed Risk Management Plan (RMP) data models.
 """
 from .codes import (
     ChemCd,
+    CountyCd,
     DeregCd,
     DochanCd,
     DoctypCd,
@@ -58,6 +59,7 @@ from .toplevel import (
 __all__ = (
     # codes
     'ChemCd',
+    'CountyCd',
     'DeregCd',
     'DochanCd',
     'DoctypCd',

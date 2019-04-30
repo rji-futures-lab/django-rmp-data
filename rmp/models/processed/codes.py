@@ -7,6 +7,7 @@ from rmp.fields import (
     CopyFromCharField,
     CopyFromDecimalField,
     CopyFromIntegerField,
+    CopyFromForeignKey,
 )
 from rmp.models import BaseRMPModel
 from rmp.models import raw as raw_models
@@ -61,6 +62,35 @@ class ChemCd(BaseRMPModel):
     @classmethod
     def get_transform_queryset(self):
         m = raw_models.tlkpChemicals
+
+        return m.objects.get_default_transform_queryset()
+
+
+class CountyCd(BaseRMPModel):
+    state_code = CopyFromForeignKey(
+        'StateCd',
+        on_delete=models.PROTECT,
+        help_text='The U.S. Postal Service abbreviation for the state in which'
+                  ' the facility is located.',
+        db_column='State_Code',
+    )
+    county_code = CopyFromCharField(
+        max_length=2,
+        help_text='Federal Information Processing Standard (FIPS) code for the'
+                  ' county in which the facility is located.',
+    )
+    county_name = CopyFromCharField(
+        max_length=30,
+        help_text='The name of the county.',
+    )
+    state_county_code = CopyFromIntegerField(
+        primary_key=True,
+        help_text='Concatenation of state_code and county_code(?)',
+    )
+
+    @classmethod
+    def get_transform_queryset(self):
+        m = raw_models.tlkpCountyFIPSCodes
 
         return m.objects.get_default_transform_queryset()
 

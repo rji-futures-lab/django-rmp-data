@@ -62,10 +62,13 @@ class Facility(BaseRMPModel):
         max_length=5,
     )
     zip_ext = CopyFromCharField(max_length=4)
-    county_fips = CopyFromCharField(
-        max_length=5,
-        blank=True,
+    county_fips = CopyFromForeignKey(
+        'CountyCd',
+        on_delete=models.PROTECT,
+        db_column='county_fips',
+        null=True,
     )
+    county_name = CopyFromCharField(max_length=50, null=True)
     num_registrations = CopyFromIntegerField()
     latitude = CopyFromDecimalField(
         max_digits=6,
@@ -93,7 +96,7 @@ class Facility(BaseRMPModel):
     dereg_effect_date = CopyFromCharField(
         max_length=10,
         blank=True,
-        null=True,        
+        null=True,
     )
     parent = CopyFromCharField(max_length=200, blank=True)
     parent_2 = CopyFromCharField(max_length=200, blank=True)
@@ -140,6 +143,15 @@ class Facility(BaseRMPModel):
 
     @classmethod
     def get_transform_queryset(self):
+        """
+        Facility takes all of the raw data up to the num_registrations field. After that, the aggregated fields come from the facility's most recent
+        registration (the field is called sub_date in the processed model and ReceiptDate in the raw model).
+
+        Due to the nature of the foreign key relationships, I had to do the same calculations I did on Regisration as I did on Facility, calculating a
+        divider using the count of accidents on the accident table.
+
+        Again, problem fields on this model include all of the aggregated chemical quantity fields (anything with the _tot flag).
+        """
         qs = raw_models.tblFacility.objects.filter(
             tbls1facilities__FacilityID=Subquery(
                 raw_models.tblS1Facilities.objects.filter(
@@ -148,6 +160,8 @@ class Facility(BaseRMPModel):
                     max_sub_date=Max('FacilityID')
                 ).values('max_sub_date').order_by('-max_sub_date')[:1]
             )
+        ).select_related(
+            'FacilityCountyFIPS',
         ).annotate(
             id=F('EPAFacilityID'),
             facility_name=F('FacilityName'),
@@ -159,6 +173,7 @@ class Facility(BaseRMPModel):
             zip_code=F('FacilityZipCode'),
             zip_ext=F('Facility4DigitZipExt'),
             county_fips=F('FacilityCountyFIPS'),
+            county_name=F('FacilityCountyFIPS__County_Name'),
             num_registrations=F('CountOfFacilityID'),
             latitude=F('tbls1facilities__FacilityLatDecDegs'),
             longitude=F('tbls1facilities__FacilityLongDecDegs'),
@@ -291,7 +306,6 @@ class Facility(BaseRMPModel):
                 Value(0),
             ),
         )
-
         return qs
 
     class Meta:
@@ -319,7 +333,13 @@ class Registration(BaseRMPModel):
     )
     zip = CopyFromCharField(max_length=5, blank=True)
     zip_ext = CopyFromCharField(max_length=4, blank=True)
-    county_fips = CopyFromCharField(max_length=5, blank=True)
+    county_fips = CopyFromForeignKey(
+        'CountyCd',
+        on_delete=models.PROTECT,
+        db_column='county_fips',
+        null=True,
+    )
+    county_name = CopyFromCharField(max_length=50, null=True)
     lepc = CopyFromCharField(max_length=30, blank=True)
     latitude_dec = CopyFromCharField(max_length=10, blank=True)
     longitude_dec = CopyFromCharField(max_length=11, blank=True)
@@ -464,18 +484,13 @@ class Registration(BaseRMPModel):
     num_injuries = CopyFromIntegerField(null=True)
     num_evacuated = CopyFromIntegerField(null=True)
     property_damage = CopyFromBigIntegerField(null=True)
-    county = CopyFromCharField(max_length=60, blank=True, null=True)
     foreign_country_tr = CopyFromCharField(max_length=60, blank=True, null=True)
-    # num_proc_23 = CopyFromBigIntegerField(null=True)
-    # toxic_tot_23 = CopyFromBigIntegerField(null=True)
-    # flam_tot_23 = CopyFromBigIntegerField(null=True)
-    # quantity_tot_23 = CopyFromBigIntegerField(null=True)
     num_execsum = CopyFromIntegerField(null=True)
 
     @classmethod
     def get_transform_queryset(self):
         qs = raw_models.tblS1Facilities.objects.select_related(
-            'FacilityCountyFIPS_id'
+            'FacilityCountyFIPS'
         ).values(
             'FacilityID',
         ).annotate(
@@ -488,6 +503,7 @@ class Registration(BaseRMPModel):
             zip=F('FacilityZipCode'),
             zip_ext=F('Facility4DigitZipExt'),
             county_fips=F('FacilityCountyFIPS'),
+            county_name=F('FacilityCountyFIPS__County_Name'),
             lepc=F('LEPC'),
             latitude_dec=F('FacilityLatDecDegs'),
             longitude_dec=F('FacilityLongDecDegs'),
@@ -626,23 +642,12 @@ class Registration(BaseRMPModel):
             property_damage=Round(
                 Sum(F('tbls6accidenthistory__OnsitePropertyDamage') + F('tbls6accidenthistory__OffsitePropertyDamage'), output_field=CopyFromIntegerField()) / F('num_accident_divider')
             ),
-            county=F('FacilityCountyFIPS'),
             foreign_country_tr=F('ForeignCountry'),
             # num_proc_23=Count(Case(When(Q(tbls1processes__ProgramLevel='2') | Q(tbls1processes__ProgramLevel='3'), then=('tbls1processes__tbls1processchemicals')))),
             # toxic_tot_23=Sum(Case(When((Q(tbls1processes__ProgramLevel='2') | Q(tbls1processes__ProgramLevel='3')) & Q(tbls1processes__tbls1processchemicals__ChemicalID__ChemType='T'), then=('tbls1processes__tbls1processchemicals__Quantity')))),
             # flam_tot_23=Sum(Case(When((Q(tbls1processes__ProgramLevel='2') | Q(tbls1processes__ProgramLevel='3')) & Q(tbls1processes__tbls1processchemicals__ChemicalID__ChemType='F'), then=('tbls1processes__tbls1processchemicals__Quantity')))),
             # quantity_tot_23=F('toxic_tot_23') + F('flam_tot_23'),
             num_execsum=Count('tblexecutivesummaries'),
-
-            # annotate(
-            #     county=Subquery(
-            #         raw_models.tlkpCountyFIPSCodes.objects.filter(
-            #             StateCounty_Code=OuterRef('FacilityCountyFIPS')
-            #         ).values('StateCounty_Code').annotate(
-            #             county=F('County_Name'),
-            #         ).values('county')
-            #     )
-            # )
 
         )
         return qs
