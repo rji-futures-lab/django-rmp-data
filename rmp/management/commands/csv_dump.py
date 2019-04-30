@@ -18,7 +18,7 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         # DATABASE = options['database']
         DATABASE = kwargs['database']
-        databasePath = os.path.join(settings.RMP_DATA_DIR, DATABASE)
+        databasePath = os.path.join(settings.RMP_DATA_LOCATION, DATABASE)
 
         # Get the list of table names with "mdb-tables"
         table_names = subprocess.Popen(["mdb-tables", "-1", databasePath],

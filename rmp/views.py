@@ -143,24 +143,20 @@ class locationListView(ListView):
     queryset = Facility.objects.all()
     context_object_name = 'facility_list'
 
-    # def get_context_data(self, **kwargs):
-    #     if 'state' in self.request.GET and not 'city' in self.request.GET:
-    #         state_query = self.request.GET['state']
-    #         context = dict(
-    #                 state_query=state_query,
-    #         )
-    #     elif 'state' in self.request.GET and 'city' in self.request.GET:
-    #         state_query = self.request.GET['state']
-    #         city_query = self.request.GET['city']
-    #         context=dict(
-    #             state_query=state_query,
-    #             city_query=city_query
-    #         )
-    #
-    #     else:
-    #         context = dict(error=True)
-    #
-    #     return context
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if 'state' in self.request.GET and not 'city' in self.request.GET:
+            state_query = self.request.GET['state']
+            context['state_query'] = state_query
+        elif 'state' in self.request.GET and 'city' in self.request.GET:
+            state_query = self.request.GET['state']
+            city_query = self.request.GET['city']
+            context['state_query']=state_query
+            context['city_query']=city_query
+        else:
+            context['error'] = True
+
+        return context
 
     def get_queryset(self):
         state_query = self.request.GET.get('state')

@@ -3,6 +3,8 @@ Settings for the Django project that apply in any environment.
 """
 import os
 
+DEBUG = False
+
 ROOT_DIR = os.path.dirname(
     os.path.dirname(
         os.path.dirname(

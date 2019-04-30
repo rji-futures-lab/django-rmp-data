@@ -32,7 +32,7 @@
         <td><a href="{% url 'rmp:facility_detail' facility.id %}">{{ facility.facility_name }}</a></td>
         <td>{{ facility.city|title }}</td>
         <td>{{ facility.state.abbr }}</td>
-        <td>{{ facility.num_accident|intcomma }}</td>
+        <td>{{ facility.num_accident_actual|intcomma }}</td>
         <td>{{ facility.num_deaths|intcomma }}</td>
         <td>{{ facility.num_injuries|intcomma }}</td>
         <td>{{ facility.num_evacuated|intcomma }}</td>
@@ -45,7 +45,7 @@
         <td><a href="{% url 'rmp:facility_detail' facility.id %}">{{ facility.facility_name }}</a></td>
         <td>{{ facility.city|title }}</td>
         <td>{{ facility.state.abbr }}</td>
-        <td>{{ facility.num_accident|intcomma }}</td>
+        <td>{{ facility.num_accident_actual|intcomma }}</td>
         <td>{{ facility.num_deaths|intcomma }}</td>
         <td>{{ facility.num_injuries|intcomma }}</td>
         <td>{{ facility.num_evacuated|intcomma }}</td>
@@ -58,7 +58,7 @@
         <td><a href="{% url 'rmp:facility_detail' facility.id %}">{{ facility.facility_name }}</a></td>
         <td>{{ facility.city|title }}</td>
         <td>{{ facility.state.abbr }}</td>
-        <td>{{ facility.num_accident|intcomma }}</td>
+        <td>{{ facility.num_accident_actual|intcomma }}</td>
         <td>{{ facility.num_deaths|intcomma }}</td>
         <td>{{ facility.num_injuries|intcomma }}</td>
         <td>{{ facility.num_evacuated|intcomma }}</td>
