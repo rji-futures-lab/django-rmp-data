@@ -8,19 +8,22 @@ Search by chemical
 
 <h1>Search Results: {{ chemical_query }}</h1>
 
+{% load humanize %}
 <table>
   <tr>
+    <!-- <th>RMP Submission Date</th> -->
     <th>Facility ID</th>
     <th>Facility Name</th>
     <th>Chemical Name</th>
-    <th>quantity_lbs</th>
+    <th>Pounds in Processes</th>
   </tr>
   {% for facility in facility_list %}
   <tr>
-    <td><a href="{% url 'rmp:facility_detail' facility.id %}" class="facilityList">{{ facility.facility_name }}</a></td>
-    <td>{{ facility.id }}</td>
+    <!-- <td>{{ facility.process.rmp_receipt_date }}</td> -->
+    <td>{{ facility.process.facility_id }}</td>
+    <td><a href="{% url 'rmp:facility_detail' facility.process.facility_id %}" class="facilityList">{{ facility.process.facility_name }}</a></td>
     <td>{{ facility.chemical_name }}</td>
-    <td>{{ facility.quantity_total }}</td>
+    <td>{{ facility.quantity_lbs|intcomma }}</td>
   </tr>
   {% endfor %}
 </table>

@@ -94,16 +94,35 @@ def chemical_search(request):
     context = dict(chemical_list=chemical_list)
     return render(request, 'rmp/chemical_search.html', context)
 
+# def search_by_chemical(request):
+#     if 'chemical' in request.GET:
+#         chemical = request.GET['chemical']
+#         facility_list = ProcChem.objects.filter(chemical_name__search=chemical).select_related('process').values(
+#             'process__facility_id'
+#         ).order_by('id', '-rmp_receipt_date').annotate(
+#             id = F('process__facility_id'),
+#             rmp_receipt_date = F('process__rmp_receipt_date'),
+#             chemical_name = F('chemical_name'),
+#             facility_name = F('process__facility_name'),
+#             quantity_total = Sum('quantity_lbs'),
+#         )
+#         response = render(
+#             request,
+#             'rmp/chemical_results.html',
+#             dict(
+#                 facility_list=facility_list,
+#                 chemical_query = chemical,
+#             )
+#         )
+#
+#     return response
+
 def search_by_chemical(request):
     if 'chemical' in request.GET:
         chemical = request.GET['chemical']
-        facility_list = ProcChem.objects.filter(chemical_name__search=chemical).select_related('process').values(
-            'process__facility_id'
-        ).annotate(
-            id = F('process__facility_id'),
-            chemical_name = F('chemical_name'),
-            quantity_total = Sum('quantity_lbs'),
-        )
+        facility_list = ProcChem.objects.filter(chemical_name__search=chemical).select_related('process').order_by(
+            'process__facility_id', '-process__rmp_receipt_date'
+        ).distinct('process__facility_id')
         response = render(
             request,
             'rmp/chemical_results.html',
@@ -114,29 +133,6 @@ def search_by_chemical(request):
         )
 
     return response
-
-# def search_by_state(request):
-#     if 'state' in request.GET:
-#         state_query = request.GET['state']
-#         facility_list = Facility.objects.filter(
-#             state=state_query
-#         )
-#         response = render(
-#             request,
-#             'rmp/location_results.html',
-#             dict(
-#                 facility_list=facility_list,
-#                 state_query=state_query,
-#             )
-#         )
-#     else:
-#         response = render(
-#             request,
-#             'rmp/location_search.html',
-#             dict(error=True),
-#         )
-#
-#     return response
 
 class locationListView(ListView):
     template_name = 'rmp/facility_by_location.html'
@@ -172,38 +168,6 @@ class locationListView(ListView):
         elif state_query and county_query and city_query:
             queryset = queryset.filter(state=state_query).filter(county_name__search=county_query).filter(city=city_query)
         return queryset
-
-
-# def search_by_city(request):
-#     if (
-#         'state' in request.GET and
-#         'city' in request.GET
-#     ):
-#
-#         if not state_query and not city_query:
-#             response = render(
-#                 request,
-#                 'rmp/location_search.html',
-#                 dict(error=True),
-#             )
-#         elif state_query and city_query:
-#             facility_list = Facility.objects.filter(
-#                 state=state_query
-#             ).filter(
-#                 city=city_query
-#             )
-#             response = render(
-#                 request,
-#                 'rmp/location_results.html',
-#
-#             )
-#     else:
-#         response = render(
-#             request,
-#             'rmp/location_search.html',
-#             dict(error=True),
-#         )
-#     return response
 
 def search_by_facility(request):
     error=False

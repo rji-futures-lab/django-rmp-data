@@ -406,7 +406,7 @@ class Registration(BaseRMPModel):
     complete_check_dt = CopyFromCharField(blank=True, max_length=10)
     # error_report_dt = CopyFromDateTimeField(blank=True, null=True)
     error_report_dt = CopyFromCharField(blank=True, max_length=10)
-    receipt_date = CopyFromCharField(max_length=25, blank=True)
+    receipt_date = CopyFromDateTimeField(blank=True)
     graphics_ind = CopyFromBooleanField()
     attachment_ind = CopyFromBooleanField()
     cert_rec_flag = CopyFromBooleanField()
