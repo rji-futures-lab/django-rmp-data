@@ -437,8 +437,7 @@ class tblS1Facilities(BaseRMPModel):
         verbose_name='',
         help_text='',
     )
-    ReceiptDate = CopyFromCharField(
-        max_length=25,
+    ReceiptDate = CopyFromDateTimeField(
         verbose_name='',
         help_text='',
     )

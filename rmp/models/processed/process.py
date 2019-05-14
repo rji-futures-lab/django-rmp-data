@@ -57,6 +57,9 @@ class Process(BaseRMPModel):
         blank=True,
     )
     facility_id = CopyFromBigIntegerField()
+    rmp_receipt_date = CopyFromDateTimeField(
+        blank=True,
+    )
 
     @classmethod
     def get_transform_queryset(self):
@@ -100,7 +103,8 @@ class Process(BaseRMPModel):
             ),
             quantity_tot=F('flam_tot') + F('toxic_tot'),
             facility_name=F('FacilityID__FacilityName'),
-            facility_id=F('FacilityID__EPAFacilityID')
+            facility_id=F('FacilityID__EPAFacilityID'),
+            rmp_receipt_date=F('FacilityID__ReceiptDate')
         )
         return qs
 
@@ -182,7 +186,6 @@ class ProcChem(BaseRMPModel):
             #     default='0',
             # ),
         )
-        print(qs.query)
         return qs
 
 
