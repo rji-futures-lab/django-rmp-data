@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}
+Facility Search Results
+{% endblock %}
+
+{% block content %}
+
+<a href="{% url 'rmp:facility_search' %}">Back to search</a>
+
+
+<h1>{{ object.facility_name }}</h1>
+
+<h4>Basic Facility Info</h4>
+
+<ul class="facility-info">
+  <li>Facility ID: {{ object.id }}</li>
+  <li>Deregistered: {{ object.deregistration_yn }}</li>
+  <li>Facility Name: {{ object.facility_name }}</li>
+  <li>Street Address Line 1: {{ object.street_1 }}</li>
+  <li>City: {{ object.city }}</li>
+  <li>State: {{ object.state.abbr }}</li>
+  <li>Zip Code: {{ object.zip_code }}</li>
+  <li>Parent Company 1: {{ object.parent }}</li>
+  <li>Parent Company 2: {{ object.parent_2 }}</li>
+  <li>Number of RMP Registrations: {{ object.num_registrations }}</li>
+</ul>
+
+<h4>Most Recent RMP Submission Info</h4>
+
+<ul class="facility-info">
+  <li>RMP ID: {{ object.rmp.rmp_id }}</li>
+  <li>Submission Type: {{ object.rmp.submission_type }}</li>
+  <li>Submission Date: {{ object.rmp.complete_check_dt }}</li>
+  <li>Deregistration Date: {{ object.deregistration_date }}</li>
+  <li>Deregistration Effective Date : {{ object.dereg_effect_date }}</li>
+  <li>Deregistration Reason: {{ object.dereg_reason }}</li>
+</ul>
+
+<h4>Executive Summary Information</h4>
+
+<p>
+  {{ object.execsum_rmp.summary_text | linebreaksbr }}
+</p>
+
+<h4>RMP Contact Information</h4>
+
+<ul class="facility-info">
+  <li>Operator Phone: {{ object.rmp.operator_phone }}</li>
+  <li>Facility URL: {{ object.rmp.facility_url }}</li>
+  <li>Facility Phone: {{ object.rmp.facility_phone }}</li>
+  <li>Facility DUN and Bradstreet Number:{{ object.rmp.facility_duns }}</li>
+  <li>RMP Contact: {{ object.rmp.rmp_contact}}</li>
+  <li>RMP Contact Title: {{ object.rmp.rmp_contact_title }}</li>
+  <li>RMP Contact Email: {{ object.rmp.em_email }}</li>
+  <li>RMP Preparer Name: {{ object.rmp.prep_name }}</li>
+  <li>RMP Preparer Address: {{ object.rmp.prep_street_1 }}</li>
+  <li>RMP Preparer City: {{ object.rmp.prep_city }}</li>
+  <li>RMP Preparer State: {{ object.rmp.prep_state }}</li>
+  <li>RMP Preparer Zip: {{ object.rmp.prep_zip }}</li>
+  <li>RMP Preparer Phone: {{ object.rmp.prep_phone }}</li>
+</ul>
+
+{% endblock %}

@@ -216,3 +216,7 @@ def search_by_facility(request):
             return render(request, 'rmp/facility_results.html', context)
 
     return render(request, 'rmp/facility_search.html', {'error': error})
+
+class FacilityDetail(DetailView):
+    """View a Facility's latest RMP"""
+    model = Facility
