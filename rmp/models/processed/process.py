@@ -182,7 +182,7 @@ class ProcChem(BaseRMPModel):
             #     default='0',
             # ),
         )
-        print(qs.query)
+
         return qs
 
 

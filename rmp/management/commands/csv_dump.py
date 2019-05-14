@@ -35,7 +35,7 @@ class Command(BaseCommand):
                     settings.RMP_DATA_LOCATION, 'raw', filename
                 )
                 file = open(completeFileName, 'w')
-                print("Dumping " + table)
+                self.stdout.write("Dumping " + table)
                 contents = subprocess.Popen(["mdb-export", databasePath, table],
                                             stdout=subprocess.PIPE,
                                             encoding='utf8').communicate()[0]
