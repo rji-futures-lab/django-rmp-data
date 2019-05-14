@@ -56,7 +56,7 @@ class Command(BaseCommand):
         self.load_from_storage(processed_files_path)
 
         management.call_command('transformtocsv', 'StateCounts')
-        management.call_command('loadfromcsv', 'StateCounts')
+        management.call_command('loadfromcsv', 'StateCounts', flush=True)
 
     def load_from_storage(self, path):
         """
