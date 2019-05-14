@@ -2,18 +2,27 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path, re_path
-from rmp import views
-
+from rmp.views import (
+    index,
+    contact,
+    about,
+    databases,
+    rmp,
+    tri,
+    nrc,
+    rcris,
+    brs,
+)
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index, name='index'),
-    path('contact/', views.contact, name='contact'),
-    path('databases/', views.databases, name='databases'),
-    path('about/', views.about, name='about'),
-    path('tri/', views.tri, name='tri'),
-    path('nrc/', views.nrc, name='nrc'),
-    path('rcris/', views.rcris, name='rcris'),
-    path('brs/', views.brs, name='brs'),
+    path('', index.as_view(), name='index'),
+    path('contact/', contact.as_view(), name='contact'),
+    path('databases/', databases.as_view(), name='databases'),
+    path('about/', about.as_view(), name='about'),
+    path('tri/', tri.as_view(), name='tri'),
+    path('nrc/', nrc.as_view(), name='nrc'),
+    path('rcris/', rcris.as_view(), name='rcris'),
+    path('brs/', brs.as_view(), name='brs'),
     path('rmp/', include('rmp.urls', namespace='rmp')),
 ] + static(
     settings.STATIC_URL, document_root=settings.STATIC_ROOT
