@@ -1,12 +1,12 @@
 from django.urls import path, re_path
 from django.conf import urls
 from . import views
-from rmp.views import locationListView
+from rmp.views import locationListView, rmp
 
 app_name = 'rmp'
 
 urlpatterns = [
-    path('', views.rmp, name='rmp'),
+    path('', rmp.as_view(), name='rmp'),
     path('accident/', views.accident, name='accident'),
     path('states/', views.state_accidents, name='state_accidents'),
     path(

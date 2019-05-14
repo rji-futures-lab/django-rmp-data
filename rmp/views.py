@@ -20,34 +20,40 @@ from rmp.models import (
     tblS6AccidentHistory,
 )
 
-# from .forms import facility_search
+class index(TemplateView):
+    template_name = 'rmp/index.html'
 
-def index(request):
-    return render(request, 'rmp/index.html')
+class contact(TemplateView):
+    template_name = 'rmp/contact.html'
+    # return render(request, 'rmp/contact.html')
 
-def contact(request):
-    return render(request, 'rmp/contact.html')
+class about(TemplateView):
+    template_name = 'rmp/about.html'
+    # return render(request, 'rmp/about.html')
 
-def about(request):
-    return render(request, 'rmp/about.html')
+class databases(TemplateView):
+    template_name = 'rmp/databases.html'
+    # return render(request, 'rmp/databases.html')
 
-def databases(request):
-    return render(request, 'rmp/databases.html')
+class rmp(TemplateView):
+    template_name = 'rmp/rmp.html'
+    # return render(request, 'rmp/rmp.html')
 
-def rmp(request):
-    return render(request, 'rmp/rmp.html')
+class tri(TemplateView):
+    template_name = 'rmp/tri.html'
+    # return render(request, 'rmp/tri.html')
 
-def tri(request):
-    return render(request, 'rmp/tri.html')
+class nrc(TemplateView):
+    template_name = 'rmp/nrc.html'
+    # return render(request, 'rmp/nrc.html')
 
-def nrc(request):
-    return render(request, 'rmp/nrc.html')
+class rcris(TemplateView):
+    template_name = 'rmp/rcris.html'
+    # return render(request, 'rmp/rcris.html')
 
-def rcris(request):
-    return render(request, 'rmp/rcris.html')
-
-def brs(request):
-    return render(request, 'rmp/brs.html')
+class brs(TemplateView):
+    template_name = 'rmp/brs.html'
+    # return render(request, 'rmp/brs.html')
 
 def accident(request):
     facility_list = Facility.objects.filter(
