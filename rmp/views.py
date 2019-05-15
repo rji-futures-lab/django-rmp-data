@@ -25,120 +25,116 @@ class index(TemplateView):
 
 class contact(TemplateView):
     template_name = 'rmp/contact.html'
-    # return render(request, 'rmp/contact.html')
 
 class about(TemplateView):
     template_name = 'rmp/about.html'
-    # return render(request, 'rmp/about.html')
 
 class databases(TemplateView):
     template_name = 'rmp/databases.html'
-    # return render(request, 'rmp/databases.html')
 
 class rmp(TemplateView):
     template_name = 'rmp/rmp.html'
-    # return render(request, 'rmp/rmp.html')
 
 class tri(TemplateView):
     template_name = 'rmp/tri.html'
-    # return render(request, 'rmp/tri.html')
 
 class nrc(TemplateView):
     template_name = 'rmp/nrc.html'
-    # return render(request, 'rmp/nrc.html')
 
 class rcris(TemplateView):
     template_name = 'rmp/rcris.html'
-    # return render(request, 'rmp/rcris.html')
 
 class brs(TemplateView):
     template_name = 'rmp/brs.html'
-    # return render(request, 'rmp/brs.html')
 
-def accident(request):
-    facility_list = Facility.objects.filter(
-        registered=True
-    ).order_by('-num_deaths')[:20]
+class accident(TemplateView):
+    template_name = 'rmp/accident_list.html'
 
-    evacuated_list = Facility.objects.filter(
-        registered=True
-    ).order_by('-num_evacuated')[:20]
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        facility_list = Facility.objects.filter(
+            registered=True
+        ).order_by('-num_deaths')[:20]
 
-    prop_damage_list = Facility.objects.filter(
-        registered=True
-    ).order_by('-property_damage')[:20]
+        evacuated_list = Facility.objects.filter(
+            registered=True
+        ).order_by('-num_evacuated')[:20]
 
-    context = dict(
-        facility_list=facility_list,
-        evacuated_list=evacuated_list,
-        prop_damage_list=prop_damage_list,
-    )
+        prop_damage_list = Facility.objects.filter(
+            registered=True
+        ).order_by('-property_damage')[:20]
 
-    return render(request, 'rmp/accident_list.html', context)
+        context['facility_list'] = facility_list
+        context['evacuated_list'] = evacuated_list
+        context['prop_damage_list'] = prop_damage_list
+        return context
 
-def state_accidents(request):
-    state_list = StateCounts.objects.all()
-    context = dict(state_list=state_list)
-    return render(request, 'rmp/state_accidents.html', context)
+class state_accidents(TemplateView):
+    template_name = 'rmp/state_accidents.html'
 
-def facility_search(request):
-    state_list = Facility.objects.order_by('state').values('state').distinct()
-    context = {'state_list': state_list}
-    return render(request, 'rmp/facility_search.html', context)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        state_list = StateCounts.objects.all()
+        context['state_list'] = state_list
+        return context
+
+class facility_search(TemplateView):
+    template_name = 'rmp/facility_search.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        state_list = StateCd.objects.all()
+        context['state_list'] = state_list
+        return context
 
 def facility_detail(request, facility_id):
     facility_list = Facility.objects.filter(id=facility_id)
     return render(request, 'rmp/facility_results.html', {'facility_list': facility_list})
 
-def location_search(request):
-    state_list = StateCd.objects.all()
-    context = dict(state_list=state_list)
-    return render(request, 'rmp/location_search.html', context)
+class location_search(TemplateView):
+    template_name = 'rmp/location_search.html'
 
-def chemical_search(request):
-    chemical_list = ChemCd.objects.all()
-    context = dict(chemical_list=chemical_list)
-    return render(request, 'rmp/chemical_search.html', context)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        state_list = StateCd.objects.all()
+        context['state_list'] = state_list
+        return context
 
-# def search_by_chemical(request):
-#     if 'chemical' in request.GET:
-#         chemical = request.GET['chemical']
-#         facility_list = ProcChem.objects.filter(chemical_name__search=chemical).select_related('process').values(
-#             'process__facility_id'
-#         ).order_by('id', '-rmp_receipt_date').annotate(
-#             id = F('process__facility_id'),
-#             rmp_receipt_date = F('process__rmp_receipt_date'),
-#             chemical_name = F('chemical_name'),
-#             facility_name = F('process__facility_name'),
-#             quantity_total = Sum('quantity_lbs'),
-#         )
-#         response = render(
-#             request,
-#             'rmp/chemical_results.html',
-#             dict(
-#                 facility_list=facility_list,
-#                 chemical_query = chemical,
-#             )
-#         )
-#
-#     return response
+class chemical_search(TemplateView):
+    template_name = 'rmp/chemical_search.html'
 
-def search_by_chemical(request):
-    if 'chemical' in request.GET:
-        chemical = request.GET['chemical']
-        facility_list = ProcChem.objects.filter(chemical_name__search=chemical).select_related('process').order_by(
-            'process__facility_id', '-process__rmp_receipt_date'
-        ).distinct('process__facility_id')
-        response = render(
-            request,
-            'rmp/chemical_results.html',
-            dict(
-                facility_list=facility_list,
-                chemical_query = chemical,
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        chemical_list = ChemCd.objects.all()
+        context['chemical_list'] = chemical_list
+        return context
+
+class chemicalListView(ListView):
+    template_name = 'rmp/chemical_results.html'
+    queryset = ProcChem.objects.all()
+    context_object_name = 'facility_list'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if 'chemical' in self.request.GET:
+            chemical_query = self.request.GET['chemical']
+            context['chemical_query'] = chemical_query
+        else:
+            context['error'] = True
+        return context
+
+    def get_queryset(self):
+        chemical_query = self.request.GET.get('chemical')
+        queryset = super(chemicalListView, self).get_queryset()
+        if chemical_query:
+            queryset = queryset.filter(chemical_name__search=chemical_query).select_related(
+                'process',
+            ).order_by(
+                'process__facility_id', '-process__rmp_receipt_date'
+            ).distinct(
+                'process__facility_id'
             )
-        )
-
-    return response
+        return queryset
 
 class locationListView(ListView):
     template_name = 'rmp/facility_by_location.html'
@@ -175,44 +171,36 @@ class locationListView(ListView):
             queryset = queryset.filter(state=state_query).filter(county_name__search=county_query).filter(city=city_query)
         return queryset
 
-def search_by_facility(request):
-    error=False
-    if 'facility' in request.GET and 'parent_company' in request.GET and 'city' in request.GET and 'state' in request.GET:
-        facility_query = request.GET['facility']
-        pc_query = request.GET['parent_company']
-        state_query = request.GET['state']
-        city_query = request.GET['city']
-        if not facility_query and not pc_query and not state_query and not city_query:
-            error=True
-        elif facility_query and pc_query and state_query and city_query:
-            facility_list = Facility.objects.filter(
-                facility_name__search=facility_query
-            ).filter(
-                parent__search=pc_query
-            ).filter(
-                city__search=city_query
-            ).filter(
-                state=state_query
-            ).select_related('facility').select_related(
-                'execsum_rmp'
-            ).select_related('rmp').latest('receipt_date')
-            context = {'facility_list': facility_list, 'facility_query': facility_query, 'pc_query': pc_query}
-            return render(request, 'rmp/facility_results.html', context)
+class facilityListView(ListView):
+    template_name = "rmp/facility_list"
+    queryset = Facility.objects.all()
+    context_object_name = 'facility_list'
 
-        elif facility_query and state_query and city_query:
-            facility_list = Facility.objects.filter(
-                facility_name__search=facility_query
-            ).filter(
-                city__search=city_query
-            ).filter(
-                state=state_query
-            ).select_related('execsum_rmp').select_related('rmp')
-            context = {'facility_list': facility_list, 'facility_query': facility_query}
-            return render(request, 'rmp/facility_results.html', context)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if 'facility' in self.request.GET and not 'parent_company' in self.request.GET:
+            facility_query = self.request.GET['facility']
+            context['facility_query'] = facility_query
+        elif 'parent_company' in self.request.GET and not 'facility' in self.request.GET:
+            pc_query = self.request.GET['parent_company']
+            context['pc_query'] = pc_query
+        elif 'parent_company' in self.request.GET and 'facility' in self.request.GET:
+            facility_query = self.request.GET['facility']
+            pc_query = self.request.GET['parent_company']
+            context['pc_query'] = pc_query
+            context['facility_query'] = facility_query
+        else:
+            context['error'] = True
+        return context
 
-        elif len(pc_query) != 0:
-            pc_list = Facility.objects.filter(parent__search=pc_query).select_related('execsum_rmp').select_related('rmp')
-            context = {'pc_list': pc_list, 'pc_query': pc_query}
-            return render(request, 'rmp/facility_results.html', context)
-
-    return render(request, 'rmp/facility_search.html', {'error': error})
+    def get_queryset(self):
+        facility_query = self.request.GET.get('facility')
+        pc_query = self.request.GET.get('parent_company')
+        queryset = super(facilityListView, self).get_queryset()
+        if facility_query and not pc_query:
+            queryset = queryset.filter(facility_name__search=facility_query)
+        elif pc_query and not facilityP_query:
+            queryset = queryset.filter(parent__search=pc_query)
+        elif facility_query and pc_query:
+            queryset = queryset.filter(facility_name__search=facility_query).filter(parent__search=pc_query)
+        return queryset
