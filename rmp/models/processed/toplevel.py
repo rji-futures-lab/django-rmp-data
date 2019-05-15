@@ -23,6 +23,7 @@ from rmp.fields import (
 )
 from rmp.models import raw as raw_models
 from rmp.models import processed as processed_models
+from rmp.models import choices
 from rmp.models.base import BaseRMPModel
 
 
@@ -78,7 +79,11 @@ class Facility(BaseRMPModel):
         max_digits=6,
         decimal_places=3,
     )
-    sub_type = CopyFromCharField(max_length=1, blank=True)
+    sub_type = CopyFromCharField(
+        max_length=1,
+        blank=True,
+        choices=choices.SUBMISSION_TYPE,
+    )
     sub_date = CopyFromDateTimeField()
     # exec_type = CopyFromCharField(max_length=1, blank=True) **** This field is nowhere to be found in codes or in tblS1Facilities
     execsum_rmp = CopyFromForeignKey(
