@@ -1,32 +1,42 @@
 from django.urls import path, re_path
 from django.conf import urls
 from . import views
-from rmp.views import locationListView, rmp
+from rmp.views import (
+    locationListView,
+    rmp,
+    facilityListView,
+    chemicalListView,
+    accident,
+    state_accidents,
+    facility_search,
+    location_search,
+    chemical_search,
+)
 
 app_name = 'rmp'
 
 urlpatterns = [
     path('', rmp.as_view(), name='rmp'),
-    path('accident/', views.accident, name='accident'),
-    path('states/', views.state_accidents, name='state_accidents'),
+    path('accident/', accident.as_view(), name='accident'),
+    path('states/', state_accidents.as_view(), name='state_accidents'),
     path(
         'facility_search/',
-        views.facility_search,
+        facility_search.as_view(),
         name='facility_search',
     ),
     path(
         'location_search/',
-        views.location_search,
+        location_search.as_view(),
         name='location_search',
     ),
     path(
         'chemical_search/',
-        views.chemical_search,
+        chemical_search.as_view(),
         name='chemical_search',
     ),
     path(
         'chemical_search/search_by_chemical/',
-        views.search_by_chemical,
+        chemicalListView.as_view(),
         name='search_by_chemical',
     ),
     path(
@@ -46,7 +56,7 @@ urlpatterns = [
     # ),
     path(
         'facility_search/search_by_facility/',
-        views.search_by_facility,
+        facilityListView.as_view(),
         name="search_by_facility",
     ),
     path(

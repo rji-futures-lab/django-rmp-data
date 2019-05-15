@@ -11,17 +11,15 @@ Search by chemical
 {% load humanize %}
 <table>
   <tr>
-    <!-- <th>RMP Submission Date</th> -->
-    <th>Facility ID</th>
     <th>Facility Name</th>
+    <th>Facility ID</th>
     <th>Chemical Name</th>
     <th>Pounds in Processes</th>
   </tr>
   {% for facility in facility_list %}
   <tr>
-    <!-- <td>{{ facility.process.rmp_receipt_date }}</td> -->
-    <td>{{ facility.process.facility_id }}</td>
     <td><a href="{% url 'rmp:facility_detail' facility.process.facility_id %}" class="facilityList">{{ facility.process.facility_name }}</a></td>
+    <td>{{ facility.process.facility_id }}</td>
     <td>{{ facility.chemical_name }}</td>
     <td>{{ facility.quantity_lbs|intcomma }}</td>
   </tr>

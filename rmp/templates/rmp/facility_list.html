@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<a class="back" href="{% url 'rmp:facility_search' %}">Back to search</a>
+
+{% if facility_query and not pc_query %}
+<h1>RMP Facility Results: {{ facility_query }}</h1>
+
+{% elif pc_query and not facility_query %}
+<h1>RMP Facility Parent Company Results: {{ pc_query }}</h1>
+
+{% elif pc_query and facility_query %}
+<h1>RMP Facility Results: {{ facility_query }}, {{ pc_query }}</h1>
+
+{% endif %}
+
+{% if not facility_list %}
+
+<p class="error">Facility not found in database. Please enter your search parameters again.</p>
+
+{% else %}
+
+<table>
+  <tr>
+    <th>Facility Name</th>
+    <th>City</th>
+    <th>State</th>
+    <th>Zip Code</th>
+    <th>Deregistered</th>
+    <th>Chemical Quantity (Lbs)</th>
+    <th>Number of Accidents</th>
+    <th>Number of Deaths</th>
+    <th>Number of Injuries</th>
+    <th>Number of Evacuations</th>
+    <th>Amount of Property Damage</th>
+  </tr>
+  {% load humanize %}
+  {% for facility in facility_list %}
+  <tr>
+    <td><a href="{% url 'rmp:facility_detail' facility.id %}" class="facilityList">{{ facility.facility_name }}</a></td>
+    <td>{{ facility.city }}</td>
+    <td>{{ facility.state.abbr }}</td>
+    <td>{{ facility.zip_code }}</td>
+    <td>{{ facility.deregistration_yn }}</td>
+    <td>{{ facility.quantity_tot|intcomma }}</td>
+    <td>{{ facility.num_accident_actual|intcomma }}</td>
+    <td>{{ facility.num_deaths|intcomma }}</td>
+    <td>{{ facility.num_injuries|intcomma }}</td>
+    <td>{{ facility.num_evacuated|intcomma }}</td>
+    <td>{{ facility.property_damage|intcomma }}</td>
+  </tr>
+  {% endfor %}
+
+</table>
+
+{% endif %}
+
+{% endblock %}
