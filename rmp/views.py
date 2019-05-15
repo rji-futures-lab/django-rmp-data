@@ -87,10 +87,6 @@ class facility_search(TemplateView):
         context['state_list'] = state_list
         return context
 
-def facility_detail(request, facility_id):
-    facility_list = Facility.objects.filter(id=facility_id)
-    return render(request, 'rmp/facility_results.html', {'facility_list': facility_list})
-
 class location_search(TemplateView):
     template_name = 'rmp/location_search.html'
 
