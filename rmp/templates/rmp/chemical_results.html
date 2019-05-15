@@ -13,14 +13,16 @@ Search by chemical
   <tr>
     <th>Facility Name</th>
     <th>Facility ID</th>
-    <th>Chemical Name</th>
+    <th>City</th>
+    <th>State</th>
     <th>Pounds in Processes</th>
   </tr>
   {% for facility in facility_list %}
   <tr>
     <td><a href="{% url 'rmp:facility_detail' facility.process.facility_id %}" class="facilityList">{{ facility.process.facility_name }}</a></td>
     <td>{{ facility.process.facility_id }}</td>
-    <td>{{ facility.chemical_name }}</td>
+    <td>{{ facility.process.rmp.city }}</td>
+    <td>{{ facility.process.rmp.state.name }}</td>
     <td>{{ facility.quantity_lbs|intcomma }}</td>
   </tr>
   {% endfor %}

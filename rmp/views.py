@@ -164,11 +164,11 @@ class locationListView(ListView):
         if state_query and not city_query and not county_query:
             queryset = queryset.filter(state=state_query)
         elif state_query and city_query and not county_query:
-            queryset = queryset.filter(state=state_query).filter(city=city_query)
+            queryset = queryset.filter(state=state_query).filter(city__search=city_query)
         elif state_query and county_query and not city_query:
             queryset = queryset.filter(state=state_query).filter(county_name__search=county_query)
         elif state_query and county_query and city_query:
-            queryset = queryset.filter(state=state_query).filter(county_name__search=county_query).filter(city=city_query)
+            queryset = queryset.filter(state=state_query).filter(county_name__search=county_query).filter(city__search=city_query)
         return queryset
 
 class facilityListView(ListView):
