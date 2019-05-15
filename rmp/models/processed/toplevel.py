@@ -106,6 +106,7 @@ class Facility(BaseRMPModel):
         'StateCd',
         on_delete=models.PROTECT,
         blank=True,
+        null=True,
         db_column='operator_state',
         related_name='+',
     )
@@ -113,10 +114,21 @@ class Facility(BaseRMPModel):
     province = CopyFromCharField(max_length=20, blank=True)
     county = CopyFromCharField(max_length=200, blank=True)
     country = CopyFromCharField(max_length=25, blank=True)
-    sub_reason = CopyFromCharField(max_length=3, blank=True)
-    dereg_reason = CopyFromCharField(max_length=1, blank=True)
+    sub_reason = CopyFromForeignKey(
+        'SubmitCd',
+        on_delete=models.PROTECT,
+        blank=True,
+        null=True,
+        db_column='sub_reason',
+    )
+    dereg_reason = CopyFromForeignKey(
+        'DeregCd',
+        on_delete=models.PROTECT,
+        blank=True,
+        null=True,
+        db_column='dereg_reason',
+    )
     dereg_other = CopyFromCharField(max_length=255, blank=True)
-    # TODO AGGREGATE
     toxic_tot = CopyFromIntegerField()
     flam_tot = CopyFromBigIntegerField()
     quantity_tot = CopyFromBigIntegerField() # toxic_tot + flam_tot
