@@ -325,6 +325,22 @@ class Facility(BaseRMPModel):
         )
         return qs
 
+    @property
+    def google_maps_url(self):
+        url = 'https://www.google.com/maps/search/?api=1&query={},{}'.format(
+            self.latitude, self.longitude,
+        )
+
+        return url
+    
+    @property
+    def has_parent_1(self):
+        return self.parent_1 != ''
+
+    @property
+    def has_parent_2(self):
+        return self.parent_2 != ''
+
     class Meta:
         indexes = [
             models.Index(fields=['registered', '-num_deaths']),
@@ -412,7 +428,11 @@ class Registration(BaseRMPModel):
     safety_inspect_by = CopyFromCharField(max_length=50, blank=True)
     osha_ranking = CopyFromBooleanField()
     predictive_file_yn = CopyFromBooleanField()
-    submission_type = CopyFromCharField(max_length=1, blank=True)
+    submission_type = CopyFromCharField(
+        max_length=1,
+        choices=choices.SUBMISSION_TYPE,
+        blank=True,
+    )
     rmp_desc = CopyFromCharField(max_length=50, blank=True)
     no_accidents_yn = CopyFromBooleanField()
     foreign_province = CopyFromCharField(max_length=35, blank=True)
