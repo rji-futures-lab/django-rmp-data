@@ -23,6 +23,7 @@ from rmp.fields import (
 )
 from rmp.models import raw as raw_models
 from rmp.models import processed as processed_models
+from rmp.models import choices
 from rmp.models.base import BaseRMPModel
 
 
@@ -78,7 +79,11 @@ class Facility(BaseRMPModel):
         max_digits=6,
         decimal_places=3,
     )
-    sub_type = CopyFromCharField(max_length=1, blank=True)
+    sub_type = CopyFromCharField(
+        max_length=1,
+        blank=True,
+        choices=choices.SUBMISSION_TYPE,
+    )
     sub_date = CopyFromDateTimeField()
     # exec_type = CopyFromCharField(max_length=1, blank=True) **** This field is nowhere to be found in codes or in tblS1Facilities
     execsum_rmp = CopyFromForeignKey(
@@ -106,6 +111,7 @@ class Facility(BaseRMPModel):
         'StateCd',
         on_delete=models.PROTECT,
         blank=True,
+        null=True,
         db_column='operator_state',
         related_name='+',
     )
@@ -113,10 +119,21 @@ class Facility(BaseRMPModel):
     province = CopyFromCharField(max_length=20, blank=True)
     county = CopyFromCharField(max_length=200, blank=True)
     country = CopyFromCharField(max_length=25, blank=True)
-    sub_reason = CopyFromCharField(max_length=3, blank=True)
-    dereg_reason = CopyFromCharField(max_length=1, blank=True)
+    sub_reason = CopyFromForeignKey(
+        'SubmitCd',
+        on_delete=models.PROTECT,
+        blank=True,
+        null=True,
+        db_column='sub_reason',
+    )
+    dereg_reason = CopyFromForeignKey(
+        'DeregCd',
+        on_delete=models.PROTECT,
+        blank=True,
+        null=True,
+        db_column='dereg_reason',
+    )
     dereg_other = CopyFromCharField(max_length=255, blank=True)
-    # TODO AGGREGATE
     toxic_tot = CopyFromIntegerField()
     flam_tot = CopyFromBigIntegerField()
     quantity_tot = CopyFromBigIntegerField() # toxic_tot + flam_tot
@@ -308,6 +325,22 @@ class Facility(BaseRMPModel):
         )
         return qs
 
+    @property
+    def google_maps_url(self):
+        url = 'https://www.google.com/maps/search/?api=1&query={},{}'.format(
+            self.latitude, self.longitude,
+        )
+
+        return url
+    
+    @property
+    def has_parent_1(self):
+        return self.parent_1 != ''
+
+    @property
+    def has_parent_2(self):
+        return self.parent_2 != ''
+
     class Meta:
         indexes = [
             models.Index(fields=['registered', '-num_deaths']),
@@ -395,7 +428,11 @@ class Registration(BaseRMPModel):
     safety_inspect_by = CopyFromCharField(max_length=50, blank=True)
     osha_ranking = CopyFromBooleanField()
     predictive_file_yn = CopyFromBooleanField()
-    submission_type = CopyFromCharField(max_length=1, blank=True)
+    submission_type = CopyFromCharField(
+        max_length=1,
+        choices=choices.SUBMISSION_TYPE,
+        blank=True,
+    )
     rmp_desc = CopyFromCharField(max_length=50, blank=True)
     no_accidents_yn = CopyFromBooleanField()
     foreign_province = CopyFromCharField(max_length=35, blank=True)
