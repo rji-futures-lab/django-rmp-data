@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 
-{% block title %}RMP Facilities{% endblock %} <!-- Fill in Page Title Here -->
+{% block title %}RMP Facilities{% endblock %}
 
-{% block content %} <!-- This marks the beginning of where body content goes. If this tag is deleted, the page will not render.  -->
+{% block content %}
 <div id="aboutus">
   <h3>Top RMP Facilities for 5-Year Accident Histories</h3>
   <p>
@@ -13,7 +13,7 @@
     <p class="info">
       Table sorted by facility name. Re-sort using column headers.
     </p>-->
-  {% if facility_list %} <!-- Don't touch tags that look like this, but do style the markup inside them.  -->
+  {% if facility_list %}
   <div style="overflow-x:auto">
     <table>
       <tr>
