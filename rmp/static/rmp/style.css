@@ -181,7 +181,7 @@ image {
 }
 
 #gridbox {
-width: 100%;
+	width: 100%;
 	display: grid;
 	text-align: center;
 	align-content: center;
@@ -506,4 +506,37 @@ tr:nth-child(even) {
 
 #window{
 	display: none;
+}
+
+@media screen and (max-width: 767px) {
+
+	#gridbox {
+		display: block;
+	}
+
+	.card-index {
+		display: block;
+		text-align: center;
+	}
+
+}
+
+@media screen and (max-width: 479px) {
+	.flex-container {
+		flex-flow: column;
+	}
+
+	.navbar li {
+		width: 100%;
+	}
+
+	#gridbox {
+		display: block;
+	}
+
+	.card-index {
+		display: block;
+		text-align: center;
+	}
+
 }
