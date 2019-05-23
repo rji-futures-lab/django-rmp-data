@@ -10,32 +10,6 @@
     Back to search
   </a>
 
-  <h1 class="rmp-title">{{ object.facility_name }}</h1>
-
-  <div class="container-fluid rmp-section">
-    
-    <div class="row light">
-      <div class="col-4 col-sm-2 col-label">EPA ID:</div>
-      <div class="col">{{ object.id }}</div>
-    </div>
-
-    <div class="row dark">
-      <div class="col-4 col-sm-2 col-label">Other ID:</div>
-      <div class="col">{{ object.rmp.other_facility_id }}</div>
-    </div>
-
-    <div class="row light">
-      <div class="col-4 col-sm-2 col-label">DUNS:</div>
-      <div class="col">{{ object.rmp.facility_duns }}</div>
-    </div>
-
-    <div class="row dark">
-      <div class="col-4 col-sm-2 col-label">Registered:</div>
-      <div class="col">{{ object.registered }}</div>
-    </div>
-
-  </div>
-
   {% include 'rmp/rmp-sections/registration.html' %}
 
   {% include 'rmp/rmp-sections/toxics-worst-case.html' %}

@@ -9,7 +9,7 @@ from rmp.fields import (
     CopyFromForeignKey,
 )
 from rmp.models.choices import (
-    CHEMICAL_TYPE_CHOICES,
+    CHEMICAL_TYPES,
 )
 from rmp.models.base import BaseRMPModel
 
@@ -39,7 +39,7 @@ class tlkpChemicals(BaseRMPModel):
     )
     ChemType = CopyFromCharField(
         max_length=1,
-        choices=CHEMICAL_TYPE_CHOICES,
+        choices=CHEMICAL_TYPES,
         blank=True,
         help_text='"Chemical Type - (T)oxic or (F)lammable.',
     )
