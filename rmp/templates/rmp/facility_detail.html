@@ -16,69 +16,65 @@
     
     <div class="row light">
       <div class="col-4 col-sm-2 col-label">EPA ID:</div>
-      <div class="col col-value">{{ object.id }}</div>
+      <div class="col">{{ object.id }}</div>
     </div>
 
     <div class="row dark">
       <div class="col-4 col-sm-2 col-label">Other ID:</div>
-      <div class="col col-value">{{ object.rmp.other_facility_id }}</div>
+      <div class="col">{{ object.rmp.other_facility_id }}</div>
     </div>
 
     <div class="row light">
       <div class="col-4 col-sm-2 col-label">DUNS:</div>
-      <div class="col col-value">{{ object.rmp.facility_duns }}</div>
+      <div class="col">{{ object.rmp.facility_duns }}</div>
     </div>
 
     <div class="row dark">
       <div class="col-4 col-sm-2 col-label">Registered:</div>
-      <div class="col col-value">{{ object.registered }}</div>
+      <div class="col">{{ object.registered }}</div>
     </div>
 
   </div>
 
   <h4>Parent Companies:</h4>
 
+  <div class="container-fluid rmp-section">
+
   {% if object.parent != '' or object.parent_2 != '' %}
-
-    {% if object.parent != '' %}
-
-    <div class="container-fluid rmp-section">
     
-      <div class="row row-title">
-        <div class="col">{{ object.parent }}</div>
+    {% if object.parent != '' and object.parent_2 != '' %}
+
+      <div class="row row-light">
+        <div class="col-12">{{ object.parent }} (DUNS: {{ object.rmp.parent_duns }})</div>
       </div>
 
-      <div class="row light">
-        <div class="col-4 col-sm-2 col-label">DUNS:</div>
-        <div class="col col-value">{{ object.rmo.parent_duns }}</div>
+      <div class="row row-dark">
+        <div class="col-12">{{ object.parent_2 }} (DUNS: {{ object.rmp.parent2_duns }})</div>
       </div>
 
-    </div>
-
-    {% endif %}
-
-    {% if object.parent_2 != '' %}
-
-    <div class="container-fluid rmp-section">
-
-      <div class="row row-title">
-        <div class="col">{{ object.parent_2 }}</div>
+    {% elif object.parent != '' %}
+    
+      <div class="row row-light">
+        <div class="col-12">{{ object.parent }} (DUNS: {{ object.rmp.parent_duns }})</div>
       </div>
 
-      <div class="row light">
-        <div class="col-4 col-sm-2 col-label">DUNS:</div>
-        <div class="col col-value">{{ object.rmp.parent2_duns }}</div>
+    {% elif object.parent_2 != '' %}
+    
+      <div class="row row-light">
+        <div class="col-12">{{ object.parent_2 }} (DUNS: {{ object.rmp.parent2_duns }})</div>
       </div>
-
-    </div>
-
+    
     {% endif %}
 
   {% else %}
 
-  <p>None</p>
+    <div class="row row-light">
+      <div class="col">None</div>
+    </div>
 
   {% endif %}
+
+  </div>
 
   <h4>Location:</h4>
 
@@ -86,7 +82,7 @@
 
     <div class="row light">
       <div class="col-4 col-sm-2 col-label">Address:</div>
-      <div class="col col-value">
+      <div class="col">
         {{ object.street_1 }}<br>
         {{ object.city }}, {{ object.state.abbr }} {{ object.zip_code }}
       </div>
@@ -94,12 +90,12 @@
 
     <div class="row dark">
       <div class="col-4 col-sm-2 col-label">County:</div>
-      <div class="col col-value">{{ object.county_name }}</div>
+      <div class="col">{{ object.county_name }}</div>
     </div>
 
     <div class="row light">
       <div class="col-4 col-sm-2 col-label">Lat / Long:</div>
-      <div class="col col-value">
+      <div class="col">
         {{ object.latitude }}, {{ object.longitude }} (<a href="{{ object.google_maps_url }}">Get map</a>)
       </div>
     </div>
@@ -114,52 +110,52 @@
 
     <div class="row dark">
       <div class="col-4 col-sm-2 col-label">Number of registrations:</div>
-      <div class="col col-value">{{ object.num_registrations }}</div>
+      <div class="col">{{ object.num_registrations }}</div>
     </div>
 
     <div class="row light">
       <div class="col-4 col-sm-2 col-label">Sub type:</div>
-      <div class="col col-value">{{ object.sub_type }}</div>
+      <div class="col">{{ object.sub_type }}</div>
     </div>
 
     <div class="row dark">
       <div class="col-4 col-sm-2 col-label">Sub date:</div>
-      <div class="col col-value">{{ object.sub_date }}</div>
+      <div class="col">{{ object.sub_date }}</div>
     </div>
 
     <div class="row light">
       <div class="col-4 col-sm-2 col-label">Exec sub type:</div>
-      <div class="col col-value">{{ object.exec_sub_type }}</div>
+      <div class="col">{{ object.exec_sub_type }}</div>
     </div>
 
     <div class="row dark">
       <div class="col-4 col-sm-2 col-label">Exec sub date:</div>
-      <div class="col col-value">{{ object.exec_sub_date }}</div>
+      <div class="col">{{ object.exec_sub_date }}</div>
     </div>
 
     <div class="row light">
       <div class="col-4 col-sm-2 col-label">Sub reason:</div>
-      <div class="col col-value">{{ object.sub_reason }}</div>
+      <div class="col">{{ object.sub_reason }}</div>
     </div>
 
     <div class="row dark">
       <div class="col-4 col-sm-2 col-label">Dereg other:</div>
-      <div class="col col-value">{{ object.dereg_other }}</div>
+      <div class="col">{{ object.dereg_other }}</div>
     </div>
 
     <div class="row light">
       <div class="col-4 col-sm-2 col-label">Deregistration Date:</div>
-      <div class="col col-value">{{ object.deregistration_date }}</div>
+      <div class="col">{{ object.deregistration_date }}</div>
     </div>
 
     <div class="row dark">
       <div class="col-4 col-sm-2 col-label">Deregistration Effective Date:</div>
-      <div class="col col-value">{{ object.dereg_effect_date }}</div>
+      <div class="col">{{ object.dereg_effect_date }}</div>
     </div>
 
     <div class="row light">
       <div class="col-4 col-sm-2 col-label">Deregistration Reason:</div>
-      <div class="col col-value">{{ object.dereg_reason }}</div>
+      <div class="col">{{ object.dereg_reason }}</div>
     </div>
 
   </div>
@@ -172,27 +168,27 @@
 
   <h4>Processes:</h4>
 
-  <h2>Toxics</h2>
+  <h2>2. Toxics: Worst-case</h2>
 
-  <h3>Worst case scenarios</h3>
+  <h2>3. Toxics: Alternative release</h2>
 
-  <h3>Alternative release</h3>
+  <h2>4. Flammables: Worst-case</h2>
 
-  <h2>Flammables</h2>
+  <h2>5. Flammables: Alternative release</h2>
 
-  <h3>Worst case scenarios</h3>
+  <h2>6. Five-year accident history</h2>
 
-  <h3>Alternative release</h3>
+  <h2>7. Prevention: Program level 3</h2>
 
-  <h2>Five-year accident history</h2>
+  <h2>8. Prevention: Program level 2</h2>
 
-  <h2>Prevention programs</h2>
+  <h2>9. Emergency response</h2>
 
-  <h3>Level 3</h3>
+  <h2>Executive Summary</h2>
 
-  <h3>Level 2</h3>
-
-  <h3>Emergency response</h3>
+  <p>
+    {{ object.execsum_rmp.summary_text | linebreaksbr }}
+  </p>
 
 </div>
 

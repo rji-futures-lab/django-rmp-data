@@ -759,7 +759,7 @@ article img {
 }
 
 .row.row-title {
-	border-bottom: 2px solid #82806f;
+	background-color: #E8AD0C;
 	padding-top: 10px;
 	padding-bottom: 10px;
 }
