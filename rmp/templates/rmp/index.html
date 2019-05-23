@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}
 RTK Home
@@ -19,31 +20,34 @@ RTK Home
 
   <div class="card-index">
     <h2 class="database-title"><a href="{% url 'brs' %}">Biennial Reporting System (BRS)</a></h2>
-    {% load static %}
     <img src="{% static 'rmp/img/photo2.jpg' %}" alt="databasephoto" width="400px"/>
   </div>
 
   <div class="card-index">
     <h2 class="database-title"><a href="{% url 'nrc' %}">National Response Center (NRC)</a></h2>
-    {% load static %}
+  
+  {% load static %}
     <img src="{% static 'rmp/img/photo1.jpg' %}" alt="databasephoto" width="400px"/>
   </div>
 
   <div class="card-index">
      <h2 class="database-title"><a href="{% url 'rcris' %}">RCRIS/RCRAINFO</a></h2>
-    {% load static %}
+  
+  {% load static %}
     <img src="{% static 'rmp/img/photo3.jpg' %}" alt="databasephoto" width="400px"/>
   </div>
 
   <div class="card-index">
     <h2 class="database-title"><a href="{% url 'rmp:rmp' %}">Risk Management Plans (RMP)</a></h2>
-    {% load static %}
+  
+  {% load static %}
       <img src="{% static 'rmp/img/photo4.jpg' %}" alt="databasephoto" width="400px"/>
   </div>
 
   <div class="card-index">
     <h2 class="database-title"><a href="{% url 'tri' %}">Toxic Release Inventory (TRI)</a></h2>
-    {% load static %}
+  
+  {% load static %}
     <img src="{% static 'rmp/img/photo5.jpg' %}"alt="databasephoto" width="400px"/>
   </div>
 </div>

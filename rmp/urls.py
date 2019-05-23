@@ -60,8 +60,8 @@ urlpatterns = [
         name="search_by_facility",
     ),
     path(
-        'facility_search/<int:facility_id>',
-        views.facility_detail,
+        'facility/<int:pk>',
+        views.FacilityDetail.as_view(),
         name="facility_detail",
     ),
 ]

@@ -1,0 +1,131 @@
+<h4>Parent Companies:</h4>
+
+<div class="container-fluid rmp-section">
+
+{% if object.parent != '' or object.parent_2 != '' %}
+  
+  {% if object.parent != '' and object.parent_2 != '' %}
+
+    <div class="row row-light">
+      <div class="col-12">{{ object.parent }} (DUNS: {{ object.rmp.parent_duns }})</div>
+    </div>
+
+    <div class="row row-dark">
+      <div class="col-12">{{ object.parent_2 }} (DUNS: {{ object.rmp.parent2_duns }})</div>
+    </div>
+
+  {% elif object.parent != '' %}
+  
+    <div class="row row-light">
+      <div class="col-12">{{ object.parent }} (DUNS: {{ object.rmp.parent_duns }})</div>
+    </div>
+
+  {% elif object.parent_2 != '' %}
+  
+    <div class="row row-light">
+      <div class="col-12">{{ object.parent_2 }} (DUNS: {{ object.rmp.parent2_duns }})</div>
+    </div>
+  
+  {% endif %}
+
+{% else %}
+
+  <div class="row row-light">
+    <div class="col">None</div>
+  </div>
+
+{% endif %}
+
+</div>
+
+<h4>Location:</h4>
+
+<div class="container-fluid rmp-section">
+
+  <div class="row light">
+    <div class="col-4 col-sm-2 col-label">Address:</div>
+    <div class="col">
+      {{ object.street_1 }}<br>
+      {{ object.city }}, {{ object.state.abbr }} {{ object.zip_code }}
+    </div>
+  </div>
+
+  <div class="row dark">
+    <div class="col-4 col-sm-2 col-label">County:</div>
+    <div class="col">{{ object.county_name }}</div>
+  </div>
+
+  <div class="row light">
+    <div class="col-4 col-sm-2 col-label">Lat / Long:</div>
+    <div class="col">
+      {{ object.latitude }}, {{ object.longitude }} (<a href="{{ object.google_maps_url }}">Get map</a>)
+    </div>
+  </div>
+
+</div>
+
+<h4>Owner/Operator:</h4>
+
+<h4>Submission info:</h4>
+
+<div class="container-fluid rmp-section">
+
+  <div class="row dark">
+    <div class="col-4 col-sm-2 col-label">Number of registrations:</div>
+    <div class="col">{{ object.num_registrations }}</div>
+  </div>
+
+  <div class="row light">
+    <div class="col-4 col-sm-2 col-label">Sub type:</div>
+    <div class="col">{{ object.sub_type }}</div>
+  </div>
+
+  <div class="row dark">
+    <div class="col-4 col-sm-2 col-label">Sub date:</div>
+    <div class="col">{{ object.sub_date }}</div>
+  </div>
+
+  <div class="row light">
+    <div class="col-4 col-sm-2 col-label">Exec sub type:</div>
+    <div class="col">{{ object.exec_sub_type }}</div>
+  </div>
+
+  <div class="row dark">
+    <div class="col-4 col-sm-2 col-label">Exec sub date:</div>
+    <div class="col">{{ object.exec_sub_date }}</div>
+  </div>
+
+  <div class="row light">
+    <div class="col-4 col-sm-2 col-label">Sub reason:</div>
+    <div class="col">{{ object.sub_reason }}</div>
+  </div>
+
+  <div class="row dark">
+    <div class="col-4 col-sm-2 col-label">Dereg other:</div>
+    <div class="col">{{ object.dereg_other }}</div>
+  </div>
+
+  <div class="row light">
+    <div class="col-4 col-sm-2 col-label">Deregistration Date:</div>
+    <div class="col">{{ object.deregistration_date }}</div>
+  </div>
+
+  <div class="row dark">
+    <div class="col-4 col-sm-2 col-label">Deregistration Effective Date:</div>
+    <div class="col">{{ object.dereg_effect_date }}</div>
+  </div>
+
+  <div class="row light">
+    <div class="col-4 col-sm-2 col-label">Deregistration Reason:</div>
+    <div class="col">{{ object.dereg_reason }}</div>
+  </div>
+
+</div>
+
+<h4>RMP 40 CFR Part 68 implementation:</h4>
+
+<h4>Emergency contact</h4>
+
+<h4>Other contacts:</h4>
+
+<h4>Processes:</h4>
