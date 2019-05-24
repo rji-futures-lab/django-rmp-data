@@ -222,7 +222,6 @@
 
 </div>
 
-
 <h4>Safety:</h4>
 
 <div class="container-fluid rmp-section">
@@ -234,7 +233,13 @@
 
   <div class="row dark">
     <div class="col-5 col-md-3 col-label">Full-Time Equivalent Employees:</div>
-    <div class="col">{{ object.rmp.num_fte|intcomma }}</div>
+    <div class="col">
+      {% if object.rmp.cbi_flag %}
+        CBI claimed
+      {% else %}
+        {{ object.rmp.num_fte|intcomma }}
+      {% endif %}
+    </div>
   </div>
 
   <div class="row light">
@@ -351,6 +356,14 @@
   </div>
 
   <div class="row light">
+    <div class="col-4 col-sm-2 col-label">Foreign Address:</div>
+    <div class="col">
+      {{ object.rmp.prep_foreign_state }} {{ object.rmp.prep_country }}<br>
+      {{ object.rmp.prep_foreign_zip }}
+    </div>
+  </div>
+
+  <div class="row dark">
     <div class="col-4 col-sm-2 col-label">Phone:</div>
     <div class="col">{{ object.rmp.prep_phone|phonenumber }}</div>
   </div>
