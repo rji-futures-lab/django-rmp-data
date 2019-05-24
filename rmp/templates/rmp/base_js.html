@@ -12,6 +12,7 @@
     <!-- Add Google fonts below  -->
     <link href="https://fonts.googleapis.com/css?family=Muli:400,600,700" rel="stylesheet">
     {% bootstrap_css %}
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
   </head>
   <body>
 
@@ -38,5 +39,10 @@
     <div id="footer">
       <p>The Right To Know Network &copy; 2018</p>
     </div>
+
+    {% bootstrap_javascript jquery="slim" %}
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    <script type="text/javascript" src="{% static 'rmp/script.js' %}"></script>
   </body>
 </html>
