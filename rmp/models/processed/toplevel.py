@@ -82,7 +82,7 @@ class Facility(BaseRMPModel):
     sub_type = CopyFromCharField(
         max_length=1,
         blank=True,
-        choices=choices.SUBMISSION_TYPE,
+        choices=choices.SUBMISSION_TYPES,
     )
     sub_date = CopyFromDateTimeField()
     # exec_type = CopyFromCharField(max_length=1, blank=True) **** This field is nowhere to be found in codes or in tblS1Facilities
@@ -377,8 +377,18 @@ class Registration(BaseRMPModel):
     latitude_dec = CopyFromCharField(max_length=10, blank=True)
     longitude_dec = CopyFromCharField(max_length=11, blank=True)
     valid_latlong = CopyFromCharField(max_length=1, blank=True)
-    latlong_meth = CopyFromCharField(max_length=2, blank=True)
-    latlong_desc = CopyFromCharField(max_length=2, blank=True)
+    latlong_meth = CopyFromForeignKey(
+        'LlmethCd',
+        on_delete=models.PROTECT,
+        db_column='latlong_meth',
+        null=True,
+    )
+    latlong_desc = CopyFromForeignKey(
+        'LldescCd',
+        on_delete=models.PROTECT,
+        db_column='latlong_desc',
+        null=True,
+    )
     facility_url = CopyFromCharField(max_length=100, blank=True)
     facility_phone = CopyFromCharField(max_length=10, blank=True)
     facility_email = CopyFromCharField(max_length=100, blank=True)
@@ -430,7 +440,7 @@ class Registration(BaseRMPModel):
     predictive_file_yn = CopyFromBooleanField()
     submission_type = CopyFromCharField(
         max_length=1,
-        choices=choices.SUBMISSION_TYPE,
+        choices=choices.SUBMISSION_TYPES,
         blank=True,
     )
     rmp_desc = CopyFromCharField(max_length=50, blank=True)
@@ -470,7 +480,11 @@ class Registration(BaseRMPModel):
     frs_ll_desc = CopyFromCharField(max_length=40, blank=True)
     frs_ll_method = CopyFromCharField(max_length=60, blank=True)
     hor_measure = CopyFromCharField(max_length=6, blank=True)
-    hor_ref = CopyFromCharField(max_length=3, blank=True)
+    hor_ref = CopyFromCharField(
+        max_length=3,
+        blank=True,
+        choices=choices.HORIZONTAL_DATUM_CODES,
+    )
     source_scale = CopyFromCharField(max_length=10, blank=True)
     em_email = CopyFromCharField(max_length=100, blank=True)
     prep_name = CopyFromCharField(max_length=70, blank=True)

@@ -12,7 +12,7 @@ from rmp.fields import (
 from rmp.models import BaseRMPModel
 from rmp.models import raw as raw_models
 from rmp.models.choices import (
-    CHEMICAL_TYPE_CHOICES,
+    CHEMICAL_TYPES,
 )
 
 
@@ -43,7 +43,7 @@ class ChemCd(BaseRMPModel):
     chemical_type = CopyFromCharField(
         source_column='ChemType',
         max_length=1,
-        choices=CHEMICAL_TYPE_CHOICES,
+        choices=CHEMICAL_TYPES,
         blank=True,
         help_text='"The type of chemical (T=toxic, F=Flammable).',
     )
@@ -200,12 +200,10 @@ class LldescCd(BaseRMPModel):
 
 
 class LlmethCd(BaseRMPModel):
-    primary_key = CopyFromIntegerField(
-        primary_key=True
-    )
     llmeth = CopyFromCharField(
+        primary_key=True,
         source_column='Method_Code',
-        max_length=2
+        max_length=2,
     )
     llmeth_tr = CopyFromCharField(
         source_column='Method_Desc',
