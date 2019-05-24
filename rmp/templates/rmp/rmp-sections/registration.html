@@ -159,7 +159,7 @@
 
   <div class="row light">
     <div class="col-4 col-sm-2 col-label">Email:</div>
-    <div class="col">{{ object.rmp.rmp_email }}</div>
+    <div class="col">{{ object.rmp.rmp_email|urlize }}</div>
   </div>
 
 </div>
@@ -195,7 +195,7 @@
 
   <div class="row dark">
     <div class="col-4 col-sm-2 col-label">Email:</div>
-    <div class="col">{{ object.rmp.em_email }}</div>
+    <div class="col">{{ object.rmp.em_email|urlize }}</div>
   </div>
 
 
@@ -207,7 +207,7 @@
 
   <div class="row light">
     <div class="col-4 col-sm-2 col-label">Facility (or company) email:</div>
-    <div class="col">{{ object.rmp.facility_email }}</div>
+    <div class="col">{{ object.rmp.facility_email|urlize }}</div>
   </div>
 
   <div class="row dark">
