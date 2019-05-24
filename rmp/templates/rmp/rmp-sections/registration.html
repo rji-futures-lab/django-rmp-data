@@ -1,3 +1,5 @@
+{% load phonenumber_filters %}
+
 <h1 class="rmp-title">{{ object.facility_name }}</h1>
 
 <div class="container-fluid rmp-section">
@@ -117,7 +119,7 @@
 
   <div class="row dark">
     <div class="col-4 col-sm-2 col-label">Phone:</div>
-    <div class="col">{{ object.rmp.operator_phone }}</div>
+    <div class="col">{{ object.rmp.operator_phone | phonenumber }}</div>
   </div>
 
   <div class="row light">
@@ -178,12 +180,12 @@
 
   <div class="row light">
     <div class="col-4 col-sm-2 col-label">Phone:</div>
-    <div class="col">{{ object.rmp.em_contact_phone }}</div>
+    <div class="col">{{ object.rmp.em_contact_phone | phonenumber }}</div>
   </div>
 
   <div class="row dark">
     <div class="col-4 col-sm-2 col-label">24-hour phone:</div>
-    <div class="col">{{ object.rmp.phone_24hour }}</div>
+    <div class="col">{{ object.rmp.phone_24hour | phonenumber }}</div>
   </div>
 
   <div class="row light">
@@ -210,7 +212,7 @@
 
   <div class="row dark">
     <div class="col-4 col-sm-2 col-label">Facility phone:</div>
-    <div class="col">{{ object.rmp.facility_phone }}</div>
+    <div class="col">{{ object.rmp.facility_phone | phonenumber }}</div>
   </div>
 
   <div class="row light">
@@ -243,7 +245,7 @@
 
   <div class="row light">
     <div class="col-4 col-sm-2 col-label">Phone:</div>
-    <div class="col">{{ object.rmp.prep_phone }}</div>
+    <div class="col">{{ object.rmp.prep_phone | phonenumber }}</div>
   </div>
 
 </div>
