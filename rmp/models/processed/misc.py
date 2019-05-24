@@ -354,7 +354,11 @@ class ProcNaics(BaseRMPModel):
         'Process',
         on_delete=models.PROTECT,
     )
-    naics_code = CopyFromIntegerField()
+    naics_code = CopyFromForeignKey(
+        'NAICS',
+        db_column='naics_code',
+        on_delete=models.PROTECT,
+    )
     num_prevent_2 = CopyFromIntegerField()
     num_prevent_3 = CopyFromIntegerField()
 

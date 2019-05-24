@@ -1,4 +1,5 @@
 {% load phonenumber_filters %}
+{% load humanize %}
 
 <h1 class="rmp-title">{{ object.facility_name }}</h1>
 
@@ -143,7 +144,7 @@
 
 </div>
 
-<h4>RMP 40 CFR Part 68 implementation:</h4>
+<h4>Person responsible for RMP implementation:</h4>
 
 <div class="container-fluid rmp-section">
 
@@ -198,7 +199,6 @@
     <div class="col">{{ object.rmp.em_email|urlize }}</div>
   </div>
 
-
 </div>
 
 <h4>Other contacts:</h4>
@@ -222,7 +222,114 @@
 
 </div>
 
+
+<h4>Safety:</h4>
+
+<div class="container-fluid rmp-section">
+
+  <div class="row light">
+    <div class="col-5 col-md-3 col-label">Local Emergency Planning Committee:</div>
+    <div class="col">{{ object.rmp.lepc }}</div>
+  </div>
+
+  <div class="row dark">
+    <div class="col-5 col-md-3 col-label">Full-Time Equivalent Employees:</div>
+    <div class="col">{{ object.rmp.num_fte|intcomma }}</div>
+  </div>
+
+  <div class="row light">
+    <div class="col-5 col-md-3 col-label">Covered by OSHA PSM:</div>
+    <div class="col">{{ object.rmp.osha_psm_yn|yesno|capfirst }}</div>
+  </div>
+
+  <div class="row dark">
+    <div class="col-5 col-md-3 col-label">EPCRA section 302:</div>
+    <div class="col">{{ object.rmp.epcra_302_yn|yesno|capfirst }}</div>
+  </div>
+
+  <div class="row light">
+    <div class="col-5 col-md-3 col-label">CAA Title Air Operating Permit:</div>
+    <div class="col">{{ object.rmp.caa_title_v_yn|yesno|capfirst }}</div>
+  </div>
+
+  <div class="row dark">
+    <div class="col-5 col-md-3 col-label">CAA Permit ID#:</div>
+    <div class="col">{{ object.rmp.caa_permit_id }}</div>
+  </div>
+
+  <div class="row light">
+    <div class="col-5 col-md-3 col-label">OSHA Star/Merit Ranking</div>
+    <div class="col">{{ object.rmp.predictive_file_yn|yesno|capfirst }}</div>
+  </div>
+
+  <div class="row dark">
+    <div class="col-5 col-md-3 col-label">Last Safety Inspection Date:</div>
+    <div class="col">{{ object.rmp.safety_inspect_dt|date }}</div>
+  </div>
+
+  <div class="row light">
+    <div class="col-5 col-md-3 col-label">Inspecting Agency:</div>
+    <div class="col">{{ object.rmp.safety_inspect_by }}</div>
+  </div>
+
+  <div class="row dark">
+    <div class="col-5 col-md-3 col-label">Using Predictive Filing:</div>
+    <div class="col">{{ object.rmp.predictive_file_yn|yesno|capfirst }}</div>
+  </div>
+
+</div>
+
 <h4>Processes:</h4>
+
+{% for process in object.rmp.process_set.all %}
+
+<div class="container-fluid sub-section">
+
+  <div class="row title">
+    <div class="col">{{ process }}</div>
+  </div>
+
+  <div class="row light side-borders">
+    <div class="col-4 col-sm-2 col-label">RMP ID:</div>
+    <div class="col">{{ process.id }}</div>
+  </div>
+
+  <div class="row dark side-borders">
+    <div class="col-4 col-sm-2 col-label">CBI claimed:</div>
+    <div class="col">{{ process.cbi_flag|yesno|capfirst }}</div>
+  </div>
+
+  <div class="row light side-borders">
+    <div class="col-4 col-sm-2 col-label">Program Level:</div>
+    <div class="col">{{ process.program_level }}</div>
+  </div>
+
+  <div class="row dark side-borders">
+    <div class="col-4 col-sm-2 col-label">NAICS:</div>
+    <div class="col">
+      {% for pn in process.procnaics_set.all %}
+        {{ pn.naics_code.description }} ({{  pn.naics_code.code }})<br>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="row light sub">
+    <div class="col col-label">Chemical name</div>
+    <div class="col col-label">CAS#</div>
+    <div class="col col-label">Quantity (lbs.)</div>
+    <div class="col col-label">CBI</div>
+  </div>
+    {% for pc in process.procchem_set.all %}
+    <div class="row {% cycle 'dark' 'light' %} side-borders">
+      <div class='col col-label'>{{ pc.chemical.chemical_name }}</div>
+      <div class='col col-label'>{{ pc.chemical.cas2 }}</div>
+      <div class='col col-label'>{{ pc.quantity_lbs|intcomma }}</div>
+      <div class='col col-label'>{{ pc.cbi_flag|yesno|capfirst }}</div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endfor%}
 
 <h4>RMP Preparer:</h4>
 
@@ -271,7 +378,7 @@
 
   <div class="row dark">
     <div class="col-4 col-sm-2 col-label">Registered:</div>
-    <div class="col">{% if object.registered %}Yes{% else %}No{% endif %}</div>
+    <div class="col">{{ object.registered|yesno|capfirst }}</div>
   </div>
 
 </div>
