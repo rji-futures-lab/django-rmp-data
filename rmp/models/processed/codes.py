@@ -1,7 +1,7 @@
 """
 Code-related RMP data models.
 """
-from django.db import models
+from django.db.models import F, PROTECT
 from rmp.fields import (
     CopyFromBooleanField,
     CopyFromCharField,
@@ -69,7 +69,7 @@ class ChemCd(BaseRMPModel):
 class CountyCd(BaseRMPModel):
     state_code = CopyFromForeignKey(
         'StateCd',
-        on_delete=models.PROTECT,
+        on_delete=PROTECT,
         help_text='The U.S. Postal Service abbreviation for the state in which'
                   ' the facility is located.',
         db_column='State_Code',
@@ -179,6 +179,34 @@ class EventsCd(BaseRMPModel):
         m = raw_models.tlkpS6InitiatingEvents
 
         return m.objects.get_default_transform_queryset()
+
+
+class NAICS(BaseRMPModel):
+    """
+    """
+    code = CopyFromCharField(
+        primary_key=True,
+        max_length=6,
+        verbose_name='NAICS Code',
+        help_text='The 5- or 6- digit NAICS code.',
+    )
+    description = CopyFromCharField(
+        max_length=118,
+        verbose_name='NAICS Description',
+        help_text='Description text for the NAICS code.',
+    )
+
+    class Meta:
+        verbose_name = 'Lookup: NAICS codes'
+
+    @classmethod
+    def get_transform_queryset(self):
+        qs = raw_models.tlkpNAICS.objects.annotate(
+            code=F("NAICS_CODE"),
+            description=F("NAICS_DESCRIPTION"),
+        )
+
+        return qs
 
 
 class LldescCd(BaseRMPModel):
@@ -337,10 +365,10 @@ class StateCd(BaseRMPModel):
     def get_transform_queryset(self):
 
         qs = raw_models.tlkpStateFIPSCodes.objects.annotate(
-            code=models.F('STATE_CODE'),
-            abbr=models.F('STATE_ABBR'),
-            name=models.F('STATE_NAME'),
-            region=models.F('REGION'),
+            code=F('STATE_CODE'),
+            abbr=F('STATE_ABBR'),
+            name=F('STATE_NAME'),
+            region=F('REGION'),
         )
 
         return qs

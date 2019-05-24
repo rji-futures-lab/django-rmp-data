@@ -428,7 +428,12 @@ ul {
 }
 
 .rmp-section {
+	margin-bottom: 30px;
+}
+
+.sub-section {
 	margin-bottom: 20px;
+	border-bottom: 2px solid #E8AD0C;	
 }
 
 table {
@@ -478,10 +483,21 @@ tr:nth-child(even) {
 	padding-bottom: 10px;
 }
 
-.row .row-title {
-	background-color: #E8AD0C;
+.row.title {
+	border-bottom: 2px solid #E8AD0C;
 	padding-top: 10px;
 	padding-bottom: 10px;
+	font-weight: bold;
+	font-style: italic;
+}
+
+.row.side-borders {
+	border-left: 2px solid #E8AD0C;
+	border-right: 2px solid #E8AD0C;
+}
+
+.row.sub {
+	border: 2px solid #E8AD0C;
 }
 
 .col-label {
