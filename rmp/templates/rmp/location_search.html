@@ -12,10 +12,6 @@ Search RMP Facilities by Location
 
 {% if error %}
 
-<div class="dbheader">
-  <h3>Search for RMP Facilities by location</h3>
-</div>
-
 <p class="error">Please submit a search term.</p>
 
 <form class="search" action="" method="get">
@@ -31,10 +27,6 @@ Search RMP Facilities by Location
 </form>
 
 {% else %}
-
-<div class="dbheader">
-  <h3>Search for RMP Facilities by location</h3>
-</div>
 
 <form class="search" action="{% url 'rmp:search_by_location' %}" method="get">
   <input type="text" name="city" placeholder="City" />

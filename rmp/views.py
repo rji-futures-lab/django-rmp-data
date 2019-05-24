@@ -136,6 +136,7 @@ class locationListView(ListView):
     template_name = 'rmp/facility_by_location.html'
     queryset = Facility.objects.all()
     context_object_name = 'facility_list'
+    # paginate_by = 25
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
