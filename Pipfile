@@ -11,6 +11,7 @@ postgres-copy = {editable = true,git = "https://github.com/rji-futures-lab/djang
 psycopg2-binary = "*"
 urllib3 = ">=1.24.2"
 django-bootstrap4 = "*"
+django-phonenumber-filter = "*"
 
 [dev-packages]
 django-debug-toolbar = "*"

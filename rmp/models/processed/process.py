@@ -108,6 +108,15 @@ class Process(BaseRMPModel):
         )
         return qs
 
+    def __str__(self):
+        if self.process_desc != '':
+            s = self.process_desc
+        else:
+            s = 'Unspecified process'
+
+        return s
+
+
 class ProcChem(BaseRMPModel):
     procchem_id = CopyFromBigIntegerField(
         primary_key=True,

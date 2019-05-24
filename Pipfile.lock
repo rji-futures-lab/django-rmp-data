@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "b22af70072e2dde90029f076f2eed651ebb576e9989252cb75ffe0c5fc241100"
+            "sha256": "99c062f28bdc69770410d356a3535ae7e99958ca788fb46e214e97954a58a5cb"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -25,17 +25,17 @@
         },
         "boto3": {
             "hashes": [
-                "sha256:10fd4bf8fe88f9bb449a538e639c1afb9762cb91693dea8c17282ba5c9d00b51",
-                "sha256:4d187262d30befec431b3b52ccce35e55c0062a86f19b9dd5328b18d6332c5aa"
+                "sha256:33257e7c8da6880a00c38789011e5d8acdd7e6a9bc5bdabc1eb7d441837b2d63",
+                "sha256:9c0233b879996f8232c35e903d07017ffad97b2dadd70758d9d28ef86aa9ed13"
             ],
-            "version": "==1.9.151"
+            "version": "==1.9.155"
         },
         "botocore": {
             "hashes": [
-                "sha256:5e4774c106bb02f8e4639818c2f8157b8ec114a76e481e17cd3fe6955206e088",
-                "sha256:cfc667e7888aad09ead8f7e32129ea90aa5c7f602531094954bf6305db74aac4"
+                "sha256:e5f5ea3edd16d2846ca984fd57d31ad98526020fcea630f47bb00a11e61957b9",
+                "sha256:ff9070a5e707c9c445622167501dccfe9ec893f761792ae100c508435a38cda8"
             ],
-            "version": "==1.12.151"
+            "version": "==1.12.155"
         },
         "certifi": {
             "hashes": [
@@ -78,6 +78,13 @@
             ],
             "index": "pypi",
             "version": "==0.0.8"
+        },
+        "django-phonenumber-filter": {
+            "hashes": [
+                "sha256:8dd94d867d5550f4d3d6a2fe859eb50dc816d329658fddd74d5a3c3b78734f0a"
+            ],
+            "index": "pypi",
+            "version": "==1.0.0"
         },
         "django-storages": {
             "hashes": [
@@ -139,6 +146,13 @@
                 "sha256:b5e3b81ecef5f7c1b0903b5c40813536ba2343a33868a567e4e4ff1e26243406"
             ],
             "version": "==0.20.0"
+        },
+        "phonenumbers": {
+            "hashes": [
+                "sha256:708c19860afb05085d5fe91b52fcbce9e1be3c020fe8c9b6f6d028879f5a7d5e",
+                "sha256:da0504f441b5c913a2c5aeec6ed84ff4d77634bc7a9566f312a876c549e5a4af"
+            ],
+            "version": "==8.10.12"
         },
         "placebo": {
             "hashes": [

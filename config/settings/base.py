@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.postgres',
     'bootstrap4',
+    'phonenumber_filter',
     'rmp',
 ]
 

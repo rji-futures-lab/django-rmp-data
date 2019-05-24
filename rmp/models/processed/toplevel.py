@@ -430,11 +430,7 @@ class Registration(BaseRMPModel):
     epcra_302_yn = CopyFromBooleanField()
     caa_title_v_yn = CopyFromBooleanField()
     caa_permit_id = CopyFromCharField(blank=True, max_length=15)
-    # safety_inspect_dt = CopyFromDateTimeField(
-    #     blank=True,
-    #     null=True
-    # )
-    safety_inspect_dt = CopyFromCharField(blank=True, max_length=10)
+    safety_inspect_dt = CopyFromDateTimeField(null=True)
     safety_inspect_by = CopyFromCharField(max_length=50, blank=True)
     osha_ranking = CopyFromBooleanField()
     predictive_file_yn = CopyFromBooleanField()

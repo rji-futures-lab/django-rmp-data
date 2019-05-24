@@ -353,9 +353,8 @@ class tblS1Facilities(BaseRMPModel):
     )
     SafetyInspectionDate = CopyFromDateTimeField(
         null=True,
-        verbose_name='1.12.d Air Operating Permit ID',
-        help_text='Unique identifier for a CAA Title V Air Operating Permit '
-                  'or state equivalent ID.',
+        verbose_name='1.14 Last Safety Inspection Date',
+        help_text='Date of last safety inspection, by an external Agency.',
     )
     SafetyInspectionBy = CopyFromCharField(
         max_length=50,
