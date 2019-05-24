@@ -6,7 +6,7 @@
     <div class="col-4 col-sm-3 col-md-2 col-label">Parent Companies:</div>
     <div class="col">
       {% if object.parent != '' and object.parent_2 != '' %}
-        {{ object.parent }}<b>{{ object.parent_2 }}</b>
+        {{ object.parent }}<br>{{ object.parent_2 }}
       {% elif object.parent != '' %}
         {{ object.parent }}
       {% elif object.parent_2 != '' %}
