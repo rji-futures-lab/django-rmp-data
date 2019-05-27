@@ -30,10 +30,10 @@ class PreventionProgram2(BaseRMPModel): #rmp_prevent_2
     id = CopyFromIntegerField(
         primary_key=True,
     )
-    process_naics_2 = CopyFromForeignKey(
+    process_naics = CopyFromForeignKey(
         'ProcNaics',
         on_delete=models.PROTECT,
-        db_column='process_naics_2',
+        # db_column='process_naics_2',
     )
     safety_review_date = CopyFromDateField(null=True)
     fr_nfpa58 = CopyFromBooleanField()
@@ -151,10 +151,10 @@ class PreventionProgram3(BaseRMPModel):
     id = CopyFromIntegerField(
         primary_key=True,
     )
-    process_naics_3 = CopyFromForeignKey(
+    process_naics = CopyFromForeignKey(
         'ProcNaics',
         on_delete=models.PROTECT,
-        db_column='process_naics_3',
+        # db_column='process_naics_3',
     )
     safety_review_date = CopyFromDateField(null=True)
     pha_date = CopyFromDateField(null=True)
