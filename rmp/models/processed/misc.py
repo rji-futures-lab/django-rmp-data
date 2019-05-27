@@ -30,9 +30,10 @@ class PreventionProgram2(BaseRMPModel): #rmp_prevent_2
     id = CopyFromIntegerField(
         primary_key=True,
     )
-    process_naics = CopyFromForeignKey(
+    process_naics_2 = CopyFromForeignKey(
         'ProcNaics',
         on_delete=models.PROTECT,
+        db_column='process_naics_2',
     )
     safety_review_date = CopyFromDateField(null=True)
     fr_nfpa58 = CopyFromBooleanField()
@@ -138,6 +139,7 @@ class PreventionProgram2(BaseRMPModel): #rmp_prevent_2
         annotations = m.get_renamed_fields()
 
         annotations['id'] = F('PreventionProgram2ID')
+        annotations['process_naics_2'] = F('Process_NAICS_ID')
         annotations['num_prevent_2_chemicals'] = Count('tbls8_prevention_program_chemicals')
 
         qs = m.objects.annotate(**annotations)
@@ -149,9 +151,10 @@ class PreventionProgram3(BaseRMPModel):
     id = CopyFromIntegerField(
         primary_key=True,
     )
-    process_naics = CopyFromForeignKey(
+    process_naics_3 = CopyFromForeignKey(
         'ProcNaics',
         on_delete=models.PROTECT,
+        db_column='process_naics_3',
     )
     safety_review_date = CopyFromDateField(null=True)
     pha_date = CopyFromDateField(null=True)
@@ -259,6 +262,7 @@ class PreventionProgram3(BaseRMPModel):
         annotations = m.get_renamed_fields()
 
         annotations['id'] = F('PreventionProgram3ID')
+        annotations['process_naics_3'] = F('Process_NAICS_ID')
         annotations['num_prevent_3_chemicals'] = Count('tbls7_prevention_program_chemicals')
 
         qs = m.objects.annotate(**annotations)
@@ -268,7 +272,7 @@ class PreventionProgram3(BaseRMPModel):
 
 class EmergencyResponse(BaseRMPModel):
     facility = CopyFromOneToOneField(
-        'Facility',
+        'Registration',
         primary_key=True,
         on_delete=models.PROTECT,
     )

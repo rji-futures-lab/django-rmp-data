@@ -1,1 +1,116 @@
 <h2>9. Emergency response</h2>
+
+{% if not object.rmp.emergencyresponse.facility %}
+
+<div class="container-fluid rmp-section">
+
+  <div class="row light">
+    <div class="col-4 col-sm-2 col-label">No registered emergency response information</div>
+  </div>
+
+</div>
+
+{% else %}
+
+<div class="container-fluid rmp-section">
+
+  <div class="row light">
+    <div class="col-4 col-sm-2 col-label">Facility In Community Plan:</div>
+    <div class="col">
+      {{ object.rmp.emergencyresponse.community_erp_yn }}
+    </div>
+  </div>
+
+  <div class="row dark">
+    <div class="col-4 col-sm-2 col-label">Facility Own Response Plan:</div>
+    <div class="col">{{ object.rmp.facility_erp_yn }}</div>
+  </div>
+
+  <div class="row light">
+    <div class="col-4 col-sm-2 col-label">Specific Facility Response Plan:</div>
+    <div class="col">
+      {{ object.rmp.emergencyresponse.erp_specific_yn }}
+    </div>
+  </div>
+
+  <div class="row dark">
+    <div class="col-4 col-sm-2 col-label">Inform. Procedures in Response Plan:</div>
+    <div class="col">{{ object.rmp.erp_inform_yn }}</div>
+  </div>
+
+  <div class="row light">
+    <div class="col-4 col-sm-2 col-label">Emergency Care in Response Plan:</div>
+    <div class="col">
+      {{ object.rmp.emergencyresponse.erp_inform_hth_yn }}
+    </div>
+  </div>
+
+  <div class="row dark">
+    <div class="col-4 col-sm-2 col-label">Plan Review Date:</div>
+    <div class="col">{{ object.rmp.erp_review_date }}</div>
+  </div>
+
+  <div class="row light">
+    <div class="col-4 col-sm-2 col-label">Response Training Date:</div>
+    <div class="col">
+      {{ object.rmp.emergencyresponse.erp_training_date }}
+    </div>
+  </div>
+
+  <div class="row dark">
+    <div class="col-4 col-sm-2 col-label">Local Response Agency:</div>
+    <div class="col">{{ object.rmp.coord_agency }}</div>
+  </div>
+
+  <div class="row light">
+    <div class="col-4 col-sm-2 col-label">Local Response Agency Phone:</div>
+    <div class="col">
+      {{ object.rmp.emergencyresponse.coord_phone }}
+    </div>
+  </div>
+
+  <div class="row dark">
+    <div class="col-4 col-sm-2 col-label">Subject To - OSHA EAP:</div>
+    <div class="col">{{ object.rmp.subto_osha191038 }}</div>
+  </div>
+
+  <div class="row light">
+    <div class="col-4 col-sm-2 col-label">Subject To - OSHA HAZWOPER:</div>
+    <div class="col">
+      {{ object.rmp.emergencyresponse.subto_osha191020 }}
+    </div>
+  </div>
+
+  <div class="row dark">
+    <div class="col-4 col-sm-2 col-label">Subject To - CWA:</div>
+    <div class="col">{{ object.rmp.subto_cwa112 }}</div>
+  </div>
+
+  <div class="row light">
+    <div class="col-4 col-sm-2 col-label">Subject To - RCRA:</div>
+    <div class="col">
+      {{ object.rmp.emergencyresponse.subto_rcra264 }}
+    </div>
+  </div>
+
+  <div class="row dark">
+    <div class="col-4 col-sm-2 col-label">Subject To - OPA:</div>
+    <div class="col">{{ object.rmp.subto_opa90 }}</div>
+  </div>
+
+  <div class="row light">
+    <div class="col-4 col-sm-2 col-label">Subject To - State EPCRA:</div>
+    <div class="col">
+      {{ object.rmp.emergencyresponse.subto_state_epcra }}
+    </div>
+  </div>
+
+  <div class="row dark">
+    <div class="col-4 col-sm-2 col-label">Subject To - Other:</div>
+    <div class="col">{{ object.rmp.subto_other }}</div>
+  </div>
+
+
+</div>
+
+{% endif %}

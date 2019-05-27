@@ -1,1 +1,37 @@
-<h2>8. Prevention: Program level 2</h2>
+<h2>8. Prevention Program level 2</h2>
+
+<div class="container-fluid rmp-section">
+
+{% for process in object.rmp.process_set.all %}
+
+  {% for pn in process.procnaics_set.all %}
+
+    {% for program in pn.preventionprogram2_set.all %}
+
+    {% if not program %}
+
+    <div class="row light">
+      <div class="col-4 col-sm-2 col-label">No Prevention Program 2</div>
+    </div>
+
+    {% else %}
+
+    <div class="row light">
+      <div class="col-4 col-sm-2 col-label">Prevention Program ID:</div>
+      <div class="col">{{ program.id }}</div>
+    </div>
+
+    <div class="row dark">
+      <div class="col-4 col-sm-2 col-label">Safety Review Date</div>
+      <div class="col">{{ program.safety_review_date }}</div>
+    </div>
+
+    {% endif %}
+
+    {% endfor %}
+
+  {% endfor %}
+
+{% endfor %}
+
+</div>

@@ -1,1 +1,509 @@
 <h2>7. Prevention: Program level 3</h2>
+
+{% for process in object.rmp.process_set.all %}
+
+<div class="container-fluid rmp-section">
+
+  {% for pn in process.procnaics_set.all %}
+
+    {% for program in pn.preventionprogram3_set.all %}
+
+    {% if not program.id %}
+
+    <div class="row light">
+      <div class="col-4 col-sm-2 col-label">No Prevention Program 3</div>
+    </div>
+
+    {% else %}
+
+    <h4>Program</h4>
+
+    <div class="row light">
+      <div class="col-4 col-sm-2 col-label">Prevention Program ID:</div>
+      <div class="col">{{ program.id }}</div>
+    </div>
+
+    <div class="row dark">
+      <div class="col-4 col-sm-2 col-label">Safety Review Date</div>
+      <div class="col">{{ program.safety_review_date }}</div>
+    </div>
+
+    <div class="row light">
+      <div class="col-4 col-sm-2 col-label">PHA Update Date</div>
+      <div class="col">{{ program.pha_date }}</div>
+    </div>
+
+    <div class="row dark">
+      <div class="col-4 col-sm-2 col-label">PHA Technique - What If</div>
+      <div class="col">{{ program.pha_what_if }}</div>
+    </div>
+
+    <div class="row light">
+      <div class="col-4 col-sm-2 col-label">PHA Technique - Checklist</div>
+      <div class="col">{{ program.pha_checklist }}</div>
+    </div>
+
+    <div class="row dark">
+      <div class="col-4 col-sm-2 col-label">PHA Technique - What If/Checklist</div>
+      <div class="col">{{ program.pha_what_if_checklist }}</div>
+    </div>
+
+    <div class="row light">
+      <div class="col-4 col-sm-2 col-label">PHA Technique - HAZOP</div>
+      <div class="col">{{ program.pha_hazop }}</div>
+    </div>
+
+    <div class="row dark">
+      <div class="col-4 col-sm-2 col-label">PHA Technique - FMEA</div>
+      <div class="col">{{ program.pha_fmea }}</div>
+    </div>
+
+    <div class="row light">
+      <div class="col-4 col-sm-2 col-label">PHA Technique - FTA</div>
+      <div class="col">{{ program.pha_fta }}</div>
+    </div>
+
+    <div class="row dark">
+      <div class="col-4 col-sm-2 col-label">PHA Technique - Other</div>
+      <div class="col">{{ program.pha_other_technique }}</div>
+    </div>
+
+    <div class="row light">
+      <div class="col-4 col-sm-2 col-label">PHA Completion Date</div>
+      <div class="col">{{ program.pha_completion_date }}</div>
+    </div>
+
+    <div class="row dark">
+      <div class="col-4 col-sm-2 col-label">Hazard Identified - Toxic Release</div>
+      <div class="col">{{ program.mh_toxic_release }}</div>
+    </div>
+
+    <div class="row light">
+      <div class="col-4 col-sm-2 col-label">Hazard Identified - Fire</div>
+      <div class="col">{{ program.mh_fire }}</div>
+    </div>
+
+    <div class="row dark">
+      <div class="col-4 col-sm-2 col-label">Hazard Identified - Explosion</div>
+      <div class="col">{{ program.mh_explosion }}</div>
+    </div>
+
+    <div class="row light">
+      <div class="col-4 col-sm-2 col-label">Hazard Identified - Runaway Reaction</div>
+      <div class="col">{{ program.mh_runaway }}</div>
+    </div>
+
+    <div class="row dark">
+      <div class="col-4 col-sm-2 col-label">Hazard Identified - Polymerization</div>
+      <div class="col">{{ program.mh_polymerization }}</div>
+    </div>
+
+    <div class="row light">
+      <div class="col-4 col-sm-2 col-label">Hazard Identified - Overpressure	</div>
+      <div class="col">{{ program.mh_overpressurization }}</div>
+    </div>
+
+    <div class="row dark">
+      <div class="col-4 col-sm-2 col-label">Hazard Identified - Corrosion</div>
+      <div class="col">{{ program.mh_corrosion }}</div>
+    </div>
+
+    <div class="row light">
+      <div class="col-4 col-sm-2 col-label">Hazard Identified - Overfilling</div>
+      <div class="col">{{ program.mh_overfilling }}</div>
+    </div>
+
+    <div class="row dark">
+      <div class="col-4 col-sm-2 col-label">Hazard Identified - Contamination</div>
+      <div class="col">{{ program.mh_contamination }}</div>
+    </div>
+
+    <div class="row light">
+      <div class="col-4 col-sm-2 col-label">Hazard Identified - Equipment Failure</div>
+      <div class="col">{{ program.mh_equipment_failure }}</div>
+    </div>
+
+    <div class="row dark">
+      <div class="col-4 col-sm-2 col-label">Hazard Identified - Cooling Loss</div>
+      <div class="col">{{ program.mh_cooling_loss }}</div>
+    </div>
+
+    <div class="row light">
+      <div class="col-4 col-sm-2 col-label">Hazard Identified - Earthquake</div>
+      <div class="col">{{ program.mh_earthquake }}</div>
+    </div>
+
+    <div class="row dark">
+      <div class="col-4 col-sm-2 col-label">Hazard Identified - Flood	</div>
+      <div class="col">{{ program.mh_floods }}</div>
+    </div>
+
+    <div class="row light">
+      <div class="col-4 col-sm-2 col-label">Hazard Identified - Tornado</div>
+      <div class="col">{{ program.mh_tornado }}</div>
+    </div>
+
+    <div class="row dark">
+      <div class="col-4 col-sm-2 col-label">Hazard Identified - Hurricane	</div>
+      <div class="col">{{ program.mh_hurricanes }}</div>
+    </div>
+
+    <div class="row light">
+      <div class="col-4 col-sm-2 col-label">Hazard Identified - Other</div>
+      <div class="col">{{ program.mh_other_type }}</div>
+    </div>
+
+    <div class="row dark">
+      <div class="col-4 col-sm-2 col-label">Process Controls - Vents</div>
+      <div class="col">{{ program.pc_vents }}</div>
+    </div>
+
+    <div class="row light">
+      <div class="col-4 col-sm-2 col-label">Process Controls - Relief Valves</div>
+      <div class="col">{{ program.pc_relief_valves }}</div>
+    </div>
+
+    <div class="row dark">
+      <div class="col-4 col-sm-2 col-label">Process Controls - Check Valves</div>
+      <div class="col">{{ program.pc_check_valves }}</div>
+    </div>
+
+    <div class="row light">
+      <div class="col-4 col-sm-2 col-label">Process Controls - Scrubbers</div>
+      <div class="col">{{ program.pc_scrubbers }}</div>
+    </div>
+
+    <div class="row dark">
+      <div class="col-4 col-sm-2 col-label">Process Controls - Flares</div>
+      <div class="col">{{ program.pc_flares }}</div>
+    </div>
+
+    <div class="row light">
+      <div class="col-4 col-sm-2 col-label">Process Controls - Manual Shutoffs</div>
+      <div class="col">{{ program.pc_manual_shutoffs }}</div>
+    </div>
+
+    <div class="row dark">
+      <div class="col-4 col-sm-2 col-label">Process Controls - Auto Shutoffs</div>
+      <div class="col">{{ program.pc_automatic_shutoffs }}</div>
+    </div>
+
+    <div class="row light">
+      <div class="col-4 col-sm-2 col-label">Process Controls - Interlocks</div>
+      <div class="col">{{ program.pc_interlocks }}</div>
+    </div>
+
+    <div class="row dark">
+      <div class="col-4 col-sm-2 col-label">Process Controls - Alarms</div>
+      <div class="col">{{ program.pc_alarms }}</div>
+    </div>
+
+    <div class="row light">
+      <div class="col-4 col-sm-2 col-label">Process Controls - Keyed Bypass</div>
+      <div class="col">{{ program.pc_keyed_bypass }}</div>
+    </div>
+
+    <div class="row dark">
+      <div class="col-4 col-sm-2 col-label">Process Controls - Emergency Air</div>
+      <div class="col">{{ program.pc_emergency_air_supply }}</div>
+    </div>
+
+    <div class="row light">
+      <div class="col-4 col-sm-2 col-label">Process Controls - Emergency Power</div>
+      <div class="col">{{ program.pc_emergency_power }}</div>
+    </div>
+
+    <div class="row dark">
+      <div class="col-4 col-sm-2 col-label">Process Controls - Backup Pump</div>
+      <div class="col">{{ program.pc_backup_pump }}</div>
+    </div>
+
+    <div class="row light">
+      <div class="col-4 col-sm-2 col-label">Process Controls - Grounding</div>
+      <div class="col">{{ program.pc_grounding_equipment }}</div>
+    </div>
+
+    <div class="row dark">
+      <div class="col-4 col-sm-2 col-label">Process Controls - Inhibitor Addition</div>
+      <div class="col">{{ program.pc_inhibitor_addition }}</div>
+    </div>
+
+    <div class="row light">
+      <div class="col-4 col-sm-2 col-label">Process Controls - Rupture Disks</div>
+      <div class="col">{{ program.pc_rupture_disks }}</div>
+    </div>
+
+    <div class="row dark">
+      <div class="col-4 col-sm-2 col-label">Process Controls - Excess Flow Devices</div>
+      <div class="col">{{ program.pc_excess_flow_device }}</div>
+    </div>
+
+    <div class="row light">
+      <div class="col-4 col-sm-2 col-label">Process Controls - Quench System</div>
+      <div class="col">{{ program.pc_quench_system }}</div>
+    </div>
+
+    <div class="row dark">
+      <div class="col-4 col-sm-2 col-label">Process Controls - Purge System</div>
+      <div class="col">{{ program.pc_purge_system }}</div>
+    </div>
+
+    <div class="row light">
+      <div class="col-4 col-sm-2 col-label">Process Controls - None</div>
+      <div class="col">{{ program.pc_none }}</div>
+    </div>
+
+    <div class="row dark">
+      <div class="col-4 col-sm-2 col-label">PHA Update Date</div>
+      <div class="col">{{ program.pc_other_type }}</div>
+    </div>
+
+    <div class="row light">
+      <div class="col-4 col-sm-2 col-label">Mitigation Systems - Sprinklers</div>
+      <div class="col">{{ program.ms_sprinkler_system }}</div>
+    </div>
+
+    <div class="row dark">
+      <div class="col-4 col-sm-2 col-label">Mitigation Systems - Dikes</div>
+      <div class="col">{{ program.ms_dikes }}</div>
+    </div>
+
+    <div class="row light">
+      <div class="col-4 col-sm-2 col-label">Mitigation Systems - Fire Walls</div>
+      <div class="col">{{ program.ms_fire_walls }}</div>
+    </div>
+
+    <div class="row dark">
+      <div class="col-4 col-sm-2 col-label">Mitigation Systems - Blast Walls</div>
+      <div class="col">{{ program.ms_blast_walls }}</div>
+    </div>
+
+    <div class="row light">
+      <div class="col-4 col-sm-2 col-label">Mitigation Systems - Deluge Systems</div>
+      <div class="col">{{ program.ms_deluge_system }}</div>
+    </div>
+
+    <div class="row dark">
+      <div class="col-4 col-sm-2 col-label">Mitigation Systems - Water Curtains</div>
+      <div class="col">{{ program.ms_water_curtain }}</div>
+    </div>
+
+    <div class="row light">
+      <div class="col-4 col-sm-2 col-label">Mitigation Systems - Enclosure</div>
+      <div class="col">{{ program.ms_enclosure }}</div>
+    </div>
+
+    <div class="row dark">
+      <div class="col-4 col-sm-2 col-label">Mitigation Systems - Neutralization</div>
+      <div class="col">{{ program.ms_neutralization }}</div>
+    </div>
+
+    <div class="row light">
+      <div class="col-4 col-sm-2 col-label">Mitigation Systems - None</div>
+      <div class="col">{{ program.ms_none }}</div>
+    </div>
+
+    <div class="row dark">
+      <div class="col-4 col-sm-2 col-label">Mitigation Systems - Other</div>
+      <div class="col">{{ program.ms_other_type }}</div>
+    </div>
+
+    <div class="row light">
+      <div class="col-4 col-sm-2 col-label">Safety Review Date</div>
+      <div class="col">{{ program.md_process_area_detectors }}</div>
+    </div>
+
+    <div class="row dark">
+      <div class="col-4 col-sm-2 col-label">PHA Update Date</div>
+      <div class="col">{{ program.md_perimeter_monitors }}</div>
+    </div>
+
+    <div class="row light">
+      <div class="col-4 col-sm-2 col-label">Safety Review Date</div>
+      <div class="col">{{ program.md_none }}</div>
+    </div>
+
+    <div class="row dark">
+      <div class="col-4 col-sm-2 col-label">PHA Update Date</div>
+      <div class="col">{{ program.md_other_type }}</div>
+    </div>
+
+    <div class="row light">
+      <div class="col-4 col-sm-2 col-label">Changes Since PHA - Reduced Inventory</div>
+      <div class="col">{{ program.ch_chemical_reduction }}</div>
+    </div>
+
+    <div class="row dark">
+      <div class="col-4 col-sm-2 col-label">Changes Since PHA - Increased Inventory</div>
+      <div class="col">{{ program.ch_chemical_increase }}</div>
+    </div>
+
+    <div class="row light">
+      <div class="col-4 col-sm-2 col-label">Changes Since PHA - Process Parameters</div>
+      <div class="col">{{ program.ch_change_process_parameters }}</div>
+    </div>
+
+    <div class="row dark">
+      <div class="col-4 col-sm-2 col-label">Changes Since PHA - Process Controls</div>
+      <div class="col">{{ program.ch_install_process_controls }}</div>
+    </div>
+
+    <div class="row light">
+      <div class="col-4 col-sm-2 col-label">Changes Since PHA - Process Detection</div>
+      <div class="col">{{ program.ch_install_process_detection }}</div>
+    </div>
+
+    <div class="row dark">
+      <div class="col-4 col-sm-2 col-label">Changes Since PHA - Perimeter Monitoring</div>
+      <div class="col">{{ program.ch_install_perimeter_monitoring }}</div>
+    </div>
+
+    <div class="row light">
+      <div class="col-4 col-sm-2 col-label">Changes Since PHA - Mitigation Systems</div>
+      <div class="col">{{ program.ch_install_mitigation_systems }}</div>
+    </div>
+
+    <div class="row dark">
+      <div class="col-4 col-sm-2 col-label">Changes Since PHA - None Recommended</div>
+      <div class="col">{{ program.ch_none_required }}</div>
+    </div>
+
+    <div class="row light">
+      <div class="col-4 col-sm-2 col-label">Changes Since PHA - None</div>
+      <div class="col">{{ program.ch_none }}</div>
+    </div>
+
+    <div class="row dark">
+      <div class="col-4 col-sm-2 col-label">Changes Since PHA - Other</div>
+      <div class="col">{{ program.ch_other_changes }}</div>
+    </div>
+
+    <div class="row light">
+      <div class="col-4 col-sm-2 col-label">Procedure Review Date</div>
+      <div class="col">{{ program.op_procedures_review_date }}</div>
+    </div>
+
+    <div class="row dark">
+      <div class="col-4 col-sm-2 col-label">Training Review Date</div>
+      <div class="col">{{ program.training_review_date }}</div>
+    </div>
+
+    <div class="row light">
+      <div class="col-4 col-sm-2 col-label">Type of Training - Classroom</div>
+      <div class="col">{{ program.tr_classroom }}</div>
+    </div>
+
+    <div class="row dark">
+      <div class="col-4 col-sm-2 col-label">Type of Training - On the Job</div>
+      <div class="col">{{ program.tr_on_the_job }}</div>
+    </div>
+
+    <div class="row light">
+      <div class="col-4 col-sm-2 col-label">Type of Training - Other</div>
+      <div class="col">{{ program.tr_other_type }}</div>
+    </div>
+
+    <div class="row dark">
+      <div class="col-4 col-sm-2 col-label">Type of Training - On the Job</div>
+      <div class="col">{{ program.ct_written_test }}</div>
+    </div>
+
+    <div class="row light">
+      <div class="col-4 col-sm-2 col-label">Competency Testing - Oral Tests</div>
+      <div class="col">{{ program.ct_oral_test }}</div>
+    </div>
+
+    <div class="row dark">
+      <div class="col-4 col-sm-2 col-label">Competency Testing - Demonstration</div>
+      <div class="col">{{ program.ct_demonstration }}</div>
+    </div>
+
+    <div class="row light">
+      <div class="col-4 col-sm-2 col-label">Competency Testing - Observation</div>
+      <div class="col">{{ program.ct_observation }}</div>
+    </div>
+
+    <div class="row dark">
+      <div class="col-4 col-sm-2 col-label">Competency Testing - Other</div>
+      <div class="col">{{ program.ct_other_type }}</div>
+    </div>
+
+    <div class="row light">
+      <div class="col-4 col-sm-2 col-label">Maintenance Review Date</div>
+      <div class="col">{{ program.maintenance_review_date }}</div>
+    </div>
+
+    <div class="row dark">
+      <div class="col-4 col-sm-2 col-label">Maintenance Inspection Date</div>
+      <div class="col">{{ program.equipment_inspection_date }}</div>
+    </div>
+
+    <div class="row light">
+      <div class="col-4 col-sm-2 col-label">Equipment Tested</div>
+      <div class="col">{{ program.equipment_tested }}</div>
+    </div>
+
+    <div class="row dark">
+      <div class="col-4 col-sm-2 col-label">Management of Change Most Recent Date</div>
+      <div class="col">{{ program.change_mgmt_date }}</div>
+    </div>
+
+    <div class="row light">
+      <div class="col-4 col-sm-2 col-label">Management of Change Review Date</div>
+      <div class="col">{{ program.change_mgmt_review_date }}</div>
+    </div>
+
+    <div class="row dark">
+      <div class="col-4 col-sm-2 col-label">Pre-startup Review Date</div>
+      <div class="col">{{ program.pre_startup_review_date }}</div>
+    </div>
+
+    <div class="row light">
+      <div class="col-4 col-sm-2 col-label">Compliance Audit Date</div>
+      <div class="col">{{ program.compliance_audit_date }}</div>
+    </div>
+    <div class="row dark">
+      <div class="col-4 col-sm-2 col-label">Compliance Audit Change Completion Date</div>
+      <div class="col">{{ program.audit_completion_date }}</div>
+    </div>
+
+    <div class="row light">
+      <div class="col-4 col-sm-2 col-label">Incident Investigation Date</div>
+      <div class="col">{{ program.incident_investigation_date }}</div>
+    </div>
+
+    <div class="row dark">
+      <div class="col-4 col-sm-2 col-label">Incident Invest. Change Completion Date</div>
+      <div class="col">{{ program.investigation_change_date }}</div>
+    </div>
+
+    <div class="row light">
+      <div class="col-4 col-sm-2 col-label">Participation Plan Review Date</div>
+      <div class="col">{{ program.participation_plans_review_date }}</div>
+    </div>
+
+    <div class="row dark">
+      <div class="col-4 col-sm-2 col-label">Hot Work Review Date</div>
+      <div class="col">{{ program.hot_work_permit_review_date }}</div>
+    </div>
+
+    <div class="row light">
+      <div class="col-4 col-sm-2 col-label">Contractor Safety Review Date</div>
+      <div class="col">{{ program.contractor_safety_review_date }}</div>
+    </div>
+
+    <div class="row dark">
+      <div class="col-4 col-sm-2 col-label">Contractor Safety Eval. Date</div>
+      <div class="col">{{ program.contractor_safety_eval_date }}</div>
+    </div>
+
+
+    {% endif %}
+
+    {% endfor %}
+
+  {% endfor %}
+
+</div>
+
+{% endfor %}
