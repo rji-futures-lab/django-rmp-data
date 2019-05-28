@@ -1,5 +1,7 @@
 <h2>9. Emergency response</h2>
 
+{% load phonenumber_filters %}
+
 {% if not object.rmp.emergencyresponse.facility %}
 
 <div class="container-fluid rmp-section">
@@ -17,31 +19,31 @@
   <div class="row light">
     <div class="col-4 col-sm-2 col-label">Facility In Community Plan:</div>
     <div class="col">
-      {{ object.rmp.emergencyresponse.community_erp_yn }}
+      {{ object.rmp.emergencyresponse.community_erp_yn|yesno|capfirst }}
     </div>
   </div>
 
   <div class="row dark">
     <div class="col-4 col-sm-2 col-label">Facility Own Response Plan:</div>
-    <div class="col">{{ object.rmp.facility_erp_yn }}</div>
+    <div class="col">{{ object.rmp.facility_erp_yn|yesno|capfirst }}</div>
   </div>
 
   <div class="row light">
     <div class="col-4 col-sm-2 col-label">Specific Facility Response Plan:</div>
     <div class="col">
-      {{ object.rmp.emergencyresponse.erp_specific_yn }}
+      {{ object.rmp.emergencyresponse.erp_specific_yn|yesno|capfirst }}
     </div>
   </div>
 
   <div class="row dark">
     <div class="col-4 col-sm-2 col-label">Inform. Procedures in Response Plan:</div>
-    <div class="col">{{ object.rmp.erp_inform_yn }}</div>
+    <div class="col">{{ object.rmp.erp_inform_yn|yesno|capfirst }}</div>
   </div>
 
   <div class="row light">
     <div class="col-4 col-sm-2 col-label">Emergency Care in Response Plan:</div>
     <div class="col">
-      {{ object.rmp.emergencyresponse.erp_inform_hth_yn }}
+      {{ object.rmp.emergencyresponse.erp_inform_hth_yn|yesno|capfirst }}
     </div>
   </div>
 
@@ -65,43 +67,43 @@
   <div class="row light">
     <div class="col-4 col-sm-2 col-label">Local Response Agency Phone:</div>
     <div class="col">
-      {{ object.rmp.emergencyresponse.coord_phone }}
+      {{ object.rmp.emergencyresponse.coord_phone|phonenumber }}
     </div>
   </div>
 
   <div class="row dark">
     <div class="col-4 col-sm-2 col-label">Subject To - OSHA EAP:</div>
-    <div class="col">{{ object.rmp.subto_osha191038 }}</div>
+    <div class="col">{{ object.rmp.subto_osha191038|yesno|capfirst }}</div>
   </div>
 
   <div class="row light">
     <div class="col-4 col-sm-2 col-label">Subject To - OSHA HAZWOPER:</div>
     <div class="col">
-      {{ object.rmp.emergencyresponse.subto_osha191020 }}
+      {{ object.rmp.emergencyresponse.subto_osha191020|yesno|capfirst }}
     </div>
   </div>
 
   <div class="row dark">
     <div class="col-4 col-sm-2 col-label">Subject To - CWA:</div>
-    <div class="col">{{ object.rmp.subto_cwa112 }}</div>
+    <div class="col">{{ object.rmp.subto_cwa112|yesno|capfirst }}</div>
   </div>
 
   <div class="row light">
     <div class="col-4 col-sm-2 col-label">Subject To - RCRA:</div>
     <div class="col">
-      {{ object.rmp.emergencyresponse.subto_rcra264 }}
+      {{ object.rmp.emergencyresponse.subto_rcra264|yesno|capfirst}}
     </div>
   </div>
 
   <div class="row dark">
     <div class="col-4 col-sm-2 col-label">Subject To - OPA:</div>
-    <div class="col">{{ object.rmp.subto_opa90 }}</div>
+    <div class="col">{{ object.rmp.subto_opa90|yesno|capfirst }}</div>
   </div>
 
   <div class="row light">
     <div class="col-4 col-sm-2 col-label">Subject To - State EPCRA:</div>
     <div class="col">
-      {{ object.rmp.emergencyresponse.subto_state_epcra }}
+      {{ object.rmp.emergencyresponse.subto_state_epcra|yesno|capfirst }}
     </div>
   </div>
 
