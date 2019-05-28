@@ -40,7 +40,8 @@ class FlammablesAltRelease(BaseRMPModel):
         blank=True,
     )
     scenario = CopyFromCharField(
-        max_length=200
+        max_length=200,
+        blank=True,
     )
     quantity_released = CopyFromDecimalField(
         max_digits=5,
@@ -62,37 +63,60 @@ class FlammablesAltRelease(BaseRMPModel):
         decimal_places=1,
         null=True,
     )
-    population = CopyFromCharField(
+    population = CopyFromIntegerField(
         source_column="residential_population",
-        max_length=9,
-        blank=True,
+        null=True,
         verbose_name='Residential population',
     )
-    pr_schools = CopyFromBooleanField()
-    pr_residences = CopyFromBooleanField()
-    pr_hospitals = CopyFromBooleanField()
-    pr_prisons = CopyFromBooleanField()
-    pr_public_recreation = CopyFromBooleanField()
-    pr_comm_ind = CopyFromBooleanField()
+    pr_schools = CopyFromBooleanField(
+        verbose_name='Schools'
+    )
+    pr_residences = CopyFromBooleanField(
+        verbose_name='Residences'
+    )
+    pr_hospitals = CopyFromBooleanField(
+        verbose_name='Hospitals'
+    )
+    pr_prisons = CopyFromBooleanField(
+        verbose_name='Prisons/Correctional Facilities'
+    )
+    pr_public_recreation= CopyFromBooleanField(
+        verbose_name='Recreation Areas'
+    )
+    pr_comm_ind = CopyFromBooleanField(
+        verbose_name='Major Commercial, office, industrial areas'
+    )
     pr_other_type = CopyFromCharField(
         max_length=200,
         blank=True,
     )
-    er_natl_state_parks = CopyFromBooleanField()
-    er_wildlife_sactuary = CopyFromBooleanField()
-    er_fed_wilderness = CopyFromBooleanField()
+    er_natl_state_parks = CopyFromBooleanField(
+        verbose_name='National or state parks, forests, or monuments',
+    )
+    er_wildlife_sactuary = CopyFromBooleanField(
+        verbose_name='Officially designated wildlife sanctuaries, preserves, or refuges',
+    )
+    er_fed_wilderness = CopyFromBooleanField(
+        verbose_name='Federal wilderness area',
+    )
     er_other_type = CopyFromCharField(
         max_length=200,
         blank=True,
     )
-    pm_dikes = CopyFromBooleanField()
+    pm_dikes = CopyFromBooleanField(
+        verbose_name='Dikes',
+    )
     pm_firewalls = CopyFromBooleanField(
         source_column='pm_fire_walls',
+        verbose_name='Fire wall',
     )
     pm_blastwalls = CopyFromBooleanField(
         source_column='pm_blast_walls',
+        verbose_name='Blast walls',
     )
-    pm_enclosures = CopyFromBooleanField()
+    pm_enclosures = CopyFromBooleanField(
+        verbose_name='Enclosures',
+    )
     pm_other_type = CopyFromCharField(
         max_length=200,
         blank=True,
@@ -100,12 +124,16 @@ class FlammablesAltRelease(BaseRMPModel):
     am_sprinklers = CopyFromBooleanField(
         source_column='am_sprinkler_systems',
     )
-    am_deluge_systems = CopyFromBooleanField()
+    am_deluge_systems = CopyFromBooleanField(
+        verbose_name='Deluge systems',
+    )
     am_watercurtain = CopyFromBooleanField(
         source_column='am_water_curtain',
+        verbose_name='Water curtain',
     )
     am_excess_flowvalve = CopyFromBooleanField(
         source_column='am_excess_flow_valve',
+        verbose_name='Excess flow valve',
     )
     am_other_type = CopyFromCharField(
         max_length=200,
@@ -123,6 +151,125 @@ class FlammablesAltRelease(BaseRMPModel):
         m = raw_models.tblS5FlammablesAltReleases
 
         return m.objects.get_default_transform_queryset()
+
+    @classmethod
+    def get_prefixed_boolean_fields(cls, prefix):
+
+        fields = [
+            f for f in cls._meta.get_fields()
+            if f.name[0:len(prefix)] == prefix and 
+            f.name != prefix + 'other_type'
+        ]
+
+        return fields
+
+    @property
+    def public_receptors_within_distance(self):
+
+        self._public_receptors_within_distance = [
+            f.verbose_name for f
+            in self._meta.model.get_prefixed_boolean_fields('pr_')
+            if self.__dict__[f.name]
+        ]
+
+        if self.pr_other_type != '':
+            self._public_receptors_within_distance.append(
+                self.pr_other_type
+            )
+
+        return self._public_receptors_within_distance
+    
+    @property
+    def public_receptors_not_within_distance(self):
+
+        self._public_receptors_not_within_distance = [
+            f.verbose_name for f
+            in self._meta.model.get_prefixed_boolean_fields('pr_')
+            if not self.__dict__[f.name]
+        ]
+
+        return self._public_receptors_not_within_distance
+
+    @property
+    def environmental_receptors_within_distance(self):
+
+        self._environmental_receptors_within_distance = [
+            f.verbose_name for f
+            in self._meta.model.get_prefixed_boolean_fields('er_')
+            if self.__dict__[f.name]
+        ]
+
+        if self.er_other_type != '':
+            self._environmental_receptors_within_distance.append(
+                self.er_other_type
+            )
+
+        return self._environmental_receptors_within_distance
+    
+    @property
+    def environmental_receptors_not_within_distance(self):
+
+        self._environmental_receptors_not_within_distance = [
+            f.verbose_name for f
+            in self._meta.model.get_prefixed_boolean_fields('er_')
+            if not self.__dict__[f.name]
+        ]
+
+        return self._environmental_receptors_not_within_distance
+
+    @property
+    def passive_mitigation_considered(self):
+
+        self._passive_mitigation_considered = [
+            f.verbose_name for f
+            in self._meta.model.get_prefixed_boolean_fields('pm_')
+            if self.__dict__[f.name]
+        ]
+
+        if self.er_other_type != '':
+            self._passive_mitigation_considered.append(
+                self.pm_other_type
+            )
+
+        return self._passive_mitigation_considered
+    
+    @property
+    def passive_mitigation_not_considered(self):
+
+        self._passive_mitigation_not_considered = [
+            f.verbose_name for f
+            in self._meta.model.get_prefixed_boolean_fields('pm_')
+            if not self.__dict__[f.name]
+        ]
+
+        return self._passive_mitigation_not_considered
+
+    @property
+    def active_mitigation_considered(self):
+
+        self._active_mitigation_considered = [
+            f.verbose_name for f
+            in self._meta.model.get_prefixed_boolean_fields('am_')
+            if self.__dict__[f.name]
+        ]
+
+        if self.er_other_type != '':
+            self._active_mitigation_considered.append(
+                self.pm_other_type
+            )
+
+        return self._active_mitigation_considered
+    
+    @property
+    def active_mitigation_not_considered(self):
+
+        self._active_mitigation_not_considered = [
+            f.verbose_name for f
+            in self._meta.model.get_prefixed_boolean_fields('am_')
+            if not self.__dict__[f.name]
+        ]
+
+        return self._active_mitigation_not_considered    
 
 
 class ToxicsAltRelease(BaseRMPModel):
@@ -190,7 +337,7 @@ class ToxicsAltRelease(BaseRMPModel):
         decimal_places=1,
         null=True,
     )
-    residential_population = CopyFromBigIntegerField(
+    residential_population = CopyFromIntegerField(
         null=True,
         verbose_name='Residential population',
     )
@@ -408,7 +555,6 @@ class ToxicsAltRelease(BaseRMPModel):
         return self._active_mitigation_not_considered
 
 
-
 class ToxicsWorstCase(BaseRMPModel):
     id = CopyFromIntegerField(
         primary_key=True,
@@ -475,7 +621,7 @@ class ToxicsWorstCase(BaseRMPModel):
         decimal_places=1,
         null=True,
     )
-    residential_population = CopyFromBigIntegerField(
+    residential_population = CopyFromIntegerField(
         null=True,
     )
     pr_schools = CopyFromBooleanField(
@@ -656,32 +802,50 @@ class FlammablesWorstCase(BaseRMPModel):
         decimal_places=1,
         null=True,
     )
-    quantity_released = CopyFromCharField(
-        max_length=20,
-        blank=True,
+    quantity_released = CopyFromIntegerField(
+        null=True,
     )
-    residential_population = CopyFromCharField(
-        max_length=9,
-        blank=True,
+    residential_population = CopyFromIntegerField(
+        null=True,
     )
-    pr_schools = CopyFromBooleanField()
-    pr_residences = CopyFromBooleanField()
-    pr_hospitals = CopyFromBooleanField()
-    pr_prisons = CopyFromBooleanField()
-    pr_public_recreation = CopyFromBooleanField()
-    pr_comm_ind = CopyFromBooleanField()
+    pr_schools = CopyFromBooleanField(
+        verbose_name='Schools'
+    )
+    pr_residences = CopyFromBooleanField(
+        verbose_name='Residences'
+    )
+    pr_hospitals = CopyFromBooleanField(
+        verbose_name='Hospitals'
+    )
+    pr_prisons = CopyFromBooleanField(
+        verbose_name='Prisons/Correctional Facilities'
+    )
+    pr_public_recreation= CopyFromBooleanField(
+        verbose_name='Recreation Areas'
+    )
+    pr_comm_ind = CopyFromBooleanField(
+        verbose_name='Major Commercial, office, industrial areas'
+    )
     pr_other_type = CopyFromCharField(
         max_length=200,
         blank=True,
     )
-    er_natl_state_parks = CopyFromBooleanField()
-    er_wildlife_sactuary = CopyFromBooleanField()
-    er_fed_wilderness = CopyFromBooleanField()
+    er_natl_state_parks = CopyFromBooleanField(
+        verbose_name='National or state parks, forests, or monuments',
+    )
+    er_wildlife_sactuary = CopyFromBooleanField(
+        verbose_name='Officially designated wildlife sanctuaries, preserves, or refuges',
+    )
+    er_fed_wilderness = CopyFromBooleanField(
+        verbose_name='Federal wilderness area',
+    )
     er_other_type = CopyFromCharField(
         max_length=200,
         blank=True,
     )
-    pm_blast_walls = CopyFromBooleanField()
+    pm_blast_walls = CopyFromBooleanField(
+        verbose_name='Blast walls'
+    )
     pm_other_type = CopyFromCharField(
         max_length=200,
         blank=True,
@@ -697,3 +861,95 @@ class FlammablesWorstCase(BaseRMPModel):
         m = raw_models.tblS4FlammablesWorstCase
 
         return m.objects.get_default_transform_queryset()
+
+    @classmethod
+    def get_prefixed_boolean_fields(cls, prefix):
+
+        fields = [
+            f for f in cls._meta.get_fields()
+            if f.name[0:len(prefix)] == prefix and 
+            f.name != prefix + 'other_type'
+        ]
+
+        return fields
+
+    @property
+    def public_receptors_within_distance(self):
+
+        self._public_receptors_within_distance = [
+            f.verbose_name for f
+            in self._meta.model.get_prefixed_boolean_fields('pr_')
+            if self.__dict__[f.name]
+        ]
+
+        if self.pr_other_type != '':
+            self._public_receptors_within_distance.append(
+                self.pr_other_type
+            )
+
+        return self._public_receptors_within_distance
+    
+    @property
+    def public_receptors_not_within_distance(self):
+
+        self._public_receptors_not_within_distance = [
+            f.verbose_name for f
+            in self._meta.model.get_prefixed_boolean_fields('pr_')
+            if not self.__dict__[f.name]
+        ]
+
+        return self._public_receptors_not_within_distance
+
+    @property
+    def environmental_receptors_within_distance(self):
+
+        self._environmental_receptors_within_distance = [
+            f.verbose_name for f
+            in self._meta.model.get_prefixed_boolean_fields('er_')
+            if self.__dict__[f.name]
+        ]
+
+        if self.er_other_type != '':
+            self._environmental_receptors_within_distance.append(
+                self.er_other_type
+            )
+
+        return self._environmental_receptors_within_distance
+    
+    @property
+    def environmental_receptors_not_within_distance(self):
+
+        self._environmental_receptors_not_within_distance = [
+            f.verbose_name for f
+            in self._meta.model.get_prefixed_boolean_fields('er_')
+            if not self.__dict__[f.name]
+        ]
+
+        return self._environmental_receptors_not_within_distance
+
+    @property
+    def passive_mitigation_considered(self):
+
+        self._passive_mitigation_considered = [
+            f.verbose_name for f
+            in self._meta.model.get_prefixed_boolean_fields('pm_')
+            if self.__dict__[f.name]
+        ]
+
+        if self.er_other_type != '':
+            self._passive_mitigation_considered.append(
+                self.pm_other_type
+            )
+
+        return self._passive_mitigation_considered
+    
+    @property
+    def passive_mitigation_not_considered(self):
+
+        self._passive_mitigation_not_considered = [
+            f.verbose_name for f
+            in self._meta.model.get_prefixed_boolean_fields('pm_')
+            if not self.__dict__[f.name]
+        ]
+
+        return self._passive_mitigation_not_considered
