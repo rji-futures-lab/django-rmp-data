@@ -136,15 +136,7 @@ class Facility(BaseRMPModel):
     dereg_other = CopyFromCharField(max_length=255, blank=True)
     toxic_tot = CopyFromIntegerField()
     flam_tot = CopyFromBigIntegerField()
-    quantity_tot = CopyFromBigIntegerField() # toxic_tot + flam_tot
-    # num_proc_23 = CopyFromBigIntegerField()
-    # toxic_tot_23 = CopyFromIntegerField()
-    # flam_tot_23 = CopyFromBigIntegerField()
-    # quantity_tot_23 = CopyFromBigIntegerField() # toxic_tot + flam_tot
-    # all_naics = CopyFromCharField(max_length=20, blank=True)
-    # sortid_1 = CopyFromCharField(max_length=5)
-    # sortid_2 = CopyFromCharField(max_length=5)
-    # sortid_3 = CopyFromCharField(max_length=5)
+    quantity_tot = CopyFromBigIntegerField()
     registered = CopyFromBooleanField(default=True)
     num_fte = CopyFromIntegerField(null=True)
     num_accident_actual = CopyFromIntegerField(null=True)
@@ -245,10 +237,6 @@ class Facility(BaseRMPModel):
                 output_field=CopyFromBooleanField()
             ),
             num_fte=F('tbls1facilities__FTE'),
-            # num_proc_23=F('num_proc_23'),
-            # toxic_tot_23=F('toxic_tot_23'),
-            # flam_tot_23=F('flam_tot_23'),
-            # quantity_tot_23=F('quantity_tot_23'),
             all_naics=F('tbls1facilities__tbls1processes__tbls1process_naics__NAICSCode'),
             num_accident_records=Count('tbls1facilities__tbls6accidenthistory',),
             num_accident_actual=Count('tbls1facilities__tbls6accidenthistory', distinct=True,),
@@ -332,7 +320,7 @@ class Facility(BaseRMPModel):
         )
 
         return url
-    
+
     @property
     def has_parent_1(self):
         return self.parent_1 != ''
@@ -521,9 +509,6 @@ class Registration(BaseRMPModel):
     num_alt_flam = CopyFromIntegerField(null=True)
     num_prev_2 = CopyFromIntegerField(null=True)
     num_prev_3 = CopyFromIntegerField(null=True)
-    toxic_tot = CopyFromBigIntegerField(null=True)
-    flam_tot = CopyFromBigIntegerField(null=True)
-    quantity_tot=CopyFromBigIntegerField(null=True)
     acc_flam_tot = CopyFromBigIntegerField(null=True)
     acc_toxic_tot = CopyFromBigIntegerField(null=True)
     acc_quantity_tot = CopyFromBigIntegerField(null=True)
@@ -663,13 +648,6 @@ class Registration(BaseRMPModel):
             num_alt_flam=Count('tbls1processes__tbls1processchemicals__tbls5flammablesaltreleases', distinct=True),
             num_prev_2=Count('tbls1processes__tbls1process_naics__tbls8preventionprogram2', distinct=True),
             num_prev_3=Count('tbls1processes__tbls1process_naics__tbls7preventionprogram3', distinct=True),
-            toxic_tot=Round(
-                Sum(Case(When(tbls1processes__tbls1processchemicals__ChemicalID__ChemType='T', then=F('tbls1processes__tbls1processchemicals__Quantity')), default=Value(0), output_field=CopyFromIntegerField())) / F('num_proc_chem_tox')
-            ),
-            flam_tot=Round(
-                Sum(Case(When(tbls1processes__tbls1processchemicals__ChemicalID__ChemType='F', then=F('tbls1processes__tbls1processchemicals__Quantity')), default=Value(0), output_field=CopyFromIntegerField())) / F('num_proc_chem_flam')
-            ),
-            quantity_tot=F('toxic_tot') + F('flam_tot'),
             acc_flam_tot=Round(
                 Sum(Case(When(tbls6accidenthistory__tbls6accidentchemicals__ChemicalID__ChemType='F', then=('tbls6accidenthistory__tbls6accidentchemicals__QuantityReleased')), default=Value(0), output_field=CopyFromIntegerField())) / F('num_accident_divider')
             ),
@@ -690,10 +668,6 @@ class Registration(BaseRMPModel):
                 Sum(F('tbls6accidenthistory__OnsitePropertyDamage') + F('tbls6accidenthistory__OffsitePropertyDamage'), output_field=CopyFromIntegerField()) / F('num_accident_divider')
             ),
             foreign_country_tr=F('ForeignCountry'),
-            # num_proc_23=Count(Case(When(Q(tbls1processes__ProgramLevel='2') | Q(tbls1processes__ProgramLevel='3'), then=('tbls1processes__tbls1processchemicals')))),
-            # toxic_tot_23=Sum(Case(When((Q(tbls1processes__ProgramLevel='2') | Q(tbls1processes__ProgramLevel='3')) & Q(tbls1processes__tbls1processchemicals__ChemicalID__ChemType='T'), then=('tbls1processes__tbls1processchemicals__Quantity')))),
-            # flam_tot_23=Sum(Case(When((Q(tbls1processes__ProgramLevel='2') | Q(tbls1processes__ProgramLevel='3')) & Q(tbls1processes__tbls1processchemicals__ChemicalID__ChemType='F'), then=('tbls1processes__tbls1processchemicals__Quantity')))),
-            # quantity_tot_23=F('toxic_tot_23') + F('flam_tot_23'),
             num_execsum=Count('tblexecutivesummaries'),
 
         )

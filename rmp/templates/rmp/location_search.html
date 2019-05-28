@@ -16,7 +16,7 @@ Search RMP Facilities by Location
 
 <form class="search" action="" method="get">
   <input type="text" name="city" placeholder="City"/>
-  <input type="text" name="county" placeholder="County"/>
+  <input type="text" name="county" placeholder="County Name"/>
   <select name="state" required>
     <option value="" name="default">Select a state</option>
     {% for state in state_list %}
@@ -30,7 +30,7 @@ Search RMP Facilities by Location
 
 <form class="search" action="{% url 'rmp:search_by_location' %}" method="get">
   <input type="text" name="city" placeholder="City" />
-  <input type="text" name="county" placeholder="County"/>
+  <input type="text" name="county" placeholder="County Name"/>
   <select name="state" required>
     <option value="" name="default">Select a state</option>
     {% for state in state_list %}

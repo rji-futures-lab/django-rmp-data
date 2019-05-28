@@ -1,5 +1,10 @@
 /* UNIVERSAL STYLING */
 
+h1 {
+	font-family: 'Muli', Helvetica, sans-serif;
+	font-size: 40px;
+}
+
 p {
 	color: black;
 	font-family: 'Muli', Arial, Helvetica, sans-serif;

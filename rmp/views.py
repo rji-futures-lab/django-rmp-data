@@ -136,22 +136,35 @@ class locationListView(ListView):
     template_name = 'rmp/facility_by_location.html'
     queryset = Facility.objects.all()
     context_object_name = 'facility_list'
-    # paginate_by = 25
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        if 'state' in self.request.GET and not 'city' in self.request.GET:
+        if 'state' in self.request.GET and not 'city' in self.request.GET and not 'county' in self.request.GET:
             state_query = self.request.GET['state']
             context['state_query'] = state_query
-        elif 'state' in self.request.GET and 'city' in self.request.GET:
+
+        elif 'county' in self.request.GET and 'state' in self.request.GET and not 'city' in self.request.GET:
+            state_query = self.request.GET['state']
+            county_query = self.request.GET['county']
+            context['state_query']=state_query
+            context['county_query']=county_query
+
+        elif 'state' in self.request.GET and 'city' in self.request.GET and not 'county' in self.request.GET:
             state_query = self.request.GET['state']
             city_query = self.request.GET['city']
             context['state_query']=state_query
             context['city_query']=city_query
+
         else:
-            context['error'] = True
+            state_query = self.request.GET['state']
+            city_query = self.request.GET['city']
+            county_query = self.request.GET['county']
+            context['state_query']=state_query
+            context['county_query']=county_query
+            context['city_query']=city_query
 
         return context
+
 
     def get_queryset(self):
         state_query = self.request.GET.get('state')

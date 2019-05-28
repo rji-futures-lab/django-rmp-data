@@ -8,11 +8,17 @@ RMP Facilities
 
 <a class="back" href="{% url 'rmp:location_search' %}">Back to search</a>
 
-{% if state_query and not city_query %}
+{% if state_query and not city_query and not county_query%}
 <h1>RMP Facilities in {{ state_query }}</h1>
 
-{% elif state_query and city_query %}
-<h1>RMP Facilities in {{ city_query }}, {{ state_query }}</h1>
+{% elif state_query and city_query and not county_query %}
+<h1>RMP Facilities in {{ city_query|title }}, {{ state_query }}</h1>
+
+{% elif state_query and county_query and not city_query %}
+<h1>RMP Facilities in {{ county_query|title }} County, {{ state_query }}</h1>
+
+{% else %}
+<h1>RMP Facilities in {{ city_query|title }}, {{ county_query|title }} County, {{ state_query }}</h1>
 
 {% endif %}
 
