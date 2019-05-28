@@ -134,9 +134,6 @@ class Facility(BaseRMPModel):
         db_column='dereg_reason',
     )
     dereg_other = CopyFromCharField(max_length=255, blank=True)
-    toxic_tot = CopyFromIntegerField()
-    flam_tot = CopyFromBigIntegerField()
-    quantity_tot = CopyFromBigIntegerField()
     registered = CopyFromBooleanField(default=True)
     num_fte = CopyFromIntegerField(null=True)
     num_accident_actual = CopyFromIntegerField(null=True)
@@ -206,31 +203,6 @@ class Facility(BaseRMPModel):
             sub_reason=F('tbls1facilities__RMPSubmissionReasonCode'),
             dereg_reason=F('tbls1facilities__DeregistrationReasonCode'),
             dereg_other=F('tbls1facilities__DeregistrationReasonOtherText'),
-            toxic_tot=Round(
-                Sum(
-                    Case(
-                        When(
-                            tbls1facilities__tbls1processes__tbls1processchemicals__ChemicalID__ChemType='T',
-                            then=F('tbls1facilities__tbls1processes__tbls1processchemicals__Quantity')
-                        ),
-                        default=Value(0),
-                        output_field=CopyFromIntegerField()
-                    )
-                ),
-            ),
-            flam_tot=Round(
-                Sum(
-                    Case(
-                        When(
-                            tbls1facilities__tbls1processes__tbls1processchemicals__ChemicalID__ChemType='F',
-                            then=F('tbls1facilities__tbls1processes__tbls1processchemicals__Quantity')
-                        ),
-                        default=Value(0),
-                        output_field=CopyFromIntegerField()
-                    )
-                ),
-            ),
-            quantity_tot=F('toxic_tot') + F('flam_tot'),
             registered=Case(
                 When(dereg_reason__gt=0, then=0),
                 default=Value(1),
