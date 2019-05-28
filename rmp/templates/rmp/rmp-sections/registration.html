@@ -217,7 +217,7 @@
 
   <div class="row light">
     <div class="col-4 col-sm-2 col-label">Facility (or company) URL:</div>
-    <div class="col">{{ object.rmp.facility_url }}</div>
+    <div class="col">{{ object.rmp.facility_url|urlize }}</div>
   </div>
 
 </div>
@@ -392,6 +392,11 @@
   <div class="row dark">
     <div class="col-4 col-sm-2 col-label">Registered:</div>
     <div class="col">{{ object.registered|yesno|capfirst }}</div>
+  </div>
+
+  <div class="row light">
+    <div class="col-4 col-sm-2 col-label">RMP ID:</div>
+    <div class="col">{{ object.rmp.rmp_id }}</div>
   </div>
 
 </div>
