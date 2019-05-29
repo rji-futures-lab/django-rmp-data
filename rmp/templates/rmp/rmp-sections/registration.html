@@ -1,428 +1,428 @@
 {% load phonenumber_filters %}
 {% load humanize %}
 
-<h1 class="rmp-title" id="registration">{{ object.facility_name }}</h1>
+<h1 class="rmp-title" >{{ object.facility_name }}</h1>
 
-<div class="container-fluid rmp-section">
+  <div class="container-fluid rmp-section">
 
-  <div class="row light">
-    <div class="col-4 col-sm-3 col-md-2 col-label">Parent Companies:</div>
-    <div class="col">
-      {% if object.parent != '' and object.parent_2 != '' %}
-        {{ object.parent }}<br>{{ object.parent_2 }}
-      {% elif object.parent != '' %}
-        {{ object.parent }}
-      {% elif object.parent_2 != '' %}
-        {{ object.parent_2 }}
-      {% endif %}
-    </div>
-  </div>
-
-  <div class="row dark">
-    <div class="col-4 col-sm-3 col-md-2 col-label">EPA Facility ID:</div>
-    <div class="col">{{ object.id }}</div>
-  </div>
-
-  <div class="row light">
-    <div class="col-4 col-sm-3 col-md-2 col-label">Other ID:</div>
-    <div class="col">{{ object.rmp.other_facility_id }}</div>
-  </div>
-
-  <div class="row dark">
-    <div class="col-4 col-sm-3 col-md-2 col-label">Facility DUNS:</div>
-    <div class="col">{{ object.rmp.facility_duns }}</div>
-  </div>
-
-
-  {% if object.parent != '' and object.parent_2 != '' %}
     <div class="row light">
-      <div class="col-4 col-sm-3 col-md-2 col-label">Parent Company #1 DUNS:</div>
-      <div class="col">{{ object.rmp.parent_duns }}</div>
-    </div>
-    <div class="row dark">
-      <div class="col-4 col-sm-3 col-md-2 col-label">Parent Company #2 DUNS:</div>
-      <div class="col">{{ object.rmp.parent2_duns }}</div>
-    </div>
-  {% elif object.parent != '' or object.parent_2 != ''  %}
-    <div class="row light">
-      <div class="col-4 col-sm-3 col-md-2 col-label">Parent Company DUNS:</div>
+      <div class="col-4 col-sm-3 col-md-2 col-label">Parent Companies:</div>
       <div class="col">
-        {% if object.parent != '' %}
-          {{ object.rmp.parent_duns }}
+        {% if object.parent != '' and object.parent_2 != '' %}
+          {{ object.parent }}<br>{{ object.parent_2 }}
+        {% elif object.parent != '' %}
+          {{ object.parent }}
         {% elif object.parent_2 != '' %}
-          {{ object.rmp.parent2_duns }}
+          {{ object.parent_2 }}
         {% endif %}
       </div>
     </div>
-  {% endif %}
 
-</div>
-
-<h4>Location:</h4>
-
-<div class="container-fluid rmp-section">
-
-  <div class="row light">
-    <div class="col-4 col-sm-2 col-label">Address:</div>
-    <div class="col">
-      {{ object.street_1 }}<br>
-      {{ object.city }}, {{ object.state.abbr }} {{ object.zip_code }}
+    <div class="row dark">
+      <div class="col-4 col-sm-3 col-md-2 col-label">EPA Facility ID:</div>
+      <div class="col">{{ object.id }}</div>
     </div>
-  </div>
 
-  <div class="row dark">
-    <div class="col-4 col-sm-2 col-label">County:</div>
-    <div class="col">{{ object.county_name }}</div>
-  </div>
-
-  <div class="row light">
-    <div class="col-4 col-sm-2 col-label">Lat / Long:</div>
-    <div class="col">
-      {{ object.latitude }}, {{ object.longitude }} (<a href="{{ object.google_maps_url }}">Get map</a>)
+    <div class="row light">
+      <div class="col-4 col-sm-3 col-md-2 col-label">Other ID:</div>
+      <div class="col">{{ object.rmp.other_facility_id }}</div>
     </div>
-  </div>
 
-  <div class="row dark">
-    <div class="col-4 col-sm-2 col-label">Method:</div>
-    <div class="col">{{ object.rmp.latlong_meth.llmeth_tr }}</div>
-  </div>
-
-  <div class="row light">
-    <div class="col-4 col-sm-2 col-label">Description:</div>
-    <div class="col">{{ object.rmp.latlong_desc.lldesc_tr }}</div>
-  </div>
-
-  <div class="row dark">
-    <div class="col-4 col-sm-2 col-label">Horizonal accuracy:</div>
-    <div class="col">{{ object.rmp.hor_measure }} m</div>
-  </div>
-
-  <div class="row light">
-    <div class="col-4 col-sm-2 col-label">Horizontal reference datum:</div>
-    <div class="col">{{ object.rmp.get_hor_ref_display }}</div>
-  </div>
-
-  <div class="row dark">
-    <div class="col-4 col-sm-2 col-label">Source map scale:</div>
-    <div class="col">{{ object.rmp.source_scale }}</div>
-  </div>
-
-</div>
-
-<h4>Owner/Operator:</h4>
-
-<div class="container-fluid rmp-section">
-
-  <div class="row light">
-    <div class="col-4 col-sm-2 col-label">Name:</div>
-    <div class="col">{{ object.operator_name }}</div>
-  </div>
-
-  <div class="row dark">
-    <div class="col-4 col-sm-2 col-label">Phone:</div>
-    <div class="col">{{ object.rmp.operator_phone|phonenumber }}</div>
-  </div>
-
-  <div class="row light">
-    <div class="col-4 col-sm-2 col-label">Address:</div>
-    <div class="col">
-      {{ object.rmp.op_street_1 }}<br>
-      {% if object.rmp.op_street_2 != '' %}{{ object.rmp.op_street_2 }}<br>{% endif %}
-      {{ object.operator_city }}, {{ object.operator_state.abbr }} {{ object.operator_zip }}
-      {% if object.rmp.operator_zip_ext != '' %}-{{ object.rmp.operator_zip_ext }}{% endif %}
+    <div class="row dark">
+      <div class="col-4 col-sm-3 col-md-2 col-label">Facility DUNS:</div>
+      <div class="col">{{ object.rmp.facility_duns }}</div>
     </div>
+
+
+    {% if object.parent != '' and object.parent_2 != '' %}
+      <div class="row light">
+        <div class="col-4 col-sm-3 col-md-2 col-label">Parent Company #1 DUNS:</div>
+        <div class="col">{{ object.rmp.parent_duns }}</div>
+      </div>
+      <div class="row dark">
+        <div class="col-4 col-sm-3 col-md-2 col-label">Parent Company #2 DUNS:</div>
+        <div class="col">{{ object.rmp.parent2_duns }}</div>
+      </div>
+    {% elif object.parent != '' or object.parent_2 != ''  %}
+      <div class="row light">
+        <div class="col-4 col-sm-3 col-md-2 col-label">Parent Company DUNS:</div>
+        <div class="col">
+          {% if object.parent != '' %}
+            {{ object.rmp.parent_duns }}
+          {% elif object.parent_2 != '' %}
+            {{ object.rmp.parent2_duns }}
+          {% endif %}
+        </div>
+      </div>
+    {% endif %}
+
   </div>
 
-  <div class="row dark">
-    <div class="col-4 col-sm-2 col-label">Foreign Address:</div>
-    <div class="col">
-      {% if object.rmp.foreign_province != ''%}
-        {{ object.rmp.foreign_province }},
-      {% endif %}
-      {{ object.rmp.foreign_country }} {{object.rmp.foreign_zip }}</div>
-  </div>
+  <h4>Location:</h4>
 
-</div>
+  <div class="container-fluid rmp-section">
 
-<h4>Person responsible for RMP implementation:</h4>
-
-<div class="container-fluid rmp-section">
-
-  <div class="row light">
-    <div class="col-4 col-sm-2 col-label">Name:</div>
-    <div class="col">{{ object.rmp.rmp_contact }}</div>
-  </div>
-
-  <div class="row dark">
-    <div class="col-4 col-sm-2 col-label">Title:</div>
-    <div class="col">{{ object.rmp.rmp_contact_title }}</div>
-  </div>
-
-  <div class="row light">
-    <div class="col-4 col-sm-2 col-label">Email:</div>
-    <div class="col">{{ object.rmp.rmp_email|urlize }}</div>
-  </div>
-
-</div>
-
-<h4>Emergency contact:</h4>
-
-<div class="container-fluid rmp-section">
-
-  <div class="row light">
-    <div class="col-4 col-sm-2 col-label">Name:</div>
-    <div class="col">{{ object.rmp.em_contact_name }}</div>
-  </div>
-
-  <div class="row dark">
-    <div class="col-4 col-sm-2 col-label">Title:</div>
-    <div class="col">{{ object.rmp.em_contact_title }}</div>
-  </div>
-
-  <div class="row light">
-    <div class="col-4 col-sm-2 col-label">Phone:</div>
-    <div class="col">{{ object.rmp.em_contact_phone|phonenumber }}</div>
-  </div>
-
-  <div class="row dark">
-    <div class="col-4 col-sm-2 col-label">24-hour phone:</div>
-    <div class="col">{{ object.rmp.phone_24hour|phonenumber }}</div>
-  </div>
-
-  <div class="row light">
-    <div class="col-4 col-sm-2 col-label">Ext or PIN:</div>
-    <div class="col">{{ object.rmp.phone_24hour_ext }}</div>
-  </div>
-
-  <div class="row dark">
-    <div class="col-4 col-sm-2 col-label">Email:</div>
-    <div class="col">{{ object.rmp.em_email|urlize }}</div>
-  </div>
-
-</div>
-
-<h4>Other contacts:</h4>
-
-<div class="container-fluid rmp-section">
-
-  <div class="row light">
-    <div class="col-4 col-sm-2 col-label">Facility (or company) email:</div>
-    <div class="col">{{ object.rmp.facility_email|urlize }}</div>
-  </div>
-
-  <div class="row dark">
-    <div class="col-4 col-sm-2 col-label">Facility phone:</div>
-    <div class="col">{{ object.rmp.facility_phone|phonenumber }}</div>
-  </div>
-
-  <div class="row light">
-    <div class="col-4 col-sm-2 col-label">Facility (or company) URL:</div>
-    <div class="col">{{ object.rmp.facility_url|urlize }}</div>
-  </div>
-
-</div>
-
-<h4>Safety:</h4>
-
-<div class="container-fluid rmp-section">
-
-  <div class="row light">
-    <div class="col-5 col-md-3 col-label">Local Emergency Planning Committee:</div>
-    <div class="col">{{ object.rmp.lepc }}</div>
-  </div>
-
-  <div class="row dark">
-    <div class="col-5 col-md-3 col-label">Full-Time Equivalent Employees:</div>
-    <div class="col">
-      {% if object.rmp.cbi_flag %}
-        CBI claimed
-      {% else %}
-        {{ object.rmp.num_fte|intcomma }}
-      {% endif %}
+    <div class="row light">
+      <div class="col-4 col-sm-2 col-label">Address:</div>
+      <div class="col">
+        {{ object.street_1 }}<br>
+        {{ object.city }}, {{ object.state.abbr }} {{ object.zip_code }}
+      </div>
     </div>
+
+    <div class="row dark">
+      <div class="col-4 col-sm-2 col-label">County:</div>
+      <div class="col">{{ object.county_name }}</div>
+    </div>
+
+    <div class="row light">
+      <div class="col-4 col-sm-2 col-label">Lat / Long:</div>
+      <div class="col">
+        {{ object.latitude }}, {{ object.longitude }} (<a href="{{ object.google_maps_url }}">Get map</a>)
+      </div>
+    </div>
+
+    <div class="row dark">
+      <div class="col-4 col-sm-2 col-label">Method:</div>
+      <div class="col">{{ object.rmp.latlong_meth.llmeth_tr }}</div>
+    </div>
+
+    <div class="row light">
+      <div class="col-4 col-sm-2 col-label">Description:</div>
+      <div class="col">{{ object.rmp.latlong_desc.lldesc_tr }}</div>
+    </div>
+
+    <div class="row dark">
+      <div class="col-4 col-sm-2 col-label">Horizonal accuracy:</div>
+      <div class="col">{{ object.rmp.hor_measure }} m</div>
+    </div>
+
+    <div class="row light">
+      <div class="col-4 col-sm-2 col-label">Horizontal reference datum:</div>
+      <div class="col">{{ object.rmp.get_hor_ref_display }}</div>
+    </div>
+
+    <div class="row dark">
+      <div class="col-4 col-sm-2 col-label">Source map scale:</div>
+      <div class="col">{{ object.rmp.source_scale }}</div>
+    </div>
+
   </div>
 
-  <div class="row light">
-    <div class="col-5 col-md-3 col-label">Covered by OSHA PSM:</div>
-    <div class="col">{{ object.rmp.osha_psm_yn|yesno|capfirst }}</div>
+  <h4>Owner/Operator:</h4>
+
+  <div class="container-fluid rmp-section">
+
+    <div class="row light">
+      <div class="col-4 col-sm-2 col-label">Name:</div>
+      <div class="col">{{ object.operator_name }}</div>
+    </div>
+
+    <div class="row dark">
+      <div class="col-4 col-sm-2 col-label">Phone:</div>
+      <div class="col">{{ object.rmp.operator_phone|phonenumber }}</div>
+    </div>
+
+    <div class="row light">
+      <div class="col-4 col-sm-2 col-label">Address:</div>
+      <div class="col">
+        {{ object.rmp.op_street_1 }}<br>
+        {% if object.rmp.op_street_2 != '' %}{{ object.rmp.op_street_2 }}<br>{% endif %}
+        {{ object.operator_city }}, {{ object.operator_state.abbr }} {{ object.operator_zip }}
+        {% if object.rmp.operator_zip_ext != '' %}-{{ object.rmp.operator_zip_ext }}{% endif %}
+      </div>
+    </div>
+
+    <div class="row dark">
+      <div class="col-4 col-sm-2 col-label">Foreign Address:</div>
+      <div class="col">
+        {% if object.rmp.foreign_province != ''%}
+          {{ object.rmp.foreign_province }},
+        {% endif %}
+        {{ object.rmp.foreign_country }} {{object.rmp.foreign_zip }}</div>
+    </div>
+
   </div>
 
-  <div class="row dark">
-    <div class="col-5 col-md-3 col-label">EPCRA section 302:</div>
-    <div class="col">{{ object.rmp.epcra_302_yn|yesno|capfirst }}</div>
+  <h4>Person responsible for RMP implementation:</h4>
+
+  <div class="container-fluid rmp-section">
+
+    <div class="row light">
+      <div class="col-4 col-sm-2 col-label">Name:</div>
+      <div class="col">{{ object.rmp.rmp_contact }}</div>
+    </div>
+
+    <div class="row dark">
+      <div class="col-4 col-sm-2 col-label">Title:</div>
+      <div class="col">{{ object.rmp.rmp_contact_title }}</div>
+    </div>
+
+    <div class="row light">
+      <div class="col-4 col-sm-2 col-label">Email:</div>
+      <div class="col">{{ object.rmp.rmp_email|urlize }}</div>
+    </div>
+
   </div>
 
-  <div class="row light">
-    <div class="col-5 col-md-3 col-label">CAA Title Air Operating Permit:</div>
-    <div class="col">{{ object.rmp.caa_title_v_yn|yesno|capfirst }}</div>
+  <h4>Emergency contact:</h4>
+
+  <div class="container-fluid rmp-section">
+
+    <div class="row light">
+      <div class="col-4 col-sm-2 col-label">Name:</div>
+      <div class="col">{{ object.rmp.em_contact_name }}</div>
+    </div>
+
+    <div class="row dark">
+      <div class="col-4 col-sm-2 col-label">Title:</div>
+      <div class="col">{{ object.rmp.em_contact_title }}</div>
+    </div>
+
+    <div class="row light">
+      <div class="col-4 col-sm-2 col-label">Phone:</div>
+      <div class="col">{{ object.rmp.em_contact_phone|phonenumber }}</div>
+    </div>
+
+    <div class="row dark">
+      <div class="col-4 col-sm-2 col-label">24-hour phone:</div>
+      <div class="col">{{ object.rmp.phone_24hour|phonenumber }}</div>
+    </div>
+
+    <div class="row light">
+      <div class="col-4 col-sm-2 col-label">Ext or PIN:</div>
+      <div class="col">{{ object.rmp.phone_24hour_ext }}</div>
+    </div>
+
+    <div class="row dark">
+      <div class="col-4 col-sm-2 col-label">Email:</div>
+      <div class="col">{{ object.rmp.em_email|urlize }}</div>
+    </div>
+
   </div>
 
-  <div class="row dark">
-    <div class="col-5 col-md-3 col-label">CAA Permit ID#:</div>
-    <div class="col">{{ object.rmp.caa_permit_id }}</div>
+  <h4>Other contacts:</h4>
+
+  <div class="container-fluid rmp-section">
+
+    <div class="row light">
+      <div class="col-4 col-sm-2 col-label">Facility (or company) email:</div>
+      <div class="col">{{ object.rmp.facility_email|urlize }}</div>
+    </div>
+
+    <div class="row dark">
+      <div class="col-4 col-sm-2 col-label">Facility phone:</div>
+      <div class="col">{{ object.rmp.facility_phone|phonenumber }}</div>
+    </div>
+
+    <div class="row light">
+      <div class="col-4 col-sm-2 col-label">Facility (or company) URL:</div>
+      <div class="col">{{ object.rmp.facility_url|urlize }}</div>
+    </div>
+
   </div>
 
-  <div class="row light">
-    <div class="col-5 col-md-3 col-label">OSHA Star/Merit Ranking</div>
-    <div class="col">{{ object.rmp.predictive_file_yn|yesno|capfirst }}</div>
+  <h4>Safety:</h4>
+
+  <div class="container-fluid rmp-section">
+
+    <div class="row light">
+      <div class="col-5 col-md-3 col-label">Local Emergency Planning Committee:</div>
+      <div class="col">{{ object.rmp.lepc }}</div>
+    </div>
+
+    <div class="row dark">
+      <div class="col-5 col-md-3 col-label">Full-Time Equivalent Employees:</div>
+      <div class="col">
+        {% if object.rmp.cbi_flag %}
+          CBI claimed
+        {% else %}
+          {{ object.rmp.num_fte|intcomma }}
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="row light">
+      <div class="col-5 col-md-3 col-label">Covered by OSHA PSM:</div>
+      <div class="col">{{ object.rmp.osha_psm_yn|yesno|capfirst }}</div>
+    </div>
+
+    <div class="row dark">
+      <div class="col-5 col-md-3 col-label">EPCRA section 302:</div>
+      <div class="col">{{ object.rmp.epcra_302_yn|yesno|capfirst }}</div>
+    </div>
+
+    <div class="row light">
+      <div class="col-5 col-md-3 col-label">CAA Title Air Operating Permit:</div>
+      <div class="col">{{ object.rmp.caa_title_v_yn|yesno|capfirst }}</div>
+    </div>
+
+    <div class="row dark">
+      <div class="col-5 col-md-3 col-label">CAA Permit ID#:</div>
+      <div class="col">{{ object.rmp.caa_permit_id }}</div>
+    </div>
+
+    <div class="row light">
+      <div class="col-5 col-md-3 col-label">OSHA Star/Merit Ranking</div>
+      <div class="col">{{ object.rmp.predictive_file_yn|yesno|capfirst }}</div>
+    </div>
+
+    <div class="row dark">
+      <div class="col-5 col-md-3 col-label">Last Safety Inspection Date:</div>
+      <div class="col">{{ object.rmp.safety_inspect_dt|date }}</div>
+    </div>
+
+    <div class="row light">
+      <div class="col-5 col-md-3 col-label">Inspecting Agency:</div>
+      <div class="col">{{ object.rmp.safety_inspect_by }}</div>
+    </div>
+
+    <div class="row dark">
+      <div class="col-5 col-md-3 col-label">Using Predictive Filing:</div>
+      <div class="col">{{ object.rmp.predictive_file_yn|yesno|capfirst }}</div>
+    </div>
+
   </div>
 
-  <div class="row dark">
-    <div class="col-5 col-md-3 col-label">Last Safety Inspection Date:</div>
-    <div class="col">{{ object.rmp.safety_inspect_dt|date }}</div>
-  </div>
+  <h4>Processes:</h4>
 
-  <div class="row light">
-    <div class="col-5 col-md-3 col-label">Inspecting Agency:</div>
-    <div class="col">{{ object.rmp.safety_inspect_by }}</div>
-  </div>
+  {% for process in object.rmp.process_set.all %}
 
-  <div class="row dark">
-    <div class="col-5 col-md-3 col-label">Using Predictive Filing:</div>
-    <div class="col">{{ object.rmp.predictive_file_yn|yesno|capfirst }}</div>
-  </div>
+  <div class="container-fluid sub-section">
 
-</div>
+    <div class="row title">
+      <div class="col">{{ process }}</div>
+    </div>
 
-<h4>Processes:</h4>
+    <div class="row light side-borders">
+      <div class="col-4 col-sm-2 col-label">RMP ID:</div>
+      <div class="col">{{ process.id }}</div>
+    </div>
 
-{% for process in object.rmp.process_set.all %}
+    <div class="row dark side-borders">
+      <div class="col-4 col-sm-2 col-label">CBI claimed:</div>
+      <div class="col">{{ process.cbi_flag|yesno|capfirst }}</div>
+    </div>
 
-<div class="container-fluid sub-section">
+    <div class="row light side-borders">
+      <div class="col-4 col-sm-2 col-label">Program Level:</div>
+      <div class="col">{{ process.program_level }}</div>
+    </div>
 
-  <div class="row title">
-    <div class="col">{{ process }}</div>
-  </div>
+    <div class="row dark side-borders">
+      <div class="col-4 col-sm-2 col-label">NAICS:</div>
+      <div class="col">
+        {% for pn in process.procnaics_set.all %}
+          {{ pn.naics_code.description }} ({{  pn.naics_code.code }})<br>
+        {% endfor %}
+      </div>
+    </div>
 
-  <div class="row light side-borders">
-    <div class="col-4 col-sm-2 col-label">RMP ID:</div>
-    <div class="col">{{ process.id }}</div>
-  </div>
-
-  <div class="row dark side-borders">
-    <div class="col-4 col-sm-2 col-label">CBI claimed:</div>
-    <div class="col">{{ process.cbi_flag|yesno|capfirst }}</div>
-  </div>
-
-  <div class="row light side-borders">
-    <div class="col-4 col-sm-2 col-label">Program Level:</div>
-    <div class="col">{{ process.program_level }}</div>
-  </div>
-
-  <div class="row dark side-borders">
-    <div class="col-4 col-sm-2 col-label">NAICS:</div>
-    <div class="col">
-      {% for pn in process.procnaics_set.all %}
-        {{ pn.naics_code.description }} ({{  pn.naics_code.code }})<br>
+    <div class="row light sub">
+      <div class="col col-label">Chemical name</div>
+      <div class="col col-label">CAS#</div>
+      <div class="col col-label">Quantity (lbs.)</div>
+      <div class="col col-label">CBI</div>
+    </div>
+      {% for pc in process.procchem_set.all %}
+      <div class="row {% cycle 'dark' 'light' %} side-borders">
+        <div class='col col-label'>{{ pc.chemical.chemical_name }}</div>
+        <div class='col col-label'>{{ pc.chemical.cas2 }}</div>
+        <div class='col col-label'>{{ pc.quantity_lbs|intcomma }}</div>
+        <div class='col col-label'>{{ pc.cbi_flag|yesno|capfirst }}</div>
+      </div>
       {% endfor %}
+  </div>
+
+  {% endfor%}
+
+  <h4>RMP Preparer:</h4>
+
+  <div class="container-fluid rmp-section">
+
+    <div class="row light">
+      <div class="col-4 col-sm-2 col-label">Name:</div>
+      <div class="col">{{ object.rmp.prep_name }}</div>
     </div>
-  </div>
 
-  <div class="row light sub">
-    <div class="col col-label">Chemical name</div>
-    <div class="col col-label">CAS#</div>
-    <div class="col col-label">Quantity (lbs.)</div>
-    <div class="col col-label">CBI</div>
-  </div>
-    {% for pc in process.procchem_set.all %}
-    <div class="row {% cycle 'dark' 'light' %} side-borders">
-      <div class='col col-label'>{{ pc.chemical.chemical_name }}</div>
-      <div class='col col-label'>{{ pc.chemical.cas2 }}</div>
-      <div class='col col-label'>{{ pc.quantity_lbs|intcomma }}</div>
-      <div class='col col-label'>{{ pc.cbi_flag|yesno|capfirst }}</div>
+    <div class="row dark">
+      <div class="col-4 col-sm-2 col-label">Address:</div>
+      <div class="col">
+        {{ object.rmp.prep_street_1 }}<br>
+        {% if object.rmp.prep_street_2 != '' %}{{ object.rmp.prep_street_2}}<br>{% endif %}
+        {{ object.rmp.prep_city }}, {{ object.rmp.prep_state.abbr }} {{ object.rmp.prep_zip }}
+        {% if object.rmp.prep_zip_ext != '' %}-{{ object.rmp.prep_zip_ext }}{% endif %}
+      </div>
     </div>
-    {% endfor %}
-</div>
 
-{% endfor%}
-
-<h4>RMP Preparer:</h4>
-
-<div class="container-fluid rmp-section">
-
-  <div class="row light">
-    <div class="col-4 col-sm-2 col-label">Name:</div>
-    <div class="col">{{ object.rmp.prep_name }}</div>
-  </div>
-
-  <div class="row dark">
-    <div class="col-4 col-sm-2 col-label">Address:</div>
-    <div class="col">
-      {{ object.rmp.prep_street_1 }}<br>
-      {% if object.rmp.prep_street_2 != '' %}{{ object.rmp.prep_street_2}}<br>{% endif %}
-      {{ object.rmp.prep_city }}, {{ object.rmp.prep_state.abbr }} {{ object.rmp.prep_zip }}
-      {% if object.rmp.prep_zip_ext != '' %}-{{ object.rmp.prep_zip_ext }}{% endif %}
+    <div class="row light">
+      <div class="col-4 col-sm-2 col-label">Foreign Address:</div>
+      <div class="col">
+        {{ object.rmp.prep_foreign_state }} {{ object.rmp.prep_country }}<br>
+        {{ object.rmp.prep_foreign_zip }}
+      </div>
     </div>
-  </div>
 
-  <div class="row light">
-    <div class="col-4 col-sm-2 col-label">Foreign Address:</div>
-    <div class="col">
-      {{ object.rmp.prep_foreign_state }} {{ object.rmp.prep_country }}<br>
-      {{ object.rmp.prep_foreign_zip }}
+    <div class="row dark">
+      <div class="col-4 col-sm-2 col-label">Phone:</div>
+      <div class="col">{{ object.rmp.prep_phone|phonenumber }}</div>
     </div>
+
   </div>
 
-  <div class="row dark">
-    <div class="col-4 col-sm-2 col-label">Phone:</div>
-    <div class="col">{{ object.rmp.prep_phone|phonenumber }}</div>
+  <h4>Latest RMP Submission:</h4>
+
+  <div class="container-fluid rmp-section">
+
+    <div class="row light">
+      <div class="col-4 col-sm-2 col-label">Date:</div>
+      <div class="col">{{ object.sub_date|date }}</div>
+    </div>
+
+    <div class="row dark">
+      <div class="col-4 col-sm-2 col-label">Type:</div>
+      <div class="col">{{ object.get_sub_type_display }}</div>
+    </div>
+
+    <div class="row light">
+      <div class="col-4 col-sm-2 col-label">Reason:</div>
+      <div class="col">{{ object.sub_reason.submit_tr }}</div>
+    </div>
+
+    <div class="row dark">
+      <div class="col-4 col-sm-2 col-label">Registered:</div>
+      <div class="col">{{ object.registered|yesno|capfirst }}</div>
+    </div>
+
+    <div class="row light">
+      <div class="col-4 col-sm-2 col-label">RMP ID:</div>
+      <div class="col">{{ object.rmp.rmp_id }}</div>
+    </div>
+
   </div>
 
-</div>
+  <h4>Deregistration:</h4>
 
-<h4>Latest RMP Submission:</h4>
+  <div class="container-fluid rmp-section">
 
-<div class="container-fluid rmp-section">
+    <div class="row light">
+      <div class="col-4 col-sm-2 col-label">Date:</div>
+      <div class="col">{{ object.deregistration_date|date }}</div>
+    </div>
 
-  <div class="row light">
-    <div class="col-4 col-sm-2 col-label">Date:</div>
-    <div class="col">{{ object.sub_date|date }}</div>
+    <div class="row dark">
+      <div class="col-4 col-sm-2 col-label">Effective Date:</div>
+      <div class="col">{{ object.dereg_effect_date|date }}</div>
+    </div>
+
+    <div class="row light">
+      <div class="col-4 col-sm-2 col-label">Reason:</div>
+      <div class="col">{{ object.dereg_reason.dereg_tr }}</div>
+    </div>
+
+    <div class="row dark">
+      <div class="col-4 col-sm-2 col-label">Other Reason:</div>
+      <div class="col">{{ object.dereg_other }}</div>
+    </div>
+
   </div>
-
-  <div class="row dark">
-    <div class="col-4 col-sm-2 col-label">Type:</div>
-    <div class="col">{{ object.get_sub_type_display }}</div>
-  </div>
-
-  <div class="row light">
-    <div class="col-4 col-sm-2 col-label">Reason:</div>
-    <div class="col">{{ object.sub_reason.submit_tr }}</div>
-  </div>
-
-  <div class="row dark">
-    <div class="col-4 col-sm-2 col-label">Registered:</div>
-    <div class="col">{{ object.registered|yesno|capfirst }}</div>
-  </div>
-
-  <div class="row light">
-    <div class="col-4 col-sm-2 col-label">RMP ID:</div>
-    <div class="col">{{ object.rmp.rmp_id }}</div>
-  </div>
-
-</div>
-
-<h4>Deregistration:</h4>
-
-<div class="container-fluid rmp-section">
-
-  <div class="row light">
-    <div class="col-4 col-sm-2 col-label">Date:</div>
-    <div class="col">{{ object.deregistration_date|date }}</div>
-  </div>
-
-  <div class="row dark">
-    <div class="col-4 col-sm-2 col-label">Effective Date:</div>
-    <div class="col">{{ object.dereg_effect_date|date }}</div>
-  </div>
-
-  <div class="row light">
-    <div class="col-4 col-sm-2 col-label">Reason:</div>
-    <div class="col">{{ object.dereg_reason.dereg_tr }}</div>
-  </div>
-
-  <div class="row dark">
-    <div class="col-4 col-sm-2 col-label">Other Reason:</div>
-    <div class="col">{{ object.dereg_other }}</div>
-  </div>
-
-</div>
