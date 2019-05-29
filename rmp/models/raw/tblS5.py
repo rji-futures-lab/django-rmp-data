@@ -36,6 +36,7 @@ class tblS5FlammablesAltReleases(BaseRMPModel):
     )
     LFL_Value = CopyFromFloatField(
         null=True,
+        verbose_name='LFL Value (% Volume)'
     )
     Distance2Endpoint = CopyFromFloatField(
         null=True,
