@@ -1,18 +1,12 @@
-<h2>7. Prevention: Program level 3</h2>
+<h2 class="rmp-subhead" id="prev-program-3">7. Prevention: Program level 3</h2>
 
 <div class="container-fluid rmp-section">
+
+  {% if object.rmp.num_prev_3 > 0 %}
 
   {% for process in object.rmp.process_set.all %}
 
   {% for pn in process.procnaics_set.all %}
-
-    {% if not pn.preventionprogram3_set.exists %}
-
-    <div class="row light">
-      <div class="col-4 col-sm-2 col-label">No Prevention Program level 3</div>
-    </div>
-
-    {% else %}
 
     {% for program in pn.preventionprogram3_set.all %}
 
@@ -499,10 +493,18 @@
 
     {% endfor %}
 
-    {% endif %}
-
   {% endfor %}
 
   {% endfor %}
+
+  {% else %}
+
+  <div class="row light">
+    <div class="col-4 col-sm-2 col-label">No Prevention Program level 3</div>
+  </div>
+
+  {% endif %}
+
+
 
 </div>

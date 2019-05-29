@@ -1,6 +1,6 @@
 {% load humanize %}
 
-<h2>4. Flammables: Worst-case</h2>
+<h2 class="rmp-subhead" id="flammwc">4. Flammables: Worst-case</h2>
 
 {% if object.rmp.num_worst_flam > 0 %}
 
@@ -13,7 +13,7 @@
       {% if pc.worst_flam_flag %}
 
         {% for fwc in pc.flammablesworstcase_set.all %}
-                    
+
           <div class="container-fluid sub-section">
             <div class="row title">
               <div class="col">{{ pc.chemical.chemical_name }} (in {{ process }})</div>
@@ -143,7 +143,7 @@
             </div>
 
           </div>
-                
+
         {% endfor %}
 
       {% endif %}

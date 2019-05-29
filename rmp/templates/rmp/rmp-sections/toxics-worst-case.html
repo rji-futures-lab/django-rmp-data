@@ -1,6 +1,6 @@
 {% load humanize %}
 
-<h2>2. Toxics: Worst-case</h2>
+<h2 class="rmp-subhead" id="toxicswc">2. Toxics: Worst-case</h2>
 
 {% if object.rmp.num_worst_tox > 0 %}
 
@@ -13,7 +13,7 @@
       {% if pc.worst_tox_flag %}
 
         {% for twc in pc.toxicsworstcase_set.all %}
-                    
+
           <div class="container-fluid sub-section">
             <div class="row title">
               <div class="col">{{ pc.chemical.chemical_name }} (in {{ process }})</div>
@@ -183,7 +183,7 @@
             </div>
 
           </div>
-                
+
         {% endfor %}
 
       {% endif %}

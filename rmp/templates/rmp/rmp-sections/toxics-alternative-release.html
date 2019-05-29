@@ -1,11 +1,11 @@
 {% load humanize %}
 
-<h2>3. Toxics: Alternative release</h2>
+<h2 class="rmp-subhead" id="toxicsalt">3. Toxics: Alternative release</h2>
 
 {% if object.rmp.num_alt_tox > 0 %}
 
 {% for process in object.rmp.process_set.all %}
-    
+
   {% if process.num_alt_tox > 0 %}
 
     {% for pc in process.procchem_set.all %}
@@ -216,7 +216,7 @@
           </div>
 
         {% endfor %}
-    
+
       {% endif %}
 
     {% endfor %}
