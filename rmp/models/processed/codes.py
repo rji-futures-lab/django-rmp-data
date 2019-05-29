@@ -247,7 +247,7 @@ class LlmethCd(BaseRMPModel):
 
 class PhysCd(BaseRMPModel):
     """
-    Physical state?
+    Physical state
     """
     phys = CopyFromCharField(
         source_column='LookupCode',
