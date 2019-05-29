@@ -20,6 +20,7 @@
     <a href="#prev-program-3">Prevention Program Level 3</a>
     <a href="#prev-program-2">Prevention Program Level 2</a>
     <a href="#emergency">Emergency Response</a>
+    <a href="#execsum">Executive Summary</a>
   </div>
 
   {% include 'rmp/rmp-sections/registration.html' %}
@@ -40,7 +41,7 @@
 
   {% include 'rmp/rmp-sections/emergency-response.html' %}
 
-  <h2>Executive Summary</h2>
+  <h2 class="rmp-subhead" id="execsum">Executive Summary</h2>
 
   <p>
     {{ object.execsum_rmp.summary_text | linebreaksbr }}
