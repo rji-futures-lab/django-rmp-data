@@ -1,5 +1,10 @@
 /* UNIVERSAL STYLING */
 
+h1 {
+	font-family: 'Muli', Helvetica, sans-serif;
+	font-size: 40px;
+}
+
 p {
 	color: black;
 	font-family: 'Muli', Arial, Helvetica, sans-serif;
@@ -411,32 +416,9 @@ ul {
 	color: black;
 }
 
-/* TABLES / RMP DETAIL PAGES */
+/* TABLES */
 
-.rmp {
-	margin-left: 3%;
-	margin-right: 3%;
-}
-
-.rmp h1,h2,h3,h4 {
-	text-align: left;
-	border-bottom: 2px solid #E8AD0C;
-}
-
-.rmp h1 {
-	margin-top: 40px;
-}
-
-.rmp-section {
-	margin-bottom: 30px;
-}
-
-.sub-section {
-	margin-bottom: 20px;
-	border-bottom: 2px solid #E8AD0C;	
-}
-
-table {
+/* table {
 	width: 95%;
 	padding-left:2.5%;
 	padding-top: 10px;
@@ -458,6 +440,26 @@ th,td {
 
 tr:nth-child(even) {
 	background-color: #f4f4f4;
+} */
+
+/* FACILITY DETAIL PAGE */
+
+.rmp {
+	margin-left: 3%;
+	margin-right: 3%;
+}
+
+.rmp h1,h2,h3,h4 {
+	text-align: left;
+	border-bottom: 2px solid #E8AD0C;
+}
+
+.rmp h1 {
+	margin-top: 40px;
+}
+
+.rmp-section {
+	margin-bottom: 20px;
 }
 
 .chatter {

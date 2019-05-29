@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base_js.html" %}
 
 {% block title %}
 RMP Facilities
@@ -8,43 +8,52 @@ RMP Facilities
 
 <a class="back" href="{% url 'rmp:location_search' %}">Back to search</a>
 
-{% if state_query and not city_query %}
+{% if state_query and not city_query and not county_query%}
 <h1>RMP Facilities in {{ state_query }}</h1>
 
-{% elif state_query and city_query %}
-<h1>RMP Facilities in {{ city_query }}, {{ state_query }}</h1>
+{% elif state_query and city_query and not county_query %}
+<h1>RMP Facilities in {{ city_query|title }}, {{ state_query }}</h1>
+
+{% elif state_query and county_query and not city_query %}
+<h1>RMP Facilities in {{ county_query|title }} County, {{ state_query }}</h1>
+
+{% else %}
+<h1>RMP Facilities in {{ city_query|title }}, {{ county_query|title }} County, {{ state_query }}</h1>
 
 {% endif %}
 
-<table>
-  <tr>
-    <th>Facility Name</th>
-    <th>City</th>
-    <th>State</th>
-    <th>Zip Code</th>
-    <th>Registered</th>
-    <th>Number of Accidents</th>
-    <th>Number of Deaths</th>
-    <th>Number of Injuries</th>
-    <th>Number of Evacuations</th>
-    <th>Amount of Property Damage</th>
-  </tr>
-  {% load humanize %}
-  {% for facility in facility_list %}
-  <tr>
-    <td><a href="{% url 'rmp:facility_detail' facility.id %}" class="facilityList">{{ facility.facility_name }}</a></td>
-    <td>{{ facility.city }}</td>
-    <td>{{ facility.state.abbr }}</td>
-    <td>{{ facility.zip_code }}</td>
-    <td>{{ facility.registered }}</td>
-    <td>{{ facility.num_accident_actual|intcomma }}</td>
-    <td>{{ facility.num_deaths|intcomma }}</td>
-    <td>{{ facility.num_injuries|intcomma }}</td>
-    <td>{{ facility.num_evacuated|intcomma }}</td>
-    <td>{{ facility.property_damage|intcomma }}</td>
-  </tr>
-  {% endfor %}
-
+<table id="table" class="table table-striped table-bordered" data-page-length='25'>
+  <thead>
+    <tr>
+      <th>Facility Name</th>
+      <th>City</th>
+      <th>State</th>
+      <th>Zip Code</th>
+      <th>Registered</th>
+      <th>Number of Accidents</th>
+      <th>Number of Deaths</th>
+      <th>Number of Injuries</th>
+      <th>Number of Evacuations</th>
+      <th>Amount of Property Damage</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% load humanize %}
+    {% for facility in facility_list %}
+    <tr>
+      <td><a href="{% url 'rmp:facility_detail' facility.id %}" class="facilityList">{{ facility.facility_name }}</a></td>
+      <td>{{ facility.city }}</td>
+      <td>{{ facility.state.abbr }}</td>
+      <td>{{ facility.zip_code }}</td>
+      <td>{{ facility.registered|yesno|title }}</td>
+      <td>{{ facility.num_accident_actual|intcomma }}</td>
+      <td>{{ facility.num_deaths|intcomma }}</td>
+      <td>{{ facility.num_injuries|intcomma }}</td>
+      <td>{{ facility.num_evacuated|intcomma }}</td>
+      <td>{{ facility.property_damage|intcomma }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
 </table>
 
 {% endblock %}

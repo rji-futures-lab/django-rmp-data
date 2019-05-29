@@ -1,1 +1,62 @@
 <h2>6. Five-year accident history</h2>
+
+{% if not object.rmp.accident_set.all %}
+
+<div class="container-fluid sub-section">
+
+  <div class="row light side-borders">
+    <div class="col-4 col-sm-2 col-label">No Registered Accidents</div>
+  </div>
+
+</div>
+
+{% else %}
+
+{% for accident in object.rmp.accident_set.all %}
+
+<div class="container-fluid sub-section">
+
+  <div class="row light side-borders">
+    <div class="col-4 col-sm-2 col-label">Accident ID:</div>
+    <div class="col">{{ accident.id }}</div>
+  </div>
+
+  <div class="row dark side-borders">
+    <div class="col-4 col-sm-2 col-label">Accident Date:</div>
+    <div class="col">{{ accident.accident_date }}</div>
+  </div>
+
+  <div class="row light side-borders">
+    <div class="col-4 col-sm-2 col-label">Accident Time:</div>
+    <div class="col">{{ accident.accident_time }}</div>
+  </div>
+
+  <div class="row dark side-borders">
+    <div class="col-4 col-sm-2 col-label">NAICS:</div>
+    <div class="col">
+      {{ accident.naics_code }}
+    </div>
+  </div>
+
+  <div class="row light side-borders">
+    <div class="col-4 col-sm-2 col-label">Number of Deaths</div>
+    <div class="col">{{ accident.num_deaths }}</div>
+  </div>
+
+  <div class="row dark side-borders">
+    <div class="col-4 col-sm-2 col-label">Number of Injuries</div>
+    <div class="col">
+      {{ accident.num_injuries }}
+    </div>
+  </div>
+
+  <div class="row light side-borders">
+    <div class="col-4 col-sm-2 col-label">Number of Evacuations</div>
+    <div class="col">{{ accident.num_evacuations }}</div>
+  </div>
+
+</div>
+
+{% endfor %}
+
+{% endif %}

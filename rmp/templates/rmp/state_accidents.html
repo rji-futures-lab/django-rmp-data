@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base_js.html" %}
 
 {% block title %}
 RMP Accidents by State
@@ -17,28 +17,32 @@ RMP Accidents by State
     </p>  -->
 
   {% if state_list %}
-  <table>
-    <tr>
-      <th>State</th>
-      <th>Number of Facilities</th>
-      <th>Number of Accidents</th>
-      <th>Number of Deaths</th>
-      <th>Number of Injuries</th>
-      <th>Number of Evacuations</th>
-      <th>Amount of Property Damage</th>
-    </tr>
-    {% load humanize %}
-    {% for state in state_list %}
-    <tr>
-      <td>{{ state.state.name }} ({{ state.state.abbr }})</td>
-      <td>{{ state.total_facilities }}</td>
-      <td>{{ state.total_accidents|intcomma }}</td>
-      <td>{{ state.total_deaths|intcomma }}</td>
-      <td>{{ state.total_injuries|intcomma }}</td>
-      <td>{{ state.total_evacuated|intcomma }}</td>
-      <td>{{ state.total_property_damage|intcomma }}</td>
-    </tr>
-    {% endfor %}
+  <table id="table" class="table table-striped table-bordered" data-page-length='50'>
+    <thead>
+      <tr>
+        <th>State</th>
+        <th>Number of Facilities</th>
+        <th>Number of Accidents</th>
+        <th>Number of Deaths</th>
+        <th>Number of Injuries</th>
+        <th>Number of Evacuations</th>
+        <th>Amount of Property Damage</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% load humanize %}
+      {% for state in state_list %}
+      <tr>
+        <td>{{ state.state.name }} ({{ state.state.abbr }})</td>
+        <td>{{ state.total_facilities }}</td>
+        <td>{{ state.total_accidents|intcomma }}</td>
+        <td>{{ state.total_deaths|intcomma }}</td>
+        <td>{{ state.total_injuries|intcomma }}</td>
+        <td>{{ state.total_evacuated|intcomma }}</td>
+        <td>{{ state.total_property_damage|intcomma }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
   {% else %}
   <h1>Error: No information for states</h1>
   {% endif %}
