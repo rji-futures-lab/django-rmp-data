@@ -282,17 +282,6 @@ class PreventionProgram2(BaseRMPModel): #rmp_prevent_2
 
         return qs
 
-    @classmethod
-    def get_prefixed_boolean_fields(cls, prefix):
-
-        fields = [
-            f for f in cls._meta.get_fields()
-            if f.name[0:len(prefix)] == prefix and
-            f.name != prefix + 'other_type'
-        ]
-
-        return fields
-
     @property
     def safety_regs(self):
 
@@ -679,19 +668,6 @@ class PreventionProgram3(BaseRMPModel):
         qs = m.objects.annotate(**annotations)
 
         return qs
-
-    @classmethod
-    def get_prefixed_boolean_fields(cls, prefix):
-
-        fields = [
-            f for f in cls._meta.get_fields()
-            if f.name[0:len(prefix)] == prefix and
-            f.name != prefix + 'other_type' and
-            f.name != prefix + 'completion_date' and
-            f.name != prefix + 'date'
-        ]
-
-        return fields
 
     @property
     def pha_technique(self):

@@ -38,17 +38,14 @@ class Facility(BaseRMPModel):
     facility_name = CopyFromCharField(
         max_length=50,
     )
-    # ForeignKey Candidate?
     rmp = CopyFromForeignKey(
         'Registration',
         on_delete=models.PROTECT,
     )
     street_1 = CopyFromCharField(
-        # check that values going into this field match facility_str_1
         max_length=35,
     )
     street_2 = CopyFromCharField(
-        # check that values going into this field match facility_str_2
         max_length=35,
     )
     city = CopyFromCharField(
@@ -85,7 +82,6 @@ class Facility(BaseRMPModel):
         choices=choices.SUBMISSION_TYPES,
     )
     sub_date = CopyFromDateTimeField()
-    # exec_type = CopyFromCharField(max_length=1, blank=True) **** This field is nowhere to be found in codes or in tblS1Facilities
     execsum_rmp = CopyFromForeignKey(
         'ExecutiveSummary',
         on_delete=models.PROTECT,
@@ -185,7 +181,6 @@ class Facility(BaseRMPModel):
             longitude=F('tbls1facilities__FacilityLongDecDegs'),
             sub_type=F('tbls1facilities__SubmissionType'),
             sub_date=F('tbls1facilities__ReceiptDate'),
-            # exec_type=F('exec_type'),
             execsum_rmp_id=F('FacilityID'),
             exec_sub_type=F('tbls1facilities__SubmissionType'),
             exec_sub_date=F('tbls1facilities__ReceiptDate'),

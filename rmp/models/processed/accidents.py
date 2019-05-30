@@ -5,7 +5,7 @@ import os
 from django.conf import settings
 from django.db import models
 from django.db.models import F, Max, OuterRef, Subquery, Sum, Count, Case, When, Value, Q
-from django.db.models.functions import Coalesce
+from django.db.models.functions import Cast, Coalesce
 from rmp.fields import (
     CopyFromBigIntegerField,
     CopyFromBooleanField,
@@ -40,28 +40,54 @@ class Accident(BaseRMPModel):
     accident_date = CopyFromDateField(
         null=True,
     )
-    accident_time = CopyFromCharField(max_length=4)
-    naics_code = CopyFromCharField(
-        db_column='naics_code',
-        max_length=6,
+    accident_time = CopyFromCharField(
+        max_length=4,
+        blank=True,
     )
-    release_duration = CopyFromCharField(max_length=5)
-    re_gas = CopyFromBooleanField()
-    re_spill = CopyFromBooleanField()
-    re_fire = CopyFromBooleanField()
-    re_explosion = CopyFromBooleanField()
+    naics_code = CopyFromForeignKey(
+        'NAICS',
+        db_column='naics_code',
+        on_delete=models.PROTECT,
+    )
+    release_duration = CopyFromCharField(
+        max_length=5
+    )
+    re_gas = CopyFromBooleanField(
+        verbose_name='Gas release',
+    )
+    re_spill = CopyFromBooleanField(
+        verbose_name='Liquid spills/evaporation',
+    )
+    re_fire = CopyFromBooleanField(
+        verbose_name='Fire',
+    )
+    re_explosion = CopyFromBooleanField(
+        verbose_name='Explosion',
+    )
     re_reactive_incident = CopyFromBooleanField(
+        verbose_name='Uncontrolled/runaway reaction',
     )
     rs_storage_vessel = CopyFromBooleanField(
+        verbose_name='Storage vessel',
     )
-    rs_piping = CopyFromBooleanField()
+    rs_piping = CopyFromBooleanField(
+        verbose_name='Piping',
+    )
     rs_process_vessel = CopyFromBooleanField(
+        verbose_name='Process vessel',
     )
     rs_transfer_hose = CopyFromBooleanField(
+        verbose_name='Transfer hose',
     )
-    rs_valve = CopyFromBooleanField()
-    rs_pump = CopyFromBooleanField()
-    rs_joint = CopyFromBooleanField()
+    rs_valve = CopyFromBooleanField(
+        verbose_name='Valve',
+    )
+    rs_pump = CopyFromBooleanField(
+        verbose_name='Pump',
+    )
+    rs_joint = CopyFromBooleanField(
+        verbose_name='Joint',
+    )
     other_release_source = CopyFromCharField(
         max_length=200,
         blank=True
@@ -69,7 +95,12 @@ class Accident(BaseRMPModel):
     wind_speed = CopyFromFloatField(
         null=True,
     )
-    wind_speed_unit = CopyFromCharField(max_length=1, blank=True)
+    wind_speed_unit = CopyFromForeignKey(
+        'WindCd',
+        null=True,
+        on_delete=models.PROTECT,
+        db_column='wind_speed_unit',
+    )
     wind_direction = CopyFromCharField(max_length=3, blank=True)
     temperature = CopyFromDecimalField(
         max_digits=5,
@@ -83,51 +114,70 @@ class Accident(BaseRMPModel):
     deaths_responders = CopyFromIntegerField(null=True)
     deaths_public = CopyFromIntegerField(null=True)
     injuries_workers = CopyFromIntegerField(null=True)
-    injuries_responders = CopyFromIntegerField(null=True
-    )
+    injuries_responders = CopyFromIntegerField(null=True)
     injuries_public = CopyFromIntegerField(null=True)
     onsite_damage = CopyFromIntegerField(null=True)
-    offsite_deaths = CopyFromBooleanField(null=True)
-    hospitalization = CopyFromIntegerField(
-        null=True,
-    )
-    offsite_medical = CopyFromIntegerField(null=True,)
+    offsite_deaths = CopyFromIntegerField(null=True)
+    hospitalization = CopyFromIntegerField(null=True)
+    offsite_medical = CopyFromIntegerField(null=True)
     offsite_evacuated = CopyFromIntegerField(null=True)
     offsite_shelter = CopyFromIntegerField(null=True)
     offsite_damage = CopyFromIntegerField(null=True)
-    ed_kills = CopyFromBooleanField()
-    ed_defoliation = CopyFromBooleanField()
+    ed_kills = CopyFromBooleanField(
+        verbose_name='Fish or animal kills',
+    )
+    ed_defoliation = CopyFromBooleanField(
+        verbose_name='Tree, lawn, shrub, or crop damage',
+    )
     ed_water_contamination = CopyFromBooleanField(
+        verbose_name='Water contamination',
     )
     ed_soil_contamination = CopyFromBooleanField(
+        verbose_name='Soil Contamination',
     )
     ed_other = CopyFromCharField(
         max_length=200,
         blank=True
     )
-    initiating_event = CopyFromCharField(
-        max_length=1,
-        blank=True
+    initiating_event = CopyFromForeignKey(
+        'EventsCd',
+        null=True,
+        blank=True,
+        on_delete=models.PROTECT,
+        db_column='initiating_event',
     )
     cf_equipment_failure = CopyFromBooleanField(
+        verbose_name='Equipment failure',
     )
     cf_human_error = CopyFromBooleanField(
+        verbose_name='Human error',
     )
     cf_improper_procedure = CopyFromBooleanField(
+        verbose_name='Improper procedure',
     )
-    cf_overpressure = CopyFromBooleanField()
+    cf_overpressure = CopyFromBooleanField(
+        verbose_name='Overpressurization',
+    )
     cf_upset_condition = CopyFromBooleanField(
+        verbose_name='Upset condition',
     )
     cf_bypass_condition = CopyFromBooleanField(
+        verbose_name='By-pass condition',
     )
-    cf_maintenance = CopyFromBooleanField()
+    cf_maintenance = CopyFromBooleanField(
+        verbose_name='Maintenance activity/inactivity',
+    )
     cf_process_design_failure = CopyFromBooleanField(
+        verbose_name='Process design failure',
     )
     cf_unsuitable_equipment = CopyFromBooleanField(
+        verbose_name='Unsuitable equipment',
     )
     cf_unusual_weather = CopyFromBooleanField(
+        verbose_name='Unusual weather conditions',
     )
     cf_management_error = CopyFromBooleanField(
+        verbose_name='Management error',
     )
     cf_other = CopyFromCharField(
         max_length=200,
@@ -285,10 +335,10 @@ class Accident(BaseRMPModel):
             injuries_public=F('InjuriesPublic'),
             onsite_damage=F('OnsitePropertyDamage'),
             offsite_deaths=F('OffsiteDeaths'),
-            hospitalization=F('Hospitalization'),
-            offsite_medical=F('MedicalTreatment'),
-            offsite_evacuated=F('Evacuated'),
-            offsite_shelter=F('ShelteredInPlace'),
+            hospitalization=Cast('Hospitalization', CopyFromIntegerField()),
+            offsite_medical=Cast('MedicalTreatment', CopyFromIntegerField()),
+            offsite_evacuated=Cast('Evacuated', CopyFromIntegerField()),
+            offsite_shelter=Cast('ShelteredInPlace', CopyFromIntegerField()),
             offsite_damage=F('OffsitePropertyDamage'),
             ed_kills=F('ED_Kills'),
             ed_defoliation=F('ED_MinorDefoliation'),
@@ -331,6 +381,125 @@ class Accident(BaseRMPModel):
             property_damage=F('OnsitePropertyDamage') + F('OffsitePropertyDamage'),
         )
         return qs
+
+    @property
+    def formatted_time(self):
+        try:
+            self._formatted_time
+        except AttributeError:
+            if self.accident_time == '':
+                self._formatted_time = 'unspecified time'
+            else:
+                self._formatted_time = '{0}:{1}'.format(
+                    self.accident_time[0:2],
+                    self.accident_time[2:4],
+                )
+
+        return self._formatted_time
+
+    @property
+    def formatted_duration(self):
+        try:
+            self._formatted_duration
+        except AttributeError:
+            if self.release_duration != '':
+                hrs = int(self.release_duration[0:3])
+                mins = int( self.release_duration[3:6])
+
+                if hrs > 0 and mins > 0:
+                    self._formatted_duration = '{0} hours and {1} minutes'.format(
+                        hrs, mins
+                    )
+                elif hrs > 0:
+                    self._formatted_duration = '{0} hours'.format(hrs)
+                elif mins > 0:
+                    self._formatted_duration = '{0} minutes'.format(mins)
+            else:
+                self._formatted_duration = self.release_duration
+
+        return self._formatted_duration
+
+    @property
+    def release_events(self):
+        try:
+            self._release_events
+        except AttributeError:
+            self._release_events = [
+                f.verbose_name for f
+                in self._meta.model.get_prefixed_boolean_fields('re_')
+                if self.__dict__[f.name]
+            ]
+
+        return self._release_events
+
+    @property
+    def release_sources(self):
+        try:
+            self._release_sources
+        except AttributeError:
+            self._release_sources = [
+                f.verbose_name for f
+                in self._meta.model.get_prefixed_boolean_fields('rs_')
+                if self.__dict__[f.name]
+            ]
+
+            if self.other_release_source != '':
+                self._release_sources.append(self.other_release_source)
+
+        return self._release_sources
+
+    @property
+    def environmental_damages(self):
+        try:
+            self._environmental_damages
+        except AttributeError:
+            self._environmental_damages = [
+                f.verbose_name for f
+                in self._meta.model.get_prefixed_boolean_fields('ed_')
+                if self.__dict__[f.name]
+            ]
+
+            if self.ed_other != '':
+                self._environmental_damages.append(self.ed_other)
+
+        return self._environmental_damages
+
+    @property
+    def contributing_factors(self):
+        try:
+            self._contributing_factors
+        except AttributeError:
+            self._contributing_factors = [
+                f.verbose_name for f
+                in self._meta.model.get_prefixed_boolean_fields('cf_')
+                if self.__dict__[f.name]
+            ]
+
+            if self.cf_other != '':
+                self._contributing_factors.append(self.cf_other)
+
+        return self._contributing_factors
+
+    @property
+    def changes_introduced(self):
+        try:
+            self._changes_introduced
+        except AttributeError:
+            self._changes_introduced = [
+                f.verbose_name for f
+                in self._meta.model.get_prefixed_boolean_fields('ci_')
+                if self.__dict__[f.name]
+            ]
+
+            if self.ci_other != '':
+                self._changes_introduced.append(self.ci_other)
+
+        return self._changes_introduced
+
+
+    class Meta:
+        ordering = ['rmp_id', '-accident_date']
+
 
 class AccChem(BaseRMPModel):
     id = CopyFromIntegerField(
@@ -402,7 +571,6 @@ class AccChem(BaseRMPModel):
         ).order_by('accchem_id')
 
         return qs
-
 
 class AccFlam(BaseRMPModel):
     id = CopyFromIntegerField(

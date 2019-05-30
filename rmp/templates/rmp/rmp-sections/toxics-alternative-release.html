@@ -40,26 +40,6 @@
             </div>
 
             <div class="row light side-borders">
-              <div class="col-4 col-sm-2 col-label">Scenario:</div>
-              <div class="col">{{ tar.scenario.scen_tr }}</div>
-            </div>
-
-            <div class="row dark side-borders">
-              <div class="col-4 col-sm-2 col-label">Released (lbs):</div>
-              <div class="col">{{ tar.quantity_released|default_if_none:"" }}</div>
-            </div>
-
-            <div class="row light side-borders">
-              <div class="col-4 col-sm-2 col-label">Release rate (lbs per min):</div>
-              <div class="col">{{ tar.release_rate|default_if_none:"" }}</div>
-            </div>
-
-            <div class="row dark side-borders">
-              <div class="col-4 col-sm-2 col-label">Release duration (mins):</div>
-              <div class="col">{{ tar.release_duration|default_if_none:"" }}</div>
-            </div>
-
-            <div class="row light side-borders">
               <div class="col-4 col-sm-2 col-label">Wind speed (meters per sec):</div>
               <div class="col">{{ tar.wind_speed|default_if_none:"" }}</div>
             </div>
@@ -72,78 +52,6 @@
             <div class="row light side-borders">
               <div class="col-4 col-sm-2 col-label">Topography:</div>
               <div class="col">{{ tar.topography.topo_tr }}</div>
-            </div>
-
-            <div class="row dark side-borders">
-              <div class="col-4 col-sm-2 col-label">Distance to endpoint (miles):</div>
-              <div class="col">{{ tar.endpoint_distance|default_if_none:"" }}</div>
-            </div>
-
-            <div class="row light side-borders">
-              <div class="col-4 col-sm-2 col-label">Estimated residential population:</div>
-              <div class="col">{{ tar.residential_population|default_if_none:""|intcomma }}</div>
-            </div>
-
-            <div class="row dark side-borders">
-              <div class="col col-label">Public receptors distance to endpoint</div>
-            </div>
-
-            <div class="row side-borders">
-              <div class="col-12 col-sm-6 col-lg-5 order-1 order-sm-1 col-dark">within distance:</div>
-              <div class="col-12 col-sm-6 col-lg-5 order-2 order-sm-3 col-light">
-                <ul>
-                {% if tar.public_receptors_within_distance|length > 0 %}
-                {% for pr in tar.public_receptors_within_distance %}
-                  <li>{{ pr }}</li>
-                {% endfor %}
-                {% else %}
-                  <li>None</li>
-                {% endif %}
-                </ul>
-              </div>
-              <div class="col-12 col-sm-6 col-lg-7 order-2 order-sm-2 col-dark">not within:</div>
-              <div class="col-12 col-sm-6 col-lg-7 order-3 order-sm-4 col-light">
-                <ul>
-                {% if tar.public_receptors_not_within_distance|length > 0 %}
-                {% for pr in tar.public_receptors_not_within_distance %}
-                  <li>{{ pr }}</li>
-                {% endfor %}
-                {% else %}
-                  <li>None</li>
-                {% endif %}
-                </ul>
-              </div>
-            </div>
-
-            <div class="row dark side-borders">
-              <div class="col col-label">Environmental receptors distance to endpoint</div>
-            </div>
-
-            <div class="row side-borders">
-              <div class="col-12 col-sm-6 col-lg-5 order-1 order-sm-1 col-dark">within distance:</div>
-              <div class="col-12 col-sm-6 col-lg-5 order-2 order-sm-3 col-light">
-                <ul>
-                {% if tar.environmental_receptors_within_distance|length > 0 %}
-                {% for er in tar.environmental_receptors_within_distance %}
-                  <li>{{ er }}</li>
-                {% endfor %}
-                {% else %}
-                  <li>None</li>
-                {% endif %}
-                </ul>
-              </div>
-              <div class="col-12 col-sm-6 col-lg-7 order-2 order-sm-2 col-dark">not within:</div>
-              <div class="col-12 col-sm-6 col-lg-7 order-3 order-sm-4 col-light">
-                <ul>
-                {% if tar.environmental_receptors_not_within_distance|length > 0 %}
-                {% for er in tar.environmental_receptors_not_within_distance %}
-                  <li>{{ er }}</li>
-                {% endfor %}
-                {% else %}
-                  <li>None</li>
-                {% endif %}
-                </ul>
-              </div>
             </div>
 
             <div class="row dark side-borders">
@@ -206,11 +114,6 @@
                 {% endif %}
                 </ul>
               </div>
-            </div>
-
-            <div class="row dark side-borders">
-              <div class="col-4 col-sm-2 col-label">Graphics file name:</div>
-              <div class="col">{{ tar.ptr_graphic }}</div>
             </div>
 
           </div>

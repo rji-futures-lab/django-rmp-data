@@ -152,17 +152,6 @@ class FlammablesAltRelease(BaseRMPModel):
 
         return m.objects.get_default_transform_queryset()
 
-    @classmethod
-    def get_prefixed_boolean_fields(cls, prefix):
-
-        fields = [
-            f for f in cls._meta.get_fields()
-            if f.name[0:len(prefix)] == prefix and 
-            f.name != prefix + 'other_type'
-        ]
-
-        return fields
-
     @property
     def public_receptors_within_distance(self):
 
@@ -435,17 +424,6 @@ class ToxicsAltRelease(BaseRMPModel):
 
         return m.objects.get_default_transform_queryset()
 
-    @classmethod
-    def get_prefixed_boolean_fields(cls, prefix):
-
-        fields = [
-            f for f in cls._meta.get_fields()
-            if f.name[0:len(prefix)] == prefix and 
-            f.name != prefix + 'other_type'
-        ]
-
-        return fields
-
     @property
     def public_receptors_within_distance(self):
 
@@ -690,17 +668,6 @@ class ToxicsWorstCase(BaseRMPModel):
 
         return m.objects.get_default_transform_queryset()
 
-    @classmethod
-    def get_prefixed_boolean_fields(cls, prefix):
-
-        fields = [
-            f for f in cls._meta.get_fields()
-            if f.name[0:len(prefix)] == prefix and 
-            f.name != prefix + 'other_type'
-        ]
-
-        return fields
-
     @property
     def public_receptors_within_distance(self):
 
@@ -861,17 +828,6 @@ class FlammablesWorstCase(BaseRMPModel):
         m = raw_models.tblS4FlammablesWorstCase
 
         return m.objects.get_default_transform_queryset()
-
-    @classmethod
-    def get_prefixed_boolean_fields(cls, prefix):
-
-        fields = [
-            f for f in cls._meta.get_fields()
-            if f.name[0:len(prefix)] == prefix and 
-            f.name != prefix + 'other_type'
-        ]
-
-        return fields
 
     @property
     def public_receptors_within_distance(self):
