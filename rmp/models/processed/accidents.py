@@ -142,6 +142,7 @@ class Accident(BaseRMPModel):
     initiating_event = CopyFromForeignKey(
         'EventsCd',
         null=True,
+        blank=True,
         on_delete=models.PROTECT,
         db_column='initiating_event',
     )
