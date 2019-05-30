@@ -188,24 +188,35 @@ class Accident(BaseRMPModel):
         blank=True,
     )
     ci_improved_equipment = CopyFromBooleanField(
+        verbose_name='Improved/upgraded equipment',
     )
     ci_revised_maintenance = CopyFromBooleanField(
+        verbose_name='Revised maintenance',
     )
     ci_revised_training = CopyFromBooleanField(
+        verbose_name='Revised training',
     )
     ci_revised_op_procedures = CopyFromBooleanField(
+        verbose_name='Revised operating procedures',
     )
     ci_new_process_controls = CopyFromBooleanField(
+        verbose_name='New process controls',
     )
     ci_new_mitigation_systems = CopyFromBooleanField(
+        verbose_name='New mitigation systems',
     )
     ci_response_plan = CopyFromBooleanField(
+        verbose_name='Revised emergency response plan',
     )
     ci_changed_process = CopyFromBooleanField(
+        verbose_name='Changed process',
     )
     ci_reduced_inventory = CopyFromBooleanField(
+        verbose_name='Reduced inventory',
     )
-    ci_none = CopyFromBooleanField()
+    ci_none = CopyFromBooleanField(
+        verbose_name='None',
+    )
     ci_other = CopyFromCharField(max_length=200, blank=True)
     cbi_flag = CopyFromBooleanField()
     num_acc_chem = CopyFromIntegerField(null=True)
