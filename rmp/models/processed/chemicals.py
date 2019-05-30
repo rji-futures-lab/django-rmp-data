@@ -215,7 +215,7 @@ class FlammablesAltRelease(BaseRMPModel):
             if self.__dict__[f.name]
         ]
 
-        if self.er_other_type != '':
+        if self.pm_other_type != '':
             self._passive_mitigation_considered.append(
                 self.pm_other_type
             )
@@ -242,7 +242,7 @@ class FlammablesAltRelease(BaseRMPModel):
             if self.__dict__[f.name]
         ]
 
-        if self.er_other_type != '':
+        if self.am_other_type != '':
             self._active_mitigation_considered.append(
                 self.pm_other_type
             )
@@ -487,7 +487,7 @@ class ToxicsAltRelease(BaseRMPModel):
             if self.__dict__[f.name]
         ]
 
-        if self.er_other_type != '':
+        if self.pm_other_type != '':
             self._passive_mitigation_considered.append(
                 self.pm_other_type
             )
@@ -514,7 +514,7 @@ class ToxicsAltRelease(BaseRMPModel):
             if self.__dict__[f.name]
         ]
 
-        if self.er_other_type != '':
+        if self.am_other_type != '':
             self._active_mitigation_considered.append(
                 self.pm_other_type
             )
@@ -731,7 +731,7 @@ class ToxicsWorstCase(BaseRMPModel):
             if self.__dict__[f.name]
         ]
 
-        if self.er_other_type != '':
+        if self.pm_other_type != '':
             self._passive_mitigation_considered.append(
                 self.pm_other_type
             )
@@ -892,7 +892,7 @@ class FlammablesWorstCase(BaseRMPModel):
             if self.__dict__[f.name]
         ]
 
-        if self.er_other_type != '':
+        if self.pm_other_type != '':
             self._passive_mitigation_considered.append(
                 self.pm_other_type
             )
