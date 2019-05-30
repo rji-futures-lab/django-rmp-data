@@ -6,7 +6,7 @@ from .base import * # noqa
 
 ALLOWED_HOSTS = [
     '.execute-api.us-east-2.amazonaws.com',
-    'rmp.rjifuture.org',
+    '.rjifuture.org',
 ]
 
 INSTALLED_APPS = INSTALLED_APPS + ['storages',]
