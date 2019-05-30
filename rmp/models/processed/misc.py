@@ -36,86 +36,222 @@ class PreventionProgram2(BaseRMPModel): #rmp_prevent_2
         # db_column='process_naics_2',
     )
     safety_review_date = CopyFromDateField(null=True)
-    fr_nfpa58 = CopyFromBooleanField()
-    fr_osha = CopyFromBooleanField()
-    fr_astm = CopyFromBooleanField()
-    fr_ansi = CopyFromBooleanField()
-    fr_asme = CopyFromBooleanField()
-    fr_none = CopyFromBooleanField()
+    fr_nfpa58 = CopyFromBooleanField(
+        verbose_name='NFPA 58',
+    )
+    fr_osha = CopyFromBooleanField(
+        verbose_name='OSHA (Ammonia)',
+    )
+    fr_astm = CopyFromBooleanField(
+        verbose_name='ASTM Standards',
+    )
+    fr_ansi = CopyFromBooleanField(
+        verbose_name='ANSI Standards',
+    )
+    fr_asme = CopyFromBooleanField(
+        verbose_name='ASME Standards',
+    )
+    fr_none = CopyFromBooleanField(
+        verbose_name='None'
+    )
     fr_other_type = CopyFromCharField(max_length=200, blank=True)
     fr_comments = CopyFromCharField(max_length=200, blank=True)
     hazard_review_date = CopyFromDateField(null=True)
     change_completion_date = CopyFromDateField(null=True)
-    mh_toxic_release = CopyFromBooleanField()
-    mh_fire = CopyFromBooleanField()
-    mh_explosion = CopyFromBooleanField()
-    mh_runaway_reaction = CopyFromBooleanField()
-    mh_polymerization = CopyFromBooleanField()
-    mh_overpressurization = CopyFromBooleanField()
-    mh_corrosion = CopyFromBooleanField()
-    mh_overfilling = CopyFromBooleanField()
-    mh_contamination = CopyFromBooleanField()
-    mh_equipment_failure = CopyFromBooleanField()
-    mh_cooling_loss = CopyFromBooleanField()
-    mh_earthquake = CopyFromBooleanField()
-    mh_floods = CopyFromBooleanField()
-    mh_tornado = CopyFromBooleanField()
-    mh_hurricanes = CopyFromBooleanField()
+    mh_toxic_release = CopyFromBooleanField(
+        verbose_name='Toxic Release',
+    )
+    mh_fire = CopyFromBooleanField(
+        verbose_name='Fire',
+    )
+    mh_explosion = CopyFromBooleanField(
+        verbose_name='Explosion',
+    )
+    mh_runaway_reaction = CopyFromBooleanField(
+        verbose_name='Runaway reaction',
+    )
+    mh_polymerization = CopyFromBooleanField(
+        verbose_name='Polymerization',
+    )
+    mh_overpressurization = CopyFromBooleanField(
+        verbose_name='Overpressurization',
+    )
+    mh_corrosion = CopyFromBooleanField(
+        verbose_name='Corrosion'
+    )
+    mh_overfilling = CopyFromBooleanField(
+        verbose_name='Overfilling',
+    )
+    mh_contamination = CopyFromBooleanField(
+        verbose_name='Contamination',
+    )
+    mh_equipment_failure = CopyFromBooleanField(
+        verbose_name='Equipment failure'
+    )
+    mh_cooling_loss = CopyFromBooleanField(
+        verbose_name='Cooling loss',
+    )
+    mh_earthquake = CopyFromBooleanField(
+        verbose_name = 'Earthquake'
+    )
+    mh_floods = CopyFromBooleanField(
+        verbose_name = 'Floods',
+    )
+    mh_tornado = CopyFromBooleanField(
+        verbose_name = 'Tornado',
+    )
+    mh_hurricanes = CopyFromBooleanField(
+        verbose_name = 'Hurricanes',
+    )
     mh_other_type = CopyFromCharField(max_length=200, blank=True)
-    pc_vents = CopyFromBooleanField()
-    pc_relief_valves = CopyFromBooleanField()
-    pc_check_valves = CopyFromBooleanField()
-    pc_scrubbers = CopyFromBooleanField()
-    pc_flares = CopyFromBooleanField()
-    pc_manual_shutoffs = CopyFromBooleanField()
-    pc_automatic_shutoffs = CopyFromBooleanField()
-    pc_interlocks = CopyFromBooleanField()
-    pc_alarms = CopyFromBooleanField()
-    pc_keyed_bypass = CopyFromBooleanField()
-    pc_emergency_air_supply = CopyFromBooleanField()
-    pc_emergency_power = CopyFromBooleanField()
-    pc_backup_pump = CopyFromBooleanField()
-    pc_grounding_equipment = CopyFromBooleanField()
-    pc_inhibitor_addition = CopyFromBooleanField()
-    pc_rupture_disks = CopyFromBooleanField()
-    pc_excess_flow_device = CopyFromBooleanField()
-    pc_quench_system = CopyFromBooleanField()
-    pc_purge_system = CopyFromBooleanField()
-    pc_none = CopyFromBooleanField()
+    pc_vents = CopyFromBooleanField(
+        verbose_name='Vents',
+    )
+    pc_relief_valves = CopyFromBooleanField(
+        verbose_name='Relief Valves',
+    )
+    pc_check_valves = CopyFromBooleanField(
+        verbose_name='Check Valves',
+    )
+    pc_scrubbers = CopyFromBooleanField(
+        verbose_name='Scrubbers',
+    )
+    pc_flares = CopyFromBooleanField(
+        verbose_name='Flares',
+    )
+    pc_manual_shutoffs = CopyFromBooleanField(
+        verbose_name='Manual Shutoffs',
+    )
+    pc_automatic_shutoffs = CopyFromBooleanField(
+        verbose_name='Automatic Shutoffs',
+    )
+    pc_interlocks = CopyFromBooleanField(
+        verbose_name='Interlocks',
+    )
+    pc_alarms = CopyFromBooleanField(
+        verbose_name='Alarms',
+    )
+    pc_keyed_bypass = CopyFromBooleanField(
+        verbose_name='Keyed Bypass',
+    )
+    pc_emergency_air_supply = CopyFromBooleanField(
+        verbose_name='Emergency Air Supply',
+    )
+    pc_emergency_power = CopyFromBooleanField(
+        verbose_name='Emergency Power',
+    )
+    pc_backup_pump = CopyFromBooleanField(
+        verbose_name='Backup Pump',
+    )
+    pc_grounding_equipment = CopyFromBooleanField(
+        verbose_name='Grounding Equipment',
+    )
+    pc_inhibitor_addition = CopyFromBooleanField(
+        verbose_name='Inhibitor Addition',
+    )
+    pc_rupture_disks = CopyFromBooleanField(
+        verbose_name='Rupture Disks',
+    )
+    pc_excess_flow_device = CopyFromBooleanField(
+        verbose_name='Excess Flow Device',
+    )
+    pc_quench_system = CopyFromBooleanField(
+        verbose_name='Quench System',
+    )
+    pc_purge_system = CopyFromBooleanField(
+        verbose_name='Purge System',
+    )
+    pc_none = CopyFromBooleanField(
+        verbose_name='None',
+    )
     pc_other_type = CopyFromCharField(max_length=200, blank=True)
-    ms_sprinkler_system = CopyFromBooleanField()
-    ms_dikes = CopyFromBooleanField()
-    ms_fire_walls = CopyFromBooleanField()
-    ms_blast_walls = CopyFromBooleanField()
-    ms_deluge_system = CopyFromBooleanField()
-    ms_water_curtain = CopyFromBooleanField()
-    ms_enclosure = CopyFromBooleanField()
-    ms_neutralization = CopyFromBooleanField()
-    ms_none = CopyFromBooleanField()
+    ms_sprinkler_system = CopyFromBooleanField(
+        verbose_name='Sprinkler System',
+    )
+    ms_dikes = CopyFromBooleanField(
+        verbose_name='Dikes',
+    )
+    ms_fire_walls = CopyFromBooleanField(
+        verbose_name='Fire Walls',
+    )
+    ms_blast_walls = CopyFromBooleanField(
+        verbose_name='Blast Walls',
+    )
+    ms_deluge_system = CopyFromBooleanField(
+        verbose_name='Deluge System',
+    )
+    ms_water_curtain = CopyFromBooleanField(
+        verbose_name='Water Curtain',
+    )
+    ms_enclosure = CopyFromBooleanField(
+        verbose_name='Enclosure',
+    )
+    ms_neutralization = CopyFromBooleanField(
+        verbose_name='Neutralization',
+    )
+    ms_none = CopyFromBooleanField(
+        verbose_name='None',
+    )
     ms_other_type = CopyFromCharField(max_length=200, blank=True)
-    md_process_area_detectors = CopyFromBooleanField()
-    md_perimeter_monitors = CopyFromBooleanField()
-    md_none = CopyFromBooleanField()
+    md_process_area_detectors = CopyFromBooleanField(
+        verbose_name='Process Area',
+    )
+    md_perimeter_monitors = CopyFromBooleanField(
+        verbose_name='Perimeter Monitors',
+    )
+    md_none = CopyFromBooleanField(
+        verbose_name='None',
+    )
     md_other_type = CopyFromCharField(max_length=200, blank=True)
-    ch_chemical_reduction = CopyFromBooleanField()
-    ch_chemical_increase = CopyFromBooleanField()
-    ch_change_process_parameters = CopyFromBooleanField()
-    ch_install_process_controls = CopyFromBooleanField()
-    ch_install_process_detection = CopyFromBooleanField()
-    ch_install_perimeter_monitoring = CopyFromBooleanField()
-    ch_install_mitigation_systems = CopyFromBooleanField()
-    ch_none_required = CopyFromBooleanField()
-    ch_none = CopyFromBooleanField()
+    ch_chemical_reduction = CopyFromBooleanField(
+        verbose_name='Reduced Inventory',
+    )
+    ch_chemical_increase = CopyFromBooleanField(
+        verbose_name='Increased Inventory',
+    )
+    ch_change_process_parameters = CopyFromBooleanField(
+        verbose_name='Process Parameters',
+    )
+    ch_install_process_controls = CopyFromBooleanField(
+        verbose_name='Process Controls',
+    )
+    ch_install_process_detection = CopyFromBooleanField(
+        verbose_name='Process Detection',
+    )
+    ch_install_perimeter_monitoring = CopyFromBooleanField(
+        verbose_name='Perimeter Monitoring',
+    )
+    ch_install_mitigation_systems = CopyFromBooleanField(
+        verbose_name='Mitigation Systems',
+    )
+    ch_none_required = CopyFromBooleanField(
+        verbose_name='None Recommended',
+    )
+    ch_none = CopyFromBooleanField(
+        verbose_name='None',
+    )
     ch_other_changes = CopyFromCharField(max_length=200, blank=True)
     op_procedures_review_date = CopyFromDateField(null=True)
     training_review_date = CopyFromDateField(null=True)
-    tr_classroom = CopyFromBooleanField()
-    tr_on_the_job = CopyFromBooleanField()
+    tr_classroom = CopyFromBooleanField(
+        verbose_name='Classroom',
+    )
+    tr_on_the_job = CopyFromBooleanField(
+        verbose_name='On the Job',
+    )
     tr_other_type = CopyFromCharField(max_length=200, blank=True)
-    ct_written_test = CopyFromBooleanField()
-    ct_oral_test = CopyFromBooleanField()
-    ct_demonstration = CopyFromBooleanField()
-    ct_observation = CopyFromBooleanField()
+    ct_written_test = CopyFromBooleanField(
+        verbose_name='Written Test',
+    )
+    ct_oral_test = CopyFromBooleanField(
+        verbose_name='Oral Test',
+    )
+    ct_demonstration = CopyFromBooleanField(
+        verbose_name='Demonstration',
+    )
+    ct_observation = CopyFromBooleanField(
+        verbose_name='Observation',
+    )
     ct_other_type = CopyFromCharField(max_length=200, blank=True)
     maintenance_review_date = CopyFromDateField(null=True)
     equipment_inspection_date = CopyFromDateField(null=True)
@@ -146,6 +282,145 @@ class PreventionProgram2(BaseRMPModel): #rmp_prevent_2
 
         return qs
 
+    @classmethod
+    def get_prefixed_boolean_fields(cls, prefix):
+
+        fields = [
+            f for f in cls._meta.get_fields()
+            if f.name[0:len(prefix)] == prefix and
+            f.name != prefix + 'other_type'
+        ]
+
+        return fields
+
+    @property
+    def safety_regs(self):
+
+        self._safety_regs = [
+            f.verbose_name for f
+            in self._meta.model.get_prefixed_boolean_fields('fr_')
+            if self.__dict__[f.name]
+        ]
+
+        if self.fr_other_type != '':
+            self._public_receptors_within_distance.append(
+                self.fr_other_type
+            )
+
+        return self._safety_regs
+
+    @property
+    def hazard_identified(self):
+
+        self._hazard_identified = [
+            f.verbose_name for f
+            in self._meta.model.get_prefixed_boolean_fields('mh_')
+            if self.__dict__[f.name]
+        ]
+
+        if self.mh_other_type != '':
+            self._public_receptors_within_distance.append(
+                self.mh_other_type
+            )
+
+        return self._hazard_identified
+
+    @property
+    def process_controls(self):
+
+        self._process_controls = [
+            f.verbose_name for f
+            in self._meta.model.get_prefixed_boolean_fields('pc_')
+            if self.__dict__[f.name]
+        ]
+
+        if self.pc_other_type != '':
+            self._public_receptors_within_distance.append(
+                self.pc_other_type
+            )
+
+        return self._process_controls
+
+    @property
+    def mitigation_systems(self):
+
+        self._mitigation_systems = [
+            f.verbose_name for f
+            in self._meta.model.get_prefixed_boolean_fields('ms_')
+            if self.__dict__[f.name]
+        ]
+
+        if self.ms_other_type != '':
+            self._public_receptors_within_distance.append(
+                self.ms_other_type
+            )
+
+        return self._mitigation_systems
+
+    @property
+    def monitoring_systems(self):
+
+        self._monitoring_systems = [
+            f.verbose_name for f
+            in self._meta.model.get_prefixed_boolean_fields('md_')
+            if self.__dict__[f.name]
+        ]
+
+        if self.md_other_type != '':
+            self._public_receptors_within_distance.append(
+                self.md_other_type
+            )
+
+        return self._monitoring_systems
+
+    @property
+    def pha_changes(self):
+
+        self._pha_changes = [
+            f.verbose_name for f
+            in self._meta.model.get_prefixed_boolean_fields('ch_')
+            if self.__dict__[f.name]
+        ]
+
+        if self.md_other_type != '':
+            self._public_receptors_within_distance.append(
+                self.md_other_type
+            )
+
+        return self._pha_changes
+
+    @property
+    def training_type(self):
+
+        self._training_type = [
+            f.verbose_name for f
+            in self._meta.model.get_prefixed_boolean_fields('tr_')
+            if self.__dict__[f.name]
+        ]
+
+        if self.tr_other_type != '':
+            self._public_receptors_within_distance.append(
+                self.tr_other_type
+            )
+
+        return self._training_type
+
+    @property
+    def competency_testing(self):
+
+        self._competency_testing = [
+            f.verbose_name for f
+            in self._meta.model.get_prefixed_boolean_fields('ct_')
+            if self.__dict__[f.name]
+        ]
+
+        if self.ct_other_type != '':
+            self._public_receptors_within_distance.append(
+                self.ct_other_type
+            )
+
+        return self._competency_testing
+
 
 class PreventionProgram3(BaseRMPModel):
     id = CopyFromIntegerField(
@@ -158,84 +433,220 @@ class PreventionProgram3(BaseRMPModel):
     )
     safety_review_date = CopyFromDateField(null=True)
     pha_date = CopyFromDateField(null=True)
-    pha_what_if = CopyFromBooleanField()
-    pha_checklist = CopyFromBooleanField()
-    pha_what_if_checklist = CopyFromBooleanField()
-    pha_hazop = CopyFromBooleanField()
-    pha_fmea = CopyFromBooleanField()
-    pha_fta = CopyFromBooleanField()
+    pha_what_if = CopyFromBooleanField(
+        verbose_name='What if',
+    )
+    pha_checklist = CopyFromBooleanField(
+        verbose_name='Checklist',
+    )
+    pha_what_if_checklist = CopyFromBooleanField(
+        verbose_name='What if/Checklist',
+    )
+    pha_hazop = CopyFromBooleanField(
+        verbose_name='HAZOP',
+    )
+    pha_fmea = CopyFromBooleanField(
+        verbose_name='FMEA',
+    )
+    pha_fta = CopyFromBooleanField(
+        verbose_name='FTA',
+    )
     pha_other_technique = CopyFromCharField(max_length=200, blank=True)
     pha_completion_date = CopyFromDateField(null=True)
-    mh_toxic_release = CopyFromBooleanField()
-    mh_fire = CopyFromBooleanField()
-    mh_explosion = CopyFromBooleanField()
-    mh_runaway_reaction = CopyFromBooleanField()
-    mh_polymerization = CopyFromBooleanField()
-    mh_overpressurization = CopyFromBooleanField()
-    mh_corrosion = CopyFromBooleanField()
-    mh_overfilling = CopyFromBooleanField()
-    mh_contamination = CopyFromBooleanField()
-    mh_equipment_failure = CopyFromBooleanField()
-    mh_cooling_loss = CopyFromBooleanField()
-    mh_earthquake = CopyFromBooleanField()
-    mh_floods = CopyFromBooleanField()
-    mh_tornado = CopyFromBooleanField()
-    mh_hurricanes = CopyFromBooleanField()
+    mh_toxic_release = CopyFromBooleanField(
+        verbose_name='Toxic release',
+    )
+    mh_fire = CopyFromBooleanField(
+        verbose_name='Fire',
+    )
+    mh_explosion = CopyFromBooleanField(
+        verbose_name='Explosion',
+    )
+    mh_runaway_reaction = CopyFromBooleanField(
+        verbose_name='Runaway reaction',
+    )
+    mh_polymerization = CopyFromBooleanField(
+        verbose_name='Polymerization'
+    )
+    mh_overpressurization = CopyFromBooleanField(
+        verbose_name='Overpressurization'
+    )
+    mh_corrosion = CopyFromBooleanField(
+        verbose_name='Corrosion',
+    )
+    mh_overfilling = CopyFromBooleanField(
+        verbose_name='Overfilling',
+    )
+    mh_contamination = CopyFromBooleanField(
+        verbose_name='Contamination',
+    )
+    mh_equipment_failure = CopyFromBooleanField(
+        verbose_name='Equipment failure'
+    )
+    mh_cooling_loss = CopyFromBooleanField(
+        verbose_name='Cooling loss',
+    )
+    mh_earthquake = CopyFromBooleanField(
+        verbose_name = 'Earthquake'
+    )
+    mh_floods = CopyFromBooleanField(
+        verbose_name = 'Floods',
+    )
+    mh_tornado = CopyFromBooleanField(
+        verbose_name = 'Tornado',
+    )
+    mh_hurricanes = CopyFromBooleanField(
+        verbose_name = 'Hurricanes',
+    )
     mh_other_type = CopyFromCharField(max_length=200, blank=True)
-    pc_vents = CopyFromBooleanField()
-    pc_relief_valves = CopyFromBooleanField()
-    pc_check_valves = CopyFromBooleanField()
-    pc_scrubbers = CopyFromBooleanField()
-    pc_flares = CopyFromBooleanField()
-    pc_manual_shutoffs = CopyFromBooleanField()
-    pc_automatic_shutoffs = CopyFromBooleanField()
-    pc_interlocks = CopyFromBooleanField()
-    pc_alarms = CopyFromBooleanField()
-    pc_keyed_bypass = CopyFromBooleanField()
-    pc_emergency_air_supply = CopyFromBooleanField()
-    pc_emergency_power = CopyFromBooleanField()
-    pc_backup_pump = CopyFromBooleanField()
-    pc_grounding_equipment = CopyFromBooleanField()
-    pc_inhibitor_addition = CopyFromBooleanField()
-    pc_rupture_disks = CopyFromBooleanField()
-    pc_excess_flow_device = CopyFromBooleanField()
-    pc_quench_system = CopyFromBooleanField()
-    pc_purge_system = CopyFromBooleanField()
-    pc_none = CopyFromBooleanField()
+    pc_vents = CopyFromBooleanField(
+        verbose_name='Vents',
+    )
+    pc_relief_valves = CopyFromBooleanField(
+        verbose_name='Relief Valves',
+    )
+    pc_check_valves = CopyFromBooleanField(
+        verbose_name='Check Valves',
+    )
+    pc_scrubbers = CopyFromBooleanField(
+        verbose_name='Scrubbers',
+    )
+    pc_flares = CopyFromBooleanField(
+        verbose_name='Flares',
+    )
+    pc_manual_shutoffs = CopyFromBooleanField(
+        verbose_name='Manual Shutoffs',
+    )
+    pc_automatic_shutoffs = CopyFromBooleanField(
+        verbose_name='Automatic Shutoffs',
+    )
+    pc_interlocks = CopyFromBooleanField(
+        verbose_name='Interlocks',
+    )
+    pc_alarms = CopyFromBooleanField(
+        verbose_name='Alarms',
+    )
+    pc_keyed_bypass = CopyFromBooleanField(
+        verbose_name='Keyed Bypass',
+    )
+    pc_emergency_air_supply = CopyFromBooleanField(
+        verbose_name='Emergency Air Supply',
+    )
+    pc_emergency_power = CopyFromBooleanField(
+        verbose_name='Emergency Power',
+    )
+    pc_backup_pump = CopyFromBooleanField(
+        verbose_name='Backup Pump',
+    )
+    pc_grounding_equipment = CopyFromBooleanField(
+        verbose_name='Grounding Equipment',
+    )
+    pc_inhibitor_addition = CopyFromBooleanField(
+        verbose_name='Inhibitor Addition',
+    )
+    pc_rupture_disks = CopyFromBooleanField(
+        verbose_name='Rupture Disks',
+    )
+    pc_excess_flow_device = CopyFromBooleanField(
+        verbose_name='Excess Flow Device',
+    )
+    pc_quench_system = CopyFromBooleanField(
+        verbose_name='Quench System',
+    )
+    pc_purge_system = CopyFromBooleanField(
+        verbose_name='Purge System',
+    )
+    pc_none = CopyFromBooleanField(
+        verbose_name='None',
+    )
     pc_other_type = CopyFromCharField(max_length=200, blank=True)
-    ms_sprinkler_system = CopyFromBooleanField()
-    ms_dikes = CopyFromBooleanField()
-    ms_fire_walls = CopyFromBooleanField()
-    ms_blast_walls = CopyFromBooleanField()
-    ms_deluge_system = CopyFromBooleanField()
-    ms_water_curtain = CopyFromBooleanField()
-    ms_enclosure = CopyFromBooleanField()
-    ms_neutralization = CopyFromBooleanField()
-    ms_none = CopyFromBooleanField()
+    ms_sprinkler_system = CopyFromBooleanField(
+        verbose_name='Sprinkler System',
+    )
+    ms_dikes = CopyFromBooleanField(
+        verbose_name='Dikes',
+    )
+    ms_fire_walls = CopyFromBooleanField(
+        verbose_name='Fire Walls',
+    )
+    ms_blast_walls = CopyFromBooleanField(
+        verbose_name='Blast Walls',
+    )
+    ms_deluge_system = CopyFromBooleanField(
+        verbose_name='Deluge System',
+    )
+    ms_water_curtain = CopyFromBooleanField(
+        verbose_name='Water Curtain',
+    )
+    ms_enclosure = CopyFromBooleanField(
+        verbose_name='Enclosure',
+    )
+    ms_neutralization = CopyFromBooleanField(
+        verbose_name='Neutralization',
+    )
+    ms_none = CopyFromBooleanField(
+        verbose_name='None',
+    )
     ms_other_type = CopyFromCharField(max_length=200, blank=True)
-    md_process_area_detectors = CopyFromBooleanField()
-    md_perimeter_monitors = CopyFromBooleanField()
-    md_none = CopyFromBooleanField()
+    md_process_area_detectors = CopyFromBooleanField(
+        verbose_name='Process Area',
+    )
+    md_perimeter_monitors = CopyFromBooleanField(
+        verbose_name='Perimeter Monitors',
+    )
+    md_none = CopyFromBooleanField(
+        verbose_name='None',
+    )
     md_other_type = CopyFromCharField(max_length=200, blank=True)
-    ch_chemical_reduction = CopyFromBooleanField()
-    ch_chemical_increase = CopyFromBooleanField()
-    ch_change_process_parameters = CopyFromBooleanField()
-    ch_install_process_controls = CopyFromBooleanField()
-    ch_install_process_detection = CopyFromBooleanField()
-    ch_install_perimeter_monitoring = CopyFromBooleanField()
-    ch_install_mitigation_systems = CopyFromBooleanField()
-    ch_none_required = CopyFromBooleanField()
-    ch_none = CopyFromBooleanField()
+    ch_chemical_reduction = CopyFromBooleanField(
+        verbose_name='Reduced Inventory',
+    )
+    ch_chemical_increase = CopyFromBooleanField(
+        verbose_name='Increased Inventory',
+    )
+    ch_change_process_parameters = CopyFromBooleanField(
+        verbose_name='Process Parameters',
+    )
+    ch_install_process_controls = CopyFromBooleanField(
+        verbose_name='Process Controls',
+    )
+    ch_install_process_detection = CopyFromBooleanField(
+        verbose_name='Process Detection',
+    )
+    ch_install_perimeter_monitoring = CopyFromBooleanField(
+        verbose_name='Perimeter Monitoring',
+    )
+    ch_install_mitigation_systems = CopyFromBooleanField(
+        verbose_name='Mitigation Systems',
+    )
+    ch_none_required = CopyFromBooleanField(
+        verbose_name='None Recommended',
+    )
+    ch_none = CopyFromBooleanField(
+        verbose_name='None',
+    )
     ch_other_changes = CopyFromCharField(max_length=200, blank=True)
     op_procedures_review_date = CopyFromDateField(null=True)
     training_review_date = CopyFromDateField(null=True)
-    tr_classroom = CopyFromBooleanField()
-    tr_on_the_job = CopyFromBooleanField()
+    tr_classroom = CopyFromBooleanField(
+        verbose_name='Classrom',
+    )
+    tr_on_the_job = CopyFromBooleanField(
+        verbose_name='On the Job',
+    )
     tr_other_type = CopyFromCharField(max_length=200, blank=True)
-    ct_written_test = CopyFromBooleanField()
-    ct_oral_test  = CopyFromBooleanField()
-    ct_demonstration = CopyFromBooleanField()
-    ct_observation = CopyFromBooleanField()
+    ct_written_test = CopyFromBooleanField(
+        verbose_name='Written Test',
+    )
+    ct_oral_test  = CopyFromBooleanField(
+        verbose_name='Oral Test',
+    )
+    ct_demonstration = CopyFromBooleanField(
+        verbose_name='Demonstration',
+    )
+    ct_observation = CopyFromBooleanField(
+        verbose_name='Observation',
+    )
     ct_other_type = CopyFromCharField(max_length=200, blank=True)
     maintenance_review_date = CopyFromDateField(null=True)
     equipment_inspection_date = CopyFromDateField(null=True)
@@ -268,6 +679,147 @@ class PreventionProgram3(BaseRMPModel):
         qs = m.objects.annotate(**annotations)
 
         return qs
+
+    @classmethod
+    def get_prefixed_boolean_fields(cls, prefix):
+
+        fields = [
+            f for f in cls._meta.get_fields()
+            if f.name[0:len(prefix)] == prefix and
+            f.name != prefix + 'other_type' and
+            f.name != prefix + 'completion_date' and
+            f.name != prefix + 'date'
+        ]
+
+        return fields
+
+    @property
+    def pha_technique(self):
+
+        self._pha_technique = [
+            f.verbose_name for f
+            in self._meta.model.get_prefixed_boolean_fields('pha_')
+            if self.__dict__[f.name]
+        ]
+
+        if self.pha_other_technique != '':
+            self._public_receptors_within_distance.append(
+                self.pha_other_technique
+            )
+
+        return self._pha_technique
+
+    @property
+    def hazard_identified(self):
+
+        self._hazard_identified = [
+            f.verbose_name for f
+            in self._meta.model.get_prefixed_boolean_fields('mh_')
+            if self.__dict__[f.name]
+        ]
+
+        if self.mh_other_type != '':
+            self._public_receptors_within_distance.append(
+                self.mh_other_type
+            )
+
+        return self._hazard_identified
+
+    @property
+    def process_controls(self):
+
+        self._process_controls = [
+            f.verbose_name for f
+            in self._meta.model.get_prefixed_boolean_fields('pc_')
+            if self.__dict__[f.name]
+        ]
+
+        if self.pc_other_type != '':
+            self._public_receptors_within_distance.append(
+                self.pc_other_type
+            )
+
+        return self._process_controls
+
+    @property
+    def mitigation_systems(self):
+
+        self._mitigation_systems = [
+            f.verbose_name for f
+            in self._meta.model.get_prefixed_boolean_fields('ms_')
+            if self.__dict__[f.name]
+        ]
+
+        if self.ms_other_type != '':
+            self._public_receptors_within_distance.append(
+                self.ms_other_type
+            )
+
+        return self._mitigation_systems
+
+    @property
+    def monitoring_systems(self):
+
+        self._monitoring_systems = [
+            f.verbose_name for f
+            in self._meta.model.get_prefixed_boolean_fields('md_')
+            if self.__dict__[f.name]
+        ]
+
+        if self.md_other_type != '':
+            self._public_receptors_within_distance.append(
+                self.md_other_type
+            )
+
+        return self._monitoring_systems
+
+    @property
+    def pha_changes(self):
+
+        self._pha_changes = [
+            f.verbose_name for f
+            in self._meta.model.get_prefixed_boolean_fields('ch_')
+            if self.__dict__[f.name]
+        ]
+
+        if self.md_other_type != '':
+            self._public_receptors_within_distance.append(
+                self.md_other_type
+            )
+
+        return self._pha_changes
+
+    @property
+    def training_type(self):
+
+        self._training_type = [
+            f.verbose_name for f
+            in self._meta.model.get_prefixed_boolean_fields('tr_')
+            if self.__dict__[f.name]
+        ]
+
+        if self.tr_other_type != '':
+            self._public_receptors_within_distance.append(
+                self.tr_other_type
+            )
+
+        return self._training_type
+
+    @property
+    def competency_testing(self):
+
+        self._competency_testing = [
+            f.verbose_name for f
+            in self._meta.model.get_prefixed_boolean_fields('ct_')
+            if self.__dict__[f.name]
+        ]
+
+        if self.ct_other_type != '':
+            self._public_receptors_within_distance.append(
+                self.ct_other_type
+            )
+
+        return self._competency_testing
 
 
 class EmergencyResponse(BaseRMPModel):

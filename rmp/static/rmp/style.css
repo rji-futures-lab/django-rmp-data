@@ -96,6 +96,20 @@ image {
 	text-decoration: underline;
 }
 
+a.anchor-1 {
+  display: block;
+  position: relative;
+  top: 50px;
+	visibility: hidden;
+}
+
+a.anchor-2 {
+	display: block;
+	position: relative;
+	top: 55px;
+	visibility: hidden;
+}
+
 .rmp-title {
 	position: sticky;
 	position: -webkit-sticky;
