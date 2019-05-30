@@ -442,7 +442,6 @@ h2 {
 	font-size: 1.6em;
 	margin-top: 5px;
 	color: black;
-	margin-right: 5%;
 }
 
 .facility-info {
@@ -513,6 +512,14 @@ tr:nth-child(even) {
 
 }
 
+.rmp h2 {
+	margin-top: 40px;
+}
+
+.rmp h4 {
+	margin-top: 20px;
+}
+
 .rmp-section {
 	margin-bottom: 20px;
 }
@@ -555,7 +562,14 @@ tr:nth-child(even) {
 }
 
 .row.sub {
-	border: 2px solid #E8AD0C;
+	border-bottom: 2px solid #E8AD0C;
+	border-left: 2px solid #E8AD0C;
+	border-right: 2px solid #E8AD0C;
+	border-top: 2px solid #E8AD0C;
+}
+
+.row.bottom-border {
+	border-bottom: 2px solid #E8AD0C;
 }
 
 .col-label {
@@ -638,4 +652,13 @@ tr:nth-child(even) {
 		display: none;
 	}
 
+}
+
+.sub-section {
+	border-bottom: 2px solid #E8AD0C;
+	margin-bottom: 15px;
+}
+
+#dbheader, h2.searchhead, h2.titlecontact, h2.database-title, h2.table {
+	margin-right: 5%;
 }

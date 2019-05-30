@@ -86,10 +86,8 @@ class tblS6AccidentHistory(BaseRMPModel):
         max_length=1,
         blank=True,
     )
-    Precipitation = CopyFromBooleanField(
-    )
-    WeatherUnknown = CopyFromBooleanField(
-    )
+    Precipitation = CopyFromBooleanField()
+    WeatherUnknown = CopyFromBooleanField()
     DeathsWorkers = CopyFromIntegerField(
         null=True,
     )
@@ -108,35 +106,17 @@ class tblS6AccidentHistory(BaseRMPModel):
     InjuriesPublic = CopyFromIntegerField(
         null=True,
     )
-    OnsitePropertyDamage = CopyFromFloatField(
-        null=True,
-    )
-    OffsiteDeaths = CopyFromBooleanField(
-        null=True,
-    )
-    Hospitalization = CopyFromFloatField(
-        null=True,
-    )
-    MedicalTreatment = CopyFromFloatField(
-        null=True,
-    )
-    Evacuated = CopyFromFloatField(
-        null=True,
-    )
-    ShelteredInPlace = CopyFromFloatField(
-        null=True,
-    )
-    OffsitePropertyDamage = CopyFromFloatField(
-        null=True,
-    )
-    ED_Kills = CopyFromBooleanField(
-    )
-    ED_MinorDefoliation = CopyFromBooleanField(
-    )
-    ED_WaterContamination = CopyFromBooleanField(
-    )
-    ED_SoilContamination = CopyFromBooleanField(
-    )
+    OnsitePropertyDamage = CopyFromFloatField(null=True)
+    OffsiteDeaths = CopyFromIntegerField(null=True)
+    Hospitalization = CopyFromFloatField(null=True)
+    MedicalTreatment = CopyFromFloatField(null=True)
+    Evacuated = CopyFromFloatField(null=True)
+    ShelteredInPlace = CopyFromFloatField(null=True)
+    OffsitePropertyDamage = CopyFromFloatField(null=True)
+    ED_Kills = CopyFromBooleanField()
+    ED_MinorDefoliation = CopyFromBooleanField()
+    ED_WaterContamination = CopyFromBooleanField()
+    ED_SoilContamination = CopyFromBooleanField()
     ED_Other = CopyFromCharField(
         max_length=200,
         blank=True,

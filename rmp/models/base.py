@@ -100,6 +100,21 @@ class BaseRMPModel(models.Model):
 
         return result
 
+    @classmethod
+    def get_prefixed_boolean_fields(cls, prefix):
+
+        fields = [
+            f for f in cls._meta.get_fields()
+            if f.name[0:len(prefix)] == prefix and (
+                f.name not in [
+                    prefix + 'other_type', 
+                    prefix + 'other',
+                ]
+            )
+        ]
+
+        return fields
+
     objects = BaseRMPManager()
 
     class Meta:

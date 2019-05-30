@@ -2,10 +2,10 @@
 
 {% if not object.rmp.accident_set.all %}
 
-<div class="container-fluid sub-section">
+<div class="container-fluid">
 
-  <div class="row light side-borders">
-    <div class="col-4 col-sm-2 col-label">No Registered Accidents</div>
+  <div class="row light">
+    <div class="col">No Registered Accidents</div>
   </div>
 
 </div>
@@ -16,43 +16,200 @@
 
 <div class="container-fluid sub-section">
 
+  <div class="row title">
+    <div class="col">{{ accident.accident_date }} at {{ accident.formatted_time }}</div>
+  </div>
+
   <div class="row light side-borders">
-    <div class="col-4 col-sm-2 col-label">Accident ID:</div>
+    <div class="col-4 col-sm-3 col-label">ID:</div>
     <div class="col">{{ accident.id }}</div>
   </div>
 
   <div class="row dark side-borders">
-    <div class="col-4 col-sm-2 col-label">Accident Date:</div>
-    <div class="col">{{ accident.accident_date }}</div>
-  </div>
-
-  <div class="row light side-borders">
-    <div class="col-4 col-sm-2 col-label">Accident Time:</div>
-    <div class="col">{{ accident.accident_time }}</div>
-  </div>
-
-  <div class="row dark side-borders">
-    <div class="col-4 col-sm-2 col-label">NAICS:</div>
+    <div class="col-4 col-sm-3 col-label">NAICS:</div>
     <div class="col">
-      {{ accident.naics_code }}
+      {% if accident.naics_code %}
+        {{ accident.naics_code.description }} ({{ accident.naics_code.code }})
+      {% endif %}
     </div>
   </div>
 
   <div class="row light side-borders">
-    <div class="col-4 col-sm-2 col-label">Number of Deaths</div>
-    <div class="col">{{ accident.num_deaths }}</div>
+    <div class="col-4 col-sm-3 col-label">Duration:</div>
+    <div class="col">{{ accident.formatted_duration }}</div>
   </div>
 
   <div class="row dark side-borders">
-    <div class="col-4 col-sm-2 col-label">Number of Injuries</div>
+    <div class="col-4 col-sm-3 col-label">Chemicals involved:</div>
     <div class="col">
-      {{ accident.num_injuries }}
+      <ul>
+      {% for ac in accident.accchem_set.all %}
+        <li>{{ ac.chemical.chemical_name }}</li>
+      {% endfor %}
+      </ul>
     </div>
   </div>
 
   <div class="row light side-borders">
-    <div class="col-4 col-sm-2 col-label">Number of Evacuations</div>
-    <div class="col">{{ accident.num_evacuations }}</div>
+    <div class="col-4 col-sm-3 col-label">Release events:</div>
+    <div class="col">
+      {% for e in accident.release_events %}
+        {{ e }}<br>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="row dark sub">
+    <div class="col col-label">Weather conditions at time of event</div>
+  </div>
+
+  <div class="row light side-borders">
+    <div class="col-4 col-sm-3 col-label">Wind speed:</div>
+    <div class="col">
+      {{ accident.wind_speed }} {{ accident.wind_speed_unit.wind_tr }} {{ accident.wind_direction }}
+    </div>
+  </div>
+
+  <div class="row dark side-borders">
+    <div class="col-4 col-sm-3 col-label">Temperature:</div>
+    <div class="col">
+      {% if accident.temperature != '' %}
+        {{ accident.temperature }} ℉
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="row light side-borders">
+    <div class="col-4 col-sm-3 col-label">Atmospheric stability:</div>
+    <div class="col">{{ accident.stability_class }}</div>
+  </div>
+
+  <div class="row dark side-borders">
+    <div class="col-4 col-sm-3 col-label">Precipitation present:</div>
+    <div class="col">{{ accident.precipitation|yesno|capfirst }}</div>
+  </div>
+
+  <div class="row light side-borders">
+    <div class="col-4 col-sm-3 col-label">Unknown weather conditions:</div>
+    <div class="col">{{ accident.unknown_weather|yesno|capfirst }}</div>
+  </div>
+
+  <div class="row dark sub">
+    <div class="col col-label">On-site impacts</div>
+  </div>
+
+  <div class="row light side-borders">
+    <div class="col-4 col-sm-3 col-label">Deaths of employees or contractors:</div>
+    <div class="col">{{ accident.deaths_workers }}</div>
+  </div>
+
+  <div class="row dark side-borders">
+    <div class="col-4 col-sm-3 col-label">Deaths of public responders:</div>
+    <div class="col">{{ accident.deaths_responders }}</div>
+  </div>
+
+  <div class="row light side-borders">
+    <div class="col-4 col-sm-3 col-label">Deaths of public:</div>
+    <div class="col">{{ accident.deaths_public }}</div>
+  </div>
+
+  <div class="row dark side-borders">
+    <div class="col-4 col-sm-3 col-label">Injuries of employees or contractors:</div>
+    <div class="col">{{ accident.injuries_workers }}</div>
+  </div>
+
+  <div class="row light side-borders">
+    <div class="col-4 col-sm-3 col-label">Injuries of public responders:</div>
+    <div class="col">{{ accident.injuries_responders }}</div>
+  </div>
+
+  <div class="row dark side-borders">
+    <div class="col-4 col-sm-3 col-label">Injuries of public:</div>
+    <div class="col">{{ accident.injuries_public }}</div>
+  </div>
+
+  <div class="row light side-borders">
+    <div class="col-4 col-sm-3 col-label">Property damage:</div>
+    <div class="col">${{ accident.onsite_damage }}</div>
+  </div>
+
+  <div class="row dark sub">
+    <div class="col col-label">Known off-site impacts</div>
+  </div>
+
+  <div class="row light side-borders">
+    <div class="col-4 col-sm-3 col-label">Deaths:</div>
+    <div class="col">{{ accident.offsite_deaths }}</div>
+  </div>
+
+  <div class="row dark side-borders">
+    <div class="col-4 col-sm-3 col-label">Hospitalizations:</div>
+    <div class="col">{{ accident.hospitalization }}</div>
+  </div>
+
+  <div class="row light side-borders">
+    <div class="col-4 col-sm-3 col-label">Medicals treatments:</div>
+    <div class="col">{{ accident.offsite_medical }}</div>
+  </div>
+
+  <div class="row dark side-borders">
+    <div class="col-4 col-sm-3 col-label">Evacuated:</div>
+    <div class="col">{{ accident.offsite_evacuated }}</div>
+  </div>
+
+  <div class="row light side-borders">
+    <div class="col-4 col-sm-3 col-label">Sheltered-in-place:</div>
+    <div class="col">{{ accident.offsite_shelter }}</div>
+  </div>
+
+  <div class="row dark side-borders">
+    <div class="col-4 col-sm-3 col-label">Property damage:</div>
+    <div class="col">${{ accident.offsite_damage }}</div>
+  </div>
+
+  <div class="row light side-borders bottom-border">
+    <div class="col-4 col-sm-3 col-label">Environmental damage:</div>
+    <div class="col">
+      <ul>
+      {% for ed in accident.environmental_damages %}
+        <li>{{ ed }}</li>
+      {% endfor %}
+      </ul>
+    </div>
+  </div>
+
+  <div class="row dark side-borders">
+    <div class="col-4 col-sm-3 col-label">Initiating event:</div>
+    <div class="col">
+      {{ accident.initiating_event.events_tr }}
+    </div>
+  </div>
+
+  <div class="row light side-borders">
+    <div class="col-4 col-sm-3 col-label">Contributing factors:</div>
+    <div class="col">
+      <ul>
+      {% for cf in accident.contributing_factors %}
+        <li>{{ cf }}</li>
+      {% endfor %}
+      </ul>
+    </div>
+  </div>
+
+  <div class="row dark side-borders">
+    <div class="col-4 col-sm-3 col-label">Off-site responders notified:</div>
+    <div class="col">{{ accident.offsite_responders_notify }}</div>
+  </div>
+
+  <div class="row light side-borders">
+    <div class="col-4 col-sm-3 col-label">Changes introduced as a result of the accident:</div>
+    <div class="col">
+      <ul>
+      {% for ci in accident.changes_introduced %}
+        <li>{{ ci }}</li>
+      {% endfor %}
+      </ul>
+    </div>
   </div>
 
 </div>
