@@ -19,15 +19,15 @@ RTK Home
 <div id="gridbox">
 
   <div class="card-index">
-    <h2 class="database-title"><a href="{% url 'brs' %}">Biennial Reporting System (BRS)</a></h2>
-    <img src="{% static 'rmp/img/photo2.jpg' %}" alt="databasephoto" width="400px"/>
+    <h2 class="database-title"><a href="{% url 'rmp:rmp' %}">Risk Management Plans (RMP)</a></h2>
+
+  {% load static %}
+      <img src="{% static 'rmp/img/photo4.jpg' %}" alt="databasephoto" width="400px"/>
   </div>
 
   <div class="card-index">
-    <h2 class="database-title"><a href="{% url 'nrc' %}">National Response Center (NRC)</a></h2>
-
-  {% load static %}
-    <img src="{% static 'rmp/img/photo1.jpg' %}" alt="databasephoto" width="400px"/>
+    <h2 class="database-title"><a href="{% url 'brs' %}">Biennial Reporting System (BRS)</a></h2>
+    <img src="{% static 'rmp/img/photo2.jpg' %}" alt="databasephoto" width="400px"/>
   </div>
 
   <div class="card-index">
@@ -35,13 +35,6 @@ RTK Home
 
   {% load static %}
     <img src="{% static 'rmp/img/photo3.jpg' %}" alt="databasephoto" width="400px"/>
-  </div>
-
-  <div class="card-index">
-    <h2 class="database-title"><a href="{% url 'rmp:rmp' %}">Risk Management Plans (RMP)</a></h2>
-
-  {% load static %}
-      <img src="{% static 'rmp/img/photo4.jpg' %}" alt="databasephoto" width="400px"/>
   </div>
 
   <div class="card-index">

@@ -10,7 +10,9 @@
 
     {% for program in pn.preventionprogram2_set.all %}
 
-    <h4>{{ program.process_naics.process.process_desc }}, {{ program.process_naics.naics_code.description }} ({{ program.process_naics.naics_code.code }})</h4>
+    <div class="row title">
+      <div class="col">{{ program.process_naics.process.process_desc }}, {{ program.process_naics.naics_code.description }} ({{ program.process_naics.naics_code.code }})</div>
+    </div>
 
     <div class="row light">
       <div class="col-4 col-sm-2 col-label">Prevention Program ID:</div>
