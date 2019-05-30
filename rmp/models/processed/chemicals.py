@@ -123,6 +123,7 @@ class FlammablesAltRelease(BaseRMPModel):
     )
     am_sprinklers = CopyFromBooleanField(
         source_column='am_sprinkler_systems',
+        verbose_name='Sprinkler systems',
     )
     am_deluge_systems = CopyFromBooleanField(
         verbose_name='Deluge systems',
