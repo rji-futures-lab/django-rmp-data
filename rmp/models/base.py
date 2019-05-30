@@ -105,12 +105,8 @@ class BaseRMPModel(models.Model):
 
         fields = [
             f for f in cls._meta.get_fields()
-            if f.name[0:len(prefix)] == prefix and (
-                f.name not in [
-                    prefix + 'other_type', 
-                    prefix + 'other',
-                ]
-            )
+            if f.name[0:len(prefix)] == prefix and 
+            'Boolean' in f.get_internal_type()
         ]
 
         return fields
