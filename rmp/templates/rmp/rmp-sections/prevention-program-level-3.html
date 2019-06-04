@@ -22,12 +22,12 @@
 
     <div class="row dark">
       <div class="col-4 col-sm-2 col-label">Safety Review Date</div>
-      <div class="col">{{ program.safety_review_date }}</div>
+      <div class="col">{{ program.safety_review_date }}, {{ program.safety_review_date|timesince:object.sub_date  }} since latest RMP submission</div>
     </div>
 
     <div class="row light">
       <div class="col-4 col-sm-2 col-label">PHA Update Date</div>
-      <div class="col">{{ program.pha_date }}</div>
+      <div class="col">{{ program.pha_date }}, {{ program.pha_date|timesince:object.sub_date  }} since latest RMP submission</div>
     </div>
 
     <div class="row dark">
@@ -176,22 +176,22 @@
 
     <div class="row light">
       <div class="col-4 col-sm-2 col-label">Procedure Review Date</div>
-      <div class="col">{{ program.op_procedures_review_date }}</div>
+      <div class="col">{{ program.op_procedures_review_date }}, {{ program.op_procedures_review_date|timesince:object.sub_date  }} since latest RMP submission</div>
     </div>
 
     <div class="row dark">
       <div class="col-4 col-sm-2 col-label">Training Review Date</div>
-      <div class="col">{{ program.training_review_date }}</div>
+      <div class="col">{{ program.training_review_date }}, {{ program.training_review_date|timesince:object.sub_date  }} since latest RMP submission</div>
     </div>
 
     <div class="row light">
       <div class="col-4 col-sm-2 col-label">Maintenance Review Date</div>
-      <div class="col">{{ program.maintenance_review_date }}</div>
+      <div class="col">{{ program.maintenance_review_date }}, {{ program.maintenance_review_date|timesince:object.sub_date  }} since latest RMP submission</div>
     </div>
 
     <div class="row dark">
       <div class="col-4 col-sm-2 col-label">Maintenance Inspection Date</div>
-      <div class="col">{{ program.equipment_inspection_date }}</div>
+      <div class="col">{{ program.equipment_inspection_date }}, {{ program.equipment_inspection_date|timesince:object.sub_date  }} since latest RMP submission</div>
     </div>
 
     <div class="row light">
@@ -216,11 +216,11 @@
 
     <div class="row light">
       <div class="col-4 col-sm-2 col-label">Compliance Audit Date</div>
-      <div class="col">{{ program.compliance_audit_date }}</div>
+      <div class="col">{{ program.compliance_audit_date }}, {{ program.compliance_audit_date|timesince:object.sub_date  }} since latest RMP submission</div>
     </div>
     <div class="row dark">
       <div class="col-4 col-sm-2 col-label">Compliance Audit Change Completion Date</div>
-      <div class="col">{{ program.audit_completion_date }}</div>
+      <div class="col">{{ program.audit_completion_date }}, {{ program.audit_completion_date|timesince:object.sub_date  }} since latest RMP submission</div>
     </div>
 
     <div class="row light">
@@ -245,12 +245,12 @@
 
     <div class="row light">
       <div class="col-4 col-sm-2 col-label">Contractor Safety Review Date</div>
-      <div class="col">{{ program.contractor_safety_review_date }}</div>
+      <div class="col">{{ program.contractor_safety_review_date }}, {{ program.contractor_safety_review_date|timesince:object.sub_date  }} since latest RMP submission</div>
     </div>
 
     <div class="row dark">
       <div class="col-4 col-sm-2 col-label">Contractor Safety Eval. Date</div>
-      <div class="col">{{ program.contractor_safety_eval_date }}</div>
+      <div class="col">{{ program.contractor_safety_eval_date }}, {{ program.contractor_safety_eval_date|timesince:object.sub_date  }} since latest RMP submission</div>
     </div>
 
     {% endfor %}
