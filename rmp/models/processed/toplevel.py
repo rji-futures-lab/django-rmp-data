@@ -81,7 +81,7 @@ class Facility(BaseRMPModel):
         blank=True,
         choices=choices.SUBMISSION_TYPES,
     )
-    sub_date = CopyFromDateTimeField()
+    sub_date = CopyFromDateField()
     execsum_rmp = CopyFromForeignKey(
         'ExecutiveSummary',
         on_delete=models.PROTECT,
