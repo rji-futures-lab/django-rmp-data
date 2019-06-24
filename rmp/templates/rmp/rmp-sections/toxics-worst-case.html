@@ -4,6 +4,20 @@
 
 {% if object.rmp.num_worst_tox > 0 %}
 
+<p>Some Risk Management Plan information is not provided in the available RMP data. You need to make an appointment at an EPA Reading Room In order to get access to details from the Off-Site Consequence Analysis (OCA) such as:</p>
+
+<ul>
+  <li>Names of the chemicals in the Off-Site Consequence Analysis</li>
+  <li>Amount of chemical released</li>
+  <li>Rate of chemical release</li>
+  <li>Radius of affected area</li>
+  <li>Vulnerable areas affected </li>
+  <li>Count of affected population</li>
+  <li>Maps or other optionally provided supplementary material</li>
+</ul>
+
+<p>Instructions on how to make an EPA appointment can be found <a href='https://www.epa.gov/rmp/federal-reading-rooms-risk-management-plans-rmp'>here</a>.</p>
+
 {% for process in object.rmp.process_set.all %}
 
   {% if process.num_worst_tox > 0 %}
