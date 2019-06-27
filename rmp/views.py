@@ -135,7 +135,6 @@ class chemicalListView(ListView):
             ).distinct(
                 'process__facility_id'
             )
-        print(queryset.query)
         return queryset
 
 
