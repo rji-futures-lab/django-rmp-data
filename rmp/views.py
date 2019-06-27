@@ -103,7 +103,7 @@ class chemical_search(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        chemical_list = ChemCd.objects.all()
+        chemical_list = ChemCd.objects.exclude(id=0).all()
         context['chemical_list'] = chemical_list
         return context
 
