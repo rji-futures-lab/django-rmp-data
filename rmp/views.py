@@ -1,4 +1,5 @@
 """RMP Views."""
+from django.db.models import Q, Sum
 from django.views.generic import TemplateView, ListView, DetailView
 from rmp.models import (
     Facility,
@@ -110,14 +111,15 @@ class chemical_search(TemplateView):
 
 class chemicalListView(ListView):
     template_name = 'rmp/chemical_results.html'
-    queryset = ProcChem.objects.all()
+    queryset = Facility.objects.all()
     context_object_name = 'facility_list'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         if 'chemical' in self.request.GET:
-            chemical_query = self.request.GET['chemical']
-            context['chemical_query'] = chemical_query
+            chemical_id = self.request.GET['chemical']
+            chemical = ChemCd.objects.get(id=chemical_id)
+            context['chemical'] = chemical
         else:
             context['error'] = True
         return context
@@ -126,15 +128,12 @@ class chemicalListView(ListView):
         chemical_query = self.request.GET.get('chemical')
         queryset = super(chemicalListView, self).get_queryset()
         if chemical_query:
-            queryset = queryset.filter(
-                chemical_name__search=chemical_query
-            ).select_related(
-                'process',
-            ).order_by(
-                'process__facility_id', '-process__rmp_receipt_date'
-            ).distinct(
-                'process__facility_id'
-            )
+            queryset = queryset.annotate(
+                lbs=Sum(
+                    'rmp__process__procchem__quantity_lbs',
+                    filter=Q(rmp__process__procchem__chemical=chemical_query)
+                )
+            ).filter(lbs__gt=0).order_by('facility_name')
         return queryset
 
 
