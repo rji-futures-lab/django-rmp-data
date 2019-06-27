@@ -245,7 +245,7 @@ class facilityListView(ListView):
         queryset = super(facilityListView, self).get_queryset()
         if facility_query and not pc_query:
             queryset = queryset.filter(facility_name__search=facility_query)
-        elif pc_query and not facilityP_query:
+        elif pc_query and not facility_query:
             queryset = queryset.filter(parent__search=pc_query)
         elif facility_query and pc_query:
             queryset = queryset.filter(
