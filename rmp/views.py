@@ -114,7 +114,9 @@ class chemical_search(TemplateView):
 
 class chemicalListView(ListView):
     template_name = 'rmp/chemical_results.html'
-    queryset = Facility.objects.all()
+    queryset = Facility.objects.only(
+        'id', 'facility_name', 'city', 'state',
+    ).all()
     context_object_name = 'facility_list'
 
     def get_context_data(self, **kwargs):
@@ -137,6 +139,7 @@ class chemicalListView(ListView):
                     filter=Q(rmp__process__procchem__chemical=chemical_query)
                 )
             ).filter(lbs__gt=0).order_by('facility_name')
+        print(queryset.query)
         return queryset
 
 
