@@ -16,7 +16,7 @@ Search by chemical
       <select name="chemical" required>
         <option value="" name="default">Select a chemical</option>
         {% for chemical in chemical_list %}
-        <option value="{{ chemical.chemical_name }}">{{ chemical.chemical_name }}</option>
+        <option value="{{ chemical.id }}">{{ chemical.chemical_name }}</option>
         {% endfor %}
       </select>
       <input type="submit" value="Search" required/>
@@ -28,7 +28,7 @@ Search by chemical
       <select name="chemical" required>
         <option value="" name="default">Select a chemical</option>
         {% for chemical in chemical_list %}
-        <option value="{{ chemical.chemical_name }}">{{ chemical.chemical_name }}</option>
+        <option value="{{ chemical.id }}">{{ chemical.chemical_name }}</option>
         {% endfor %}
       </select>
       <input type="submit" value="Search" required/>
