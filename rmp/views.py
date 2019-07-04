@@ -115,7 +115,7 @@ class chemical_search(TemplateView):
 class chemicalListView(ListView):
     template_name = 'rmp/chemical_results.html'
     queryset = Facility.objects.only(
-        'id', 'facility_name', 'city', 'state',
+        'id', 'facility_name', 'city', 'state', 'rmp'
     ).all()
     context_object_name = 'facility_list'
 
